@@ -1,6 +1,6 @@
 import * as express from 'express';
 import * as path from 'path';
-import apiRouter from './Routes';
+import mainRouter from './Routes';
 
 
 const app = express();
@@ -9,7 +9,7 @@ const app = express();
 app.use(express.json());
 
 app.use(express.static('public'));
-app.use('/api', apiRouter);
+app.use(mainRouter);
 
 // Add client side routes to array in strings separated by commas
 app.get('*', (req, res) => {
