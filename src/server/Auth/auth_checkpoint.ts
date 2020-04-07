@@ -1,5 +1,7 @@
-import { RequestHandler} from 'express';
-import {ReqUser} from '../Models/index';
+import * as passport from 'passport';
+
+import { RequestHandler, Request } from 'express';
+import { ReqUser } from '../Models/index';
 
 export const isGuest: RequestHandler = (req: ReqUser, res, next) => {
     if (req.user && req.user.role === "guest") {
@@ -15,5 +17,14 @@ export const isAdmin: RequestHandler = (req: ReqUser, res, next) => {
     } else {
         return res.sendStatus(401);
     }
+}
+
+export const tokenCheckpoint: RequestHandler = (req, res, next) => {
+    passport.authenticate('bearer', (err, user) => {
+        if(user) {
+            req.user = user;
+        } 
+        next();
+    })(req, res, next);
 }
 
