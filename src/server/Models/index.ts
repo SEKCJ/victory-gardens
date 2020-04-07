@@ -13,6 +13,14 @@ export interface ITokens {
     expires: Date,
 }
 
+export interface IPayLoad {
+    id?: number,
+    userid: number,
+    accesstokenid?: number;
+    role?: string,
+    unique?: string,
+}
+
 import {Request} from 'express';
 
 export interface ReqUser extends Request {
