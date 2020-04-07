@@ -2,6 +2,9 @@ import * as express from 'express';
 import * as path from 'path';
 import * as passport from 'passport'
 import * as morgan from 'morgan';
+
+import './Middleware/localstrategy';
+import './Middleware/bearerstrategy';
 import mainRouter from './Routes';
 
 const app = express();
