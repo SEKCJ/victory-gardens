@@ -7,7 +7,7 @@ export const isGuest: RequestHandler = (req: ReqUser, res, next) => {
     if (req.user && req.user.role === "guest") {
         return next();
     } else {
-        return res.sendStatus(401);
+        return res.status(401).json({msg: "not authorized"});
     }
 }
 
