@@ -1,8 +1,8 @@
 import { Query } from '../index';
 import { ITokens } from '../../Models/index';
 
-const one = async (id: number, token: string) => {
-    return Query<{ insertId: number }>('SELECT * FROM tokens WHERE id = ? AND token = ?; --', [id, token]);
+const match = async (id: number, userid: number, token: string) => {
+    return Query<ITokens[]>('SELECT * FROM tokens WHERE id = ? AND userid = ? AND token = ?; --', [id, userid, token]);
 };
 
 const post = async (userid: number) => {
@@ -14,7 +14,7 @@ const put = async (id: number, token: string) => {
 };
 
 export default {
-    one,
+    match,
     post,
     put
 }
