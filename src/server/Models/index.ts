@@ -29,3 +29,23 @@ export interface ReqUser extends Request {
         role: string,
     };
 }
+
+export interface IVegetables {
+    id: number,
+    name: string,
+    sci_name: string,
+    soil: string,
+    position: string,
+    frost_tolerant: string,
+    feeding: string,
+    companions: string,
+    bad_companions: string,
+    spacing: string,
+    sow_and_plant: string,
+    planting_months: string,
+    harvesting_months: string,
+    notes: string,
+    harvesting: string,
+    troubleshooting: string,
+    help_me_choose: string
+}
