@@ -2,7 +2,7 @@ import * as express from 'express';
 import * as passport from 'passport';
 
 import { CreateToken } from '../Utils/Security/tokens';
-import { ReqUser } from './auth_checkpoint';
+import { ReqUser } from '../Models/index';
 
 const router = express.Router();
 

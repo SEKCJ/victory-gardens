@@ -1,4 +1,5 @@
-import { RequestHandler, Request } from 'express';
+import { RequestHandler} from 'express';
+import {ReqUser} from '../Models/index';
 
 export const isGuest: RequestHandler = (req: ReqUser, res, next) => {
     if (req.user && req.user.role === "guest") {
@@ -16,9 +17,3 @@ export const isAdmin: RequestHandler = (req: ReqUser, res, next) => {
     }
 }
 
-export interface ReqUser extends Request {
-    user: {
-        id: number,
-        role: string,
-    };
-}
