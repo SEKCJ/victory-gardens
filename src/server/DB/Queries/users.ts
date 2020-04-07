@@ -1,4 +1,5 @@
-import { Query } from './index';
+import { Query } from '../index';
+import {IUsers} from '../../Models/index';
 
 const findOneByEmail = async (email: string) => {
     return Query<IUsers[]>('SELECT * FROM users WHERE email = ? LIMIT 1; --', [email]);
@@ -12,15 +13,6 @@ const post = async (email: string, firstname: string, lastname: string, password
     let values = [email, firstname, lastname, password];
     return Query<IUsers>('INSERT INTO users(email, firstname, lastname, password) VALUES(?,?,?,?); --', values)
 }
-
-export interface IUsers {
-    id: number,
-    email: string,
-    firstname: string,
-    lastname: string,
-    password: string
-}
-
 
 export default {
     findOneByEmail,

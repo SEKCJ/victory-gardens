@@ -1,8 +1,8 @@
 import * as mysql from "mysql";
 
 import config from "../config";
-import Tokens from './accesstokens';
-import Users from './users';
+import Tokens from './Queries/accesstokens';
+import Users from './Queries/users';
 
 const pool = mysql.createPool(config.mysql);
 

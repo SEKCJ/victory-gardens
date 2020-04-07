@@ -1,7 +1,8 @@
-import { Query } from './index';
+import { Query } from '../index';
+import { ITokens } from '../../Models/index';
 
 const one = async (id: number, token: string) => {
-    return Query('SELECT * FROM tokens WHERE id = ? AND token = ?; --', [id, token]);
+    return Query<{ insertId: number }>('SELECT * FROM tokens WHERE id = ? AND token = ?; --', [id, token]);
 };
 
 const post = async (userid: number) => {
