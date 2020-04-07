@@ -29,7 +29,7 @@ router.get('/:id?', async (req, res) => {
 
 // POST a new vegetable
 router.post('/', async (req, res) => {
-    let id = parseInt(req.params.id, 10);
+    // let id = parseInt(req.params.id, 10);
     let name = req.body.name;
     let soil = req.body.soil;
     let position = req.body.position;
@@ -43,7 +43,7 @@ router.post('/', async (req, res) => {
     let troubleshooting = req.body.troubleshooting;
     // need to have a userid associated with who adds what vegetable
     try {
-        res.json(await DB.Vegetables.post(id, name, soil, position, frost_tolerant, feeding, companions, spacing, sow_and_plant, notes, harvesting, troubleshooting))
+        res.json(await DB.Vegetables.post(name, soil, position, frost_tolerant, feeding, companions, spacing, sow_and_plant, notes, harvesting, troubleshooting))
     } catch(e) {
         console.log(e);
         res.sendStatus(500);
