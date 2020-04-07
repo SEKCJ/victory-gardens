@@ -11,7 +11,6 @@ app.use(express.json());
 app.use(express.static('public'));
 app.use(mainRouter);
 
-// Add client side routes to array in strings separated by commas
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../public/index.html'))
 })

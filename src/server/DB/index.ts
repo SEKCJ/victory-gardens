@@ -1,5 +1,8 @@
 import * as mysql from "mysql";
+
 import config from "../config";
+import Tokens from './accesstokens';
+import Users from './users';
 
 const pool = mysql.createPool(config.mysql);
 
@@ -18,4 +21,7 @@ export const Query = (query: string, values?: Array<string | number>) => {
   });
 };
 
-export default {};
+export default {
+  Tokens, 
+  Users,
+};
