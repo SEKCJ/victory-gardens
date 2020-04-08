@@ -3,12 +3,13 @@ import * as mysql from "mysql";
 import config from "../config";
 import Tokens from './Queries/accesstokens';
 import Users from './Queries/users';
-// import Vegetables from './Queries/vegetables';
-// import MyVegetables from './Queries/myvegetables';
+import Vegetables from './Queries/vegetables';
+import MyVegetables from './Queries/myvegetables';
 
 const pool = mysql.createPool(config.mysql);
 
 export const Query = <T = any> (query: string, values?: Array<string | number>) => {
+    // or (query: string, values?: any) // (CM)
 
   const sql = mysql.format(query, values);
 
@@ -26,6 +27,6 @@ export const Query = <T = any> (query: string, values?: Array<string | number>) 
 export default {
   Tokens,
   Users,
-//   Vegetables,
-//   MyVegetables
+  Vegetables,
+  MyVegetables
 };
