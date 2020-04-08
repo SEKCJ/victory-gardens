@@ -1,15 +1,23 @@
 import * as React from 'react';
+import { BrowserRouter as Router , Route , Switch } from 'react-router-dom';
+import UserSignUp from './Components/UserSignUp';
+import AbVicGard from './Components/AboutVictoryGardens';
+import './scss/app';
+
+//import {IAppProps} from 'react-router-dom';
 
 const App: React.FC<IAppProps> = props => {
-	return(
-		<h1>Hello World!</h1>
-	)
+	return (
+		<Router>
+		  <Switch>
+			   <Route exact path = "/home" component= { AbVicGard }/> 
+			  <Route exact path = "/joingarden" component= { UserSignUp }/>
+			  </Switch>	
+		</Router>
+		);
 }
 
-export interface IAppProps {}
+export interface IAppProps { } 
 
-export interface IAppState {
-	name: string;
-}
 
 export default App;
