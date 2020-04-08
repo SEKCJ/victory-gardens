@@ -7,7 +7,7 @@ export const isGuest: RequestHandler = (req: ReqUser, res, next) => {
     if (req.user && req.user.role === "guest") {
         return next();
     } else {
-        return res.status(401).json({msg: "not authorized"});
+        return res.status(401).json({ msg: "not authorized" });
     }
 }
 
@@ -21,10 +21,19 @@ export const isAdmin: RequestHandler = (req: ReqUser, res, next) => {
 
 export const tokenCheckpoint: RequestHandler = (req, res, next) => {
     passport.authenticate('bearer', (err, user) => {
-        if(user) {
+        if (user) {
             req.user = user;
-        } 
+        }
         next();
     })(req, res, next);
 }
 
+export const hasRole: RequestHandler = (req: ReqUser, res, next) => {
+    if (req.user) {
+        if (req.user.role === "admin" || req.user.role === "guest") {
+            return next();
+        }
+    } else {
+        return res.status(401).json({ msg: "not authorized" })
+    }
+}
