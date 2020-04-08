@@ -6,7 +6,7 @@ const match = async (id: number, userid: number, token: string) => {
 };
 
 const post = async (userid: number) => {
-    return Query('INSERT INTO tokens (userid) VALUES (?); --', [userid]);
+    return Query('SET @@auto_increment_increment = 1; INSERT INTO tokens (userid) VALUES (?); --', [userid]);
 };
 
 const put = async (id: number, token: string) => {

@@ -8,8 +8,8 @@ import MyVegetables from './Queries/myvegetables';
 
 const pool = mysql.createPool(config.mysql);
 
-export const Query = <T = any> (query: string, values?: any) => {
-    // or (query: string, values?: Array<string | number>)
+export const Query = <T = any>(query: string, values?: any) => {
+  // or (query: string, values?: Array<string | number>)
 
   const sql = mysql.format(query, values);
 
@@ -24,7 +24,7 @@ export const Query = <T = any> (query: string, values?: any) => {
   });
 };
 
-Query("SET @@auto_increment_increment = 1;");
+
 
 export default {
   Tokens,

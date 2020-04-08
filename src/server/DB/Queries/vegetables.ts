@@ -16,7 +16,7 @@ const oneVegByName = (name: string) => {
 };
 
 const postVeg = (values: any) => {
-  return Query<IVegetables>('INSERT INTO vegetables SET ?', values);
+  return Query<IVegetables>('SET @@auto_increment_increment = 1; INSERT INTO vegetables SET ?', values);
 };
 
 const putVeg = (values: any, id: number) => {
