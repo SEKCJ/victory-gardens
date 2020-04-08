@@ -31,26 +31,27 @@ router.get('/:id?', async (req, res) => {
 
 // POST a new vegetable
 router.post('/', async (req: { body: IVegetables }, res) => {
-    // let id = parseInt(req.params.id, 10);
-    let name = req.body.name;
-    let sci_name = req.body.sci_name;
-    let soil = req.body.soil;
-    let position = req.body.position;
-    let frost_tolerant = req.body.frost_tolerant;
-    let feeding = req.body.feeding;
-    let companions = req.body.companions;
-    let bad_companions = req.body.bad_companions;
-    let spacing = req.body.spacing;
-    let sow_and_plant = req.body.sow_and_plant;
-    let planting_months = req.body.planting_months;
-    let harvesting_months = req.body.harvesting_months;
-    let notes = req.body.notes;
-    let harvesting = req.body.harvesting;
-    let troubleshooting = req.body.troubleshooting;
-    let help_me_choose = req.body.help_me_choose;
+    let vegsObj = {
+    name: req.body.name,
+    sci_name: req.body.sci_name,
+    soil: req.body.soil,
+    position: req.body.position,
+    frost_tolerant: req.body.frost_tolerant,
+    feeding: req.body.feeding,
+    companions: req.body.companions,
+    // bad_companions: req.body.bad_companions,
+    spacing: req.body.spacing,
+    sow_and_plant: req.body.sow_and_plant,
+    planting_months: req.body.planting_months,
+    harvest_months: req.body.harvest_months,
+    notes: req.body.notes,
+    harvesting: req.body.harvesting,
+    help_me_choose: req.body.help_me_choose,
+    troubleshooting: req.body.troubleshooting
+    }
     // need to have a userid associated with who adds what vegetable // (CM)
     try {
-        res.json(await DB.Vegetables.postVeg(name, sci_name, soil, position, frost_tolerant, feeding, companions, bad_companions, spacing, sow_and_plant, planting_months, harvesting_months, notes, harvesting, troubleshooting, help_me_choose))
+        res.json(await DB.Vegetables.postVeg(vegsObj))
     } catch(e) {
         console.log(e);
         res.sendStatus(500);
@@ -60,24 +61,26 @@ router.post('/', async (req: { body: IVegetables }, res) => {
 // PUT (edit) an existing vegetable
 router.put('/:id?', async (req: { body: IVegetables, params: any }, res) => {
     let id = parseInt(req.params.id, 10);
-    let name = req.body.name;
-    let sci_name = req.body.sci_name;
-    let soil = req.body.soil;
-    let position = req.body.position;
-    let frost_tolerant = req.body.frost_tolerant;
-    let feeding = req.body.feeding;
-    let companions = req.body.companions;
-    let bad_companions = req.body.bad_companions;
-    let spacing = req.body.spacing;
-    let sow_and_plant = req.body.sow_and_plant;
-    let planting_months = req.body.planting_months;
-    let harvesting_months = req.body.harvesting_months;
-    let notes = req.body.notes;
-    let harvesting = req.body.harvesting;
-    let troubleshooting = req.body.troubleshooting;
-    let help_me_choose = req.body.help_me_choose;
+    let vegsObj = {
+        name: req.body.name,
+        sci_name: req.body.sci_name,
+        soil: req.body.soil,
+        position: req.body.position,
+        frost_tolerant: req.body.frost_tolerant,
+        feeding: req.body.feeding,
+        companions: req.body.companions,
+        // bad_companions: req.body.bad_companions,
+        spacing: req.body.spacing,
+        sow_and_plant: req.body.sow_and_plant,
+        planting_months: req.body.planting_months,
+        harvest_months: req.body.harvest_months,
+        notes: req.body.notes,
+        harvesting: req.body.harvesting,
+        help_me_choose: req.body.help_me_choose,
+        troubleshooting: req.body.troubleshooting
+        }
     try {
-        res.json(await DB.Vegetables.putVeg(id, name, sci_name, soil, position, frost_tolerant, feeding, companions, bad_companions, spacing, sow_and_plant, planting_months, harvesting_months, notes, harvesting, troubleshooting, help_me_choose))
+        res.json(await DB.Vegetables.putVeg(vegsObj, id))
     } catch(e) {
         console.log(e);
         res.sendStatus(500);

@@ -39,13 +39,13 @@ export interface IVegetables {
     frost_tolerant: string,
     feeding: string,
     companions: string,
-    bad_companions: string,
+    // bad_companions: string,
     spacing: string,
     sow_and_plant: string,
     planting_months: string,
-    harvesting_months: string,
+    harvest_months: string,
     notes: string,
     harvesting: string,
-    troubleshooting: string,
-    help_me_choose: string
+    help_me_choose: string,
+    troubleshooting: string
 }
