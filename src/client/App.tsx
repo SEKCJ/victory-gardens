@@ -1,23 +1,27 @@
 import * as React from 'react';
-import { BrowserRouter as Router , Route , Switch } from 'react-router-dom';
-import UserSignUp from './Components/UserSignUp';
-import AbVicGard from './Components/AboutVictoryGardens';
-import './scss/app';
-
-//import {IAppProps} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+import Navigate from './components/Navbar';
+import HomeCard from './Components/HomeCard';
+import Veggies from './Components/Veggies';
+import Choose from './components/Choose';
 
 const App: React.FC<IAppProps> = props => {
+
 	return (
 		<Router>
-		  <Switch>
-			   <Route exact path = "/home" component= { AbVicGard }/> 
-			  <Route exact path = "/joingarden" component= { UserSignUp }/>
-			  </Switch>	
-		</Router>
-		);
+			<Navigate />
+			<Switch>
+				<Route exact path="/veggies" component={Veggies} />
+				<Route exact path="/choose" component={Choose} />
+				<Route path="/" component={HomeCard} />
+				
+			</Switch>
+		</Router >
+	)
 }
 
-export interface IAppProps { } 
+export interface IAppProps { }
+
 
 
 export default App;

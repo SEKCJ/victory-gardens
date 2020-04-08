@@ -8,7 +8,7 @@ const UserSignUp: React.FC<IAppProps> = () => {
     <Container fluid>
       <Jumbotron fluid>
         <h1>Join the Army of Victory Gardens!</h1>
-        <p></p>
+        <p>This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
         </Jumbotron>
 
 
