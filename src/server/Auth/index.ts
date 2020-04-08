@@ -2,12 +2,12 @@ import * as express from 'express';
 
 import loginRouter from './login';
 import registerRouter from './register';
-import validateRouter from './tokenAuth';
+import tokensRouter from './tokenAuth';
 
 const router = express.Router();
 
 router.use('/login', loginRouter);
 router.use('/register', registerRouter);
-router.use('/validate', validateRouter);
+router.use('/tokens', tokensRouter);
 
 export default router;
