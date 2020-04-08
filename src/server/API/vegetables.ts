@@ -10,7 +10,7 @@ router.get('/:id?', async (req, res) => {
     let id: number = parseInt(req.params.id, 10); //base10 because the integer got converted to a string in the json
     if (id) {
         try {
-            let vegetables = await DB.Vegetables.one(id)
+            let vegetables = await DB.Vegetables.oneVegById(id)
             res.json(vegetables);
             // res.json((await DB.Vegetables.one(req.params.id))[0]); // 0 index bc it comes first in the response
         } catch(e) {
@@ -19,7 +19,7 @@ router.get('/:id?', async (req, res) => {
         }
     } else {
         try {
-            let vegetables = await DB.Vegetables.all();
+            let vegetables = await DB.Vegetables.allVeg();
             res.json(vegetables)
             // res.json(await DB.Vegetables.all());
         } catch(e) {
@@ -48,9 +48,9 @@ router.post('/', async (req: { body: IVegetables }, res) => {
     let harvesting = req.body.harvesting;
     let troubleshooting = req.body.troubleshooting;
     let help_me_choose = req.body.help_me_choose;
-    // need to have a userid associated with who adds what vegetable (CM)
+    // need to have a userid associated with who adds what vegetable // (CM)
     try {
-        res.json(await DB.Vegetables.post(name, sci_name, soil, position, frost_tolerant, feeding, companions, bad_companions, spacing, sow_and_plant, planting_months, harvesting_months, notes, harvesting, troubleshooting, help_me_choose))
+        res.json(await DB.Vegetables.postVeg(name, sci_name, soil, position, frost_tolerant, feeding, companions, bad_companions, spacing, sow_and_plant, planting_months, harvesting_months, notes, harvesting, troubleshooting, help_me_choose))
     } catch(e) {
         console.log(e);
         res.sendStatus(500);
@@ -77,7 +77,7 @@ router.put('/:id?', async (req: { body: IVegetables, params: any }, res) => {
     let troubleshooting = req.body.troubleshooting;
     let help_me_choose = req.body.help_me_choose;
     try {
-        res.json(await DB.Vegetables.put(id, name, sci_name, soil, position, frost_tolerant, feeding, companions, bad_companions, spacing, sow_and_plant, planting_months, harvesting_months, notes, harvesting, troubleshooting, help_me_choose))
+        res.json(await DB.Vegetables.putVeg(id, name, sci_name, soil, position, frost_tolerant, feeding, companions, bad_companions, spacing, sow_and_plant, planting_months, harvesting_months, notes, harvesting, troubleshooting, help_me_choose))
     } catch(e) {
         console.log(e);
         res.sendStatus(500);
@@ -88,7 +88,7 @@ router.put('/:id?', async (req: { body: IVegetables, params: any }, res) => {
 router.delete('/:id', async (req, res) => {
     let id = parseInt(req.params.id, 10);
     try {
-        res.json(await DB.Vegetables.del(id))
+        res.json(await DB.Vegetables.deleteVeg(id))
     } catch(e) {
         console.log(e);
         res.sendStatus(500).json('delete failed');
