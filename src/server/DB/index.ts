@@ -8,7 +8,7 @@ import MyVegetables from './Queries/myvegetables';
 
 const pool = mysql.createPool(config.mysql);
 
-export const Query = <T = any> (query: string, values?: Array<string | number>) => {
+export const Query = <T = any> (query: string, values?: Array<string | number>  ) => {
     // or (query: string, values?: any) // (CM)
 
   const sql = mysql.format(query, values);

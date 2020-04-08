@@ -12,6 +12,7 @@ export default {
     },
     port: process.env.PORT,
     auth: {
-        secret: process.env.SECRET
+        secret: process.env.SECRET,
+        apiKey: process.env.API_KEY,
     }
 } 
