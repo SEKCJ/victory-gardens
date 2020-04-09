@@ -8,7 +8,7 @@ const UserSignUp: React.FC<IAppProps> = () => {
     <Container fluid>
       <Jumbotron fluid>
         <h1>Join the Army of Victory Gardens!</h1>
-        <p>This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+        <p>Join the fight against potential source rationing and start gardening today!</p>
         </Jumbotron>
 
 
@@ -17,7 +17,7 @@ const UserSignUp: React.FC<IAppProps> = () => {
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control type="email" placeholder="Enter email" />
-          <Form.Text className="text-muted">We'll never share your email with anyone else.</Form.Text>
+          <Form.Text className="text-muted"></Form.Text>
         </Form.Group>
 
         <Form.Group controlId="formBasicPassword">
@@ -33,14 +33,14 @@ const UserSignUp: React.FC<IAppProps> = () => {
         <DropdownButton
           as={InputGroup.Prepend}
           variant="outline-secondary"
-          title="Dropdown"
+          title="Help Me Choose!"
           id="input-group-dropdown-1">
 
-          <Dropdown.Item href="#">Action</Dropdown.Item>
-          <Dropdown.Item href="#">Another action</Dropdown.Item>
-          <Dropdown.Item href="#">Something else here</Dropdown.Item>
+          <Dropdown.Item href="#">Plant example</Dropdown.Item>
+          <Dropdown.Item href="#">Plant example</Dropdown.Item>
+          <Dropdown.Item href="#">Plant example</Dropdown.Item>
           <Dropdown.Divider />
-          <Dropdown.Item href="#">Separated link</Dropdown.Item>
+          <Dropdown.Item href="./Choose">See More..</Dropdown.Item>
         </DropdownButton>
 
         <FormControl

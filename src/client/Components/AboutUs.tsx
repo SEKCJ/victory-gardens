@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-class AbVicGard extends React.Component<IAppProps, IAppState> {
+class AboutUs extends React.Component<IAppProps, IAppState> {
 	constructor(props: IAppProps) {
 		super(props);
 		this.state = {
@@ -21,7 +21,7 @@ class AbVicGard extends React.Component<IAppProps, IAppState> {
 	render() {
 		return (
 			<main className="container my-5">
-				<h1 className="text-primary text-center">Hello {this.state.name}!</h1>
+				<h1 className="text-primary text-center">About Victory Gardens Page{this.state.name}</h1>
 			</main>
 		);
 	}
@@ -33,4 +33,4 @@ export interface IAppState {
 	name: string;
 }
 
-export default AbVicGard;
+export default AboutUs;
