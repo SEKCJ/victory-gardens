@@ -7,7 +7,14 @@ import DB from '../../DB';
 
 export const CreateToken = async (payload: IPayLoad) => {
     let result = await DB.Tokens.post(payload.userid);
-    payload.accesstokenid = result.insertId;
+    let resultId = 0;
+    Object.entries(result).forEach((element) => {
+        let obj: any = element[1];
+        if (obj.insertId !== 0) {
+            resultId = obj.insertId
+        }
+    })
+    payload.accesstokenid = resultId;
     payload.unique = crypto.randomBytes(32).toString('hex');
     console.log(Config.auth.secret);
     let token = await jwt.sign(payload, Config.auth.secret);

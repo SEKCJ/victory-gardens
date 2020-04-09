@@ -6,7 +6,7 @@ import { ReqUser } from '../Models/index';
 
 const router = express.Router();
 
-router.post('/', passport.authenticate('local', async (req: ReqUser, res, next) => {
+router.post('/', passport.authenticate('local'), async (req: ReqUser, res, next) => {
     try {
         let token = await CreateToken({ userid: req.user.id });
         res.json({
@@ -18,6 +18,6 @@ router.post('/', passport.authenticate('local', async (req: ReqUser, res, next) 
         if (error) throw error;
         res.sendStatus(500);
     }
-}))
+});
 
 export default router;

@@ -13,11 +13,18 @@ router.post('/', async (req, res, next) => {
         let last = req.body.lastname;
         let password = HashPassword(req.body.password);
         let result: any = await DB.Users.post(email, first, last, password);
-        let token = await CreateToken({ userid: result.insertId })
+        let resultId = 0;
+        Object.entries(result).forEach((element) => {
+            let obj: any = element[1];
+            if (obj.insertId !== 0) {
+                resultId = obj.insertId
+            }
+        })
+        let token = await CreateToken({ userid: resultId })
         res.json({
             token,
             role: 'guest',
-            userid: result.insertId
+            userid: resultId
         })
     } catch (error) {
         console.log(error);

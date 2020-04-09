@@ -4,3 +4,4 @@ public/js/app.js
 src/server/Config/development.ts
 herokuschema.txt
 .env
+admin.txt
