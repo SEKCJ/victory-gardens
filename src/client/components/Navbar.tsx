@@ -16,6 +16,8 @@ return (
                 <Nav.Link as={Link} to="/Choose">Help Me Choose</Nav.Link>
                 <Nav.Link as={Link} to="/veggies">My Veggies</Nav.Link>
                 <Nav.Link as={Link} to="/">Calendar</Nav.Link>
+                <Nav.Link as={Link} to="/about">About Victory Gardens</Nav.Link>
+
             </Nav>
             <Nav>
                 <NavDropdown className="mr-auto" title="Profile" id="profile-dropdown">
