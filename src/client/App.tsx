@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import Navigate from './components/Navbar';
-import HomeCard from './Components/HomeCard';
-import Veggies from './Components/Veggies';
-import Choose from './components/Choose';
+import HomeCard from './components/UserHome';
+import Veggies from './components/UserVeggies';
+import Choose from './components/UserChoose';
 
 const App: React.FC<IAppProps> = props => {
 

@@ -1,6 +1,6 @@
 import React, { } from 'react';
 import { IAppProps } from '../App';
-import {Jumbotron, Container, Button} from 'react-bootstrap';
+import {Jumbotron, Container, Row, Col} from 'react-bootstrap';
 
 const Home: React.FC<IAppProps> = props => {
     return (
@@ -15,6 +15,6 @@ const Home: React.FC<IAppProps> = props => {
 
     ); 
 };
-<Button variant="secondary">About Us</Button>
+
 
 export default Home;
