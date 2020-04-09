@@ -1,34 +1,40 @@
 import { Query } from "../index";
 import { IVegetables } from "../../Models/index";
 
-const allVeg = () => {
-  return Query<IVegetables[]>(`SELECT * FROM vegetables `);
+const allVegs = () => {
+  return Query<IVegetables[]>("SELECT * FROM vegetables");
 };
 
 const oneVegById = (id: number) => {
-  return Query<IVegetables[]>('SELECT * FROM vegetables WHERE id = ?', [id]);
+  return Query<IVegetables[]>("SELECT * FROM vegetables WHERE id = ?", [id]);
 };
 
 const oneVegByName = (name: string) => {
-  return Query<IVegetables[]>('SELECT * FROM vegetables WHERE name = ?', [
+  return Query<IVegetables[]>("SELECT * FROM vegetables WHERE name = ?", [
     name,
   ]);
 };
 
 const postVeg = (values: any) => {
-  return Query<IVegetables>('SET @@auto_increment_increment = 1; INSERT INTO vegetables SET ?', values);
+  return Query<IVegetables>(
+    "SET @@auto_increment_increment = 1; INSERT INTO vegetables SET ?",
+    values
+  );
 };
 
 const putVeg = (values: any, id: number) => {
-  return Query<IVegetables>('UPDATE vegetables SET ? WHERE id =?', [values, id]);
+  return Query<IVegetables>("UPDATE vegetables SET ? WHERE id =?", [
+    values,
+    id,
+  ]);
 };
 
 const deleteVeg = (id: number) => {
-  return Query('DELETE FROM vegetabless WHERE id = ?', [id]);
+  return Query("DELETE FROM vegetables WHERE id = ?", [id]);
 };
 
 export default {
-  allVeg,
+  allVegs,
   oneVegById,
   oneVegByName,
   postVeg,
