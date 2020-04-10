@@ -1,17 +1,17 @@
 import * as React from 'react';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
-import Navigate from './components/Navbar';
-import UserHome from './components/UserHome';
-import Veggies from './components/UserVeggies';
-import HelpChoose from './components/UserChoose';
-import Veggie from './components/Veggie';
-import MyProfile from './components/UserProfile';
-import SavedVeggies from './components/SavedVeggies';
-import Settings from './components/Settings';
-import UserSignUp from './components/UserSignUp';
-import AboutUs from './components/AboutUs';
-import UserLogin from './components/Login';
-import ControlledTabs from './Components/MyProfile';
+import Navigate from './Components/Navbar';
+import UserHome from './Components/UserHome';
+import Veggies from './Components/UserVeggies';
+import HelpChoose from './Components/UserChoose';
+import Veggie from './Components/Veggie';
+// import MyProfile from './Components/UserProfile';
+import SavedVeggies from './Components/SavedVeggies';
+import Settings from './Components/Settings';
+import UserSignUp from './Components/UserSignUp';
+import AboutUs from './Components/AboutUs'; 
+import UserLogin from './Components/Login';
+// import ControlledTabs from './Components/MyProfile';
 
 
 
@@ -24,15 +24,15 @@ const App: React.FC<IAppProps> = props => {
 			<Switch>
 				<Route exact path="/veggies" component={Veggies} />
 				<Route exact path="/veggies/:id" component={Veggie} />
-				<Route exact path="/myprofile" component={MyProfile} />
+				{/* <Route exact path="/myprofile" component={MyProfile} /> */}
 				<Route exact path="/savedveggies" component={SavedVeggies} />
 				<Route exact path="/settings" component={Settings} />
 				<Route exact path= "/joingarden" component={UserSignUp}/>
 				<Route exact path="/login" component={UserLogin} />
 				<Route exact path="/aboutus" component={AboutUs}/>
-				<Route exact path="/myprofile" component={ControlledTabs}/>
+				{/* <Route exact path="/myprofile" component={ControlledTabs}/> */}
 				<Route exact path="/choose" component={HelpChoose} />
-					<Route path = '/' component={UserHome} />
+					<Route path = "/home" component={UserHome} />
 			</Switch>
 		</Router >
 	)
