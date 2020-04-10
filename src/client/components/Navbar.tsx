@@ -7,7 +7,7 @@ import { IAppProps } from '../App';
 const Navigate: React.FC<IAppProps> = props => {
 
 return (
-    <Navbar variant="dark" bg="dark" expand="lg" className="sticky-top">
+    <Navbar variant="dark" bg="dark" expand="sm" className="sticky-top">
         <Navbar.Brand href="/"> <img src={window.location.origin + "/assets/VGLogo.png"}
         style={{"width": "3em"}} /></Navbar.Brand>
         <Navbar.Toggle aria-controls="navigate"/>
@@ -19,10 +19,9 @@ return (
             </Nav>
             <Nav>
                 <NavDropdown className="mr-auto" title="Profile" id="profile-dropdown">
-                    <NavDropdown.Item>My Profile</NavDropdown.Item>
-                    <NavDropdown.Item>My Garden</NavDropdown.Item>
-                    <NavDropdown.Item>Saved Veggies</NavDropdown.Item>
-                    <NavDropdown.Item>Settings</NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to='/myprofile'>My Profile</NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to='/savedveggies'>Saved Veggies</NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to='/settings'>Settings</NavDropdown.Item>
                 </NavDropdown>
                 {/* <Nav.Link as={Link} to="/">Community Garden</Nav.Link> */}
             </Nav>
