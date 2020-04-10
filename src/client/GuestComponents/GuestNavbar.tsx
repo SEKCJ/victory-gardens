@@ -14,7 +14,7 @@ return (
         <Navbar.Collapse id="navigate">
             <Nav className="mr-auto">
                 <Nav.Link as={Link} to="/guestchoose">Help Me Choose</Nav.Link>
-                <Nav.Link as={Link} to="/guestveggies">My Veggies</Nav.Link>
+                <Nav.Link as={Link} to="/guestveggies">Veggies</Nav.Link>
                 <Nav.Link as={Link} to="/">Calendar</Nav.Link>
                 <Nav.Link as={Link} to="/guestabout">About Victory Gardens</Nav.Link>
                 
