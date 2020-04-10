@@ -30,7 +30,7 @@ const Veggies: React.FC<IAppProps> = props => {
                                     the card's content.
     </Card.Text>
                             </Card.Body>
-                            <Button variant="primary" as={Link} to={`/veggies/${index}`}>Go somewhere</Button>
+                            <Button variant="primary" as={Link} to={`/veggies/${index}`}>Read More</Button>
                         </div>
 
                         {/* <Collapse in={open}>
