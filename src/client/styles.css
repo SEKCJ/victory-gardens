@@ -1,0 +1,11 @@
+body 
+{font-family: 'Josefin Sans', sans-serif;
+    background-color: rgba(52, 170, 22, 0.452);
+}
+
+.jumbotron {
+    background-color: rgba(112, 144, 117, 0.685);
+    text-align: center;
+}
+
+

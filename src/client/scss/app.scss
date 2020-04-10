@@ -1,6 +1,11 @@
 $theme-colors: (
-    'primary': #0091ea //Covalence Blue!  :D
+    'primary': #13445a85,
+    'secondary': #cc4c52b9 
 );
+
 
 @import '../../../node_modules/bootstrap/scss/bootstrap.scss';
 @import "~bootstrap/scss/bootstrap";
+
+
+
