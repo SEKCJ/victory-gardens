@@ -14,7 +14,7 @@ passport.use(new LocalStrategy.Strategy({
     try {
         let [result]:any = await DB.Users.findOneByEmail(email);
         let user = result[0];
-        if (user.email && ComparePassword(password, user.password)) {
+        if (user && ComparePassword(password, user.password)) {
             delete user.password;
             done(null, user);
         } else {
