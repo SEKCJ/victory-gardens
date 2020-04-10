@@ -14,9 +14,9 @@ const oneVegById = (id: number) => {
 };
 
 // returns name of one veg with image url based on the veg's name
-const oneVegByName = (name: string) => {
-  return Query<IVegetables[]>("SELECT * FROM vegetables WHERE name = ?", [name,]);
-};
+// const oneVegByName = (name: string) => {
+//   return Query<IVegetables[]>("SELECT * FROM vegetables WHERE name = ?", [name,]);
+// };
 
 // adds a veg to vegs table
 const postVeg = (values: any) => {
@@ -38,7 +38,7 @@ const deleteVeg = (id: number) => {
 export default {
   allVegs,
   oneVegById,
-  oneVegByName,
+  // oneVegByName,
   postVeg,
   putVeg,
   deleteVeg,

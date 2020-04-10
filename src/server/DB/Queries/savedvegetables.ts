@@ -2,25 +2,32 @@ import { Query } from "../index";
 import { IVegetables } from "../../Models/index";
 
 const allSavedVegs = () => {
-  return Query<IVegetables[]>("SELECT * FROM myvegetables");
+  return Query<IVegetables[]>("SELECT * FROM myvegetables a JOIN images b ON a.vegetableid = b.vegetableid");
 };
 
 // returns the firstnames of the users and the vegs that particular user has in their myvegs list based on that user's userid // (CM)
 const oneSavedVegByTheuserid = (theuserid: number) => {
   return Query<IVegetables[]>(
-    "SELECT users.firstname, vegetables.name FROM myvegetables JOIN vegetables ON vegetables.id = myvegetables.vegetableid JOIN users ON users.id = myvegetables.theuserid WHERE theuserid = ?",
+    `SELECT users.id as userid, 
+    vegetables.name,
+    images.url
+    FROM myvegetables 
+    JOIN vegetables ON vegetables.id = myvegetables.vegetableid 
+    JOIN users ON users.id = myvegetables.theuserid 
+    JOIN images on myvegetables.vegetableid = images.vegetableid
+    WHERE users.id = ?`,
     [theuserid]
   );
   // ('SELECT * FROM myvegetables WHERE theuserid = ?', [theuserid])
 };
 
 // returns what users have a particular veg in their myvegs list based on that veg's vegetableid // (CM)
-const oneSavedVegByVegid = (vegetableid: number) => {
-  return Query<IVegetables[]>(
-    "SELECT * FROM myvegetables WHERE vegetableid = ?",
-    [vegetableid]
-  );
-};
+// const oneSavedVegByVegid = (vegetableid: number) => {
+//   return Query<IVegetables[]>(
+//     "SELECT * FROM myvegetables WHERE vegetableid = ?",
+//     [vegetableid]
+//   );
+// };
 
 // adds a veg to myvegs table. May need to do a WHERE query to make it user specific // (CM)
 const postSavedVeg = (theuserid: number, vegetableid: number) => {
@@ -38,7 +45,7 @@ const deleteSavedVeg = (vegetableid: number) => {
 export default {
   allSavedVegs,
   oneSavedVegByTheuserid,
-  oneSavedVegByVegid,
+  // oneSavedVegByVegid,
   postSavedVeg,
   deleteSavedVeg,
 };

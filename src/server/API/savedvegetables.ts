@@ -1,4 +1,5 @@
 import * as express from "express";
+
 import DB from "../DB";
 
 // import { IVegetables } from "../Models/index";
@@ -7,7 +8,7 @@ const router = express.Router();
 
 // GET SavedVegetables - if (id) GET one, else GET all
 router.get("/:id?", async (req, res) => {
-  let theuserid: number = parseInt(req.body.id, 10); //base10 because the integer got converted to a string in the json
+  let theuserid: number = parseInt(req.params.id, 10); //base10 because the integer got converted to a string in the json
   if (theuserid) {
     try {
       let SavedVegetables = await DB.SavedVegetables.oneSavedVegByTheuserid(theuserid);
