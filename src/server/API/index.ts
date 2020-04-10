@@ -1,8 +1,8 @@
 import * as express from 'express';
 
 import vegetablesRouter from './vegetables';
-import myvegetablesRouter from './myvegetables';
-import helpmechooseRouter from './helpmechoose';
+import savedvegetablesRouter from './savedvegetables';
+import helpmechooseRouter from './helpchoose';
 
 
 import { tokenCheckpoint } from '../Auth/authCheckpoint';
@@ -11,7 +11,7 @@ const router = express.Router();
 
 router.use(tokenCheckpoint);
 router.use('/vegetables', vegetablesRouter);
-router.use('/myvegetables', myvegetablesRouter);
+router.use('/savedvegetables', savedvegetablesRouter);
 router.use('/helpmechoose', helpmechooseRouter);
 
 export default router;
