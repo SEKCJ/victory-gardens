@@ -41,9 +41,3 @@ export default {
   putVeg,
   deleteVeg,
 };
-
-// // sucks and doesn't quite work, but it's close and WAY less messy
-// const post = (<IVegetables>) => {
-//     let values = [<IVegetables>];
-//     return Query<IVegetables>(`INSERT INTO vegetables() VALUES ()`, values)
-// };

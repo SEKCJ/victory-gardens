@@ -39,17 +39,16 @@ router.post("/", async (req: { body: IVegetables }, res) => {
     frost_tolerant: req.body.frost_tolerant,
     feeding: req.body.feeding,
     companions: req.body.companions,
-    // bad_companions: req.body.bad_companions,
+    bad_companions: req.body.bad_companions,
     spacing: req.body.spacing,
     sow_and_plant: req.body.sow_and_plant,
     planting_months: req.body.planting_months,
     harvest_months: req.body.harvest_months,
     notes: req.body.notes,
     harvesting: req.body.harvesting,
-    help_me_choose: req.body.help_me_choose,
     troubleshooting: req.body.troubleshooting,
   };
-  // need to have a userid associated with who adds what vegetable // (CM)
+
   try {
     res.json(await DB.Vegetables.postVeg(vegsObj));
   } catch (e) {
@@ -69,14 +68,13 @@ router.put("/:id?", async (req: { body: IVegetables; params: any }, res) => {
     frost_tolerant: req.body.frost_tolerant,
     feeding: req.body.feeding,
     companions: req.body.companions,
-    // bad_companions: req.body.bad_companions,
+    bad_companions: req.body.bad_companions,
     spacing: req.body.spacing,
     sow_and_plant: req.body.sow_and_plant,
     planting_months: req.body.planting_months,
     harvest_months: req.body.harvest_months,
     notes: req.body.notes,
     harvesting: req.body.harvesting,
-    help_me_choose: req.body.help_me_choose,
     troubleshooting: req.body.troubleshooting,
   };
   try {
