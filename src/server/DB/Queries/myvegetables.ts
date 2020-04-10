@@ -25,7 +25,7 @@ const oneMyVegByVegid = (vegetableid: number) => {
 // adds a veg to myvegs table. May need to do a WHERE query to make it user specific // (CM)
 const postMyVeg = (theuserid: number, vegetableid: number) => {
   return Query<IVegetables>(
-    "SET @@auto_increment_increment = 1; INSERT INTO myvegetables (theuserid, vegetableid) SET (?,?)",
+    "SET @@auto_increment_increment = 1; INSERT INTO myvegetables (theuserid, vegetableid) VALUES (?,?)",
     [theuserid, vegetableid]
   );
 };
