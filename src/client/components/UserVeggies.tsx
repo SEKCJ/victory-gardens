@@ -1,43 +1,68 @@
 
-import React, { } from 'react';
-import { Card, CardColumns, Container, Jumbotron } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { Card, Container, Jumbotron, Row, Col, Button, Collapse } from 'react-bootstrap';
+import {Link} from 'react-router-dom';
 import { IAppProps } from '../App';
 
 const Veggies: React.FC<IAppProps> = props => {
-    
+
+    const [basicArray, setBasicArray] = useState([]);
+    const [open, setOpen] = useState(false);
+
+
+    // useEffect [] same as componentDidMount()
+    useEffect(() => {
+        // Arrays start at index 0
+        const infoArray = ['rachel', 'cesar', 'madelyn', 'cheyenne', 'aaron', 'josh', 'jake', 'garrett'];
+
+        let cardArray = infoArray.map((element, index) => {
+            return (
+                <Row>
+                    <Card>
+                        <div className="d-flex flex-row mx-auto">
+
+                            <Card.Img variant="top" style={{ "width": "10em" }}
+                                src="https://c7.uihere.com/files/396/838/483/cabbage-vector.jpg" />
+                            <Card.Body>
+                                <Card.Title>Card Title</Card.Title>
+                                <Card.Text>
+                                    Some quick example text to build on the card title and make up the bulk of
+                                    the card's content.
+    </Card.Text>
+                            </Card.Body>
+                            <Button variant="primary" as={Link} to={`/veggies/${index}`}>Go somewhere</Button>
+                        </div>
+
+                        {/* <Collapse in={open}>
+                            <div id={`collapse-content ${index}`}>VEGGIES</div>
+                        </Collapse> */}
+
+                    </Card>
+                </Row>
+            )
+
+        });
+
+        setBasicArray(cardArray)
+
+    }, [])
+
 
     return (
-        <React.Fragment>
+        <Container >
 
-<Jumbotron fluid>
-  <Container>
-    <h1>Fluid jumbotron</h1>
-    <p>
-      This is a modified jumbotron that occupies the entire horizontal space of
-      its parent.
-    </p>
-  </Container>
-</Jumbotron>
+            <Jumbotron fluid>
+                <Container >
+                    <h1>Veggie Masterlist</h1>
+                    <p>
+                        Looking for something inparticular? Come choose from our masterlist of vegetables!
+                        </p>
+                </Container>
+            </Jumbotron>
+            
+            {basicArray}
 
-            <CardColumns>
-
-                <Card>
-                    <Card.Img variant="top" src="holder.js/100px160" />
-                    <Card.Body>
-                        <Card.Title>Card title</Card.Title>
-                        <Card.Text>
-                            This card has supporting text below as a natural lead-in to additional
-        content.{' '}
-                        </Card.Text>
-                    </Card.Body>
-                    <Card.Footer>
-                        <small className="text-muted">Last updated 3 mins ago</small>
-                    </Card.Footer>
-                </Card>
-
-                
-            </CardColumns>
-        </React.Fragment>
+        </Container>
     )
 }
 
