@@ -1,18 +1,18 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { Card, ListGroup, ListGroupItem, Container, Row, Col, Button, Accordion } from 'react-bootstrap';
 
 interface IVeggieProps extends RouteComponentProps<{ id: string }> { }
 const Veggie: React.FC<IVeggieProps> = ({ match: { params: { id } } }) => {
 
-let fetchAPI = async() => {
-    let response: Response=await fetch(`/api/vegetables/${id}`)
-    let resObj: any=await response.json()
-    console.log(resObj)
-}
-useEffect(() => {
-    fetchAPI()
-},[])
+    let fetchAPI = async () => {
+        let response: Response = await fetch(`/api/vegetables/${id}`)
+        let resObj: any = await response.json()
+        console.log(resObj)
+    }
+    useEffect(() => {
+        fetchAPI()
+    }, [])
 
     return (
         <div className="d-flex">
@@ -30,8 +30,8 @@ useEffect(() => {
                 <Card.Body className="mx-auto">
                     <Button variant="success">Add to My Garden</Button>{' '}
 
-                    <Card.Text>
-                        <h1>{id}</h1>
+                    <Card.Text as="h1">
+                        {id}
                     </Card.Text>
                 </Card.Body>
                 <Container>
