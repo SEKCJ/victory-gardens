@@ -1,10 +1,10 @@
 import * as express from 'express';
 
-import {tokenCheckpoint, isGuest} from './authCheckpoint';;
+import {tokenCheckpoint, hasRole} from './authCheckpoint';;
 
 const router = express.Router();
 
-router.get('/validate', tokenCheckpoint, isGuest, async(req, res) => {
+router.get('/validate', tokenCheckpoint, hasRole, async(req, res) => {
     const user = req.user;
     res.json({msg: "successful", user});
 })
