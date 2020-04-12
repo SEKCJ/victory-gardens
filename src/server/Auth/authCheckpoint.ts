@@ -30,7 +30,8 @@ export const tokenCheckpoint: RequestHandler = (req, res, next) => {
 
 export const hasRole: RequestHandler = (req: ReqUser, res, next) => {
     if (req.user) {
-        if (req.user.role === "admin" || req.user.role === "guest") {
+        let [user]: any = req.user;
+        if (user.role === "admin" || user.role === "guest") {
             return next();
         }
     } else {
