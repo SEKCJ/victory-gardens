@@ -13,9 +13,6 @@ import AboutUs from './components/AboutUs';
 import UserLogin from './components/Login';
 import ControlledTabs from './Components/MyProfile';
 
-
-
-
 const App: React.FC<IAppProps> = props => {
 
 	return (
@@ -27,12 +24,12 @@ const App: React.FC<IAppProps> = props => {
 				<Route exact path="/myprofile" component={MyProfile} />
 				<Route exact path="/savedveggies" component={SavedVeggies} />
 				<Route exact path="/settings" component={Settings} />
-				<Route exact path= "/joingarden" component={UserSignUp}/>
+				<Route exact path="/joingarden" component={UserSignUp} />
 				<Route exact path="/login" component={UserLogin} />
-				<Route exact path="/aboutus" component={AboutUs}/>
-				<Route exact path="/myprofile" component={ControlledTabs}/>
+				<Route exact path="/aboutus" component={AboutUs} />
+				<Route exact path="/myprofile" component={ControlledTabs} />
 				<Route exact path="/choose" component={HelpChoose} />
-					<Route path = '/' component={UserHome} />
+				<Route path='/' component={UserHome} />
 			</Switch>
 		</Router >
 	)
