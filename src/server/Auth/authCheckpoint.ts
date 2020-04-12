@@ -9,7 +9,6 @@ export const isGuest: RequestHandler = (req: ReqUser, res, next) => {
     } else {
         return res.status(401).json({ msg: "not authorized" });
     }
-
 }
 
 export const isAdmin: RequestHandler = (req: ReqUser, res, next) => {
@@ -18,6 +17,7 @@ export const isAdmin: RequestHandler = (req: ReqUser, res, next) => {
     } else {
         return res.status(401).json('nope, you shall not pass');
     }
+
 }
 
 export const tokenCheckpoint: RequestHandler = (req, res, next) => {
