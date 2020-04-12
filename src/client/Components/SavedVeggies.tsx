@@ -1,49 +1,51 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Container, Jumbotron, Row, Col, Button, Collapse } from 'react-bootstrap';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { IAppProps } from '../App';
+import { Token } from '../Services/apiServices';
 
 const SavedVeggies: React.FC<IAppProps> = props => {
 
-    const [basicArray, setBasicArray] = useState([]);
-    const [open, setOpen] = useState(false);
+    const [apiArray, setApiArray] = useState([]);
 
+    let fetchAPI = async () => {
+        let response: Response = await fetch(`/api/savedvegetables/${Token}`);
+        let resObj = await response.json()
+        makeCards(resObj)
+    }
 
-    // useEffect [] same as componentDidMount()
-    useEffect(() => {
-        // Arrays start at index 0
-        const infoArray = ['rachel', 'cesar', 'madelyn', 'cheyenne', 'aaron', 'josh', 'jake', 'garrett'];
+    let makeCards = (resObj: any) => {
+        let cardMemory = resObj.map((element: any, index: any) => {
+            let veggieImg = element.url;
+            let veggieName = element.name;
+            let veggieId = element.id;
+            let veggieSciName = element.sci_name
 
-        let cardArray = infoArray.map((element, index) => {
             return (
-                <Row>
-                    <Card>
-                        <div className="d-flex flex-row mx-auto">
-
+                <Row key={veggieId} className="d-flex">
+                    <Card className="mx-auto col-sm-8 px-0">
+                        <div className="d-flex flex-row">
                             <Card.Img variant="top" style={{ "width": "10em" }}
-                                src="https://c7.uihere.com/files/396/838/483/cabbage-vector.jpg" />
+                                src={veggieImg} />
                             <Card.Body>
-                                <Card.Title>Card Title</Card.Title>
+                                <Card.Title>{veggieName}</Card.Title>
                                 <Card.Text>
-                                    Some quick example text to build on the card title and make up the bulk of
-                                    the card's content.
-    </Card.Text>
+                                    {veggieSciName}
+                                </Card.Text>
                             </Card.Body>
-                            <Button variant="primary" as={Link} to={`/veggies/${index}`}>Go somewhere</Button>
+                            <Button variant="primary" as={Link} to={`/veggies/${veggieId}`}>Read More</Button>
                         </div>
-
-                        {/* <Collapse in={open}>
-                            <div id={`collapse-content ${index}`}>VEGGIES</div>
-                        </Collapse> */}
-
                     </Card>
                 </Row>
+
             )
+        })
 
-        });
-
-        setBasicArray(cardArray)
-
+        setApiArray(cardMemory)
+    }
+    // useEffect [] same as componentDidMount()
+    useEffect(() => {
+        fetchAPI()
     }, [])
 
 
@@ -55,8 +57,7 @@ const SavedVeggies: React.FC<IAppProps> = props => {
                     <h1>My Garden</h1>
                 </Container>
             </Jumbotron>
-            
-            {basicArray}
+            {apiArray}
 
         </Container>
     )

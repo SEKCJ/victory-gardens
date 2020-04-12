@@ -21,15 +21,15 @@ const App: React.FC<IAppProps> = props => {
 			<Switch>
 				<Route exact path="/veggies" component={Veggies} />
 				<Route exact path="/veggies/:id" component={Veggie} />
-				<Route exact path="/myprofile/:token?" component={MyProfile} />
-				<Route exact path="/savedveggies/:token?" component={SavedVeggies} />
-				<Route exact path="/settings/:token?" component={Settings} />
-				<Route exact path="/joingarden/:token?" component={UserSignUp} />
+				<Route exact path="/myprofile" component={MyProfile} />
+				<Route exact path="/savedveggies" component={SavedVeggies} />
+				<Route exact path="/settings" component={Settings} />
+				<Route exact path="/joingarden" component={UserSignUp} />
 				<Route exact path="/login" component={UserLogin} />
 				<Route exact path="/aboutus" component={AboutUs} />
 				{/* <Route exact path="/myprofile/:token?" component={ControlledTabs} /> */}
 				<Route exact path="/choose" component={HelpChoose} />
-				<Route path='/:token?' component={UserHome} />
+				<Route path='/' component={UserHome} />
 			</Switch>
 		</Router >
 	)

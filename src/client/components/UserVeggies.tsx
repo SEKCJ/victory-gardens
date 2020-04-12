@@ -22,17 +22,16 @@ const Veggies: React.FC<IAppProps> = props => {
             let veggieSciName = element.sci_name
 
             return (
-                <Row key={veggieId}>
-                    <Card>
-                        <div className="d-flex flex-row mx-auto">
-
+                <Row key={veggieId} className="d-flex">
+                    <Card className="mx-auto col-sm-8 px-0">
+                        <div className="d-flex flex-row">
                             <Card.Img variant="top" style={{ "width": "10em" }}
                                 src={veggieImg} />
                             <Card.Body>
                                 <Card.Title>{veggieName}</Card.Title>
                                 <Card.Text>
-            {veggieSciName}
-</Card.Text>
+                                    {veggieSciName}
+                                </Card.Text>
                             </Card.Body>
                             <Button variant="primary" as={Link} to={`/veggies/${veggieId}`}>Read More</Button>
                         </div>
@@ -70,7 +69,7 @@ const Veggies: React.FC<IAppProps> = props => {
                         </p>
                 </Container>
             </Jumbotron>
-        {apiArray}
+            {apiArray}
 
         </Container>
     )

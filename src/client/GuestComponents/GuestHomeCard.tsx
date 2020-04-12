@@ -14,7 +14,7 @@ const GuestHome: React.FC<ILoginProps> = props => {
     api('/auth/tokens/validate')
       .then(result => {
         if (result.msg === "successful") {
-          props.history.push(`/${Token}`)
+          props.history.push("/")
         }
       })
       .catch(error => {
@@ -27,7 +27,7 @@ const GuestHome: React.FC<ILoginProps> = props => {
     let result = await api<{ token: string }>('/auth/login', "POST", { email, password });
     if (result?.token) {
       setToken(result.token);
-      props.history.push(`/${result.token}`)
+      props.history.push("/")
       window.location.reload()
     } else {
       setError(true);

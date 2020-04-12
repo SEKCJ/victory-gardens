@@ -10,6 +10,7 @@ const oneSavedVegByToken = (token: string) => {
   return Query<IVegetables[]>(
     `SELECT 
     vegetables.name,
+    vegetables.sci_name,
     images.url
     FROM myvegetables 
     JOIN vegetables ON vegetables.id = myvegetables.vegetableid 

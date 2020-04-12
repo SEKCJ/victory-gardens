@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
 import App from './App';
 import GuestApp from './GuestApp';
-import { api, Token } from './services/apiServices';
 
-const Auth: React.FC<HomeProps> = props => {
+import React, { useState, useEffect } from 'react';
+import { api, Token } from './services/apiServices';
+import { IAppProps } from './App';
+
+const Auth: React.FC<IAppProps> = props => {
 
     const [router, setRouter] = useState<any>();
 
@@ -32,7 +34,5 @@ const Auth: React.FC<HomeProps> = props => {
         )
     }
 }
-
-export interface HomeProps { }
 
 export default Auth;
