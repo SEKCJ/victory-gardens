@@ -19,8 +19,8 @@ return (
                 <Nav.Link as={Link} to="/guestabout">About Victory Gardens</Nav.Link>
                 
             </Nav>
-            <Nav>
-                <NavDropdown className="mr-auto" title="Profile" id="profile-dropdown">
+            <Nav className="mr-4">
+                <NavDropdown className="mr-5" title="Profile" id="profile-dropdown">
                     <NavDropdown.Item>My Profile</NavDropdown.Item>
                     <NavDropdown.Item>My Garden</NavDropdown.Item>
                     <NavDropdown.Item>Saved Veggies</NavDropdown.Item>

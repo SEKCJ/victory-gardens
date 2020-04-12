@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { RouteComponentProps } from 'react-router';
 import { IAppProps } from '../GuestApp';
-import { Jumbotron, Form, Button, Container, Spinner } from 'react-bootstrap';
+import { Jumbotron, Form, Button, Container, Spinner, Alert } from 'react-bootstrap';
 import { api, setToken, Token } from '../services/apiServices';
 
 const GuestHome: React.FC<ILoginProps> = props => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<boolean>(false);
+  const [invalid, setInvalid] = useState<JSX.Element>();
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -30,9 +31,22 @@ const GuestHome: React.FC<ILoginProps> = props => {
       props.history.push("/")
       window.location.reload()
     } else {
-      setError(true);
+      setError(true)
     }
   }
+
+  useEffect(() => {
+    if (error === true) {
+      setInvalid(
+        <Alert variant="danger" className="col-sm-8 mx-auto" onClose={() => setError(false)} dismissible>
+          <Alert.Heading>Invalid Login</Alert.Heading>
+          <p>Check your credentials and try again.</p>
+        </Alert>
+      )
+    } else {
+      setInvalid(<div></div>)
+    }
+  }, [error])
 
   if (loading === true) {
     return (
@@ -69,6 +83,10 @@ const GuestHome: React.FC<ILoginProps> = props => {
               <Button href="/guestsignup" variant="link" type="submit">Don't have an account? Click here to create one!</Button>
             </div>
           </Form>
+          <div className="d-flex">
+            {invalid}
+          </div>
+
         </Container>
       </>
     )
