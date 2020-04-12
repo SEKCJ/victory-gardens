@@ -28,7 +28,6 @@ export const isAdmin: RequestHandler = (req: ReqUser, res, next) => {
 export const tokenCheckpoint: RequestHandler = (req, res, next) => {
     passport.authenticate('bearer', (err, user) => {
         if (user) {
-            console.log(user);
             req.user = user;
         }
         next();
