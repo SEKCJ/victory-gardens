@@ -1,31 +1,28 @@
+import React, { useState, useEffect } from 'react';
 import App from './App';
 import GuestApp from './GuestApp';
+import { api, Token } from './services/apiServices';
 
-import React, { useState, useEffect } from 'react';
-import {IAppProps} from './App'
-import { api, Token } from './Services/apiServices';
+const Auth: React.FC<HomeProps> = props => {
 
-
-const Auth: React.FC<IAppProps> = props => {
-
-    const [mode, setMode] = useState<string>("");
+    const [router, setRouter] = useState<any>();
 
     useEffect(() => {
         if (Token !== null) {
             api('/auth/tokens/validate')
                 .then(result => {
                     if (result?.msg === "successful") {
-                        setMode("User");
+                        setRouter("User");
                     } else {
-                        setMode("Guest");
+                        setRouter("Guest");
                     }
                 })
         } else {
-            setMode("Guest");
+            setRouter("Guest");
         }
     }, [])
 
-    if (mode === "User") {
+    if (router === "User") {
         return (
             <App />
         )
@@ -34,7 +31,8 @@ const Auth: React.FC<IAppProps> = props => {
             <GuestApp />
         )
     }
-
 }
+
+export interface HomeProps { }
 
 export default Auth;
