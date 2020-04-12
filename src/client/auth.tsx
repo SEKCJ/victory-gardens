@@ -8,18 +8,17 @@ const Auth: React.FC<HomeProps> = props => {
     const [router, setRouter] = useState<any>();
 
     useEffect(() => {
-        if (Token === null) {
-            setRouter("Guest");
-        } else {
+        if (Token !== null) {
             api('/auth/tokens/validate')
                 .then(result => {
-                    console.log(result)
                     if (result?.msg === "successful") {
                         setRouter("User");
                     } else {
                         setRouter("Guest");
                     }
                 })
+        } else {
+            setRouter("Guest");
         }
     }, [])
 

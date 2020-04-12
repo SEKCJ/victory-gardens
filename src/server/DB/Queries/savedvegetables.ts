@@ -6,17 +6,18 @@ const allSavedVegs = () => {
 };
 
 // returns the firstnames of the users and the vegs that particular user has in their myvegs list based on that user's userid // (CM)
-const oneSavedVegByTheuserid = (theuserid: number) => {
+const oneSavedVegByToken = (token: string) => {
   return Query<IVegetables[]>(
-    `SELECT users.id as userid, 
+    `SELECT 
     vegetables.name,
     images.url
     FROM myvegetables 
     JOIN vegetables ON vegetables.id = myvegetables.vegetableid 
     JOIN users ON users.id = myvegetables.theuserid 
     JOIN images on myvegetables.vegetableid = images.vegetableid
-    WHERE users.id = ?`,
-    [theuserid]
+    JOIN tokens on users.id = tokens.userid
+    WHERE tokens.token = ?`,
+    [token]
   );
   // ('SELECT * FROM myvegetables WHERE theuserid = ?', [theuserid])
 };
@@ -44,7 +45,7 @@ const deleteSavedVeg = (vegetableid: number) => {
 
 export default {
   allSavedVegs,
-  oneSavedVegByTheuserid,
+  oneSavedVegByToken,
   // oneSavedVegByVegid,
   postSavedVeg,
   deleteSavedVeg,

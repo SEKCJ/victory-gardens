@@ -7,24 +7,25 @@ import DB from "../DB";
 const router = express.Router();
 
 // GET SavedVegetables - if (id) GET one, else GET all
-router.get("/:id?", async (req, res) => {
-  let theuserid: number = parseInt(req.params.id, 10); //base10 because the integer got converted to a string in the json
-  if (theuserid) {
+router.get("/:token", async (req, res) => {
+  let token = req.params.token; //base10 because the integer got converted to a string in the json
+  if (token) {
     try {
-      let SavedVegetables = await DB.SavedVegetables.oneSavedVegByTheuserid(theuserid);
+      let SavedVegetables = await DB.SavedVegetables.oneSavedVegByToken(token);
       res.json(SavedVegetables);
     } catch (e) {
       console.log(e);
       res.sendStatus(500);
     }
   } else {
-    try {
-      let SavedVegetables = await DB.SavedVegetables.allSavedVegs();
-      res.json(SavedVegetables);
-    } catch (e) {
-      console.log(e);
-      res.sendStatus(500);
-    }
+    // try {
+    //   let SavedVegetables = await DB.SavedVegetables.allSavedVegs();
+    //   res.json(SavedVegetables);
+    // } catch (e) {
+    //   console.log(e);
+    //   res.sendStatus(500);
+    // }
+    res.sendStatus(500)
   }
 });
 
