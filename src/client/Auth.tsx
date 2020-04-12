@@ -2,10 +2,11 @@ import App from './App';
 import GuestApp from './GuestApp';
 
 import React, { useState, useEffect } from 'react';
+import {IAppProps} from './App'
 import { api, Token } from './Services/apiServices';
 
 
-const Auth: React.FC<ILoginProps> = props => {
+const Auth: React.FC<IAppProps> = props => {
 
     const [mode, setMode] = useState<string>("");
 
@@ -35,7 +36,5 @@ const Auth: React.FC<ILoginProps> = props => {
     }
 
 }
-
-export interface ILoginProps { }
 
 export default Auth;
