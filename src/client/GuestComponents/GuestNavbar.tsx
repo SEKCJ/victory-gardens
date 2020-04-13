@@ -15,18 +15,15 @@ return (
             <Nav className="mr-auto">
                 <Nav.Link as={Link} to="/guestchoose">Help Me Choose</Nav.Link>
                 <Nav.Link as={Link} to="/guestveggies">Veggies</Nav.Link>
-                <Nav.Link as={Link} to="/">Calendar</Nav.Link>
+                {/* <Nav.Link as={Link} to="/">Calendar</Nav.Link> */}
                 <Nav.Link as={Link} to="/guestabout">About Victory Gardens</Nav.Link>
                 
             </Nav>
-            <Nav className="mr-4">
-                <NavDropdown className="mr-5" title="Profile" id="profile-dropdown">
-                    <NavDropdown.Item>My Profile</NavDropdown.Item>
-                    <NavDropdown.Item>My Garden</NavDropdown.Item>
-                    <NavDropdown.Item>Saved Veggies</NavDropdown.Item>
-                    <NavDropdown.Item>Settings</NavDropdown.Item>
-                </NavDropdown>
-                {/* <Nav.Link as={Link} to="/">Community Garden</Nav.Link> */}
+            <Nav className="mr-5">
+                <Nav.Link as={Link} to="/myprofile">Login</Nav.Link>
+                <Nav.Link as={Link} to="/guestsignup">Signup</Nav.Link>
+
+
             </Nav>
         </Navbar.Collapse>
 
