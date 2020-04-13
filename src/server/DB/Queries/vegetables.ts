@@ -4,13 +4,18 @@ import { IVegetables } from "../../Models/index";
 // returns all info for all vegs with image url
 const allVegs = () => {
   return Query<IVegetables[]>(
-    "SELECT vegetables.*, images.url FROM vegetables JOIN images ON vegetables.id = images.vegetableid"
+    `SELECT vegetables.*, images.url
+    FROM vegetables
+    JOIN images ON vegetables.id = images.vegetableid`
   );
 };
 
 // returns all info for one veg with image url based on the veg's unique id
 const oneVegById = (id: number) => {
-  return Query<IVegetables[]>("SELECT vegetables.*, images.url FROM vegetables JOIN images ON vegetables.id = images.vegetableid WHERE id = ?", [id]);
+  return Query<IVegetables[]>(`SELECT vegetables.*, images.url
+  FROM vegetables
+  JOIN images ON vegetables.id = images.vegetableid
+  WHERE id = ?`, [id]);
 };
 
 // returns name of one veg with image url based on the veg's name
