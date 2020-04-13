@@ -40,6 +40,7 @@ const HelpChoose: React.FC<IAppProps> = props => {
 <>
 <Accordion>
 <Card style={{ width: '18rem' }}>
+<Card.Img variant="top" src="holder.js/100px180?text=Image cap" />
   <Card.Header>
     <Accordion.Toggle as={Button} variant="link" eventKey="0">Salsa Essentials</Accordion.Toggle>
     </Card.Header>

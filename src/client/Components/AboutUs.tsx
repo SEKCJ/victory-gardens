@@ -1,36 +1,14 @@
-import * as React from 'react';
+import React, { } from 'react';
+import { Jumbotron, Container} from 'react-bootstrap';
+import { IAppProps } from '../App';
 
-class AboutUs extends React.Component<IAppProps, IAppState> {
-	constructor(props: IAppProps) {
-		super(props);
-		this.state = {
-			name: null
-		};
-	}
-
-	async componentDidMount() {
-		try {
-			let r = await fetch('/api/hello');
-			let name = await r.json();
-			this.setState({ name });
-		} catch (error) {
-			console.log(error);
-		}
-	}
-
-	render() {
-		return (
-			<main className="container my-5">
-				<h1 className="text-primary text-center">About Victory Gardens Page{this.state.name}</h1>
-			</main>
-		);
-	}
+const AboutUs: React.FC<IAppProps> = props => {
+  return (
+  <Container className= "d-flex flex-column">
+      <Jumbotron fluid>
+              <h1>About Victory Gardens</h1>
+      </Jumbotron>
+  </Container>
+  )
 }
-
-export interface IAppProps {}
-
-export interface IAppState {
-	name: string;
-}
-
 export default AboutUs;

@@ -34,7 +34,7 @@ const Home: React.FC<IAppProps> = props => {
   </Row>
 </Container> 
 
- <Button variant="success" href="/aboutus">About Us</Button>{''}
+ <Button variant="success" href="/aboutus">About Us</Button>
  </Jumbotron>
 
   )

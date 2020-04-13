@@ -14,7 +14,7 @@ const SavedVeggies: React.FC<IAppProps> = props => {
         // Arrays start at index 0
         const infoArray = ['rachel', 'cesar', 'madelyn', 'cheyenne', 'aaron', 'josh', 'jake', 'garrett'];
 
-        let cardArray = infoArray.map((element, index) => {
+        let cardArray = infoArray.map((element:any, index) => {
             return (
                 <Row>
                     <Card>
