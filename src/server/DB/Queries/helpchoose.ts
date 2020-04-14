@@ -2,7 +2,7 @@ import { Query } from "../index";
 import { IVegetables } from "../../Models/index";
 
 // return the whole list of helpchoose
-const allHelp = () => {
+const allHelp = async () => {
   return Query<IVegetables[]>(
     `SELECT a.name, a.id, c.category, b.categoryid
     FROM vegetables a
@@ -12,7 +12,7 @@ const allHelp = () => {
 };
 
 // return one category in helpchoose based on that category's categoryid
-const oneHelpByCategory = (categoryid: number) => {
+const oneHelpByCategory = async (categoryid: number) => {
   return Query<IVegetables[]>(`
   SELECT a.name, a.id, c.category
   FROM vegetables a
@@ -21,7 +21,7 @@ const oneHelpByCategory = (categoryid: number) => {
   WHERE b.categoryid = ?`, [categoryid]);
 }
 
-const oneHelpByVegId = (vegetableid: number) => {
+const oneHelpByVegId = async (vegetableid: number) => {
   return Query<IVegetables[]>(`
   SELECT a.name, a.id, c.category
   FROM vegetables a
@@ -30,17 +30,17 @@ const oneHelpByVegId = (vegetableid: number) => {
   WHERE b.vegetableid = ?`, [vegetableid]);
 }
 
-const postHelp = (vegetableid: number, categoryid: number) => {
+const postHelp = async (vegetableid: number, categoryid: number) => {
   let values = [vegetableid, categoryid];
   return Query('INSERT INTO helpchoose(vegetableid, categoryid) VALUES(?,?);--', values)
 }
 
-const putHelp = (oldvegetableid: number, oldcategoryid: number, vegetableid: number, categoryid: number) => {
+const putHelp = async (oldvegetableid: number, oldcategoryid: number, vegetableid: number, categoryid: number) => {
   let values = [vegetableid, categoryid, oldvegetableid, oldcategoryid];
   return Query('UPDATE helpchoose SET vegetableid = ?, categoryid = ? WHERE vegetableid = ? AND categoryid = ?;--', values)
 }
 
-const deleteHelp = (vegetableid: number) => {
+const deleteHelp = async (vegetableid: number) => {
   return Query('DELETE FROM helpchoose WHERE vegetableid = ?', [vegetableid])
 }
 
@@ -49,6 +49,6 @@ export default {
   oneHelpByCategory,
   oneHelpByVegId,
   postHelp,
-  putHelp, 
+  putHelp,
   deleteHelp
 };

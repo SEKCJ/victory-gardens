@@ -2,7 +2,7 @@ import { Query } from "../index";
 import { IVegetables } from "../../Models/index";
 
 // returns all info for all vegs with image url
-const allVegs = () => {
+const allVegs = async () => {
   return Query<IVegetables[]>(
     `SELECT vegetables.*, images.url
     FROM vegetables
@@ -11,7 +11,7 @@ const allVegs = () => {
 };
 
 // returns all info for one veg with image url based on the veg's unique id
-const oneVegById = (id: number) => {
+const oneVegById = async (id: number) => {
   return Query<IVegetables[]>(`SELECT vegetables.*, images.url
   FROM vegetables
   JOIN images ON vegetables.id = images.vegetableid
@@ -24,12 +24,12 @@ const oneVegById = (id: number) => {
 // };
 
 // adds a veg to vegs table
-const postVeg = (values: any) => {
+const postVeg = async (values: any) => {
   return Query<IVegetables>(
     "SET @@auto_increment_increment = 1; INSERT INTO vegetables VALUES ?", values);
 };
 
-const putVeg = (values: any, id: number) => {
+const putVeg = async (values: any, id: number) => {
   return Query<IVegetables>("UPDATE vegetables SET ? WHERE id =?", [
     values,
     id,
