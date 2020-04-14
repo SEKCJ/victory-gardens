@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import App from './App';
 import GuestApp from './GuestApp';
 import { api, Token } from './services/apiServices';
+import {Container, Spinner} from 'react-bootstrap';
 
 const Auth: React.FC<HomeProps> = props => {
 
@@ -26,9 +27,15 @@ const Auth: React.FC<HomeProps> = props => {
         return (
             <App />
         )
-    } else {
+    } else if (router === "Guest") {
         return (
             <GuestApp />
+        )
+    } else {
+        return (
+            <Container className="d-flex">
+                <Spinner className="mx-auto my-3" animation="border" variant="warning" style={{ "width": "30em", "height": "30em" }} />
+            </Container>
         )
     }
 }
