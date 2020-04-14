@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { api } from '../Services/apiServices';
-import { Card, ListGroup, ListGroupItem, Container, Row, Col, Button, Accordion } from 'react-bootstrap';
+import { Card, ListGroup, ListGroupItem, Container, Row, Col, Button, Image } from 'react-bootstrap';
+// import styles from '../scss/app.scss';
+// import '../styles.css';
 import { IVegetables } from "../../server/Models/index";
 
 interface IGardenProps extends RouteComponentProps<{ id: string }> { }
@@ -14,9 +16,9 @@ const Garden: React.FC<IGardenProps> = ({
 
     let fetchAPI = async () => {
         let [response] = await api(`/api/vegetables/${id}`);
-        makeVeggie(response);
+        makeGarden(response);
     };
-    let makeVeggie = (resObj: any) => {
+    let makeGarden = (resObj: any) => {
         let vgId = resObj.id;
         let vgName = resObj.name;
         let vgPosition = resObj.position;
@@ -28,19 +30,21 @@ const Garden: React.FC<IGardenProps> = ({
             <section id="view">
                 <Container fluid="md">
                     <div id="board">
-                        <div id="overlay">
+                        <div id="plants"></div>
+                        <div id="soil">
+                            {/* need a top row for things to start insde (CM) */}
                             <Row>
                                 {/* <span className="plot"></span> */}
-                                <Col className="">1</Col>
-                                <Col className="">2</Col>
-                                <Col className="">3</Col>
-                                <Col className="">4</Col>
-                                <Col className="">5</Col>
-                                <Col className="">6</Col>
-                                <Col className="">7</Col>
-                                <Col className="">8</Col>
-                                <Col className="">9</Col>
-                                <Col className="">10</Col>
+                                <Col className="plot"><Image src={window.location.origin + '/assets/dirt.jpg'} style={{ 'width': '100%' }}></Image></Col>
+                                <Col className="plot"><Image src={window.location.origin + '/assets/dirt.jpg'} style={{ 'width': '100%' }}></Image></Col>
+                                <Col className="plot"><Image src={window.location.origin + '/assets/dirt.jpg'} style={{ 'width': '100%' }}></Image></Col>
+                                <Col className="plot"><Image src={window.location.origin + '/assets/dirt.jpg'} style={{ 'width': '100%' }}></Image></Col>
+                                <Col className="plot"><Image src={window.location.origin + '/assets/dirt.jpg'} style={{ 'width': '100%' }}></Image></Col>
+                                <Col className="plot"><Image src={window.location.origin + '/assets/dirt.jpg'} style={{ 'width': '100%' }}></Image></Col>
+                                <Col className="plot"><Image src={window.location.origin + '/assets/dirt.jpg'} style={{ 'width': '100%' }}></Image></Col>
+                                <Col className="plot"><Image src={window.location.origin + '/assets/dirt.jpg'} style={{ 'width': '100%' }}></Image></Col>
+                                <Col className="plot"><Image src={window.location.origin + '/assets/dirt.jpg'} style={{ 'width': '100%' }}></Image></Col>
+                                <Col className="plot"><Image src={window.location.origin + '/assets/dirt.jpg'} style={{ 'width': '100%' }}></Image></Col>
                             </Row>
                         </div>
                     </div>
