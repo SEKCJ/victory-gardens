@@ -187,6 +187,44 @@ const Veggie: React.FC<IVeggieProps> = ({ match: { params: { id } } }) => {
                                     </ListGroup> </Card.Body>
                                 </Accordion.Collapse>
                             </Card>
+
+                            <Card>
+                                <Card.Header>
+                                    <Accordion.Toggle as={Button} variant="link" eventKey="0">
+                                        Notes
+      </Accordion.Toggle>
+                                </Card.Header>
+                                <Accordion.Collapse eventKey="0">
+                                    <Card.Body>{vgNotes}</Card.Body>
+                                </Accordion.Collapse>
+                            </Card>
+                        
+                            <Card>
+                                <Card.Header>
+                                    <Accordion.Toggle as={Button} variant="link" eventKey="0">
+                                        Harvesting
+      </Accordion.Toggle>
+                                </Card.Header>
+                                <Accordion.Collapse eventKey="0">
+                                    <Card.Body> <ListGroup className="list-group-flush">
+                                        {vgHarvest}
+
+                                    </ListGroup> </Card.Body>
+                                </Accordion.Collapse>
+                            </Card>
+                            <Card>
+                                <Card.Header>
+                                    <Accordion.Toggle as={Button} variant="link" eventKey="0">
+                                        Troubleshooting
+      </Accordion.Toggle>
+                                </Card.Header>
+                                <Accordion.Collapse eventKey="0">
+                                    <Card.Body> <ListGroup className="list-group-flush">
+                                        {vgTs}
+
+                                    </ListGroup> </Card.Body>
+                                </Accordion.Collapse>
+                            </Card>
                            
                         </Accordion> </Col>
                         
