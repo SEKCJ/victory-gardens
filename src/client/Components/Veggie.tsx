@@ -56,25 +56,25 @@ const Veggie: React.FC<IVeggieProps> = ({ match: { params: { id } } }) => {
                     <Row>
                         <Col>
                             <ListGroup className="list-group-flush">
-        <ListGroupItem>{vgSoil}</ListGroupItem>
-        <ListGroupItem>{vgPosition}</ListGroupItem>
-        <ListGroupItem>{vgFt}</ListGroupItem>
-        <ListGroupItem>{vgFeeding}</ListGroupItem>
-        <ListGroupItem>{vgCompanions}</ListGroupItem>
-        <ListGroupItem>{vgBadCompanions}</ListGroupItem>
-        <ListGroupItem>{vgSpacing}</ListGroupItem>
+        <ListGroupItem><h5>SOIL:</h5> {vgSoil}</ListGroupItem>
+        <ListGroupItem><h5>POSITION:</h5> {vgPosition}</ListGroupItem>
+        <ListGroupItem><h5>FROST TOLERANCE:</h5> {vgFt}</ListGroupItem>
+        <ListGroupItem><h5>FEEDING:</h5> {vgFeeding}</ListGroupItem>
+        <ListGroupItem><h5>COMPANIONS:</h5> {vgCompanions}</ListGroupItem>
+        <ListGroupItem><h5>BAD COMPANIONS:</h5> {vgBadCompanions}</ListGroupItem>
+        <ListGroupItem><h5>SPACING:</h5> {vgSpacing}</ListGroupItem>
                             </ListGroup>
                         </Col>
 
                         <Col>
 
                             <ListGroup className="list-group-flush">
-        <ListGroupItem>{vgSandP}</ListGroupItem>
-        <ListGroupItem>{vgPm}</ListGroupItem>
-        <ListGroupItem>{vgHm}</ListGroupItem>
-        <ListGroupItem>{vgNotes}</ListGroupItem>
-        <ListGroupItem>{vgHarvest}</ListGroupItem>
-        <ListGroupItem>{vgTs}</ListGroupItem>
+        <ListGroupItem><h5>SOW AND PLANT:</h5> {vgSandP}</ListGroupItem>
+        <ListGroupItem><h5>PLANTING MONTHS:</h5> {vgPm}</ListGroupItem>
+        <ListGroupItem><h5>HARVESTING MONTHS:</h5> {vgHm}</ListGroupItem>
+        <ListGroupItem><h5>NOTES:</h5> {vgNotes}</ListGroupItem>
+        <ListGroupItem><h5>HARVEST:</h5> {vgHarvest}</ListGroupItem>
+        <ListGroupItem><h5>TROUBLESHOOTING:</h5> {vgTs}</ListGroupItem>
                                 
                             </ListGroup>  </Col></Row> </Container>
 
