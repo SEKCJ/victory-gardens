@@ -1,7 +1,8 @@
 import * as express from "express";
-import DB from "../DB";
 
+import DB from "../DB";
 import { IVegetables } from "../Models/index";
+import { hasRole, isAdmin } from '../Auth/authCheckpoint';
 
 const router = express.Router();
 
@@ -30,7 +31,7 @@ router.get("/:id?", async (req, res) => {
 });
 
 // POST a new vegetable
-router.post("/", async (req: { body: IVegetables }, res) => {
+router.post("/", isAdmin, async (req: { body: IVegetables }, res) => {
   let vegsObj = {
     name: req.body.name,
     sci_name: req.body.sci_name,
@@ -58,7 +59,7 @@ router.post("/", async (req: { body: IVegetables }, res) => {
 });
 
 // PUT (edit) an existing vegetable
-router.put("/:id?", async (req: { body: IVegetables; params: any }, res) => {
+router.put("/:id?", isAdmin, async (req: { body: IVegetables; params: any }, res) => {
   let id = parseInt(req.params.id, 10);
   let vegsObj = {
     name: req.body.name,
@@ -86,7 +87,7 @@ router.put("/:id?", async (req: { body: IVegetables; params: any }, res) => {
 });
 
 // DELETE an existing vegetable
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", isAdmin, async (req, res) => {
   let id = parseInt(req.params.id, 10);
   try {
     res.json(await DB.Vegetables.deleteVeg(id));

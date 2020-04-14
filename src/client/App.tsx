@@ -8,13 +8,10 @@ import Veggie from './Components/Veggie';
 import MyProfile from './Components/UserProfile';
 import SavedVeggies from './Components/SavedVeggies';
 import Settings from './Components/Settings';
-import UserSignUp from './Components/UserSignUp';
 import AboutUs from './Components/AboutUs';
 import UserLogin from './Components/Login';
-import ControlledTabs from './Components/MyProfile';
-
-
-
+//import UserSignUp from './Components/UserSignUp';
+//import ControlledTabs from './Components/MyProfile';
 
 const App: React.FC<IAppProps> = props => {
 
@@ -27,12 +24,12 @@ const App: React.FC<IAppProps> = props => {
 				<Route exact path="/myprofile" component={MyProfile} />
 				<Route exact path="/savedveggies" component={SavedVeggies} />
 				<Route exact path="/settings" component={Settings} />
-				<Route exact path= "/joingarden" component={UserSignUp}/>
 				<Route exact path="/login" component={UserLogin} />
-				<Route exact path="/aboutus" component={AboutUs}/>
-				<Route exact path="/myprofile" component={ControlledTabs}/>
+				<Route exact path="/aboutus" component={AboutUs} />
 				<Route exact path="/choose" component={HelpChoose} />
-					<Route path = '/' component={UserHome} />
+				<Route path='/' component={UserHome} />
+				{/* <Route exact path="/myprofile" component={ControlledTabs} /> */}
+				{/* <Route exact path="/joingarden" component={UserSignUp} /> */}
 			</Switch>
 		</Router >
 	)

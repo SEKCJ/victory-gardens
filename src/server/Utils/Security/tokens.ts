@@ -16,7 +16,6 @@ export const CreateToken = async (payload: IPayLoad) => {
     })
     payload.accesstokenid = resultId;
     payload.unique = crypto.randomBytes(32).toString('hex');
-    console.log(Config.auth.secret);
     let token = await jwt.sign(payload, Config.auth.secret);
     await DB.Tokens.put(payload.accesstokenid, token);
     return token;

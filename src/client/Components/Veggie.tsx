@@ -1,9 +1,19 @@
-import React, { } from 'react';
+import React, { useState, useEffect } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
+import { api } from '../Services/apiServices';
 import { Card, ListGroup, ListGroupItem, Container, Row, Col, Button, Accordion } from 'react-bootstrap';
 
 interface IVeggieProps extends RouteComponentProps<{ id: string }> { }
 const Veggie: React.FC<IVeggieProps> = ({ match: { params: { id } } }) => {
+
+    let fetchAPI = async () => {
+        let response = await api(`/api/vegetables/${id}`)
+        console.log(response)
+    }
+    useEffect(() => {
+        fetchAPI()
+    }, [])
+
     return (
         <div className="d-flex">
 
@@ -20,8 +30,8 @@ const Veggie: React.FC<IVeggieProps> = ({ match: { params: { id } } }) => {
                 <Card.Body className="mx-auto">
                     <Button variant="success">Add to My Garden</Button>{' '}
 
-                    <Card.Text>
-                        <h1>{id}</h1>
+                    <Card.Text as="h1">
+                        {id}
                     </Card.Text>
                 </Card.Body>
                 <Container>
@@ -56,5 +66,4 @@ const Veggie: React.FC<IVeggieProps> = ({ match: { params: { id } } }) => {
     )
 
 }
-
 export default Veggie;

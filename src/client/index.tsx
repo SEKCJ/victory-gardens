@@ -1,10 +1,10 @@
 import React from 'react';
 import { render } from 'react-dom';
-import App from './App';
+import Auth from './Auth';
 import './scss/app';
 import './styles';
 
 
 
 
-render(<App />, document.getElementById("root"));
+render(<Auth />, document.getElementById("root"));

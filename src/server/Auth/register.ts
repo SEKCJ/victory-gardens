@@ -9,8 +9,8 @@ const router = express.Router();
 router.post('/', async (req, res, next) => {
     try {
         let email = req.body.email;
-        let first = req.body.firstname;
-        let last = req.body.lastname;
+        let first = req.body.firstName;
+        let last = req.body.lastName;
         let password = HashPassword(req.body.password);
         let result: any = await DB.Users.post(email, first, last, password);
         let resultId = 0;

@@ -1,5 +1,6 @@
 import * as express from "express";
 
+import { hasRole, isAdmin } from '../Auth/authCheckpoint';
 import DB from "../DB";
 
 // import { IVegetables } from "../Models/index";
@@ -7,29 +8,23 @@ import DB from "../DB";
 const router = express.Router();
 
 // GET SavedVegetables - if (id) GET one, else GET all
-router.get("/:id?", async (req, res) => {
-  let theuserid: number = parseInt(req.params.id, 10); //base10 because the integer got converted to a string in the json
-  if (theuserid) {
+router.get("/:token", hasRole, async (req, res) => {
+  let token = req.params.token;
+  if (token) {
     try {
-      let SavedVegetables = await DB.SavedVegetables.oneSavedVegByTheuserid(theuserid);
+      let SavedVegetables = await DB.SavedVegetables.oneSavedVegByToken(token);
       res.json(SavedVegetables);
     } catch (e) {
       console.log(e);
       res.sendStatus(500);
     }
   } else {
-    try {
-      let SavedVegetables = await DB.SavedVegetables.allSavedVegs();
-      res.json(SavedVegetables);
-    } catch (e) {
-      console.log(e);
-      res.sendStatus(500);
-    }
+    res.sendStatus(500)
   }
 });
 
 // POST a new vegetable to Saved Veg
-router.post("/", async (req, res) => {
+router.post("/", hasRole, async (req, res) => {
   let theuserid = parseInt(req.body.theuserid, 10);
   let vegetableid = parseInt(req.body.vegetableid, 10);
   try {
@@ -40,7 +35,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", hasRole, async (req, res) => {
   let vegetableid = parseInt(req.body.vegetableid, 10);
   try {
     res.json(await DB.SavedVegetables.deleteSavedVeg(vegetableid));

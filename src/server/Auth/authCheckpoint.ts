@@ -15,14 +15,15 @@ export const isAdmin: RequestHandler = (req: ReqUser, res, next) => {
     if (req.user && req.user.role === "admin") {
         return next();
     } else {
-        return res.sendStatus(401);
+        return res.status(401).json('nope, you shall not pass');
     }
+
 }
 
 export const tokenCheckpoint: RequestHandler = (req, res, next) => {
     passport.authenticate('bearer', (err, user) => {
         if (user) {
-            req.user = user;
+            req.user = user[0];
         }
         next();
     })(req, res, next);

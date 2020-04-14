@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { IAppProps } from '../App';
 
 
-const Navigate: React.FC<IAppProps> = props => {
+const Navigate: React.FC<IAppProps> = () => {
 
     return (
         <Navbar variant="dark" bg="dark" expand="sm" className="sticky-top">
@@ -18,7 +18,7 @@ const Navigate: React.FC<IAppProps> = props => {
                 <Nav.Link as={Link} to="/savedveggies">My Garden</Nav.Link>
                 {/* <Nav.Link as={Link} to="/">Calendar</Nav.Link> */}
             </Nav>
-            <Nav className="mr-auto">
+            <Nav className="mr-5">
                 <Nav.Link as={Link} to="/myprofile">My Profile</Nav.Link>
 
             </Nav>
