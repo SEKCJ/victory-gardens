@@ -7,6 +7,7 @@ import GuestChoose from './GuestComponents/GuestGhoose';
 import GuestSignUp from './GuestComponents/GuestSignUp';
 //import GuestLogin from './GuestComponents/GuestLogin';
 import GuestAbout from './GuestComponents/GuestAbout';
+import GSingleVeg from './GuestComponents/GSingleVeg';
 
 const GuestApp: React.FC<IAppProps> = props => {
 
@@ -19,6 +20,7 @@ const GuestApp: React.FC<IAppProps> = props => {
                 {/* <Route exact path= "/joingarden" component={UserSignUp}/> */}
                 <Route exact path="/guestsignup" component={GuestSignUp} />
                 <Route exact path="/guestabout" component={GuestAbout} />
+                <Route exact path="/guestsingleveg" component={GSingleVeg} />
                 <Route path="/" component={GuestHomeCard} />
 
             </Switch>

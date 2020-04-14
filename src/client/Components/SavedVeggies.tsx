@@ -2,16 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { Card, Container, Jumbotron, Row, Col, Button, Collapse } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { IAppProps } from '../App';
-import { Token } from '../Services/apiServices';
+import { api, Token } from '../Services/apiServices';
 
 const SavedVeggies: React.FC<IAppProps> = props => {
 
     const [apiArray, setApiArray] = useState([]);
 
     let fetchAPI = async () => {
-        let response: Response = await fetch(`/api/savedvegetables/${Token}`);
-        let resObj = await response.json()
-        makeCards(resObj)
+        let response = await api(`/api/savedvegetables/${Token}`);
+        makeCards(response)
     }
 
     let makeCards = (resObj: any) => {
