@@ -31,5 +31,6 @@ export default {
   Tokens,
   Users,
   Vegetables,
-  SavedVegetables
+  SavedVegetables,
+  HelpChoose
 };

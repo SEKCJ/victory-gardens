@@ -11,6 +11,7 @@ const oneSavedVegByToken = (token: string) => {
     `SELECT 
     vegetables.name,
     vegetables.sci_name,
+    vegetables.id,
     images.url
     FROM myvegetables 
     JOIN vegetables ON vegetables.id = myvegetables.vegetableid 
