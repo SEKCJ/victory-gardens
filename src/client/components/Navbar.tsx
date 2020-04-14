@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { IAppProps } from '../App';
 
 
-const Navigate: React.FC<IAppProps> = props => {
+const Navigate: React.FC<IAppProps> = () => {
 
     return (
         <Navbar variant="dark" bg="dark" expand="sm" sticky="top" className="d-flex">

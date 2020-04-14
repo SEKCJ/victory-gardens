@@ -66,5 +66,4 @@ const Veggie: React.FC<IVeggieProps> = ({ match: { params: { id } } }) => {
     )
 
 }
-
 export default Veggie;
