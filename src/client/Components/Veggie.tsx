@@ -5,64 +5,92 @@ import { Card, ListGroup, ListGroupItem, Container, Row, Col, Button, Accordion 
 
 interface IVeggieProps extends RouteComponentProps<{ id: string }> { }
 const Veggie: React.FC<IVeggieProps> = ({ match: { params: { id } } }) => {
+    const[Veggie, setVeggie] = useState<any>()
 
     let fetchAPI = async () => {
-        let response = await api(`/api/vegetables/${id}`)
-        console.log(response)
+        let [response] = await api(`/api/vegetables/${id}`)
+        makeVeggie(response);
     }
-    useEffect(() => {
-        fetchAPI()
-    }, [])
+    let makeVeggie =(resObj: any) => {
+        let vgId=resObj.id;
+        let vgName=resObj.name;
+        let vgSciName=resObj.sci_name;
+        let vgSoil=resObj.soil;
+        let vgPosition=resObj.position;
+        let vgFt=resObj.frost_tolerant;
+        let vgFeeding=resObj.feeding;
+        let vgCompanions=resObj.companions;
+        let vgBadCompanions=resObj.bad_companions;
+        let vgSpacing=resObj.spacing;
+        let vgSandP=resObj.sow_and_plant;
+        let vgPm=resObj.planting_months;
+        let vgHm=resObj.harvest_months;
+        let vgNotes=resObj.notes;
+        let vgHarvest=resObj.harvesting;
+        let vgTs=resObj.troubleshooting;
+        let vgImg=resObj.url;
 
-    return (
-        <div className="d-flex">
+
+        setVeggie(
+            <div className="d-flex">
 
             <Card className="mx-auto" style={{ width: '40rem' }}>
 
                 <Card.Body>
                     <Card.Link href='/veggies'>Back to List</Card.Link>
                 </Card.Body>
-                <Card.Title className="mx-auto"><h1>Cabbage</h1></Card.Title>
+        <Card.Title className="mx-auto">
+            <h1>{vgName}</h1>
+        <p>{vgSciName}</p>
+            </Card.Title>
 
-                <Card.Img className="mx-auto" variant="top" style={{ "width": '15em' }} src="https://c7.uihere.com/files/396/838/483/cabbage-vector.jpg" />
+                <Card.Img className="mx-auto" variant="top" style={{ "width": '15em' }} src={vgImg} />
 
 
                 <Card.Body className="mx-auto">
                     <Button variant="success">Add to My Garden</Button>{' '}
 
-                    <Card.Text as="h1">
-                        {id}
-                    </Card.Text>
+                   
                 </Card.Body>
                 <Container>
                     <Row>
                         <Col>
                             <ListGroup className="list-group-flush">
-                                <ListGroupItem>Cras justo odio</ListGroupItem>
-                                <ListGroupItem>Dapibus ac facilisis in</ListGroupItem>
-                                <ListGroupItem>Vestibulum at eros</ListGroupItem>
-                                <ListGroupItem>Cras justo odio</ListGroupItem>
-                                <ListGroupItem>Dapibus ac facilisis in</ListGroupItem>
-                                <ListGroupItem>Vestibulum at eros</ListGroupItem>
-                                <ListGroupItem>Vestibulum at eros</ListGroupItem>
+        <ListGroupItem>{vgSoil}</ListGroupItem>
+        <ListGroupItem>{vgPosition}</ListGroupItem>
+        <ListGroupItem>{vgFt}</ListGroupItem>
+        <ListGroupItem>{vgFeeding}</ListGroupItem>
+        <ListGroupItem>{vgCompanions}</ListGroupItem>
+        <ListGroupItem>{vgBadCompanions}</ListGroupItem>
+        <ListGroupItem>{vgSpacing}</ListGroupItem>
                             </ListGroup>
                         </Col>
 
                         <Col>
 
                             <ListGroup className="list-group-flush">
-                                <ListGroupItem>Cras justo odio</ListGroupItem>
-                                <ListGroupItem>Dapibus ac facilisis in</ListGroupItem>
-                                <ListGroupItem>Vestibulum at eros</ListGroupItem>
-                                <ListGroupItem>Cras justo odio</ListGroupItem>
-                                <ListGroupItem>Dapibus ac facilisis in</ListGroupItem>
-                                <ListGroupItem>Vestibulum at eros</ListGroupItem>
-                                <ListGroupItem>Vestibulum at eros</ListGroupItem>
+        <ListGroupItem>{vgSandP}</ListGroupItem>
+        <ListGroupItem>{vgPm}</ListGroupItem>
+        <ListGroupItem>{vgHm}</ListGroupItem>
+        <ListGroupItem>{vgNotes}</ListGroupItem>
+        <ListGroupItem>{vgHarvest}</ListGroupItem>
+        <ListGroupItem>{vgTs}</ListGroupItem>
+                                
                             </ListGroup>  </Col></Row> </Container>
 
 
             </Card>
         </div>
+        )
+    }
+    useEffect(() => {
+        fetchAPI()
+    }, [])
+
+    return (
+       <React.Fragment>
+           {Veggie}
+       </React.Fragment>
     )
 
 }
