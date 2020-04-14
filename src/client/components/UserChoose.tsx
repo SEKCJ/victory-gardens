@@ -2,7 +2,7 @@
 import React, { } from 'react';
 import { IAppProps } from '../App';
 import { Link } from 'react-router-dom';
-import { Card, Container, Accordion, Button, Jumbotron, Image} from 'react-bootstrap';
+import { Card, Container, Accordion, Button, Jumbotron, Image, Row} from 'react-bootstrap';
 
 const HelpChoose: React.FC<IAppProps> = props => {
     return (
@@ -13,13 +13,14 @@ const HelpChoose: React.FC<IAppProps> = props => {
                 <p> </p>
         </Jumbotron>
     </>
-<div className="mx-auto">     
+<div className="mx-auto">  
+<Row>   
 <>
 <Accordion>
 <Card style={{ width: '18rem' }}>
   <Card.Header className="d-flex">
     <Accordion.Toggle className="mr-auto" as={Button} variant="link" eventKey="0">Pizza</Accordion.Toggle>
-    <Image src= "https://freesvg.org/img/meltypizza.png" style={{"width":"3em"}}/>
+    <Image src= "https://freesvg.org/img/meltypizza.png" style={{"width":"2.9em"}}/>
     </Card.Header>
     <Accordion.Collapse eventKey="0">
         <Card.Body>
@@ -40,9 +41,9 @@ const HelpChoose: React.FC<IAppProps> = props => {
 <>
 <Accordion>
 <Card style={{ width: '18rem' }}>
-<Card.Img variant="top" src="holder.js/100px180?text=Image cap" />
-  <Card.Header>
-    <Accordion.Toggle as={Button} variant="link" eventKey="0">Salsa Essentials</Accordion.Toggle>
+  <Card.Header className="d-flex">
+    <Accordion.Toggle className="mr-auto" as={Button} variant="link" eventKey="0">Salsa Essentials</Accordion.Toggle>
+    <Image src= "https://freesvg.org/img/johnny_automatic_tomato_plant.png" style={{"width":"1.7em"}}/>
     </Card.Header>
     <Accordion.Collapse eventKey="0">
         <Card.Body>
@@ -59,11 +60,15 @@ const HelpChoose: React.FC<IAppProps> = props => {
 </Card>
 </Accordion>
 </>
+</Row>
+<br></br>
+<Row>
 <>
 <Accordion>
 <Card style={{ width: '18rem' }}>
-  <Card.Header>
-    <Accordion.Toggle as={Button} variant="link" eventKey="0">Salad</Accordion.Toggle>
+  <Card.Header className="d-flex">
+    <Accordion.Toggle className="mr-auto" as={Button} variant="link" eventKey="0">Salad</Accordion.Toggle>
+    <Image src= "https://storage.needpix.com/rsynced_images/salad-29440_1280.png" style={{"width":"2.89em"}}/>
     </Card.Header>
     <Accordion.Collapse eventKey="0">
         <Card.Body>
@@ -84,8 +89,9 @@ const HelpChoose: React.FC<IAppProps> = props => {
 <>
 <Accordion>
 <Card style={{ width: '18rem' }}>
-  <Card.Header>
-    <Accordion.Toggle as={Button} variant="link" eventKey="0">Great on the Grill</Accordion.Toggle>
+  <Card.Header className="d-flex">
+    <Accordion.Toggle className="mr-auto" as={Button} variant="link" eventKey="0">Great on the Grill</Accordion.Toggle>
+    <Image src= "https://cdn.pixabay.com/photo/2012/04/12/20/43/tongs-30580_960_720.png" style={{"width":"5.81em"}}/>
     </Card.Header>
     <Accordion.Collapse eventKey="0">
         <Card.Body>
@@ -104,11 +110,15 @@ const HelpChoose: React.FC<IAppProps> = props => {
 </Card>
 </Accordion>
 </>
+</Row>
+<br></br>
+<Row>
 <>
 <Accordion>
 <Card style={{ width: '18rem' }}>
-  <Card.Header>
-    <Accordion.Toggle as={Button} variant="link" eventKey="0">Beginner</Accordion.Toggle>
+  <Card.Header className="d-flex">
+    <Accordion.Toggle className="mr-auto" as={Button} variant="link" eventKey="0">Beginner</Accordion.Toggle>
+    <Image src= "https://freesvg.org/img/guanti--e-pinze.png" style={{"width":"3em"}}/>
     </Card.Header>
     <Accordion.Collapse eventKey="0">
         <Card.Body>
@@ -118,7 +128,7 @@ const HelpChoose: React.FC<IAppProps> = props => {
              <Card.Link href="/veggies">Pepper</Card.Link><br></br>
              <Card.Link href="/veggies">Chili Pepper</Card.Link><br></br>
              <Card.Link href="/veggies">Swiss Chard</Card.Link><br></br>
-             <Card.Link href="/veggies">Veggie 5</Card.Link>
+             <Card.Link href="/veggies"></Card.Link>
          </Card.Body>
     </Accordion.Collapse>
 </Card>
@@ -127,8 +137,9 @@ const HelpChoose: React.FC<IAppProps> = props => {
 <>
 <Accordion>
 <Card style={{ width: '18rem' }}>
-  <Card.Header>
-    <Accordion.Toggle as={Button} variant="link" eventKey="0">Immortal</Accordion.Toggle>
+  <Card.Header className="d-flex">
+    <Accordion.Toggle className="mr-auto" as={Button} variant="link" eventKey="0">Immortal</Accordion.Toggle>
+    <Image src= "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Euler%27s_infinity_sign.svg/2000px-Euler%27s_infinity_sign.svg.png" style={{"width":"5.19em"}}/>
     </Card.Header>
     <Accordion.Collapse eventKey="0">
         <Card.Body>
@@ -149,11 +160,15 @@ const HelpChoose: React.FC<IAppProps> = props => {
 </Card>
 </Accordion>
 </>
+</Row>
+<br></br>
+<Row>
 <>
 <Accordion>
 <Card style={{ width: '18rem' }}>
-  <Card.Header>
-    <Accordion.Toggle as={Button} variant="link" eventKey="0"> Save the Bees! </Accordion.Toggle>
+  <Card.Header className="d-flex">
+    <Accordion.Toggle className="mr-auto" as={Button} variant="link" eventKey="0"> Save the Bees! </Accordion.Toggle>
+    <Image src= "https://storage.needpix.com/rsynced_images/honey-bee-2881949_1280.png" style={{"width":"3.74em"}}/>
     </Card.Header>
     <Accordion.Collapse eventKey="0">
         <Card.Body>
@@ -173,8 +188,9 @@ const HelpChoose: React.FC<IAppProps> = props => {
 <>
 <Accordion>
 <Card style={{ width: '18rem' }}>
-  <Card.Header>
-    <Accordion.Toggle as={Button} variant="link" eventKey="0">Large Harvest</Accordion.Toggle>
+  <Card.Header className="d-flex">
+    <Accordion.Toggle className="mr-auto" as={Button} variant="link" eventKey="0">Large Harvest</Accordion.Toggle>
+    <Image src= "https://storage.needpix.com/rsynced_images/spade-24434_1280.png" style={{"width":"2.38em"}}/>
     </Card.Header>
     <Accordion.Collapse eventKey="0">
         <Card.Body>
@@ -197,6 +213,8 @@ const HelpChoose: React.FC<IAppProps> = props => {
 </Card>
 </Accordion>
 </>   
+</Row>
+<br></br>
 </div>
 </Container>
     )

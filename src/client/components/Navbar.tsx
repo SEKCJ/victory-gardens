@@ -1,5 +1,5 @@
 import React, { } from 'react';
-import { Nav, Navbar } from 'react-bootstrap';
+import { Nav, Navbar, Image } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { IAppProps } from '../App';
 
@@ -8,8 +8,8 @@ const Navigate: React.FC<IAppProps> = props => {
 
     return (
         <Navbar variant="dark" bg="dark" expand="sm" className="sticky-top">
-            <Navbar.Brand href="/"> <img src={window.location.origin + "/assets/VGLogo.png"}
-                style={{ "width": "3em" }} /></Navbar.Brand>
+            <Navbar.Brand href="/"> <Image src={window.location.origin + "/assets/VGLogo.png"}
+                style={{ "width": "3em" }} rounded/></Navbar.Brand>
             <Navbar.Toggle aria-controls="navigate" />
             {/* <Navbar.Collapse id="navigate"> */}
             <Nav className="mr-auto">
