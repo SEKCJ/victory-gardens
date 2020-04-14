@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Container, Jumbotron, Row, Col, Button, Collapse } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { api } from '../Services/apiServices';
 import { IAppProps } from '../App';
 
 const Veggies: React.FC<IAppProps> = props => {
@@ -10,9 +11,8 @@ const Veggies: React.FC<IAppProps> = props => {
     const [open, setOpen] = useState(false);
 
     let fetchAPI = async () => {
-        let response: Response = await fetch(`/api/vegetables`)
-        let resObj: any = await response.json()
-        makeCards(resObj)
+        let response = await api(`/api/vegetables`)
+        makeCards(response)
     }
     let makeCards = (resObj: any) => {
         let cardMemory = resObj.map((element: any, index: any) => {

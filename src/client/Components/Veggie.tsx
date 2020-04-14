@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
+import { api } from '../Services/apiServices';
 import { Card, ListGroup, ListGroupItem, Container, Row, Col, Button, Accordion } from 'react-bootstrap';
 
 interface IVeggieProps extends RouteComponentProps<{ id: string }> { }
 const Veggie: React.FC<IVeggieProps> = ({ match: { params: { id } } }) => {
 
     let fetchAPI = async () => {
-        let response: Response = await fetch(`/api/vegetables/${id}`)
-        let resObj: any = await response.json()
-        console.log(resObj)
+        let response = await api(`/api/vegetables/${id}`)
+        console.log(response)
     }
     useEffect(() => {
         fetchAPI()
@@ -66,5 +66,4 @@ const Veggie: React.FC<IVeggieProps> = ({ match: { params: { id } } }) => {
     )
 
 }
-
 export default Veggie;
