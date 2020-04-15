@@ -1,10 +1,130 @@
 
-import React, { } from 'react';
+import React, { useState, useEffect } from 'react';
 import { IAppProps } from '../App';
 import { Link } from 'react-router-dom';
-import { Card, Container, Accordion, Button, Jumbotron, Image, Row } from 'react-bootstrap';
+import { api, Token } from '../Services/apiServices';
+import { Card, Container, Accordion, Button, Jumbotron, Image, Row, Col } from 'react-bootstrap';
 
 const HelpChoose: React.FC<IAppProps> = props => {
+    const [linkObj, setLinkObj] = useState<any>({})
+
+    useEffect(() => {
+        fetchAPI()
+    }, [])
+
+    let fetchAPI = async () => {
+        let response: any = await api('/api/helpchoose');
+        makeLinks(response)
+    }
+
+    let makeLinks = (resObj: any) => {
+        let pizzaLinks: JSX.Element[] = []
+        let salsaLinks: JSX.Element[] = []
+        let saladLinks: JSX.Element[] = []
+        let grillLinks: JSX.Element[] = []
+        let beginnerLinks: JSX.Element[] = []
+        let immortalLinks: JSX.Element[] = []
+        let beesLinks: JSX.Element[] = []
+        let largeLinks: JSX.Element[] = []
+        resObj.forEach((element: any) => {
+            switch (element.category) {
+                case "pizza":
+                    pizzaLinks.push(
+                        <Row key={element.id} className="d-flex">
+                            <Col>
+                                <Card.Link as={Link}
+                                    to={`/veggies/${element.id}`}>{element.name}</Card.Link>
+                            </Col>
+                        </Row>
+                    );
+                    break;
+                case "salsa":
+                    salsaLinks.push(
+                        <Row key={element.id} className="d-flex">
+                            <Col>
+                                <Card.Link as={Link}
+                                    to={`/veggies/${element.id}`}>{element.name}</Card.Link>
+                            </Col>
+                        </Row>
+                    );
+                    break;
+                case "salad":
+                    saladLinks.push(
+                        <Row key={element.id} className="d-flex">
+                            <Col>
+                                <Card.Link as={Link}
+                                    to={`/veggies/${element.id}`}>{element.name}</Card.Link>
+                            </Col>
+                        </Row>
+                    );
+                    break;
+                case "grill":
+                    grillLinks.push(
+                        <Row key={element.id} className="d-flex">
+                            <Col>
+                                <Card.Link as={Link}
+                                    to={`/veggies/${element.id}`}>{element.name}</Card.Link>
+                            </Col>
+                        </Row>
+                    );
+                    break;
+                case "beginner":
+                    beginnerLinks.push(
+                        <Row key={element.id} className="d-flex">
+                            <Col>
+                                <Card.Link as={Link}
+                                    to={`/veggies/${element.id}`}>{element.name}</Card.Link>
+                            </Col>
+                        </Row>
+                    );
+                    break;
+                case "immortal":
+                    immortalLinks.push(
+                        <Row key={element.id} className="d-flex">
+                            <Col>
+                                <Card.Link as={Link}
+                                    to={`/veggies/${element.id}`}>{element.name}</Card.Link>
+                            </Col>
+                        </Row>
+                    );
+                    break;
+                case "bees":
+                    beesLinks.push(
+                        <Row key={element.id} className="d-flex">
+                            <Col>
+                                <Card.Link as={Link}
+                                    to={`/veggies/${element.id}`}>{element.name}</Card.Link>
+                            </Col>
+                        </Row>
+                    );
+                    break;
+                case "largeharvest":
+                    largeLinks.push(
+                        <Row key={element.id} className="d-flex">
+                            <Col>
+                                <Card.Link as={Link}
+                                    to={`/veggies/${element.id}`}>{element.name}</Card.Link>
+                            </Col>
+                        </Row>
+                    );
+                    break;
+            }
+        })
+
+        setLinkObj(
+            {
+                pizza: pizzaLinks,
+                salsa: salsaLinks,
+                salad: saladLinks,
+                grill: grillLinks,
+                beginner: beginnerLinks,
+                immortal: immortalLinks,
+                bees: beesLinks,
+                harvest: largeLinks
+            }
+        )
+    }
+
     return (
         <Container className="d-flex flex-column">
 
@@ -26,13 +146,14 @@ const HelpChoose: React.FC<IAppProps> = props => {
                                 <Card.Body>
                                     <Card.Title></Card.Title>
                                     <Card.Subtitle className="mb-2 text-muted">Grow your own pizza toppings!</Card.Subtitle>
-                                    <Card.Link href="/veggies">Chili Pepper</Card.Link><br></br>
+                                    {linkObj.pizza}
+                                    {/* <Card.Link href="/veggies">Chili Pepper</Card.Link><br></br>
                                     <Card.Link href="/veggies">Onions</Card.Link><br></br>
                                     <Card.Link href="/veggies">Onions (Fall planted)</Card.Link><br></br>
                                     <Card.Link href="/veggies">Tomato (Large)</Card.Link><br></br>
                                     <Card.Link href="/veggies">Tomato (Small)</Card.Link><br></br>
                                     <Card.Link href="/veggies">Spinach</Card.Link><br></br>
-                                    <Card.Link href="/veggies">Pepper</Card.Link>
+                                    <Card.Link href="/veggies">Pepper</Card.Link> */}
                                 </Card.Body>
                             </Accordion.Collapse>
                         </Card>
@@ -49,12 +170,13 @@ const HelpChoose: React.FC<IAppProps> = props => {
                                 <Card.Body>
                                     <Card.Title></Card.Title>
                                     <Card.Subtitle className="mb-2 text-muted"></Card.Subtitle>
-                                    <Card.Link href="/veggies">Tomato (Small)</Card.Link><br></br>
+                                    {linkObj.salsa}
+                                    {/* <Card.Link href="/veggies">Tomato (Small)</Card.Link><br></br>
                                     <Card.Link href="/veggies">Tomato (Large)</Card.Link><br></br>
                                     <Card.Link href="/veggies">Pepper</Card.Link><br></br>
                                     <Card.Link href="/veggies">Onions (Fall planted)</Card.Link><br></br>
                                     <Card.Link href="/veggies">Chili Pepper</Card.Link><br></br>
-                                    <Card.Link href="/veggies">Onions</Card.Link>
+                                    <Card.Link href="/veggies">Onions</Card.Link> */}
                                 </Card.Body>
                             </Accordion.Collapse>
                         </Card>
@@ -74,13 +196,14 @@ const HelpChoose: React.FC<IAppProps> = props => {
                                 <Card.Body>
                                     <Card.Title></Card.Title>
                                     <Card.Subtitle className="mb-2 text-muted">Check out these easy to grow salad greens!</Card.Subtitle>
-                                    <Card.Link href="/veggies">Arugula</Card.Link><br></br>
+                                    {linkObj.salad}
+                                    {/* <Card.Link href="/veggies">Arugula</Card.Link><br></br>
                                     <Card.Link href="/veggies">Kale</Card.Link><br></br>
                                     <Card.Link href="/veggies">Crisphead Lettuce</Card.Link><br></br>
                                     <Card.Link href="/veggies">Leaf Lettuce</Card.Link><br></br>
                                     <Card.Link href="/veggies">Mustard</Card.Link><br></br>
                                     <Card.Link href="/veggies">Swiss Chard</Card.Link><br></br>
-                                    <Card.Link href="/veggies">Miner's Lettuce</Card.Link>
+                                    <Card.Link href="/veggies">Miner's Lettuce</Card.Link> */}
                                 </Card.Body>
                             </Accordion.Collapse>
                         </Card>
@@ -96,14 +219,15 @@ const HelpChoose: React.FC<IAppProps> = props => {
                                 <Card.Body>
                                     <Card.Title></Card.Title>
                                     <Card.Subtitle className="mb-2 text-muted">Veggies that you can grill!</Card.Subtitle>
-                                    <Card.Link href="/veggies">Asparagus</Card.Link><br></br>
+                                    {linkObj.grill}
+                                    {/* <Card.Link href="/veggies">Asparagus</Card.Link><br></br>
                                     <Card.Link href="/veggies">Corn</Card.Link><br></br>
                                     <Card.Link href="/veggies">Eggplant</Card.Link><br></br>
                                     <Card.Link href="/veggies">Onions</Card.Link><br></br>
                                     <Card.Link href="/veggies">Squash (summer)</Card.Link><br></br>
                                     <Card.Link href="/veggies">Squash (winter)</Card.Link><br></br>
                                     <Card.Link href="/veggies">Tomato (Large)</Card.Link><br></br>
-                                    <Card.Link href="/veggies">Onions (Fall planted)</Card.Link>
+                                    <Card.Link href="/veggies">Onions (Fall planted)</Card.Link> */}
                                 </Card.Body>
                             </Accordion.Collapse>
                         </Card>
@@ -123,11 +247,12 @@ const HelpChoose: React.FC<IAppProps> = props => {
                                 <Card.Body>
                                     <Card.Title></Card.Title>
                                     <Card.Subtitle className="mb-2 text-muted"> Start out simple with these plants for beginner level gardeners!</Card.Subtitle>
-                                    <Card.Link href="/veggies">Collards</Card.Link><br></br>
+                                    {linkObj.begineer}
+                                    {/* <Card.Link href="/veggies">Collards</Card.Link><br></br>
                                     <Card.Link href="/veggies">Pepper</Card.Link><br></br>
                                     <Card.Link href="/veggies">Chili Pepper</Card.Link><br></br>
                                     <Card.Link href="/veggies">Swiss Chard</Card.Link><br></br>
-                                    <Card.Link href="/veggies"></Card.Link>
+                                    <Card.Link href="/veggies"></Card.Link> */}
                                 </Card.Body>
                             </Accordion.Collapse>
                         </Card>
@@ -143,7 +268,8 @@ const HelpChoose: React.FC<IAppProps> = props => {
                                 <Card.Body>
                                     <Card.Title></Card.Title>
                                     <Card.Subtitle className="mb-2 text-muted">These plants keep for a month or longer after harvest!</Card.Subtitle>
-                                    <Card.Link href="/veggies">Beet</Card.Link><br></br>
+                                    {linkObj.immortal}
+                                    {/* <Card.Link href="/veggies">Beet</Card.Link><br></br>
                                     <Card.Link href="/veggies">Carrot</Card.Link><br></br>
                                     <Card.Link href="/veggies">Chili Pepper</Card.Link><br></br>
                                     <Card.Link href="/veggies">Garlic</Card.Link><br></br>
@@ -152,7 +278,7 @@ const HelpChoose: React.FC<IAppProps> = props => {
                                     <Card.Link href="/veggies">Potatoes (Early)</Card.Link><br></br>
                                     <Card.Link href="/veggies">Potatoes (Maincrop)</Card.Link><br></br>
                                     <Card.Link href="/veggies">Squash (summer)</Card.Link><br></br>
-                                    <Card.Link href="/veggies">Squash (winter)</Card.Link>
+                                    <Card.Link href="/veggies">Squash (winter)</Card.Link> */}
                                 </Card.Body>
                             </Accordion.Collapse>
                         </Card>
@@ -172,12 +298,13 @@ const HelpChoose: React.FC<IAppProps> = props => {
                                 <Card.Body>
                                     <Card.Title></Card.Title>
                                     <Card.Subtitle className="mb-2 text-muted">Have a look at these bee-friendly vegetables!</Card.Subtitle>
-                                    <Card.Link href="/veggies">Cantaloupe</Card.Link><br></br>
+                                    {linkObj.bees}
+                                    {/* <Card.Link href="/veggies">Cantaloupe</Card.Link><br></br>
                                     <Card.Link href="/veggies">Cucumber</Card.Link><br></br>
                                     <Card.Link href="/veggies">Eggplant</Card.Link><br></br>
                                     <Card.Link href="/veggies">Melon</Card.Link><br></br>
                                     <Card.Link href="/veggies">Pepper</Card.Link><br></br>
-                                    <Card.Link href="/veggies">Pumpkin</Card.Link>
+                                    <Card.Link href="/veggies">Pumpkin</Card.Link> */}
                                 </Card.Body>
                             </Accordion.Collapse>
                         </Card>
@@ -193,7 +320,8 @@ const HelpChoose: React.FC<IAppProps> = props => {
                                 <Card.Body>
                                     <Card.Title></Card.Title>
                                     <Card.Subtitle className="mb-2 text-muted">These plants yield a large harvest.</Card.Subtitle>
-                                    <Card.Link href="/veggies">Bush Snap Beans</Card.Link><br></br>
+                                    {linkObj.harvest}
+                                    {/* <Card.Link href="/veggies">Bush Snap Beans</Card.Link><br></br>
                                     <Card.Link href="/veggies">Beans (Dry)</Card.Link><br></br>
                                     <Card.Link href="/veggies">Fava Beans</Card.Link><br></br>
                                     <Card.Link href="/veggies">Lima Beans</Card.Link><br></br>
@@ -204,7 +332,7 @@ const HelpChoose: React.FC<IAppProps> = props => {
                                     <Card.Link href="/veggies">Potatoes (Maincrop)</Card.Link><br></br>
                                     <Card.Link href="/veggies">Tomato (Large)</Card.Link><br></br>
                                     <Card.Link href="/veggies">Tomato (Small)</Card.Link><br></br>
-                                    <Card.Link href="/veggies">Zucchini</Card.Link>
+                                    <Card.Link href="/veggies">Zucchini</Card.Link> */}
                                 </Card.Body>
                             </Accordion.Collapse>
                         </Card>
