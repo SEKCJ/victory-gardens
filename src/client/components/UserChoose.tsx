@@ -247,7 +247,7 @@ const HelpChoose: React.FC<IAppProps> = props => {
                                 <Card.Body>
                                     <Card.Title></Card.Title>
                                     <Card.Subtitle className="mb-2 text-muted"> Start out simple with these plants for beginner level gardeners!</Card.Subtitle>
-                                    {linkObj.begineer}
+                                    {linkObj.beginner}
                                     {/* <Card.Link href="/veggies">Collards</Card.Link><br></br>
                                     <Card.Link href="/veggies">Pepper</Card.Link><br></br>
                                     <Card.Link href="/veggies">Chili Pepper</Card.Link><br></br>
