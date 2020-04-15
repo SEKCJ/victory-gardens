@@ -10,33 +10,23 @@ body
 
 
 #board {
-    margin: 0 auto;
     display: block;
     /* display: flex; */
-    padding: 0;
+    margin: 50px 0;
     border: 12px solid #4c311c;
     border-radius: 10px;
-}
-
-#soil {
     background-color: #2e1206;
-    /* display: grid; */
-    grid-template-columns: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
-    grid-template-rows: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
-    width: 100%;
-    /* position: inherit; */
-    /* padding-left: 0;
-    padding-right: 0; */
 }
 
-.row {
-    margin: 0 auto;
-    width: inherit;
+.dirtRow {
+    display: flex;
 }
 
 .plot {
-    border: .5px solid #2e1206;
-    /* width: 100%; */
+    border: 0.5px solid #2e1206;
+    width: 10%;
     padding: 0;
-    background-image: url();
+    cursor: pointer;
+    /* flex for stretching horizontal plant images to be square */
+    display: flex;
 }
