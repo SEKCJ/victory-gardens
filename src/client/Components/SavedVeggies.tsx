@@ -13,6 +13,11 @@ const SavedVeggies: React.FC<IAppProps> = props => {
         makeCards(response)
     }
 
+    let handleClick = async (e: React.MouseEvent<HTMLButtonElement>, vegId: number) => {
+        let response = await api(`/api/savedvegetables/${vegId}`, "DELETE", {Token})
+        console.log(response)
+    }
+
     let makeCards = (resObj: any) => {
         let cardMemory = resObj.map((element: any, index: any) => {
             let veggieImg = element.url;
@@ -26,12 +31,19 @@ const SavedVeggies: React.FC<IAppProps> = props => {
                         <div className="d-flex flex-row">
                             <Card.Img variant="top" style={{ "width": "10em" }}
                                 src={veggieImg} />
+                            <Card.ImgOverlay className="px-0 py-0" style={{ "width": "5em" }}>
+                                <Button variant="danger" className="px-1 py-1"
+                                    onClick={(e: React.MouseEvent<HTMLButtonElement>) => { handleClick(e, veggieId) }}>
+                                    <small style={{ "fontSize": "0.75em" }}>X</small>
+                                </Button>
+                            </Card.ImgOverlay>
                             <Card.Body>
                                 <Card.Title>{veggieName}</Card.Title>
                                 <Card.Text>
                                     {veggieSciName}
                                 </Card.Text>
                             </Card.Body>
+
                             <Button variant="primary" as={Link} to={`/veggies/${veggieId}`}>Read More</Button>
                         </div>
                     </Card>

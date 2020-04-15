@@ -1,279 +1,348 @@
 import React, { useState, useEffect } from 'react';
 import { RouteComponentProps, Link } from 'react-router-dom';
 import { api, Token } from '../Services/apiServices';
-import { Card, ListGroup, Row, Col, Button, Accordion, Container, Spinner } from 'react-bootstrap';
-
-interface IVeggieProps extends RouteComponentProps { }
+import { Card, ListGroup, Row, Col, Button, Accordion, Container, Spinner, Alert } from 'react-bootstrap';
+import { IVeggieProps, IVeggieState, IResObj } from '../Services/interfaces';
 
 const Veggie: React.FC<IVeggieProps> = (props: any) => {
-    const [Veggie, setVeggie] = useState<JSX.Element>();
-    const [btnState, setBtnState] = useState<boolean>(true);
+    const [inGarden, setInGarden] = useState<JSX.Element>();
+    const [btnType, setBtnType] = useState<JSX.Element>();
+
     const [added, setAdded] = useState<boolean>(false);
+    const [deleted, setDeleted] = useState<boolean>(false);
     const [pageState, setPageState] = useState<boolean>(true);
+    const [vgObj, setVgObj] = useState<IVeggieState>()
 
     let vegetableid = props.match.params.id;
 
     useEffect(() => {
-        vgCheck()
-        fetchAPI()
-    }, [btnState]);
+        vgCheck();
+        fetchAPI();
+    }, []);
 
     let vgCheck = async () => {
         let check = await api('/api/savedvegetables/vegetableCheck', "POST", { Token, vegetableid });
         if (check) {
-            setBtnState(true)
+
+            setInGarden(
+                <Container className="d-flex mt-4">
+                    <Alert variant="warning" className="mx-auto col-sm-6 d-flex flex-column">
+                        <p className="mb-0">Looks like this vegetable has already been added to your garden!</p>
+                        <Alert.Link as={Link} to="/savedveggies">Click to go to your garden!</Alert.Link>
+                    </Alert>
+                </Container>
+            )
+            setBtnType(
+                <Button variant="danger"
+                    onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleClick(e, "delete")}>Delete From Garden</Button>
+            )
         } else {
-            setBtnState(false)
+            setBtnType(
+                <Button variant="success"
+                    onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleClick(e, "add")}>Add to My Garden</Button>
+            )
+
         }
     }
 
     let fetchAPI = async () => {
-        let [response] = await api(`/api/vegetables/${vegetableid}`)
+        let [response]: IResObj[] = await api(`/api/vegetables/${vegetableid}`)
         makeVeggie(response);
         setPageState(false);
     }
 
-    let handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault();
-        setBtnState(true);
-        setAdded(true);
-        let response = await api('/api/savedvegetables', "POST", { Token, vegetableid })
-        if (response) {
-            props.history.push("/savedveggies")
-        } else {
-            setAdded(false);
+    let handleClick = async (e: React.MouseEvent<HTMLButtonElement>, method: string) => {
+        if (method === "add") {
+            setAdded(true);
+            let response = await api('/api/savedvegetables', "POST", { Token, vegetableid })
+            if (response) {
+                props.history.push("/savedveggies")
+            } else {
+                setAdded(false);
+            }
+        } else if (method === "delete") {
+            setDeleted(true);
+            let response = await api(`/api/savedvegetables/${vegetableid}`, "DELETE", { Token })
+            if (response) {
+                props.history.push("/savedveggies")
+            } else {
+                setDeleted(false);
+            }
         }
     }
 
-    let makeVeggie = (resObj: any) => {
-        let vgId = resObj.id;
-        let vgName = resObj.name;
-        let vgSciName = resObj.sci_name;
-        let vgSoil = resObj.soil;
-        let vgPosition = resObj.position;
-        let vgFt = resObj.frost_tolerant;
-        let vgFeeding = resObj.feeding;
-        let vgCompanions = resObj.companions;
-        let vgBadCompanions = resObj.bad_companions;
-        let vgSpacing = resObj.spacing;
-        let vgSandP = resObj.sow_and_plant;
-        let vgPm = resObj.planting_months;
-        let vgHm = resObj.harvest_months;
-        let vgNotes = resObj.notes;
-        let vgHarvest = resObj.harvesting;
-        let vgTs = resObj.troubleshooting;
-        let vgImg = resObj.url;
+    let makeVeggie = (resObj: IResObj) => {
+        setVgObj(
+            {
+                vgId: resObj.id,
+                vgName: resObj.name,
+                vgSciName: resObj.sci_name,
+                vgSoil: resObj.soil,
+                vgPosition: resObj.position,
+                vgFt: resObj.frost_tolerant,
+                vgFeeding: resObj.feeding,
+                vgCompanions: resObj.companions,
+                vgBadCompanions: resObj.bad_companions,
+                vgSpacing: resObj.spacing,
+                vgSandP: resObj.sow_and_plant,
+                vgPm: resObj.planting_months,
+                vgHm: resObj.harvest_months,
+                vgNotes: resObj.notes,
+                vgHarvest: resObj.harvesting,
+                vgTs: resObj.troubleshooting,
+                vgImg: resObj.url
+            }
+        )
+    }
 
-        setVeggie(
-            <div className="d-flex">
-                <Card className="mx-auto my-4" style={{ width: '40rem' }}>
+    if (added === true) {
+        return (
+            <Container className="d-flex">
+                <div className="mx-auto d-flex" style={{ "height": "85vh" }}>
+                    <Spinner className="my-auto" animation="grow" variant="primary"
+                        style={{ "height": "15vh", "width": "15vh" }} />
+                    <h1 className="my-auto text-primary" style={{ "fontSize": "15vh" }}>Adding...</h1>
+                    <Spinner className="my-auto" animation="grow" variant="primary"
+                        style={{ "height": "15vh", "width": "15vh" }} />
+                </div>
+            </Container>
+        )
+    } else if (deleted === true) {
+        return (
+            <Container className="d-flex">
+                <div className="mx-auto d-flex" style={{ "height": "85vh" }}>
+                    <Spinner className="my-auto" animation="grow" variant="danger"
+                        style={{ "height": "15vh", "width": "15vh" }} />
+                    <h1 className="my-auto text-danger" style={{ "fontSize": "15vh" }}>Deleting...</h1>
+                    <Spinner className="my-auto" animation="grow" variant="danger"
+                        style={{ "height": "15vh", "width": "15vh" }} />
+                </div>
+            </Container>
+        )
+    } else if (pageState === true) {
+        return (
+            <Container className="d-flex">
+                <div className="mx-auto d-flex" style={{ "height": "85vh" }}>
+                    <Spinner className="my-auto" animation="grow" variant="dark"
+                        style={{ "height": "15vh", "width": "15vh" }} />
+                    <h1 className="my-auto text-dark" style={{ "fontSize": "15vh" }}>Loading...</h1>
+                    <Spinner className="my-auto" animation="grow" variant="dark"
+                        style={{ "height": "15vh", "width": "15vh" }} />
+                </div>
+            </Container>
+        )
+    } else {
+        return (
+            <React.Fragment>
+                {inGarden}
+                <div className="d-flex">
+                    <Card className="mx-auto my-4" style={{ width: '40rem' }}>
 
-                    <Card.Body className="d-flex">
-                        <Card.Link as={Link} to="/veggies" className="mx-auto btn btn-secondary col-sm-8"><h5 className="my-auto">Back to List</h5></Card.Link>
-                    </Card.Body>
+                        <Card.Body className="d-flex">
+                            <Card.Link as={Link} to="/veggies" className="mx-auto btn btn-secondary col-sm-8"><h5 className="my-auto">Back to List</h5></Card.Link>
+                        </Card.Body>
 
-                    <Card.Title className="mx-auto">
-                        <h1>{vgName}</h1>
-                        <p>{vgSciName}</p>
-                    </Card.Title>
+                        <Card.Title className="mx-auto">
+                            <h1>{vgObj.vgName}</h1>
+                            <p>{vgObj.vgSciName}</p>
+                        </Card.Title>
 
-                    <Card.Img className="mx-auto" variant="top" style={{ "width": '15em' }} src={vgImg} />
+                        <Card.Img className="mx-auto" variant="top" style={{ "width": '15em' }} src={vgObj.vgImg} />
 
-                    <Card.Body className="mx-auto">
-                        <Button variant="success" disabled={btnState}
-                            onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleClick(e)}>Add to My Garden</Button>
-                    </Card.Body>
+                        <Card.Body className="mx-auto d-flex">
+                            {btnType}
+                        </Card.Body>
 
-                    <Row>
-                        <Col>
-                            <Accordion>
-                                <Card>
-                                    <Card.Header className="bg-info d-flex">
-                                        <Accordion.Toggle as={Button} variant="link"
-                                            className="mx-auto text-light" eventKey="0">
-                                            Soil
+                        <Row>
+                            <Col>
+                                <Accordion>
+                                    <Card>
+                                        <Card.Header className="bg-info d-flex">
+                                            <Accordion.Toggle as={Button} variant="link"
+                                                className="mx-auto text-light" eventKey="0">
+                                                Soil
                                         </Accordion.Toggle>
-                                    </Card.Header>
-                                    <Accordion.Collapse eventKey="0">
-                                        <Card.Body>
-                                            <ListGroup className="list-group-flush">
-                                                {vgSoil}
-                                            </ListGroup>
-                                        </Card.Body>
-                                    </Accordion.Collapse>
-                                </Card>
-                                <Card>
-                                    <Card.Header className="bg-info d-flex">
-                                        <Accordion.Toggle as={Button} variant="link"
-                                            className="mx-auto text-light" eventKey="1">
-                                            Position
+                                        </Card.Header>
+                                        <Accordion.Collapse eventKey="0">
+                                            <Card.Body>
+                                                <ListGroup className="list-group-flush">
+                                                    {vgObj.vgSoil}
+                                                </ListGroup>
+                                            </Card.Body>
+                                        </Accordion.Collapse>
+                                    </Card>
+                                    <Card>
+                                        <Card.Header className="bg-info d-flex">
+                                            <Accordion.Toggle as={Button} variant="link"
+                                                className="mx-auto text-light" eventKey="1">
+                                                Position
                                         </Accordion.Toggle>
-                                    </Card.Header>
-                                    <Accordion.Collapse eventKey="1">
-                                        <Card.Body>{vgPosition}</Card.Body>
-                                    </Accordion.Collapse>
-                                </Card>
-                                <Card>
-                                    <Card.Header className="bg-info d-flex">
-                                        <Accordion.Toggle as={Button} variant="link"
-                                            className="mx-auto text-light" eventKey="2">
-                                            Frost Tolerance
+                                        </Card.Header>
+                                        <Accordion.Collapse eventKey="1">
+                                            <Card.Body>{vgObj.vgPosition}</Card.Body>
+                                        </Accordion.Collapse>
+                                    </Card>
+                                    <Card>
+                                        <Card.Header className="bg-info d-flex">
+                                            <Accordion.Toggle as={Button} variant="link"
+                                                className="mx-auto text-light" eventKey="2">
+                                                Frost Tolerance
                                         </Accordion.Toggle>
-                                    </Card.Header>
-                                    <Accordion.Collapse eventKey="2">
-                                        <Card.Body>{vgFt}</Card.Body>
-                                    </Accordion.Collapse>
-                                </Card>
-                                <Card>
-                                    <Card.Header className="bg-info d-flex">
-                                        <Accordion.Toggle as={Button} variant="link"
-                                            className="mx-auto text-light" eventKey="3">
-                                            Feeding
+                                        </Card.Header>
+                                        <Accordion.Collapse eventKey="2">
+                                            <Card.Body>{vgObj.vgFt}</Card.Body>
+                                        </Accordion.Collapse>
+                                    </Card>
+                                    <Card>
+                                        <Card.Header className="bg-info d-flex">
+                                            <Accordion.Toggle as={Button} variant="link"
+                                                className="mx-auto text-light" eventKey="3">
+                                                Feeding
                                         </Accordion.Toggle>
-                                    </Card.Header>
-                                    <Accordion.Collapse eventKey="3">
-                                        <Card.Body> <ListGroup className="list-group-flush">
-                                            {vgFeeding}
+                                        </Card.Header>
+                                        <Accordion.Collapse eventKey="3">
+                                            <Card.Body> <ListGroup className="list-group-flush">
+                                                {vgObj.vgFeeding}
 
-                                        </ListGroup> </Card.Body>
-                                    </Accordion.Collapse>
-                                </Card>
+                                            </ListGroup> </Card.Body>
+                                        </Accordion.Collapse>
+                                    </Card>
 
-                            </Accordion>
-                        </Col>
+                                </Accordion>
+                            </Col>
 
-                        <Col>
-                            <Accordion>
+                            <Col>
+                                <Accordion>
 
-                                <Card>
-                                    <Card.Header className="bg-info d-flex">
-                                        <Accordion.Toggle as={Button} variant="link"
-                                            className="mx-auto text-light" eventKey="4">
-                                            Companions
+                                    <Card>
+                                        <Card.Header className="bg-info d-flex">
+                                            <Accordion.Toggle as={Button} variant="link"
+                                                className="mx-auto text-light" eventKey="4">
+                                                Companions
                                         </Accordion.Toggle>
-                                    </Card.Header>
-                                    <Accordion.Collapse eventKey="4">
-                                        <Card.Body>{vgCompanions}</Card.Body>
-                                    </Accordion.Collapse>
-                                </Card>
-                                <Card>
-                                    <Card.Header className="bg-info d-flex">
-                                        <Accordion.Toggle as={Button} variant="link"
-                                            className="mx-auto text-light" eventKey="5">
-                                            Bad Companions
+                                        </Card.Header>
+                                        <Accordion.Collapse eventKey="4">
+                                            <Card.Body>{vgObj.vgCompanions}</Card.Body>
+                                        </Accordion.Collapse>
+                                    </Card>
+                                    <Card>
+                                        <Card.Header className="bg-info d-flex">
+                                            <Accordion.Toggle as={Button} variant="link"
+                                                className="mx-auto text-light" eventKey="5">
+                                                Bad Companions
                                         </Accordion.Toggle>
-                                    </Card.Header>
-                                    <Accordion.Collapse eventKey="5">
-                                        <Card.Body>{vgBadCompanions}</Card.Body>
-                                    </Accordion.Collapse>
-                                </Card>
-                                <Card>
-                                    <Card.Header className="bg-info d-flex">
-                                        <Accordion.Toggle as={Button} variant="link"
-                                            className="mx-auto text-light" eventKey="6">
-                                            Spacing
+                                        </Card.Header>
+                                        <Accordion.Collapse eventKey="5">
+                                            <Card.Body>{vgObj.vgBadCompanions}</Card.Body>
+                                        </Accordion.Collapse>
+                                    </Card>
+                                    <Card>
+                                        <Card.Header className="bg-info d-flex">
+                                            <Accordion.Toggle as={Button} variant="link"
+                                                className="mx-auto text-light" eventKey="6">
+                                                Spacing
                                         </Accordion.Toggle>
-                                    </Card.Header>
-                                    <Accordion.Collapse eventKey="6">
-                                        <Card.Body> <ListGroup className="list-group-flush">
-                                            {vgSpacing}
+                                        </Card.Header>
+                                        <Accordion.Collapse eventKey="6">
+                                            <Card.Body> <ListGroup className="list-group-flush">
+                                                {vgObj.vgSpacing}
 
-                                        </ListGroup> </Card.Body>
-                                    </Accordion.Collapse>
-                                </Card>
-                                <Card>
-                                    <Card.Header className="bg-info d-flex">
-                                        <Accordion.Toggle as={Button} variant="link"
-                                            className="mx-auto text-light" eventKey="7">
-                                            Sow and Plant
+                                            </ListGroup> </Card.Body>
+                                        </Accordion.Collapse>
+                                    </Card>
+                                    <Card>
+                                        <Card.Header className="bg-info d-flex">
+                                            <Accordion.Toggle as={Button} variant="link"
+                                                className="mx-auto text-light" eventKey="7">
+                                                Sow and Plant
                                         </Accordion.Toggle>
-                                    </Card.Header>
-                                    <Accordion.Collapse eventKey="7">
-                                        <Card.Body>{vgSandP}</Card.Body>
-                                    </Accordion.Collapse>
-                                </Card>
-                                <Card>
-                                    <Card.Header className="bg-info d-flex">
-                                        <Accordion.Toggle as={Button} variant="link"
-                                            className="mx-auto text-light" eventKey="8">
-                                            Planting Months
+                                        </Card.Header>
+                                        <Accordion.Collapse eventKey="7">
+                                            <Card.Body>{vgObj.vgSandP}</Card.Body>
+                                        </Accordion.Collapse>
+                                    </Card>
+                                    <Card>
+                                        <Card.Header className="bg-info d-flex">
+                                            <Accordion.Toggle as={Button} variant="link"
+                                                className="mx-auto text-light" eventKey="8">
+                                                Planting Months
                                         </Accordion.Toggle>
-                                    </Card.Header>
-                                    <Accordion.Collapse eventKey="8">
-                                        <Card.Body>{vgPm}</Card.Body>
-                                    </Accordion.Collapse>
-                                </Card>
-                            </Accordion>
-                        </Col>
+                                        </Card.Header>
+                                        <Accordion.Collapse eventKey="8">
+                                            <Card.Body>{vgObj.vgPm}</Card.Body>
+                                        </Accordion.Collapse>
+                                    </Card>
+                                </Accordion>
+                            </Col>
 
-                        <Col>
-                            <Accordion>
+                            <Col>
+                                <Accordion>
 
 
-                                <Card>
-                                    <Card.Header className="bg-info d-flex">
-                                        <Accordion.Toggle as={Button} variant="link"
-                                            className="mx-auto text-light" eventKey="9">
-                                            Harvesting Months
+                                    <Card>
+                                        <Card.Header className="bg-info d-flex">
+                                            <Accordion.Toggle as={Button} variant="link"
+                                                className="mx-auto text-light" eventKey="9">
+                                                Harvesting Months
                                         </Accordion.Toggle>
-                                    </Card.Header>
-                                    <Accordion.Collapse eventKey="9">
-                                        <Card.Body> <ListGroup className="list-group-flush">
-                                            {vgHm}
+                                        </Card.Header>
+                                        <Accordion.Collapse eventKey="9">
+                                            <Card.Body> <ListGroup className="list-group-flush">
+                                                {vgObj.vgHm}
 
-                                        </ListGroup> </Card.Body>
-                                    </Accordion.Collapse>
-                                </Card>
+                                            </ListGroup> </Card.Body>
+                                        </Accordion.Collapse>
+                                    </Card>
 
-                                <Card>
-                                    <Card.Header className="bg-info d-flex">
-                                        <Accordion.Toggle as={Button} variant="link"
-                                            className="mx-auto text-light" eventKey="10">
-                                            Notes
+                                    <Card>
+                                        <Card.Header className="bg-info d-flex">
+                                            <Accordion.Toggle as={Button} variant="link"
+                                                className="mx-auto text-light" eventKey="10">
+                                                Notes
                                         </Accordion.Toggle>
-                                    </Card.Header>
-                                    <Accordion.Collapse eventKey="10">
-                                        <Card.Body>{vgNotes}</Card.Body>
-                                    </Accordion.Collapse>
-                                </Card>
+                                        </Card.Header>
+                                        <Accordion.Collapse eventKey="10">
+                                            <Card.Body>{vgObj.vgNotes}</Card.Body>
+                                        </Accordion.Collapse>
+                                    </Card>
 
-                                <Card>
-                                    <Card.Header className="bg-info d-flex">
-                                        <Accordion.Toggle as={Button} variant="link"
-                                            className="mx-auto text-light" eventKey="11">
-                                            Harvesting
+                                    <Card>
+                                        <Card.Header className="bg-info d-flex">
+                                            <Accordion.Toggle as={Button} variant="link"
+                                                className="mx-auto text-light" eventKey="11">
+                                                Harvesting
                                         </Accordion.Toggle>
-                                    </Card.Header>
-                                    <Accordion.Collapse eventKey="11">
-                                        <Card.Body> <ListGroup className="list-group-flush">
-                                            {vgHarvest}
+                                        </Card.Header>
+                                        <Accordion.Collapse eventKey="11">
+                                            <Card.Body> <ListGroup className="list-group-flush">
+                                                {vgObj.vgHarvest}
 
-                                        </ListGroup> </Card.Body>
-                                    </Accordion.Collapse>
-                                </Card>
-                                <Card>
-                                    <Card.Header className="bg-info d-flex">
-                                        <Accordion.Toggle as={Button} variant="link"
-                                            className="mx-auto text-light" eventKey="12">
-                                            Troubleshooting
+                                            </ListGroup> </Card.Body>
+                                        </Accordion.Collapse>
+                                    </Card>
+                                    <Card>
+                                        <Card.Header className="bg-info d-flex">
+                                            <Accordion.Toggle as={Button} variant="link"
+                                                className="mx-auto text-light" eventKey="12">
+                                                Troubleshooting
                                         </Accordion.Toggle>
-                                    </Card.Header>
-                                    <Accordion.Collapse eventKey="12">
-                                        <Card.Body> <ListGroup className="list-group-flush">
-                                            {vgTs}
+                                        </Card.Header>
+                                        <Accordion.Collapse eventKey="12">
+                                            <Card.Body> <ListGroup className="list-group-flush">
+                                                {vgObj.vgTs}
 
-                                        </ListGroup> </Card.Body>
-                                    </Accordion.Collapse>
-                                </Card>
+                                            </ListGroup> </Card.Body>
+                                        </Accordion.Collapse>
+                                    </Card>
 
-                            </Accordion> </Col>
+                                </Accordion> </Col>
 
-                    </Row>
-
-
+                        </Row>
 
 
-                    {/* 
+
+
+                        {/* 
                 <Container>
                     <Row>
                         <Col>
@@ -301,40 +370,8 @@ const Veggie: React.FC<IVeggieProps> = (props: any) => {
                             </ListGroup>  </Col></Row> </Container> */}
 
 
-                </Card>
-            </div>
-        )
-    }
-
-    if (added === true) {
-        return (
-            <Container className="d-flex">
-                <div className="mx-auto d-flex" style={{ "height": "85vh" }}>
-                    <Spinner className="my-auto" animation="grow" variant="warning"
-                        style={{ "height": "15vh", "width": "15vh" }} />
-                    <h1 className="my-auto text-warning" style={{ "fontSize": "15vh" }}>Adding...</h1>
-                    <Spinner className="my-auto" animation="grow" variant="warning"
-                        style={{ "height": "15vh", "width": "15vh" }} />
+                    </Card>
                 </div>
-
-            </Container>
-        )
-    } else if (pageState === true) {
-        return (
-            <Container className="d-flex">
-                <div className="mx-auto d-flex" style={{ "height": "85vh" }}>
-                    <Spinner className="my-auto" animation="grow" variant="dark"
-                        style={{ "height": "15vh", "width": "15vh" }} />
-                    <h1 className="my-auto text-dark" style={{ "fontSize": "15vh" }}>Loading...</h1>
-                    <Spinner className="my-auto" animation="grow" variant="dark"
-                        style={{ "height": "15vh", "width": "15vh" }} />
-                </div>
-            </Container>
-        )
-    } else {
-        return (
-            <React.Fragment>
-                {Veggie}
             </React.Fragment>
         )
     }
