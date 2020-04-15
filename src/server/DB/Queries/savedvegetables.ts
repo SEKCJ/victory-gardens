@@ -32,6 +32,12 @@ const oneSavedVegByToken = async (token: string) => {
 //   );
 // };
 
+const vegCheck = async (theuserid: number, vegetableid: number) => {
+  return Query<IVegetables[]>(
+    `SELECT vegetableid FROM myvegetables WHERE theuserid = ? AND vegetableid = ?`, [theuserid, vegetableid]
+  )
+}
+
 // adds a veg to myvegs table. May need to do a WHERE query to make it user specific // (CM)
 const postSavedVeg = async (theuserid: number, vegetableid: number) => {
   return Query<IVegetables>(
@@ -49,6 +55,7 @@ export default {
   allSavedVegs,
   oneSavedVegByToken,
   // oneSavedVegByVegid,
+  vegCheck,
   postSavedVeg,
   deleteSavedVeg,
 };

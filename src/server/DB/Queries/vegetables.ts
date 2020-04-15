@@ -4,7 +4,7 @@ import { IVegetables } from "../../Models/index";
 // returns all info for all vegs with image url
 const allVegs = async () => {
   return Query<IVegetables[]>(
-    `SELECT vegetables.*, images.url
+    `SELECT vegetables.name, vegetables.sci_name, vegetables.id, images.url
     FROM vegetables
     JOIN images ON vegetables.id = images.vegetableid`
   );

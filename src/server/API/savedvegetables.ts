@@ -2,6 +2,7 @@ import * as express from "express";
 
 import { hasRole, isAdmin } from '../Auth/authCheckpoint';
 import DB from "../DB";
+import { ITokens } from "../Models";
 
 // import { IVegetables } from "../Models/index";
 
@@ -23,11 +24,26 @@ router.get("/:token", hasRole, async (req, res) => {
   }
 });
 
-// POST a new vegetable to Saved Veg
-router.post("/", hasRole, async (req, res) => {
-  let theuserid = parseInt(req.body.theuserid, 10);
+router.post('/vegetableCheck', hasRole, async (req, res) => {
+  let token = req.body.Token;
   let vegetableid = parseInt(req.body.vegetableid, 10);
   try {
+    let [result]: any = (await DB.Tokens.findUserIdByToken(token))[0];
+    let theuserid = parseInt(result.userid, 10);
+    res.json((await DB.SavedVegetables.vegCheck(theuserid, vegetableid))[0])
+  } catch (error) {
+    console.log(error);
+    res.status(500).json("check token and vegetable Id");
+  }
+})
+
+// POST a new vegetable to Saved Veg
+router.post("/", hasRole, async (req, res) => {
+  let token = req.body.Token;
+  try {
+    let [result]: any = (await DB.Tokens.findUserIdByToken(token))[0];
+    let theuserid = parseInt(result.userid, 10);
+    let vegetableid = parseInt(req.body.vegetableid, 10);
     res.json(await DB.SavedVegetables.postSavedVeg(theuserid, vegetableid));
   } catch (e) {
     console.log(e);
