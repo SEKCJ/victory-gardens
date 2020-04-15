@@ -18,6 +18,13 @@ const oneVegById = async (id: number) => {
   WHERE id = ?`, [id]);
 };
 
+const vegByName = async (name: string) => {
+  let values = [name + "%"]
+  return Query<IVegetables[]>(`SELECT a.name, a.sci_name, a.id, b.url
+   FROM vegetables a
+   JOIN images b ON a.id = b.vegetableid
+   WHERE name like ?`, values)
+}
 // returns name of one veg with image url based on the veg's name
 // const oneVegByName = (name: string) => {
 //   return Query<IVegetables[]>("SELECT * FROM vegetables WHERE name = ?", [name,]);
@@ -43,6 +50,7 @@ const deleteVeg = (id: number) => {
 export default {
   allVegs,
   oneVegById,
+  vegByName,
   // oneVegByName,
   postVeg,
   putVeg,

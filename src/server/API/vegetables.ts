@@ -30,6 +30,14 @@ router.get("/:id?", async (req, res) => {
   }
 });
 
+router.get('/name/:vgName', async (req, res) => {
+  try {
+    res.json(await DB.Vegetables.vegByName(req.params.vgName));
+  } catch (error) {
+    console.log(error);
+    res.send(500).json("could not be found");
+  }
+})
 // POST a new vegetable
 router.post("/", isAdmin, async (req: { body: IVegetables }, res) => {
   let vegsObj = {
