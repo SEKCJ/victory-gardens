@@ -10,23 +10,33 @@ body
 
 
 #board {
+    margin: 0 auto;
     display: block;
     /* display: flex; */
-    border: 12 px solid #6d5720;
+    padding: 0;
+    border: 12px solid #4c311c;
+    border-radius: 10px;
 }
 
 #soil {
-    background-color: #523d1f;
-    display: grid;
-    /* grid-template-columns: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%; */
+    background-color: #2e1206;
+    /* display: grid; */
+    grid-template-columns: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
     grid-template-rows: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
-    /* position: inherit; */
     width: 100%;
-    padding-left: 0;
-    padding-right: 0;
+    /* position: inherit; */
+    /* padding-left: 0;
+    padding-right: 0; */
+}
+
+.row {
+    margin: 0 auto;
+    width: inherit;
 }
 
 .plot {
-    width: 100%;
+    border: .5px solid #2e1206;
+    /* width: 100%; */
     padding: 0;
+    background-image: url();
 }
