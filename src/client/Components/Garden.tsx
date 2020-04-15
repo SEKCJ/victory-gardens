@@ -33,18 +33,41 @@ const Garden: React.FC<IGardenProps> = ({
                         <div id="plants"></div>
                         <div id="soil">
                             {/* need a top row for things to start insde (CM) */}
-                            <Row>
-                                {/* <span className="plot"></span> */}
-                                <Col className="plot"><Image src={window.location.origin + '/assets/dirt.jpg'} style={{ 'width': '100%' }}></Image></Col>
-                                <Col className="plot"><Image src={window.location.origin + '/assets/dirt.jpg'} style={{ 'width': '100%' }}></Image></Col>
-                                <Col className="plot"><Image src={window.location.origin + '/assets/dirt.jpg'} style={{ 'width': '100%' }}></Image></Col>
-                                <Col className="plot"><Image src={window.location.origin + '/assets/dirt.jpg'} style={{ 'width': '100%' }}></Image></Col>
-                                <Col className="plot"><Image src={window.location.origin + '/assets/dirt.jpg'} style={{ 'width': '100%' }}></Image></Col>
-                                <Col className="plot"><Image src={window.location.origin + '/assets/dirt.jpg'} style={{ 'width': '100%' }}></Image></Col>
-                                <Col className="plot"><Image src={window.location.origin + '/assets/dirt.jpg'} style={{ 'width': '100%' }}></Image></Col>
-                                <Col className="plot"><Image src={window.location.origin + '/assets/dirt.jpg'} style={{ 'width': '100%' }}></Image></Col>
-                                <Col className="plot"><Image src={window.location.origin + '/assets/dirt.jpg'} style={{ 'width': '100%' }}></Image></Col>
-                                <Col className="plot"><Image src={window.location.origin + '/assets/dirt.jpg'} style={{ 'width': '100%' }}></Image></Col>
+                            <Row id='1'>
+                            <Col className="plot" sm='1'><Image src={'/assets/dirt.jpg'} style={{ 'width': '100%' }}></Image></Col>
+                                <Col className="plot" sm='1'><Image src={'/assets/dirt.jpg'} style={{ 'width': '100%' }}></Image></Col>
+                                <Col className="plot" sm='1'><Image src={'/assets/dirt.jpg'} style={{ 'width': '100%' }}></Image></Col>
+                                <Col className="plot" sm='1'><Image src={'/assets/dirt.jpg'} style={{ 'width': '100%' }}></Image></Col>
+                                <Col className="plot" sm='1'><Image src={'/assets/dirt.jpg'} style={{ 'width': '100%' }}></Image></Col>
+                                <Col className="plot" sm='1'><Image src={'/assets/dirt.jpg'} style={{ 'width': '100%' }}></Image></Col>
+                                <Col className="plot" sm='1'><Image src={'/assets/dirt.jpg'} style={{ 'width': '100%' }}></Image></Col>
+                                <Col className="plot" sm='1'><Image src={'/assets/dirt.jpg'} style={{ 'width': '100%' }}></Image></Col>
+                                <Col className="plot" sm='1'><Image src={'/assets/dirt.jpg'} style={{ 'width': '100%' }}></Image></Col>
+                                <Col className="plot" sm='1'><Image src={'/assets/dirt.jpg'} style={{ 'width': '100%' }}></Image></Col>
+                            </Row>
+                            <Row id='2'>
+                                <Col className="plot" sm='1'><Image src={'/assets/dirt.jpg'} style={{ 'width': '100%' }}></Image></Col>
+                                <Col className="plot" sm='1'><Image src={'/assets/dirt.jpg'} style={{ 'width': '100%' }}></Image></Col>
+                                <Col className="plot" sm='1'><Image src={'/assets/dirt.jpg'} style={{ 'width': '100%' }}></Image></Col>
+                                <Col className="plot" sm='1'><Image src={'/assets/dirt.jpg'} style={{ 'width': '100%' }}></Image></Col>
+                                <Col className="plot" sm='1'><Image src={'/assets/dirt.jpg'} style={{ 'width': '100%' }}></Image></Col>
+                                <Col className="plot" sm='1'><Image src={'/assets/dirt.jpg'} style={{ 'width': '100%' }}></Image></Col>
+                                <Col className="plot" sm='1'><Image src={'/assets/dirt.jpg'} style={{ 'width': '100%' }}></Image></Col>
+                                <Col className="plot" sm='1'><Image src={'/assets/dirt.jpg'} style={{ 'width': '100%' }}></Image></Col>
+                                <Col className="plot" sm='1'><Image src={'/assets/dirt.jpg'} style={{ 'width': '100%' }}></Image></Col>
+                                <Col className="plot" sm='1'><Image src={'/assets/dirt.jpg'} style={{ 'width': '100%' }}></Image></Col>
+                            </Row>
+                            <Row id='3'>
+                                <Col className="plot" sm='1'><Image src={'/assets/dirt.jpg'} style={{ 'width': '100%' }}></Image></Col>
+                                <Col className="plot" sm='1'><Image src={'/assets/dirt.jpg'} style={{ 'width': '100%' }}></Image></Col>
+                                <Col className="plot" sm='1'><Image src={'/assets/dirt.jpg'} style={{ 'width': '100%' }}></Image></Col>
+                                <Col className="plot" sm='1'><Image src={'/assets/dirt.jpg'} style={{ 'width': '100%' }}></Image></Col>
+                                <Col className="plot" sm='1'><Image src={'/assets/dirt.jpg'} style={{ 'width': '100%' }}></Image></Col>
+                                <Col className="plot" sm='1'><Image src={'/assets/dirt.jpg'} style={{ 'width': '100%' }}></Image></Col>
+                                <Col className="plot" sm='1'><Image src={'/assets/dirt.jpg'} style={{ 'width': '100%' }}></Image></Col>
+                                <Col className="plot" sm='1'><Image src={'/assets/dirt.jpg'} style={{ 'width': '100%' }}></Image></Col>
+                                <Col className="plot" sm='1'><Image src={'/assets/dirt.jpg'} style={{ 'width': '100%' }}></Image></Col>
+                                <Col className="plot" sm='1'><Image src={'/assets/dirt.jpg'} style={{ 'width': '100%' }}></Image></Col>
                             </Row>
                         </div>
                     </div>
