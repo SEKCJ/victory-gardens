@@ -9,3 +9,24 @@ body
 }
 
 
+#board {
+    display: block;
+    /* display: flex; */
+    border: 12 px solid #6d5720;
+}
+
+#soil {
+    background-color: #523d1f;
+    display: grid;
+    /* grid-template-columns: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%; */
+    grid-template-rows: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
+    /* position: inherit; */
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.plot {
+    width: 100%;
+    padding: 0;
+}
