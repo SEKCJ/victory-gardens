@@ -40,10 +40,10 @@ router.post('/vegetableCheck', hasRole, async (req, res) => {
 // POST a new vegetable to Saved Veg
 router.post("/", hasRole, async (req, res) => {
   let token = req.body.Token;
+  let vegetableid = parseInt(req.body.vegetableid, 10);
   try {
     let [result]: any = (await DB.Tokens.findUserIdByToken(token))[0];
     let theuserid = parseInt(result.userid, 10);
-    let vegetableid = parseInt(req.body.vegetableid, 10);
     res.json(await DB.SavedVegetables.postSavedVeg(theuserid, vegetableid));
   } catch (e) {
     console.log(e);
@@ -52,9 +52,12 @@ router.post("/", hasRole, async (req, res) => {
 });
 
 router.delete("/:id", hasRole, async (req, res) => {
-  let vegetableid = parseInt(req.body.vegetableid, 10);
+  let token = req.body.Token;
+  let vegetableid = parseInt(req.params.id, 10);
   try {
-    res.json(await DB.SavedVegetables.deleteSavedVeg(vegetableid));
+    let [result]: any = (await DB.Tokens.findUserIdByToken(token))[0];
+    let theuserid = parseInt(result.userid, 10);
+    res.json(await DB.SavedVegetables.deleteSavedVeg(theuserid, vegetableid));
   } catch (e) {
     console.log(e);
     res.sendStatus(500).json("delete failed");

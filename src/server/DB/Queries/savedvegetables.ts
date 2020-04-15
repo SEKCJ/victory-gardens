@@ -47,8 +47,8 @@ const postSavedVeg = async (theuserid: number, vegetableid: number) => {
 };
 
 // removes a veg from a user's myvegs list based on that veg's vegetableid // (CM)
-const deleteSavedVeg = async (vegetableid: number) => {
-  return Query("DELETE FROM myvegetables WHERE vegetableid = ?", [vegetableid]);
+const deleteSavedVeg = async (theuserid: number, vegetableid: number) => {
+  return Query("DELETE FROM myvegetables WHERE theuserid = ? AND vegetableid = ?", [theuserid, vegetableid]);
 };
 
 export default {
