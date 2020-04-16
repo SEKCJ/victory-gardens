@@ -5,6 +5,11 @@ import { IAppProps } from '../App';
 
 
 const Navigate: React.FC<IAppProps> = () => {
+    let handleClick = async (e: React.MouseEvent) => {
+        e.preventDefault()
+        await localStorage.clear()
+        window.location.reload()
+    }
 
     return (
         <Navbar variant="dark" bg="dark" expand="sm" className="sticky-top">
@@ -16,11 +21,12 @@ const Navigate: React.FC<IAppProps> = () => {
                 <Nav.Link as={Link} to="/choose">Help Me Choose</Nav.Link>
                 <Nav.Link as={Link} to="/veggies">Browse All Veggies</Nav.Link>
                 <Nav.Link as={Link} to="/savedveggies">My Garden</Nav.Link>
+                
                 {/* <Nav.Link as={Link} to="/">Calendar</Nav.Link> */}
             </Nav>
             <Nav className="mr-5">
                 <Nav.Link as={Link} to="/myprofile">My Profile</Nav.Link>
-
+                <Nav.Link onClick={(e: React.MouseEvent) =>  handleClick(e)}>Log Out</Nav.Link>
             </Nav>
         </Navbar >
     )
