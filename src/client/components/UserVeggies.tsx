@@ -120,7 +120,7 @@ const Veggies: React.FC<IAppProps> = props => {
     return (
         <Container >
 
-            <Jumbotron fluid>
+<Jumbotron fluid className="shadow rounded">
                 <Container >
                     <h1>Veggie Masterlist</h1>
                     <p>

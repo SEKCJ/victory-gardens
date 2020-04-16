@@ -128,7 +128,7 @@ const HelpChoose: React.FC<IAppProps> = props => {
     return (
         <Container className="d-flex flex-column">
 
-            <Jumbotron fluid>
+<Jumbotron fluid className="shadow rounded">
                 <h1>Let's find your inner green thumb!</h1>
                 <p> </p>
             </Jumbotron>
