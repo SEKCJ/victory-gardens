@@ -1,5 +1,5 @@
 import React, { } from 'react';
-import { Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import { Nav, Navbar, NavDropdown, Form, Button} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { IAppProps } from '../GuestApp';
 
@@ -13,14 +13,43 @@ return (
         <Navbar.Toggle aria-controls="navigate"/>
         <Navbar.Collapse id="navigate">
             <Nav className="mr-auto">
-                <Nav.Link as={Link} to="/guestchoose">Help Me Choose</Nav.Link>
-                <Nav.Link as={Link} to="/guestveggies">Veggies</Nav.Link>
+               
+                <Navbar.Collapse id="navigate">  <Nav>
+                 <Nav.Link as={Link} to="/guestchoose">Help Me Choose</Nav.Link>
+                <NavDropdown className="mr-auto" title="Browse All" id="browse-dropdown">
+                    <NavDropdown.Item as={Link} to='/guestveggies'>Veggies</NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to='/'>Herbs</NavDropdown.Item>
+
+                </NavDropdown>
                 {/* <Nav.Link as={Link} to="/">Calendar</Nav.Link> */}
                 <Nav.Link as={Link} to="/guestabout">About Victory Gardens</Nav.Link>
-                
+                </Nav>
+            </Navbar.Collapse>
+
+
             </Nav>
             <Nav className="mr-5">
-                <Nav.Link as={Link} to="/myprofile">Login</Nav.Link>
+            <NavDropdown className="mr-auto" title="Login" id="login-dropdown">
+                    <NavDropdown.Item><Form>
+<Form.Group controlId="formBasicEmail">
+  <Form.Label>Email address</Form.Label>
+  <Form.Control type="email" placeholder="Enter email" />
+  <Form.Text className="text-muted">
+  </Form.Text>
+</Form.Group>
+
+<Form.Group controlId="formBasicPassword">
+  <Form.Label>Password</Form.Label>
+  <Form.Control type="password" placeholder="Password" />
+</Form.Group>
+<Button variant="primary" type="submit">
+  Submit
+</Button>
+</Form>
+</NavDropdown.Item>
+                    
+
+                </NavDropdown>
                 <Nav.Link as={Link} to="/guestsignup">Signup</Nav.Link>
 
 
@@ -30,5 +59,6 @@ return (
     </Navbar >
 )
 }
+
 
 export default GuestNavigate;
