@@ -93,7 +93,7 @@ const SavedVeggies: React.FC<IAppProps> = props => {
     return (
         <Container >
 
-            <Jumbotron fluid className="rounded">
+<Jumbotron fluid className="shadow rounded">
                 <Container >
                     <h1>My Garden</h1>
                 </Container>

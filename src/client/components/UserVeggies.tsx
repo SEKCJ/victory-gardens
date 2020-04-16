@@ -147,8 +147,8 @@ const Veggies: React.FC<IAppProps> = props => {
     return (
         <Container>
 
-            <Jumbotron fluid>
-                <Container>
+<Jumbotron fluid className="shadow rounded">
+                <Container >
                     <h1>Veggie Masterlist</h1>
                     <p>
                         Looking for something inparticular? Come choose from our masterlist of vegetables!
