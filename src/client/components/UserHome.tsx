@@ -5,7 +5,7 @@ import { Jumbotron, Button, Container, Row, Col, Image } from 'react-bootstrap';
 
 const UserHome: React.FC<IAppProps> = props => {
   return (
-      <Jumbotron fluid>
+      <Jumbotron fluid className="rounded">
         <h1>Victory Gardens</h1>
         <h4>How can YOU flatten the curve?</h4>
     

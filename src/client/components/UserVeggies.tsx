@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { Card, Container, Jumbotron, Row, Col, Button, Collapse, Form, Alert } from 'react-bootstrap';
+import { Card, Container, Jumbotron, Row, Col, Button, Collapse, Form, Alert, Tabs, Tab, Image } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { api } from '../Services/apiServices';
 import { IAppProps } from '../App';
@@ -12,6 +12,9 @@ const Veggies: React.FC<IAppProps> = props => {
     const [searchVal, setSearchVal] = useState<string>("");
     const [btnState, setBtnState] = useState<boolean>(false);
     const [count, setCount] = useState<number>();
+    const [added, setAdded] = useState<JSX.Element>();
+    const [adding, setAdding] = useState<boolean>();
+
 
     let fetchAPI = async () => {
         if (searchVal !== "") {
@@ -22,6 +25,17 @@ const Veggies: React.FC<IAppProps> = props => {
             makeCards(response)
         }
     }
+    let handleClick = async (e: React.MouseEvent<HTMLButtonElement>, vegId: number) => {
+        setAdded(
+            <Container className="d-flex mt-4">
+                <Alert variant="warning" className="mx-auto col-sm-6 d-flex flex-column">
+                    Deleting Vegetable...
+                </Alert>
+            </Container>
+        )
+        // let response = await api(`/api/savedvegetables/${vegId}`, "DELETE", { Token })
+        setAdding(true)
+    }
 
     let findCards = (resObj: any) => {
         let cardMemory = resObj.map((element: any, index: any) => {
@@ -31,27 +45,34 @@ const Veggies: React.FC<IAppProps> = props => {
             let veggieSciName = element.sci_name
 
             return (
-                <Row key={veggieId} className="d-flex">
-                    <Card className="mx-auto col-sm-8 px-0">
-                        <div className="d-flex flex-row">
-                            <Card.Img variant="top" style={{ "width": "10em" }}
-                                src={veggieImg} />
-                            <Card.Body>
-                                <Card.Title>{veggieName}</Card.Title>
-                                <Card.Text>
-                                    {veggieSciName}
-                                </Card.Text>
-                            </Card.Body>
-                            <Button variant="primary" as={Link} to={`/veggies/${veggieId}`}>Read More</Button>
-                        </div>
+                <Container key={veggieId} className=" p-3 mb-5 rounded border-0 ">
+                    <Row className="d-flex ">
+                        <Card className="mx-auto col-sm-8 px-0 p-3 mb-2 bg-success shadow p-3 mb-5">
+                            <div className="d-flex flex-row p-3 mb-2 bg-success rounded">
+                                <Card.Img className="rounded border border-info " variant="top" style={{ "width": "10em" }}
+                                    src={veggieImg} />
+                                <Card.ImgOverlay className="px-0 py-0" style={{ "width": "5em" }}>
+                                    <Button variant="info" className="px-1 py-1 bg-info"
+                                        onClick={(e: React.MouseEvent<HTMLButtonElement>) => { handleClick(e, veggieId) }}>
+                                        <small style={{ "fontSize": "2em" }}>+</small>
+                                    </Button>
+                                </Card.ImgOverlay>
+                                <Card.Body className="p-3 mb-2 bg-success text-white ">
+                                    <Card.Title>{veggieName}</Card.Title>
+                                    <Card.Text>
+                                        {veggieSciName}
+                                    </Card.Text>
+                                </Card.Body>
 
-                        {/* <Collapse in={open}>
+                                <Button className="shadow p-3 mb-5" variant="primary" as={Link} to={`/veggies/${veggieId}`}>Read More</Button>
+                            </div>
+
+                            {/* <Collapse in={open}>
                             <div id={`collapse-content ${index}`}>VEGGIES</div>
                         </Collapse> */}
-
-                    </Card>
-                </Row>
-
+                        </Card>
+                    </Row>
+                </Container>
             )
         })
         setApiArray(cardMemory)
@@ -69,29 +90,35 @@ const Veggies: React.FC<IAppProps> = props => {
             let veggieName = element.name;
             let veggieId = element.id;
             let veggieSciName = element.sci_name
-
             return (
-                <Row key={veggieId} className="d-flex">
-                    <Card className="mx-auto col-sm-8 px-0">
-                        <div className="d-flex flex-row">
-                            <Card.Img variant="top" style={{ "width": "10em" }}
-                                src={veggieImg} />
-                            <Card.Body>
-                                <Card.Title>{veggieName}</Card.Title>
-                                <Card.Text>
-                                    {veggieSciName}
-                                </Card.Text>
-                            </Card.Body>
-                            <Button variant="primary" as={Link} to={`/veggies/${veggieId}`}>Read More</Button>
-                        </div>
+                <Container className=" p-3 mb-5 rounded border-0 " key={veggieId}>
+                    <Row className="d-flex ">
+                        <Card className="mx-auto col-sm-8 px-0 p-3 mb-2 bg-success shadow p-3 mb-5">
+                            <div className="d-flex flex-row p-3 mb-2 bg-success rounded">
+                                <Card.Img className="rounded border border-info " variant="top" style={{ "width": "10em" }}
+                                    src={veggieImg} />
+                                <Card.ImgOverlay className="px-2 py-2" style={{ "width": "5em" }}>
+                                    <Button variant="info" className="px-3 py-0" style={{"borderRadius" : "50%"}}
+                                        onClick={(e: React.MouseEvent<HTMLButtonElement>) => { handleClick(e, veggieId) }}>
+                                        <small style={{ "fontSize": "2em" }}>+</small>
+                                    </Button>
+                                </Card.ImgOverlay>
+                                <Card.Body className="p-3 mb-2 bg-success text-white">
+                                    <Card.Title>{veggieName}</Card.Title>
+                                    <Card.Text>
+                                        {veggieSciName}
+                                    </Card.Text>
+                                </Card.Body>
 
-                        {/* <Collapse in={open}>
+                                <Button className="shadow p-3 mb-5" variant="primary" as={Link} to={`/veggies/${veggieId}`}>Read More</Button>
+                            </div>
+
+                            {/* <Collapse in={open}>
                             <div id={`collapse-content ${index}`}>VEGGIES</div>
                         </Collapse> */}
-
-                    </Card>
-                </Row>
-
+                        </Card>
+                    </Row>
+                </Container>
             )
         })
         setApiArray(cardMemory)
@@ -101,7 +128,7 @@ const Veggies: React.FC<IAppProps> = props => {
     useEffect(() => {
         // Arrays start at index 0
         fetchAPI()
-        
+
     }, [searchVal])
 
     useEffect(() => {
@@ -118,10 +145,10 @@ const Veggies: React.FC<IAppProps> = props => {
     }, [btnState])
 
     return (
-        <Container >
+        <Container>
 
             <Jumbotron fluid>
-                <Container >
+                <Container>
                     <h1>Veggie Masterlist</h1>
                     <p>
                         Looking for something inparticular? Come choose from our masterlist of vegetables!

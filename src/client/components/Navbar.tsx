@@ -8,7 +8,7 @@ const Navigate: React.FC<IAppProps> = () => {
 
     return (
         <Navbar variant="dark" bg="dark" expand="sm" className="sticky-top">
-            <Navbar.Brand href="/"> <Image src={window.location.origin + "/assets/VGLogo.png"}
+            <Navbar.Brand href="/"> <Image src={window.location.origin + "/assets/VGLogo.png"} 
                 style={{ "width": "3em" }} rounded/></Navbar.Brand>
             <Navbar.Toggle aria-controls="navigate" />
             {/* <Navbar.Collapse id="navigate"> */}
