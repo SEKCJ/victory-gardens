@@ -12,10 +12,11 @@ import AboutUs from './Components/AboutUs';
 import UserLogin from './Components/Login';
 //import UserSignUp from './Components/UserSignUp';
 //import ControlledTabs from './Components/MyProfile';
-import Garden from './Components/Garden';
+// import Garden from './Components/Garden';
+import GardenVis from './Components/GardenVis';
 
 const App: React.FC<IAppProps> = props => {
-
+	
 	return (
 		<Router>
 			<Navigate />
@@ -28,7 +29,7 @@ const App: React.FC<IAppProps> = props => {
 				<Route exact path="/login" component={UserLogin} />
 				<Route exact path="/aboutus" component={AboutUs} />
 				<Route exact path="/choose" component={HelpChoose} />
-				<Route exact path="/garden" component={Garden} />
+				<Route exact path="/garden" component={GardenVis} />
 				<Route path='/' component={UserHome} />
 				{/* <Route exact path="/myprofile" component={ControlledTabs} /> */}
 				{/* <Route exact path="/joingarden" component={UserSignUp} /> */}

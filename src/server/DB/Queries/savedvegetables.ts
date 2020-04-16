@@ -12,6 +12,7 @@ const oneSavedVegByToken = async (token: string) => {
     vegetables.name,
     vegetables.sci_name,
     vegetables.id,
+    vegetables.spacing,
     images.url
     FROM myvegetables 
     JOIN vegetables ON vegetables.id = myvegetables.vegetableid 
