@@ -2,50 +2,37 @@ import React, { } from 'react';
 import { IAppProps } from '../App';
 import { Carousel, Card, Image, Jumbotron, Container } from 'react-bootstrap';
 
-const AboutUs: React.FC<IAppProps> = props => {
-  return (
-    <Container className="d-flex flex-column">
-      <Jumbotron fluid>
-        <h1>About Victory Gardens</h1>
-      </Jumbotron>
+const AboutUs: React.FC<IAppProps> = props => { 
+return(
+  <Container className="justify-content-center">
+  <Jumbotron fluid className="rounded">
+  <main className="container my-5">
+    <h1 className="text-primary">About Victory Gardens</h1>
+    <div className="video">  <h3 className="text-primary"></h3>
+      {/* <iframe src="https://archive.org/embed/Kitchencaravan-TheVictoryGardenGrowsAgain209-2" width="640" height="480" frameBorder="0" allowFullScreen></iframe> */}
+      {/* // webkitallowfullscreen="true"
+      // mozallowfullscreen="true"  */}
+  </div> 
+  {/* <p className="text-muted">Don't have an account yet? Click<Button href="/guestsignup" variant="link" type="submit">here</Button>to join Victory Gardens!</p>  */}
+  </main>
+</Jumbotron>
+<div className="justify-content">  
+<Carousel className="rounded">
+<Carousel.Item>
+ <Image className="d-block w-100"
+        src="assets/victorydefintion2.png"
+        alt="First slide" rounded />
 
-      <Carousel>
-        <Carousel.Item>
-          <Image
-            className="d-block w-25"
-            src="https://live.staticflickr.com/6053/6302880786_13e17071f5_b.jpg"
-            alt="First slide" rounded
-          />
-          <Carousel.Caption>
-            <h3>What is a Victory Garden?</h3>
-            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+ </Carousel.Item>
+    <Carousel.Item>
+  <Image className="d-block w-100"
+        src="assets/victoryabout3.jpg"
+        alt="Third slide" rounded />
+    </Carousel.Item>
+  </Carousel>
+  </div>
+</Container>
 
-
-            <Card className="mr-auto" style={{ width: '18rem' }}>
-              <Card.Body>
-                <Card.Title>What is a Victory Garden?</Card.Title>
-                <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle>
-                <Card.Text>
-                </Card.Text>
-                <Card.Link href="#">Card Link</Card.Link>
-                <Card.Link href="#">Another Link</Card.Link>
-              </Card.Body>
-            </Card>
-
-          </Carousel.Caption>
-        </Carousel.Item>
-        <Carousel.Item>
-          <img
-            className="d-block w-100"
-            src="holder.js/800x400?text=Second slide&bg=282c34"
-            alt="Third slide"
-          />
-
-          <h3>Third slide label</h3>
-          <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-        </Carousel.Item>
-</Carousel>
-  </Container >
-  )
+ )
 }
 export default AboutUs;
