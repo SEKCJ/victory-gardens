@@ -29,8 +29,8 @@ return (
 
             </Nav>
             <Nav className="mr-5">
-            <NavDropdown className="mr-auto" title="Login" id="login-dropdown">
-                    <NavDropdown.Item><Form>
+            <NavDropdown className="mr-auto" title="Login" id="login-dropdown" >
+                    <NavDropdown.Item onClick={(e:any)=> e.preventDefault()}><Form>
 <Form.Group controlId="formBasicEmail">
   <Form.Label>Email address</Form.Label>
   <Form.Control type="email" placeholder="Enter email" />
