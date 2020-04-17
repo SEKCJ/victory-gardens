@@ -57,7 +57,7 @@ const UserSignUp: React.FC<ILoginProps> = (props) => {
   } else {
     return (
       <React.Fragment>
-        <Jumbotron fluid>
+        <Jumbotron fluid className="rounded">
           <h1>Join the Army of Victory Gardens!</h1>
           <p>Join the fight against potential source rationing and start gardening today!</p>
         </Jumbotron>

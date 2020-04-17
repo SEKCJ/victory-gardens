@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { IAppProps } from '../App';
 import { Link } from 'react-router-dom';
 import { api, Token } from '../Services/apiServices';
-import { Card, Container, Accordion, Button, Jumbotron, Image, Row, Col } from 'react-bootstrap';
+import { Card, Container, Accordion, Button, Jumbotron, Image, Row, Col, Tabs, Tab } from 'react-bootstrap';
 
 const HelpChoose: React.FC<IAppProps> = props => {
     const [linkObj, setLinkObj] = useState<any>({})
@@ -126,6 +126,7 @@ const HelpChoose: React.FC<IAppProps> = props => {
     }
 
     return (
+
         <Container className="d-flex flex-column">
 
 <Jumbotron fluid className="shadow rounded">
@@ -133,215 +134,164 @@ const HelpChoose: React.FC<IAppProps> = props => {
                 <p> </p>
             </Jumbotron>
 
-            <div className="mx-auto">
-                <Row>
+            <Container className="flex-column d-flex col-sm-7">
 
-                    <Accordion>
-                        <Card style={{ width: '18rem' }}>
-                            <Card.Header className="d-flex">
-                                <Accordion.Toggle className="mr-auto" as={Button} variant="link" eventKey="0">Pizza</Accordion.Toggle>
-                                <Image src="https://freesvg.org/img/meltypizza.png" style={{ "width": "2.9em" }} />
-                            </Card.Header>
-                            <Accordion.Collapse eventKey="0">
-                                <Card.Body>
-                                    <Card.Title></Card.Title>
-                                    <Card.Subtitle className="mb-2 text-muted">Grow your own pizza toppings!</Card.Subtitle>
-                                    {linkObj.pizza}
-                                    {/* <Card.Link href="/veggies">Chili Pepper</Card.Link><br></br>
-                                    <Card.Link href="/veggies">Onions</Card.Link><br></br>
-                                    <Card.Link href="/veggies">Onions (Fall planted)</Card.Link><br></br>
-                                    <Card.Link href="/veggies">Tomato (Large)</Card.Link><br></br>
-                                    <Card.Link href="/veggies">Tomato (Small)</Card.Link><br></br>
-                                    <Card.Link href="/veggies">Spinach</Card.Link><br></br>
-                                    <Card.Link href="/veggies">Pepper</Card.Link> */}
-                                </Card.Body>
-                            </Accordion.Collapse>
-                        </Card>
-                    </Accordion>
+                <Tabs id="makeCards" className="d-flex">
+                    <Tab eventKey="vegetables" className="mx-auto d-flex flex-column" title="Veggies">
+                     <br></br>
+                        <Row className="mx-auto">
+
+                            <Accordion>
+                                <Card style={{ width: '18rem' }}>
+                                    <Card.Header className="d-flex">
+                                        <Accordion.Toggle className="mr-auto" as={Button} variant="link" eventKey="0">Pizza</Accordion.Toggle>
+                                        <Image src="https://freesvg.org/img/meltypizza.png" style={{ "width": "2.9em" }} />
+                                    </Card.Header>
+                                    <Accordion.Collapse eventKey="0">
+                                        <Card.Body>
+                                            <Card.Title></Card.Title>
+                                            <Card.Subtitle className="mb-2 text-muted">Grow your own pizza toppings!</Card.Subtitle>
+                                            {linkObj.pizza}
+                                        </Card.Body>
+                                    </Accordion.Collapse>
+                                </Card>
+                            </Accordion>
 
 
-                    <Accordion>
-                        <Card style={{ width: '18rem' }}>
-                            <Card.Header className="d-flex">
-                                <Accordion.Toggle className="mr-auto" as={Button} variant="link" eventKey="0">Salsa Essentials</Accordion.Toggle>
-                                <Image src="https://freesvg.org/img/johnny_automatic_tomato_plant.png" style={{ "width": "1.7em" }} />
-                            </Card.Header>
-                            <Accordion.Collapse eventKey="0">
-                                <Card.Body>
-                                    <Card.Title></Card.Title>
-                                    <Card.Subtitle className="mb-2 text-muted"></Card.Subtitle>
-                                    {linkObj.salsa}
-                                    {/* <Card.Link href="/veggies">Tomato (Small)</Card.Link><br></br>
-                                    <Card.Link href="/veggies">Tomato (Large)</Card.Link><br></br>
-                                    <Card.Link href="/veggies">Pepper</Card.Link><br></br>
-                                    <Card.Link href="/veggies">Onions (Fall planted)</Card.Link><br></br>
-                                    <Card.Link href="/veggies">Chili Pepper</Card.Link><br></br>
-                                    <Card.Link href="/veggies">Onions</Card.Link> */}
-                                </Card.Body>
-                            </Accordion.Collapse>
-                        </Card>
-                    </Accordion>
+                            <Accordion>
+                                <Card style={{ width: '18rem' }}>
+                                    <Card.Header className="d-flex">
+                                        <Accordion.Toggle className="mr-auto" as={Button} variant="link" eventKey="0">Salsa Essentials</Accordion.Toggle>
+                                        <Image src="https://freesvg.org/img/johnny_automatic_tomato_plant.png" style={{ "width": "1.7em" }} />
+                                    </Card.Header>
+                                    <Accordion.Collapse eventKey="0">
+                                        <Card.Body>
+                                            <Card.Title></Card.Title>
+                                            <Card.Subtitle className="mb-2 text-muted"></Card.Subtitle>
+                                            {linkObj.salsa}
+                                        </Card.Body>
+                                    </Accordion.Collapse>
+                                </Card>
+                            </Accordion>
 
-                </Row>
-                <br></br>
-                <Row>
+                        </Row>
+                        <br></br>
+                        <Row className="mx-auto">
 
-                    <Accordion>
-                        <Card style={{ width: '18rem' }}>
-                            <Card.Header className="d-flex">
-                                <Accordion.Toggle className="mr-auto" as={Button} variant="link" eventKey="0">Salad</Accordion.Toggle>
-                                <Image src="https://storage.needpix.com/rsynced_images/salad-29440_1280.png" style={{ "width": "2.89em" }} />
-                            </Card.Header>
-                            <Accordion.Collapse eventKey="0">
-                                <Card.Body>
-                                    <Card.Title></Card.Title>
-                                    <Card.Subtitle className="mb-2 text-muted">Check out these easy to grow salad greens!</Card.Subtitle>
-                                    {linkObj.salad}
-                                    {/* <Card.Link href="/veggies">Arugula</Card.Link><br></br>
-                                    <Card.Link href="/veggies">Kale</Card.Link><br></br>
-                                    <Card.Link href="/veggies">Crisphead Lettuce</Card.Link><br></br>
-                                    <Card.Link href="/veggies">Leaf Lettuce</Card.Link><br></br>
-                                    <Card.Link href="/veggies">Mustard</Card.Link><br></br>
-                                    <Card.Link href="/veggies">Swiss Chard</Card.Link><br></br>
-                                    <Card.Link href="/veggies">Miner's Lettuce</Card.Link> */}
-                                </Card.Body>
-                            </Accordion.Collapse>
-                        </Card>
-                    </Accordion>
+                            <Accordion>
+                                <Card style={{ width: '18rem' }}>
+                                    <Card.Header className="d-flex">
+                                        <Accordion.Toggle className="mr-auto" as={Button} variant="link" eventKey="0">Salad</Accordion.Toggle>
+                                        <Image src="https://storage.needpix.com/rsynced_images/salad-29440_1280.png" style={{ "width": "2.89em" }} />
+                                    </Card.Header>
+                                    <Accordion.Collapse eventKey="0">
+                                        <Card.Body>
+                                            <Card.Title></Card.Title>
+                                            <Card.Subtitle className="mb-2 text-muted">Check out these easy to grow salad greens!</Card.Subtitle>
+                                            {linkObj.salad}
+                                        </Card.Body>
+                                    </Accordion.Collapse>
+                                </Card>
+                            </Accordion>
 
-                    <Accordion>
-                        <Card style={{ width: '18rem' }}>
-                            <Card.Header className="d-flex">
-                                <Accordion.Toggle className="mr-auto" as={Button} variant="link" eventKey="0">Great on the Grill</Accordion.Toggle>
-                                <Image src="https://cdn.pixabay.com/photo/2012/04/12/20/43/tongs-30580_960_720.png" style={{ "width": "5.81em" }} />
-                            </Card.Header>
-                            <Accordion.Collapse eventKey="0">
-                                <Card.Body>
-                                    <Card.Title></Card.Title>
-                                    <Card.Subtitle className="mb-2 text-muted">Veggies that you can grill!</Card.Subtitle>
-                                    {linkObj.grill}
-                                    {/* <Card.Link href="/veggies">Asparagus</Card.Link><br></br>
-                                    <Card.Link href="/veggies">Corn</Card.Link><br></br>
-                                    <Card.Link href="/veggies">Eggplant</Card.Link><br></br>
-                                    <Card.Link href="/veggies">Onions</Card.Link><br></br>
-                                    <Card.Link href="/veggies">Squash (summer)</Card.Link><br></br>
-                                    <Card.Link href="/veggies">Squash (winter)</Card.Link><br></br>
-                                    <Card.Link href="/veggies">Tomato (Large)</Card.Link><br></br>
-                                    <Card.Link href="/veggies">Onions (Fall planted)</Card.Link> */}
-                                </Card.Body>
-                            </Accordion.Collapse>
-                        </Card>
-                    </Accordion>
+                            <Accordion>
+                                <Card style={{ width: '18rem' }}>
+                                    <Card.Header className="d-flex">
+                                        <Accordion.Toggle className="mr-auto" as={Button} variant="link" eventKey="0">Great on the Grill</Accordion.Toggle>
+                                        <Image src="https://cdn.pixabay.com/photo/2012/04/12/20/43/tongs-30580_960_720.png" style={{ "width": "5.81em" }} />
+                                    </Card.Header>
+                                    <Accordion.Collapse eventKey="0">
+                                        <Card.Body>
+                                            <Card.Title></Card.Title>
+                                            <Card.Subtitle className="mb-2 text-muted">Veggies that you can grill!</Card.Subtitle>
+                                            {linkObj.grill}
+                                        </Card.Body>
+                                    </Accordion.Collapse>
+                                </Card>
+                            </Accordion>
 
-                </Row>
-                <br></br>
-                <Row>
+                        </Row>
+                        <br></br>
+                        <Row className="mx-auto">
 
-                    <Accordion>
-                        <Card style={{ width: '18rem' }}>
-                            <Card.Header className="d-flex">
-                                <Accordion.Toggle className="mr-auto" as={Button} variant="link" eventKey="0">Beginner</Accordion.Toggle>
-                                <Image src="https://freesvg.org/img/guanti--e-pinze.png" style={{ "width": "3em" }} />
-                            </Card.Header>
-                            <Accordion.Collapse eventKey="0">
-                                <Card.Body>
-                                    <Card.Title></Card.Title>
-                                    <Card.Subtitle className="mb-2 text-muted"> Start out simple with these plants for beginner level gardeners!</Card.Subtitle>
-                                    {linkObj.beginner}
-                                    {/* <Card.Link href="/veggies">Collards</Card.Link><br></br>
-                                    <Card.Link href="/veggies">Pepper</Card.Link><br></br>
-                                    <Card.Link href="/veggies">Chili Pepper</Card.Link><br></br>
-                                    <Card.Link href="/veggies">Swiss Chard</Card.Link><br></br>
-                                    <Card.Link href="/veggies"></Card.Link> */}
-                                </Card.Body>
-                            </Accordion.Collapse>
-                        </Card>
-                    </Accordion>
+                            <Accordion>
+                                <Card style={{ width: '18rem' }}>
+                                    <Card.Header className="d-flex">
+                                        <Accordion.Toggle className="mr-auto" as={Button} variant="link" eventKey="0">Beginner</Accordion.Toggle>
+                                        <Image src="https://freesvg.org/img/guanti--e-pinze.png" style={{ "width": "3em" }} />
+                                    </Card.Header>
+                                    <Accordion.Collapse eventKey="0">
+                                        <Card.Body>
+                                            <Card.Title></Card.Title>
+                                            <Card.Subtitle className="mb-2 text-muted"> Start out simple with these plants for beginner level gardeners!</Card.Subtitle>
+                                            {linkObj.beginner}
+                                        </Card.Body>
+                                    </Accordion.Collapse>
+                                </Card>
+                            </Accordion>
 
-                    <Accordion>
-                        <Card style={{ width: '18rem' }}>
-                            <Card.Header className="d-flex">
-                                <Accordion.Toggle className="mr-auto" as={Button} variant="link" eventKey="0">Immortal</Accordion.Toggle>
-                                <Image src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Euler%27s_infinity_sign.svg/2000px-Euler%27s_infinity_sign.svg.png" style={{ "width": "5.19em" }} />
-                            </Card.Header>
-                            <Accordion.Collapse eventKey="0">
-                                <Card.Body>
-                                    <Card.Title></Card.Title>
-                                    <Card.Subtitle className="mb-2 text-muted">These plants keep for a month or longer after harvest!</Card.Subtitle>
-                                    {linkObj.immortal}
-                                    {/* <Card.Link href="/veggies">Beet</Card.Link><br></br>
-                                    <Card.Link href="/veggies">Carrot</Card.Link><br></br>
-                                    <Card.Link href="/veggies">Chili Pepper</Card.Link><br></br>
-                                    <Card.Link href="/veggies">Garlic</Card.Link><br></br>
-                                    <Card.Link href="/veggies">Onions</Card.Link><br></br>
-                                    <Card.Link href="/veggies">Onions (Fall planted)</Card.Link><br></br>
-                                    <Card.Link href="/veggies">Potatoes (Early)</Card.Link><br></br>
-                                    <Card.Link href="/veggies">Potatoes (Maincrop)</Card.Link><br></br>
-                                    <Card.Link href="/veggies">Squash (summer)</Card.Link><br></br>
-                                    <Card.Link href="/veggies">Squash (winter)</Card.Link> */}
-                                </Card.Body>
-                            </Accordion.Collapse>
-                        </Card>
-                    </Accordion>
+                            <Accordion>
+                                <Card style={{ width: '18rem' }}>
+                                    <Card.Header className="d-flex">
+                                        <Accordion.Toggle className="mr-auto" as={Button} variant="link" eventKey="0">Immortal</Accordion.Toggle>
+                                        <Image src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Euler%27s_infinity_sign.svg/2000px-Euler%27s_infinity_sign.svg.png" style={{ "width": "5.19em" }} />
+                                    </Card.Header>
+                                    <Accordion.Collapse eventKey="0">
+                                        <Card.Body>
+                                            <Card.Title></Card.Title>
+                                            <Card.Subtitle className="mb-2 text-muted">These plants keep for a month or longer after harvest!</Card.Subtitle>
+                                            {linkObj.immortal}
+                                        </Card.Body>
+                                    </Accordion.Collapse>
+                                </Card>
+                            </Accordion>
 
-                </Row>
-                <br></br>
-                <Row>
+                        </Row>
+                        <br></br>
+                        <Row className="mx-auto">
 
-                    <Accordion>
-                        <Card style={{ width: '18rem' }}>
-                            <Card.Header className="d-flex">
-                                <Accordion.Toggle className="mr-auto" as={Button} variant="link" eventKey="0"> Save the Bees! </Accordion.Toggle>
-                                <Image src="https://storage.needpix.com/rsynced_images/honey-bee-2881949_1280.png" style={{ "width": "3.74em" }} />
-                            </Card.Header>
-                            <Accordion.Collapse eventKey="0">
-                                <Card.Body>
-                                    <Card.Title></Card.Title>
-                                    <Card.Subtitle className="mb-2 text-muted">Have a look at these bee-friendly vegetables!</Card.Subtitle>
-                                    {linkObj.bees}
-                                    {/* <Card.Link href="/veggies">Cantaloupe</Card.Link><br></br>
-                                    <Card.Link href="/veggies">Cucumber</Card.Link><br></br>
-                                    <Card.Link href="/veggies">Eggplant</Card.Link><br></br>
-                                    <Card.Link href="/veggies">Melon</Card.Link><br></br>
-                                    <Card.Link href="/veggies">Pepper</Card.Link><br></br>
-                                    <Card.Link href="/veggies">Pumpkin</Card.Link> */}
-                                </Card.Body>
-                            </Accordion.Collapse>
-                        </Card>
-                    </Accordion>
+                            <Accordion>
+                                <Card style={{ width: '18rem' }}>
+                                    <Card.Header className="d-flex">
+                                        <Accordion.Toggle className="mr-auto" as={Button} variant="link" eventKey="0"> Save the Bees! </Accordion.Toggle>
+                                        <Image src="https://storage.needpix.com/rsynced_images/honey-bee-2881949_1280.png" style={{ "width": "3.74em" }} />
+                                    </Card.Header>
+                                    <Accordion.Collapse eventKey="0">
+                                        <Card.Body>
+                                            <Card.Title></Card.Title>
+                                            <Card.Subtitle className="mb-2 text-muted">Have a look at these bee-friendly vegetables!</Card.Subtitle>
+                                            {linkObj.bees}
+                                        </Card.Body>
+                                    </Accordion.Collapse>
+                                </Card>
+                            </Accordion>
 
-                    <Accordion>
-                        <Card style={{ width: '18rem' }}>
-                            <Card.Header className="d-flex">
-                                <Accordion.Toggle className="mr-auto" as={Button} variant="link" eventKey="0">Large Harvest</Accordion.Toggle>
-                                <Image src="https://storage.needpix.com/rsynced_images/spade-24434_1280.png" style={{ "width": "2.38em" }} />
-                            </Card.Header>
-                            <Accordion.Collapse eventKey="0">
-                                <Card.Body>
-                                    <Card.Title></Card.Title>
-                                    <Card.Subtitle className="mb-2 text-muted">These plants yield a large harvest.</Card.Subtitle>
-                                    {linkObj.harvest}
-                                    {/* <Card.Link href="/veggies">Bush Snap Beans</Card.Link><br></br>
-                                    <Card.Link href="/veggies">Beans (Dry)</Card.Link><br></br>
-                                    <Card.Link href="/veggies">Fava Beans</Card.Link><br></br>
-                                    <Card.Link href="/veggies">Lima Beans</Card.Link><br></br>
-                                    <Card.Link href="/veggies">Pole Beans</Card.Link><br></br>
-                                    <Card.Link href="/veggies">Cucumber</Card.Link><br></br>
-                                    <Card.Link href="/veggies">Okra</Card.Link><br></br>
-                                    <Card.Link href="/veggies">Potatoes (Early)</Card.Link><br></br>
-                                    <Card.Link href="/veggies">Potatoes (Maincrop)</Card.Link><br></br>
-                                    <Card.Link href="/veggies">Tomato (Large)</Card.Link><br></br>
-                                    <Card.Link href="/veggies">Tomato (Small)</Card.Link><br></br>
-                                    <Card.Link href="/veggies">Zucchini</Card.Link> */}
-                                </Card.Body>
-                            </Accordion.Collapse>
-                        </Card>
-                    </Accordion>
+                            <Accordion>
+                                <Card style={{ width: '18rem' }}>
+                                    <Card.Header className="d-flex">
+                                        <Accordion.Toggle className="mr-auto" as={Button} variant="link" eventKey="0">Large Harvest</Accordion.Toggle>
+                                        <Image src="https://storage.needpix.com/rsynced_images/spade-24434_1280.png" style={{ "width": "2.38em" }} />
+                                    </Card.Header>
+                                    <Accordion.Collapse eventKey="0">
+                                        <Card.Body>
+                                            <Card.Title></Card.Title>
+                                            <Card.Subtitle className="mb-2 text-muted">These plants yield a large harvest.</Card.Subtitle>
+                                            {linkObj.harvest}
+                                        </Card.Body>
+                                    </Accordion.Collapse>
+                                </Card>
+                            </Accordion>
 
-                </Row>
-                <br></br>
-            </div>
+                        </Row>
+                        <br></br>
+                    </Tab>
+                    <Tab eventKey="herbs" className="mx-auto d-flex flex-column" title="Herbs" >
+                       <br></br>
+                    </Tab>
+                </Tabs>
+            </Container>
         </Container >
+
     )
 }
 

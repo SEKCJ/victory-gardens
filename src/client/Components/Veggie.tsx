@@ -11,7 +11,7 @@ const Veggie: React.FC<IVeggieProps> = (props: any) => {
     const [added, setAdded] = useState<boolean>(false);
     const [deleted, setDeleted] = useState<boolean>(false);
     const [pageState, setPageState] = useState<boolean>(true);
-    const [vgObj, setVgObj] = useState<IVeggieState>()
+    const [vgObj, setVgObj] = useState<IVeggieState>() 
 
     let vegetableid = props.match.params.id;
 
