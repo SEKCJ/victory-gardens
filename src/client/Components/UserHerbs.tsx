@@ -14,34 +14,34 @@ const Herbs: React.FC<IAppProps> = props => {
 
     let fetchAPI = async () => {
         if (searchVal !== "") {
-            let response = await api(`/api/vegetables/name/${searchVal}`)
+            let response = await api(`/api/herbs/name/${searchVal}`)
             findCards(response)
         } else {
-            let response = await api(`/api/vegetables`)
+            let response = await api(`/api/herbs`)
             makeCards(response)
         }
     }
 
     let findCards = (resObj: any) => {
         let cardMemory = resObj.map((element: any, index: any) => {
-            let veggieImg = element.url;
-            let veggieName = element.name;
-            let veggieId = element.id;
-            let veggieSciName = element.sci_name
+            let herbsImg = element.url;
+            let herbsName = element.name;
+            let herbsId = element.id;
+            let herbsSciName = element.sci_name
 
             return (
-                <Row key={veggieId} className="d-flex">
+                <Row key={herbsId} className="d-flex">
                     <Card className="mx-auto col-sm-8 px-0">
                         <div className="d-flex flex-row">
                             <Card.Img variant="top" style={{ "width": "10em" }}
-                                src={veggieImg} />
+                                src={herbsImg} />
                             <Card.Body>
-                                <Card.Title>{veggieName}</Card.Title>
+                                <Card.Title>{herbsName}</Card.Title>
                                 <Card.Text>
-                                    {veggieSciName}
+                                    {herbsSciName}
                                 </Card.Text>
                             </Card.Body>
-                            <Button variant="primary" as={Link} to={`/veggies/${veggieId}`}>Read More</Button>
+                            <Button variant="primary" as={Link} to={`/userherbs/${herbsId}`}>Read More</Button>
                         </div>
 
                         {/* <Collapse in={open}>
@@ -64,24 +64,24 @@ const Herbs: React.FC<IAppProps> = props => {
 
     let makeCards = (resObj: any) => {
         let cardMemory = resObj.map((element: any, index: any) => {
-            let veggieImg = element.url;
-            let veggieName = element.name;
-            let veggieId = element.id;
-            let veggieSciName = element.sci_name
+            let herbsImg = element.url;
+            let herbsName = element.name;
+            let herbsId = element.id;
+            let herbsSciName = element.sci_name
 
             return (
-                <Row key={veggieId} className="d-flex">
+                <Row key={herbsId} className="d-flex">
                     <Card className="mx-auto col-sm-8 px-0">
                         <div className="d-flex flex-row">
                             <Card.Img variant="top" style={{ "width": "10em" }}
-                                src={veggieImg} />
+                                src={herbsImg} />
                             <Card.Body>
-                                <Card.Title>{veggieName}</Card.Title>
+                                <Card.Title>{herbsName}</Card.Title>
                                 <Card.Text>
-                                    {veggieSciName}
+                                    {herbsSciName}
                                 </Card.Text>
                             </Card.Body>
-                            <Button variant="primary" as={Link} to={`/veggies/${veggieId}`}>Read More</Button>
+                            <Button variant="primary" as={Link} to={`/userherbs/${herbsId}`}>Read More</Button>
                         </div>
 
                         {/* <Collapse in={open}>
