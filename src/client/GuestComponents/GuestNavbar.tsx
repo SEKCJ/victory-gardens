@@ -92,7 +92,7 @@ const GuestNavigate: React.FC<any> = props => {
 
             </NavDropdown>
             {/* <Nav.Link as={Link} to="/">Calendar</Nav.Link> */}
-            <Nav.Link as={Link} to="/guestabout">About Victory Gardens</Nav.Link>
+            {/* <Nav.Link as={Link} to="/guestabout">About Victory Gardens</Nav.Link> */}
           </Nav>
           </Navbar.Collapse>
 

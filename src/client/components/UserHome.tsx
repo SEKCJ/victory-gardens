@@ -6,12 +6,12 @@ import { Jumbotron, Button, Container, Row, Col, Image, Carousel } from 'react-b
 const UserHome: React.FC<IAppProps> = props => {
   return (
     <Container className="justify-content-center">
-      <Jumbotron fluid className="shadow p-3 mb-5 rounded">
-        <main className="container my-5">
-          <h1 className="text-primary">Welcome to Victory Gardens</h1><p className="text-primary">How will YOU flatten the curve?</p>
-          <div className="video">  <h3 className="text-primary"></h3>
-            {/* <iframe src="https://archive.org/embed/Kitchencaravan-TheVictoryGardenGrowsAgain209-2" width="640" height="480" frameBorder="0" allowFullScreen></iframe> */}
-            {/* // webkitallowfullscreen="true"
+    <Jumbotron fluid className="shadow p-3 mb-5 rounded">
+    <main className="container my-5">
+      <h1 className="text-light">Welcome to Victory Gardens</h1><p className="text-light">How will YOU flatten the curve?</p>
+      <div className="video">  <h3 className="text-primary"></h3>
+        {/* <iframe src="https://archive.org/embed/Kitchencaravan-TheVictoryGardenGrowsAgain209-2" width="640" height="480" frameBorder="0" allowFullScreen></iframe> */}
+        {/* // webkitallowfullscreen="true"
         // mozallowfullscreen="true"  */}
           </div>
           {/* <p className="text-muted">Don't have an account yet? Click<Button href="/guestsignup" variant="link" type="submit">here</Button>to join Victory Gardens!</p>  */}
