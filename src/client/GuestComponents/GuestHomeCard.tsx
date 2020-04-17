@@ -62,7 +62,7 @@ const GuestHome: React.FC<ILoginProps> = props => {
           <h4>How can YOU flatten the curve?</h4>
           <br></br>
           <p>Login</p>
-          <div>
+          <div className="padding: 35px">
           <Form className="flex-center">
             <Form.Group controlId="formBasicEmail">
               {/* <Form.Label>Email address</Form.Label> */}
