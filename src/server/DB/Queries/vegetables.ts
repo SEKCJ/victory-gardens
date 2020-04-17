@@ -6,7 +6,8 @@ const allVegs = async () => {
   return Query<IVegetables[]>(
     `SELECT vegetables.name, vegetables.sci_name, vegetables.id, images.url
     FROM vegetables
-    JOIN images ON vegetables.id = images.vegetableid`
+    JOIN images ON vegetables.id = images.vegetableid
+    ORDER BY vegetables.name ASC`
   );
 };
 
@@ -23,7 +24,8 @@ const vegByName = async (name: string) => {
   return Query<IVegetables[]>(`SELECT a.name, a.sci_name, a.id, b.url
    FROM vegetables a
    JOIN images b ON a.id = b.vegetableid
-   WHERE name like ?`, values)
+   WHERE name like ?
+   ORDER BY a.name ASC`, values)
 }
 // returns name of one veg with image url based on the veg's name
 // const oneVegByName = (name: string) => {
