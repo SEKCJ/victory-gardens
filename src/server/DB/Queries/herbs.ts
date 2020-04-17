@@ -47,7 +47,7 @@ const putHerb = async (values: any, id: number) => {
   ]);
 };
 
-const deleteVeg = (id: number) => {
+const deleteHerb = (id: number) => {
   return Query("DELETE FROM herbs WHERE id = ?", [id]);
 };
 
@@ -57,5 +57,5 @@ export default {
   herbByName,
   postHerb,
   putHerb,
-  deleteVeg
+  deleteHerb
 };
