@@ -5,8 +5,10 @@ import Tokens from './Queries/accesstokens';
 import Users from './Queries/users';
 import Vegetables from './Queries/vegetables';
 import SavedVegetables from './Queries/savedvegetables';
+import Herbs from './Queries/herbs';
+import SavedHerbs from './Queries/savedherbs'
 import HelpChoose from './Queries/helpchoose';
-import Herbs from './Queries/herbs'
+// import ChooseHerbs from './Queries/chooseherbs'
 
 const pool = mysql.createPool(config.mysql);
 
@@ -34,5 +36,7 @@ export default {
   Vegetables,
   SavedVegetables,
   HelpChoose,
-  Herbs
+  Herbs,
+  SavedHerbs,
+  // ChooseHerbs
 };
