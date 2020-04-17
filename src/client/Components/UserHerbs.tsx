@@ -19,6 +19,7 @@ const Herbs: React.FC<IAppProps> = props => {
         } else {
             let response = await api(`/api/herbs`)
             makeCards(response)
+            console.log(response)
         }
     }
 

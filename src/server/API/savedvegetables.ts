@@ -14,7 +14,9 @@ router.get("/:token", hasRole, async (req, res) => {
   if (token) {
     try {
       let SavedVegetables = await DB.SavedVegetables.oneSavedVegByToken(token);
-      res.json(SavedVegetables);
+      let SavedHerbs = await DB.SavedHerbs.oneSavedHerbByToken(token);
+      let SavedPlants = [...SavedVegetables, ...SavedHerbs]
+      res.json(SavedPlants);
     } catch (e) {
       console.log(e);
       res.sendStatus(500);

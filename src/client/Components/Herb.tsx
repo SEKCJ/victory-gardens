@@ -11,17 +11,17 @@ const Herb: React.FC<IVeggieProps> = (props: any) => {
     const [added, setAdded] = useState<boolean>(false);
     const [deleted, setDeleted] = useState<boolean>(false);
     const [pageState, setPageState] = useState<boolean>(true);
-    const [HerbObj, setHerbObj] = useState<IVeggieState>() 
+    const [vgObj, setvgObj] = useState<IVeggieState>() 
 
-    let herbid = props.match.params.id;
+    let herbsid = props.match.params.herbid;
 
     useEffect(() => {
-        vgCheck();
+        herbCheck();
         fetchAPI();
     }, []);
 
-    let vgCheck = async () => {
-        let check = await api('/api/savedherbs/vegetableCheck', "POST", { Token, vegetableid });
+    let herbCheck = async () => {
+        let check = await api('/api/savedherbs/vegetableCheck', "POST", { Token, herbsid });
         if (check) {
 
             setInGarden(
@@ -46,15 +46,15 @@ const Herb: React.FC<IVeggieProps> = (props: any) => {
     }
 
     let fetchAPI = async () => {
-        let [response]: IResObj[] = await api(`/api/vegetables/${vegetableid}`)
-        makeVeggie(response);
+        let [response]: IResObj[] = await api(`/api/herbs/${herbsid}`)
+        makeHerbs(response);
         setPageState(false);
     }
 
     let handleClick = async (e: React.MouseEvent<HTMLButtonElement>, method: string) => {
         if (method === "add") {
             setAdded(true);
-            let response = await api('/api/savedvegetables', "POST", { Token, vegetableid })
+            let response = await api('/api/savedherbs', "POST", { Token, herbsid })
             if (response) {
                 props.history.push("/savedveggies")
             } else {
@@ -62,7 +62,7 @@ const Herb: React.FC<IVeggieProps> = (props: any) => {
             }
         } else if (method === "delete") {
             setDeleted(true);
-            let response = await api(`/api/savedvegetables/${vegetableid}`, "DELETE", { Token })
+            let response = await api(`/api/savedherbs/${herbsid}`, "DELETE", { Token })
             if (response) {
                 props.history.push("/savedveggies")
             } else {
@@ -71,8 +71,8 @@ const Herb: React.FC<IVeggieProps> = (props: any) => {
         }
     }
 
-    let makeVeggie = (resObj: IResObj) => {
-        setVgObj(
+    let makeHerbs = (resObj: IResObj) => {
+        setvgObj(
             {
                 vgId: resObj.id,
                 vgName: resObj.name,

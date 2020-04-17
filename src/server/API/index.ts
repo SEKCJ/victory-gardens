@@ -17,7 +17,7 @@ router.use('/vegetables', vegetablesRouter);
 router.use('/savedvegetables', savedvegetablesRouter);
 router.use('/helpchoose', helpchooseRouter);
 router.use('/herbs', herbsRouter);
-router.use('savedherbs', savedherbsRouter);
-router.use('chooseherbs', chooseherbsRouter)
+router.use('/savedherbs', savedherbsRouter);
+router.use('/chooseherbs', chooseherbsRouter)
 
 export default router;
