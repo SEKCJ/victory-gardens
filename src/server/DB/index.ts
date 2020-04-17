@@ -8,7 +8,7 @@ import SavedVegetables from './Queries/savedvegetables';
 import Herbs from './Queries/herbs';
 import SavedHerbs from './Queries/savedherbs'
 import HelpChoose from './Queries/helpchoose';
-// import ChooseHerbs from './Queries/chooseherbs'
+import ChooseHerbs from './Queries/chooseherbs'
 
 const pool = mysql.createPool(config.mysql);
 
@@ -38,5 +38,5 @@ export default {
   HelpChoose,
   Herbs,
   SavedHerbs,
-  // ChooseHerbs
+  ChooseHerbs
 };
