@@ -1,22 +1,18 @@
 import * as express from "express";
-
 import { hasRole, isAdmin } from '../Auth/authCheckpoint';
 import DB from "../DB";
 import { ITokens } from "../Models";
-
 // import { IVegetables } from "../Models/index";
 
 const router = express.Router();
 
-// GET SavedVegetables - if (id) GET one, else GET all
+// GET SavedHerbs - if (id) GET one, else GET all
 router.get("/:token", hasRole, async (req, res) => {
   let token = req.params.token;
   if (token) {
     try {
-      let SavedVegetables = await DB.SavedVegetables.oneSavedVegByToken(token);
       let SavedHerbs = await DB.SavedHerbs.oneSavedHerbByToken(token);
-      let SavedPlants = [...SavedVegetables, ...SavedHerbs]
-      res.json(SavedPlants);
+      res.json(SavedHerbs);
     } catch (e) {
       console.log(e);
       res.sendStatus(500);
@@ -26,28 +22,27 @@ router.get("/:token", hasRole, async (req, res) => {
   }
 });
 
-router.post('/vegetableCheck', hasRole, async (req, res) => {
+router.post('/herbCheck', hasRole, async (req, res) => {
   let token = req.body.Token;
-  let vegetableid = parseInt(req.body.vegetableid, 10);
+  let herbsid = parseInt(req.body.herbsid, 10);
   try {
     let [result]: any = (await DB.Tokens.findUserIdByToken(token))[0];
     let theuserid = parseInt(result.userid, 10);
-    res.json((await DB.SavedVegetables.vegCheck(theuserid, vegetableid))[0])
+    res.json((await DB.SavedHerbs.herbCheck(theuserid, herbsid))[0])
   } catch (error) {
     console.log(error);
-    res.status(500).json("check token and vegetable Id");
+    res.status(500).json("check token and herb Id");
   }
 })
 
-// POST a new vegetable to Saved Veg
+// POST a new herb to SavedHerb
 router.post("/", hasRole, async (req, res) => {
   let token = req.body.Token;
-  let vegetableid = parseInt(req.body.vegetableid, 10);
-  console.log(token ,vegetableid);
+  let herbsid = parseInt(req.body.herbsid, 10);
   try {
     let [result]: any = (await DB.Tokens.findUserIdByToken(token))[0];
     let theuserid = parseInt(result.userid, 10);
-    res.json(await DB.SavedVegetables.postSavedVeg(theuserid, vegetableid));
+    res.json(await DB.SavedHerbs.postSavedHerb(theuserid, herbsid));
   } catch (e) {
     console.log(e);
     res.sendStatus(500);
@@ -56,11 +51,11 @@ router.post("/", hasRole, async (req, res) => {
 
 router.delete("/:id", hasRole, async (req, res) => {
   let token = req.body.Token;
-  let vegetableid = parseInt(req.params.id, 10);
+  let herbsid = parseInt(req.params.id, 10);
   try {
     let [result]: any = (await DB.Tokens.findUserIdByToken(token))[0];
     let theuserid = parseInt(result.userid, 10);
-    res.json(await DB.SavedVegetables.deleteSavedVeg(theuserid, vegetableid));
+    res.json(await DB.SavedHerbs.deleteSavedHerb(theuserid, herbsid));
   } catch (e) {
     console.log(e);
     res.sendStatus(500).json("delete failed");
