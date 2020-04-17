@@ -41,6 +41,7 @@ router.post('/vegetableCheck', hasRole, async (req, res) => {
 router.post("/", hasRole, async (req, res) => {
   let token = req.body.Token;
   let vegetableid = parseInt(req.body.vegetableid, 10);
+  console.log(token ,vegetableid);
   try {
     let [result]: any = (await DB.Tokens.findUserIdByToken(token))[0];
     let theuserid = parseInt(result.userid, 10);

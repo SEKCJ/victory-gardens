@@ -19,7 +19,8 @@ const oneSavedVegByToken = async (token: string) => {
     JOIN users ON users.id = myvegetables.theuserid 
     JOIN images on myvegetables.vegetableid = images.vegetableid
     JOIN tokens on users.id = tokens.userid
-    WHERE tokens.token = ?`,
+    WHERE tokens.token = ?
+    ORDER BY vegetables.name ASC`,
     [token]
   );
   // ('SELECT * FROM myvegetables WHERE theuserid = ?', [theuserid])
