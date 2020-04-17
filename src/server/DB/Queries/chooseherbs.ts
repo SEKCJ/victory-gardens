@@ -12,7 +12,7 @@ const allHerbsHelp = async () => {
 };
 
 // return one category in helpchooseherbs based on that category's categoryid
-const oneHerbsHelpByCategory = async (categoryid: number) => {
+const oneHerbHelpByCategory = async (categoryid: number) => {
   return Query<IVegetables[]>(
   `SELECT herbs.name, herbs.id, herbs_categories.category
   FROM herbs
@@ -21,7 +21,7 @@ const oneHerbsHelpByCategory = async (categoryid: number) => {
   WHERE helpchooseherbs.categoryid = ?`, [categoryid]);
 }
 
-const oneHerbsHelpByHerbId = async (herbsid: number) => {
+const oneHerbHelpByHerbsId = async (herbsid: number) => {
   return Query<IVegetables[]>(
   `SELECT herbs.name, herbs.id, herbs_categories.category
   FROM herbs
@@ -30,25 +30,25 @@ const oneHerbsHelpByHerbId = async (herbsid: number) => {
   WHERE helpchooseherbs.herbsid = ?`, [herbsid]);
 }
 
-const postHerbsHelp = async (herbsid: number, categoryid: number) => {
+const postHerbHelp = async (herbsid: number, categoryid: number) => {
   let values = [herbsid, categoryid];
   return Query('INSERT INTO helpchooseherbs(herbsid, categoryid) VALUES(?,?);--', values)
 }
 
-const putHerbsHelp = async (oldherbsid: number, oldcategoryid: number, herbsid: number, categoryid: number) => {
+const putHerbHelp = async (oldherbsid: number, oldcategoryid: number, herbsid: number, categoryid: number) => {
   let values = [herbsid, categoryid, oldherbsid, oldcategoryid];
   return Query('UPDATE helpchoose SET herbsid = ?, categoryid = ? WHERE herbsid = ? AND categoryid = ?;--', values)
 }
 
-const deleteHerbsHelp = async (herbsid: number) => {
+const deleteHerbHelp = async (herbsid: number) => {
   return Query('DELETE FROM helpchoose WHERE herbsid = ?', [herbsid])
 }
 
 export default {
   allHerbsHelp,
-  oneHerbsHelpByCategory,
-  oneHerbsHelpByHerbId,
-  postHerbsHelp,
-  putHerbsHelp,
-  deleteHerbsHelp
+  oneHerbHelpByCategory,
+  oneHerbHelpByHerbsId,
+  postHerbHelp,
+  putHerbHelp,
+  deleteHerbHelp
 };
