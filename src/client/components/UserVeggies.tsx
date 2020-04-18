@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import {
     Card, Container, Jumbotron, Row, Col, Button, Form, Alert,
-    Popover, OverlayTrigger, Spinner
+    Spinner, ProgressBar, Modal
 } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { api, Token } from '../Services/apiServices';
@@ -13,13 +13,30 @@ const Veggies: React.FC<IVeggieProps> = props => {
 
     const [apiArray, setApiArray] = useState<JSX.Element[]>([]);
     const [results, setResults] = useState<JSX.Element>();
-    const [searchVal, setSearchVal] = useState<string>("");
-    const [btnState, setBtnState] = useState<boolean>(false);
-    const [count, setCount] = useState<number>();
     const [added, setAdded] = useState<JSX.Element>();
-    const [adding, setAdding] = useState<boolean>(false);
-    const [loading, setLoading] = useState<boolean>();
 
+    const [searchVal, setSearchVal] = useState<string>("");
+    const [count, setCount] = useState<number>();
+    const [btnState, setBtnState] = useState<boolean>(false);
+    const [adding, setAdding] = useState<boolean>(false);
+
+    const handleClose = () => {
+        setAdded(<div></div>)
+        setAdding(false)
+    };
+
+    useEffect(() => {
+        setApiArray([
+            <Row className="d-flex mx-auto" key={"0"}>
+                <Col sm="8" className="mx-auto d-flex justify-content-between">
+                    <Spinner animation="grow" variant="dark" />
+                    <h4 className="text-center">Loading...</h4>
+                    <Spinner animation="grow" variant="dark" />
+                </Col>
+            </Row>
+        ])
+
+    }, [])
 
     let fetchAPI = async () => {
         if (searchVal !== "") {
@@ -27,25 +44,41 @@ const Veggies: React.FC<IVeggieProps> = props => {
             findCards(response)
         } else {
             let response = await api(`/api/vegetables`)
-            setApiArray([
-                <Row className="d-flex">
-                    <Col sm="6" className="mx-auto">
-                        
-                    </Col>
-                </Row>
-            ])
-            // makeCards(response)
+            makeCards(response)
         }
     }
 
-    let handleClick = async (e: React.MouseEvent<HTMLButtonElement>, vegetableid: number) => {
-        setAdding(true);
+    let handleClick = async (e: React.MouseEvent<HTMLButtonElement>, vegetableid: number, veggieName: string) => {
+        setAdded(
+            <Modal show={true} animation={true} size="sm"
+                autoFocus={true} restoreFocus={true}>
+                <Modal.Header>
+                    <Modal.Title>Adding {veggieName} to your garden...</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <ProgressBar animated now={100} variant="success" />
+                </Modal.Body>
+            </Modal>
+        )
         let response = await api('/api/savedvegetables', "POST", { Token, vegetableid })
-        // if (response) {
-
-        // } else {
-        setAdding(false);
-        // }
+        setAdded(
+            <Modal show={true} onHide={handleClose} animation={true} keyboard={true}
+                autoFocus={true} restoreFocus={true}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Successfully Added {veggieName} to Your Garden!</Modal.Title>
+                </Modal.Header>
+                <Modal.Body className="d-flex">
+                    <div className="mx-auto">
+                        <Button variant="info" className="mx-2" as={Link} to={`/veggies/${vegetableid}`}>
+                            View Details
+                        </Button>
+                        <Button variant="success" className="mx-2" as={Link} to="/savedveggies">
+                            View In Garden
+                        </Button>
+                    </div>
+                </Modal.Body>
+            </Modal>
+        )
     }
 
     let findCards = async (resObj: any) => {
@@ -65,7 +98,7 @@ const Veggies: React.FC<IVeggieProps> = props => {
             } else {
                 btnType = (
                     <Button variant="info" className="px-3 py-0" style={{ "borderRadius": "50%" }}
-                        onClick={(e: React.MouseEvent<HTMLButtonElement>) => { handleClick(e, veggieId) }}>
+                        onClick={(e: React.MouseEvent<HTMLButtonElement>) => { handleClick(e, veggieId, veggieName) }}>
                         <small style={{ "fontSize": "2em" }}>+</small>
                     </Button>
                 )
@@ -134,7 +167,7 @@ const Veggies: React.FC<IVeggieProps> = props => {
             } else {
                 btnType = (
                     <Button variant="info" className="px-3 py-0" style={{ "borderRadius": "50%" }}
-                        onClick={(e: React.MouseEvent<HTMLButtonElement>) => { handleClick(e, veggieId) }}>
+                        onClick={(e: React.MouseEvent<HTMLButtonElement>) => { setAdding(true); handleClick(e, veggieId, veggieName) }}>
                         <small style={{ "fontSize": "2em" }}>+</small>
                     </Button>
                 )
@@ -146,13 +179,9 @@ const Veggies: React.FC<IVeggieProps> = props => {
                     <Row className="d-flex">
                         <Card className="mx-auto col-sm-8 px-0 p-3 mb-2 bg-success shadow p-3">
                             <div className="d-flex flex-row p-3 mb-2 bg-success rounded">
-                                <Card.Img className="rounded border border-info " variant="top" style={{ "width": "10em" }}
-                                    src={veggieImg} />
+                                <Card.Img className="rounded border border-info " variant="top"
+                                    style={{ "width": "10em" }} src={veggieImg} />
                                 <Card.ImgOverlay className="px-2 py-2" style={{ "width": "5em" }}>
-                                    {/* <Button variant="info" className="px-3 py-0" style={{ "borderRadius": "50%" }}
-                                        onClick={(e: React.MouseEvent<HTMLButtonElement>) => { handleClick(e, veggieId) }}>
-                                        <small style={{ "fontSize": "2em" }}>+</small>
-                                    </Button> */}
                                     {btnType}
                                 </Card.ImgOverlay>
                                 <Card.Body className="p-3 mb-2 bg-success text-white">
@@ -162,12 +191,9 @@ const Veggies: React.FC<IVeggieProps> = props => {
                                     </Card.Text>
                                 </Card.Body>
 
-                                <Button className="shadow p-3 mb-5" variant="primary" as={Link} to={`/veggies/${veggieId}`}>Read More</Button>
+                                <Button className="shadow p-3 mb-5" variant="primary"
+                                    as={Link} to={`/veggies/${veggieId}`}>Read More</Button>
                             </div>
-
-                            {/* <Collapse in={open}>
-                            <div id={`collapse-content ${index}`}>VEGGIES</div>
-                        </Collapse> */}
                         </Card>
                     </Row>
                 </Container>
@@ -199,7 +225,7 @@ const Veggies: React.FC<IVeggieProps> = props => {
     return (
 
         <React.Fragment>
-            {added}
+
             <Container>
 
                 <Jumbotron fluid className="shadow rounded">
@@ -220,6 +246,8 @@ const Veggies: React.FC<IVeggieProps> = props => {
                 </Form>
                 {results}
                 {apiArray}
+                {added}
+
 
             </Container>
 
