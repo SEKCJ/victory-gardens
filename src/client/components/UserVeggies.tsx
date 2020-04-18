@@ -6,7 +6,6 @@ import {
 } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { api, Token } from '../Services/apiServices';
-import { IAppProps } from '../App';
 import { IVeggieProps } from '../Services/interfaces';
 
 const Veggies: React.FC<IVeggieProps> = props => {
@@ -160,8 +159,9 @@ const Veggies: React.FC<IVeggieProps> = props => {
             let btnType: JSX.Element = (<div></div>);
             if (savedVegs[veggieId]) {
                 btnType = (
-                    <Button variant="success" className="px-3 py-1 border border-dark" style={{ "borderRadius": "50%" }}>
-                        <small style={{ "fontSize": "1.8em" }}>&#10003;</small>
+                    <Button className="px-3 py-1" variant="warning"
+                        style={{ "borderRadius": "50%"}}>
+                        <small className="text-light"style={{ "fontSize": "1.8em"}}>&#10003;</small>
                     </Button>
                 )
             } else {
