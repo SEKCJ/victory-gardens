@@ -36,8 +36,8 @@ const SavedVeggies: React.FC<IAppProps> = props => {
                     <Alert variant="warning" className="mx-auto col-sm-8 d-flex flex-column">
                         <h6 className="mx-auto">Looks like no vegetables have been added yet...</h6>
                         <p className="mx-auto mb-1">Click For{" "}
-                        <Alert.Link as={Link} to="/choose">Help</Alert.Link>
-                        {" "}on How To Choose!</p>
+                            <Alert.Link as={Link} to="/choose">Help</Alert.Link>
+                            {" "}on How To Choose!</p>
                         <p className="mx-auto mb-0">
                             Click To{" "}
                             <Alert.Link className="mx-auto" as={Link} to="/veggies">View</Alert.Link>
@@ -55,28 +55,32 @@ const SavedVeggies: React.FC<IAppProps> = props => {
                 let veggieSciName = element.sci_name
 
                 return (
-                    <Row key={veggieId} className="d-flex">
-                        <Card className="mx-auto col-sm-8 px-0">
-                            <div className="d-flex flex-row">
-                                <Card.Img variant="top" style={{ "width": "10em" }}
-                                    src={veggieImg} />
-                                <Card.ImgOverlay className="px-0 py-0" style={{ "width": "5em" }}>
-                                    <Button variant="danger" className="px-1 py-1"
-                                        onClick={(e: React.MouseEvent<HTMLButtonElement>) => { handleClick(e, veggieId) }}>
-                                        <small style={{ "fontSize": "0.75em" }}>X</small>
-                                    </Button>
-                                </Card.ImgOverlay>
-                                <Card.Body>
-                                    <Card.Title>{veggieName}</Card.Title>
-                                    <Card.Text>
-                                        {veggieSciName}
-                                    </Card.Text>
-                                </Card.Body>
+                    <Container className=" p-3 mb-5 rounded border-0 " key={veggieId}>
+                        <Row className="d-flex ">
+                            <Card className="mx-auto col-sm-8 px-0 p-3 mb-2 bg-success shadow p-3 mb-5 ">
+                                <div className="d-flex flex-row p-3 mb-2 bg-success rounded">
+                                    <Card.Img className="rounded border border-light " variant="top" style={{ "width": "10em" }}
+                                        src={veggieImg} />
 
-                                <Button variant="primary" as={Link} to={`/veggies/${veggieId}`}>Read More</Button>
-                            </div>
-                        </Card>
-                    </Row>
+                                    <Card.ImgOverlay className="px-2 py-2" style={{ "width": "4em" }}>
+                                        <Button className="px-3 py-0 bg-light border-light text-danger" style={{ "borderRadius": "50%" }}
+                                            onClick={(e: React.MouseEvent<HTMLButtonElement>) => { handleClick(e, veggieId) }}>
+                                            <small style={{ "fontSize": "2em" }}>x</small>
+                                        </Button>
+                                    </Card.ImgOverlay>
+
+                                    <Card.Body className="p-3 mb-2 bg-success text-light">
+                                        <Card.Title>{veggieName}</Card.Title>
+                                        <Card.Text className="text-white">
+                                            {veggieSciName}
+                                        </Card.Text>
+                                    </Card.Body>
+
+                                    <Button className="shadow p-3 mb-5 text-center" variant="primary" as={Link} to={`/veggies/${veggieId}`}>Read More</Button>
+                                </div>
+                            </Card>
+                        </Row>
+                    </Container>
 
                 )
             })
@@ -84,24 +88,22 @@ const SavedVeggies: React.FC<IAppProps> = props => {
             setApiArray(cardMemory)
         }
     }
-    // useEffect [] same as componentDidMount()
+    // useEffect [] same as componentDidMount() 
     useEffect(() => {
         fetchAPI()
     }, [deleted])
 
 
     return (
-        <Container >
-
-<Jumbotron fluid className="shadow rounded">
-                <Container >
-                    <h1>My Garden</h1>
-                </Container>
+        <>
+            <Jumbotron fluid className="shadow rounded text-secondary bg-success text-light">
+                <h1>My Garden</h1>
             </Jumbotron>
-            {deleting}
-            {apiArray}
-
-        </Container>
+            <Container fluid className="bg-succss">
+                {deleting}
+                {apiArray}
+            </Container>
+        </>
     )
 }
 

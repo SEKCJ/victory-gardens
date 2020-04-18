@@ -1,4 +1,4 @@
-// import React, { useState, useEffect } from 'react';
+//   import React, { useState, useEffect } from 'react';
 // import { Card, Container, Jumbotron, Row, Col, Button, Collapse, Form, Accordion, Image} from 'react-bootstrap';
 // import { Link } from 'react-router-dom';
 // import { api } from '../Services/apiServices';
@@ -15,7 +15,7 @@
 //     }
 
 //     let makeGuestChoose = (resObj: any) => {
-//         let guestCardMemory = resObj.map((element: any, index: any) => {
+//         let Memory = resObj.map((element: any, index: any) => {
 //             let veggieId = element.id;
 //     return (
 // <Container className= "d-flex flex-column">
@@ -24,18 +24,23 @@
 
 // <Accordion>
 // <Card style={{ width: '18rem' }}>
-// <Card.Header className="d-flex">
-//   <Accordion.Toggle className="mr-auto" as={Button} variant="link" eventKey="0">Topic</Accordion.Toggle>
-//   <Image src= "https://freesvg.org/img/meltypizza.png" style={{"width":"3em"}}/>
-//   </Card.Header>
-//   < Accordion.Collapse eventKey="0">
-//       <Card.Body>
-//           <Card.Title></Card.Title>
-//            <Card.Subtitle className="mb-2 text-muted">blahblahblah</Card.Subtitle>
-//            <Card.Link as={Link} to={`/veggies/${veggieId}`}>dis a link</Card.Link><br></br>
-//            <Card.Link href="/somepath">dis also a link</Card.Link><br></br>
-//        </Card.Body>
-//   </Accordion.Collapse>
+//   <Card.Header className="d-flex">
+//     <Accordion.Toggle className="mr-auto" as={Button} variant="link" eventKey="0">Pizza</Accordion.Toggle>
+//     <Image src= "https://freesvg.org/img/meltypizza.png" style={{"width":"3em"}}/>
+//     </Card.Header>
+//     <Accordion.Collapse eventKey="0">
+//         <Card.Body>
+//             <Card.Title></Card.Title>
+//              <Card.Subtitle className="mb-2 text-muted">Grow your own pizza toppings!</Card.Subtitle>
+//              <Card.Link as={Link} to={`/veggies/${veggieId}`}>Chili Pepper</Card.Link><br></br>
+//              <Card.Link href="/guestsingleveg">Onions</Card.Link><br></br>
+//              <Card.Link href="/guestsingleveg">Onions (Fall planted)</Card.Link><br></br>
+//              <Card.Link href="/guestsingleveg">Tomato (Large)</Card.Link><br></br>
+//              <Card.Link href="/guestsingleveg">Tomato (Small)</Card.Link><br></br>
+//              <Card.Link href="/guestsingleveg">Spinach</Card.Link><br></br>
+//              <Card.Link href="/guestsingleveg">Pepper</Card.Link>
+//          </Card.Body>
+//     </Accordion.Collapse>
 // </Card>
 // </Accordion>
 
@@ -217,7 +222,7 @@
 //     )
 //  }
 // )
-// setApiArray(guestCardMemory)
+// setApiArray(cardMemory)
 // }
 // // useEffect [] same as componentDidMount()
 // useEffect(() => {
