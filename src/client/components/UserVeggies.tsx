@@ -1,20 +1,41 @@
 
 import React, { useState, useEffect } from 'react';
-import { Card, Container, Jumbotron, Row, Col, Button, Collapse, Form, Alert, Tabs, Tab, Image, OverlayTrigger} from 'react-bootstrap';
+import {
+    Card, Container, Jumbotron, Row, Col, Button, Form, Alert,
+    Spinner, ProgressBar, Modal
+} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { api } from '../Services/apiServices';
-import { IAppProps } from '../App';
+import { api, Token } from '../Services/apiServices';
+import { IVeggieProps } from '../Services/interfaces';
 
-const Veggies: React.FC<IAppProps> = props => {
+const Veggies: React.FC<IVeggieProps> = props => {
 
     const [apiArray, setApiArray] = useState<JSX.Element[]>([]);
     const [results, setResults] = useState<JSX.Element>();
-    const [searchVal, setSearchVal] = useState<string>("");
-    const [btnState, setBtnState] = useState<boolean>(false);
-    const [count, setCount] = useState<number>();
     const [added, setAdded] = useState<JSX.Element>();
-    const [adding, setAdding] = useState<boolean>();
 
+    const [searchVal, setSearchVal] = useState<string>("");
+    const [count, setCount] = useState<number>();
+    const [btnState, setBtnState] = useState<boolean>(false);
+    const [adding, setAdding] = useState<boolean>(false);
+
+    const handleClose = () => {
+        setAdded(<div></div>)
+        setAdding(false)
+    };
+
+    useEffect(() => {
+        setApiArray([
+            <Row className="d-flex mx-auto" key={"0"}>
+                <Col sm="8" className="mx-auto d-flex justify-content-between">
+                    <Spinner animation="grow" variant="dark" />
+                    <h4 className="text-center">Loading...</h4>
+                    <Spinner animation="grow" variant="dark" />
+                </Col>
+            </Row>
+        ])
+
+    }, [])
 
     let fetchAPI = async () => {
         if (searchVal !== "") {
@@ -25,24 +46,62 @@ const Veggies: React.FC<IAppProps> = props => {
             makeCards(response)
         }
     }
-    let handleClick = async (e: React.MouseEvent<HTMLButtonElement>, vegId: number) => {
+
+    let handleClick = async (e: React.MouseEvent<HTMLButtonElement>, vegetableid: number, veggieName: string) => {
         setAdded(
-            <Container className="d-flex mt-4">
-                <Alert variant="warning" className="mx-auto col-sm-6 d-flex flex-column">
-                    Deleting Vegetable...
-                </Alert>
-            </Container>
+            <Modal show={true} animation={true} size="sm"
+                autoFocus={true} restoreFocus={true}>
+                <Modal.Header>
+                    <Modal.Title>Adding {veggieName} to your garden...</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <ProgressBar animated now={100} variant="success" />
+                </Modal.Body>
+            </Modal>
         )
-        // let response = await api(`/api/savedvegetables/${vegId}`, "DELETE", { Token })
-        setAdding(true)
+        let response = await api('/api/savedvegetables', "POST", { Token, vegetableid })
+        setAdded(
+            <Modal show={true} onHide={handleClose} animation={true} keyboard={true}
+                autoFocus={true} restoreFocus={true}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Successfully Added {veggieName} to Your Garden!</Modal.Title>
+                </Modal.Header>
+                <Modal.Body className="d-flex">
+                    <div className="mx-auto">
+                        <Button variant="info" className="mx-2" as={Link} to={`/veggies/${vegetableid}`}>
+                            View Details
+                        </Button>
+                        <Button variant="success" className="mx-2" as={Link} to="/savedveggies">
+                            View In Garden
+                        </Button>
+                    </div>
+                </Modal.Body>
+            </Modal>
+        )
     }
 
-    let findCards = (resObj: any) => {
+    let findCards = async (resObj: any) => {
+        let savedVegs: any = await vgCheck();
         let cardMemory = resObj.map((element: any, index: any) => {
             let veggieImg = element.url;
             let veggieName = element.name;
             let veggieId = element.id;
             let veggieSciName = element.sci_name
+            let btnType: JSX.Element = (<div></div>);
+            if (savedVegs[veggieId]) {
+                btnType = (
+                    <Button variant="success" className="px-3 py-1 border border-dark" style={{ "borderRadius": "50%" }}>
+                        <small style={{ "fontSize": "1.8em" }}>&#10003;</small>
+                    </Button>
+                )
+            } else {
+                btnType = (
+               <Button className="px-3 py-0 bg-light border-light text-success" style={{ "borderRadius": "50%" }}
+                    onClick={(e: React.MouseEvent<HTMLButtonElement>) => { handleClick(e, veggieId, veggieName) }}>
+                    <small style={{ "fontSize": "2em" }}>+</small>
+                </Button> 
+                )
+            }
 
             return (
                 <Container key={veggieId} className=" p-3 mb-5 rounded border-0 ">
@@ -52,10 +111,7 @@ const Veggies: React.FC<IAppProps> = props => {
                                 <Card.Img className="rounded border border-light " variant="top" style={{ "width": "10em" }}
                                     src={veggieImg} />
                                 <Card.ImgOverlay className="px-2 py-2" style={{ "width": "4em" }}>
-                                    <Button className="px-3 py-0 bg-light border-light text-success" style={{ "borderRadius": "50%" }}
-                                        onClick={(e: React.MouseEvent<HTMLButtonElement>) => { handleClick(e, veggieId) }}>
-                                        <small style={{ "fontSize": "2em" }}>+</small>
-                                    </Button>
+                                    {btnType}
                                 </Card.ImgOverlay>
 
                                 <Card.Body className="p-3 mb-2 bg-success text-white ">
@@ -81,12 +137,40 @@ const Veggies: React.FC<IAppProps> = props => {
         )
     }
 
-    let makeCards = (resObj: any) => {
+    let vgCheck = async () => {
+        let check = await api(`/api/savedvegetables/${Token}`);
+        let savedVegs: any = {};
+        check.forEach((element: any) => {
+            savedVegs[element.id] = true;
+        })
+        return savedVegs
+    }
+
+    let makeCards = async (resObj: any) => {
+        let savedVegs: any = await vgCheck()
         let cardMemory = resObj.map((element: any, index: any) => {
             let veggieImg = element.url;
             let veggieName = element.name;
             let veggieId = element.id;
-            let veggieSciName = element.sci_name
+            let veggieSciName = element.sci_name;
+            let btnType: JSX.Element = (<div></div>);
+            if (savedVegs[veggieId]) {
+                btnType = (
+                    <Button className="px-3 py-1" variant="warning"
+                        style={{ "borderRadius": "50%"}}>
+                        <small className="text-light"style={{ "fontSize": "1.8em"}}>&#10003;</small>
+                    </Button>
+                )
+            } else {
+                btnType = (
+                    <Button variant="info" className="px-3 py-0" style={{ "borderRadius": "50%" }}
+                        onClick={(e: React.MouseEvent<HTMLButtonElement>) => { setAdding(true); handleClick(e, veggieId, veggieName) }}>
+                        <small style={{ "fontSize": "2em" }}>+</small>
+                    </Button>
+                )
+            }
+
+            // console.log(savedVegs[veggieId])
             return (
                 <Container className=" p-3 mb-5 rounded border-0 " key={veggieId}>
                     <Row className="d-flex ">
@@ -96,10 +180,7 @@ const Veggies: React.FC<IAppProps> = props => {
                                     src={veggieImg} />
 
                                 <Card.ImgOverlay className="px-2 py-2" style={{ "width": "4em" }}>
-                                    <Button className="px-3 py-0 bg-light border-light text-success" style={{"borderRadius" : "50%"}}
-                                        onClick={(e: React.MouseEvent<HTMLButtonElement>) => { handleClick(e, veggieId) }}>
-                                        <small style={{ "fontSize": "2em" }}>+</small>
-                                    </Button>
+                                    {btnType}
                                 </Card.ImgOverlay>
 
                                 <Card.Body className="p-3 mb-2 bg-success text-light">
@@ -123,7 +204,7 @@ const Veggies: React.FC<IAppProps> = props => {
     useEffect(() => {
         fetchAPI()
 
-    }, [searchVal])
+    }, [searchVal, adding])
 
     useEffect(() => {
         if (count === 0) {
@@ -159,6 +240,7 @@ const Veggies: React.FC<IAppProps> = props => {
             </Form>
             {results}
             {apiArray}
+            {added}
 
         </Container>
         </>

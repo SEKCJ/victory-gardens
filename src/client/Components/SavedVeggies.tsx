@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Container, Jumbotron, Row, Col, Button, Collapse, Alert } from 'react-bootstrap';
+import {
+    Card, Container, Jumbotron, Row, Col, Button,
+    Collapse, Alert, Modal, ProgressBar
+} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { IAppProps } from '../App';
 import { api, Token } from '../Services/apiServices';
@@ -17,13 +20,17 @@ const SavedVeggies: React.FC<IAppProps> = props => {
         setDeleting(<div></div>)
     }
 
-    let handleClick = async (e: React.MouseEvent<HTMLButtonElement>, vegId: number) => {
+    let handleClick = async (e: React.MouseEvent<HTMLButtonElement>, vegId: number, veggieName: string) => {
         setDeleting(
-            <Container className="d-flex mt-4">
-                <Alert variant="warning" className="mx-auto col-sm-6 d-flex flex-column">
-                    Deleting Vegetable...
-                </Alert>
-            </Container>
+            <Modal show={true} animation={true} size="sm"
+                autoFocus={true} restoreFocus={true}>
+                <Modal.Header>
+                    <Modal.Title>Deleting {veggieName}...</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <ProgressBar animated now={100} variant="danger" />
+                </Modal.Body>
+            </Modal>
         )
         let response = await api(`/api/savedvegetables/${vegId}`, "DELETE", { Token })
         setDeleted(true)
@@ -64,7 +71,7 @@ const SavedVeggies: React.FC<IAppProps> = props => {
 
                                     <Card.ImgOverlay className="px-2 py-2" style={{ "width": "4em" }}>
                                         <Button className="px-3 py-0 bg-light border-light text-danger" style={{ "borderRadius": "50%" }}
-                                            onClick={(e: React.MouseEvent<HTMLButtonElement>) => { handleClick(e, veggieId) }}>
+                                            onClick={(e: React.MouseEvent<HTMLButtonElement>) => { handleClick(e, veggieId, veggieName) }}>
                                             <small style={{ "fontSize": "2em" }}>x</small>
                                         </Button>
                                     </Card.ImgOverlay>

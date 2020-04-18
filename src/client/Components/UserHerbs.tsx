@@ -18,11 +18,12 @@ const Herbs: React.FC<IAppProps> = props => {
 
     let fetchAPI = async () => {
         if (searchVal !== "") {
-            let response = await api(`/api/vegetables/name/${searchVal}`)
+            let response = await api(`/api/herbs/name/${searchVal}`)
             findCards(response)
         } else {
-            let response = await api(`/api/vegetables`)
+            let response = await api(`/api/herbs`)
             makeCards(response)
+            console.log(response)
         }
     }
     let handleClick = async (e: React.MouseEvent<HTMLButtonElement>, vegId: number) => {
@@ -33,39 +34,38 @@ const Herbs: React.FC<IAppProps> = props => {
                 </Alert>
             </Container>
         )
-        // let response = await api(`/api/savedvegetables/${vegId}`, "DELETE", { Token })
         setAdding(true)
     }
 
     let findCards = (resObj: any) => {
         let cardMemory = resObj.map((element: any, index: any) => {
-            let veggieImg = element.url;
-            let veggieName = element.name;
-            let veggieId = element.id;
-            let veggieSciName = element.sci_name
+            let herbsImg = element.url;
+            let herbsName = element.name;
+            let herbsId = element.id;
+            let herbsSciName = element.sci_name
 
             return (
-                <Container key={veggieId} className=" p-3 mb-5 rounded border-0 ">
+                <Container key={herbsId} className=" p-3 mb-5 rounded border-0 ">
                     <Row className="d-flex ">
                         <Card className="mx-auto col-sm-8 px-0 p-3 mb-2 bg-success shadow p-3 mb-5 h-50">
                             <div className="d-flex flex-row p-3 mb-2 bg-success rounded">
                                 <Card.Img className="rounded border border-light " variant="top" style={{ "width": "10em" }}
-                                    src={veggieImg} />
+                                    src={herbsImg} />
                                 <Card.ImgOverlay className="px-2 py-2" style={{ "width": "4em" }}>
                                     <Button className="px-3 py-0 bg-light border-light text-success" style={{ "borderRadius": "50%" }}
-                                        onClick={(e: React.MouseEvent<HTMLButtonElement>) => { handleClick(e, veggieId) }}>
+                                        onClick={(e: React.MouseEvent<HTMLButtonElement>) => { handleClick(e, herbsId) }}>
                                         <small style={{ "fontSize": "2em" }}>+</small>
                                     </Button>
                                   </Card.ImgOverlay>
 
                                   <Card.Body className="p-3 mb-2 bg-success text-white ">
-                                    <Card.Title>{veggieName}</Card.Title>
+                                    <Card.Title>{herbsName}</Card.Title>
                                     <Card.Text className="text-white">
-                                        {veggieSciName}
+                                        {herbsSciName}
                                     </Card.Text>
                                 </Card.Body>
 
-                                <Button className="shadow p-3 mb-5 text-center" variant="primary" as={Link} to={`/veggies/${veggieId}`}>Read More</Button>
+                                <Button className="shadow p-3 mb-5 text-center" variant="primary" as={Link} to={`/veggies/${herbsId}`}>Read More</Button>
                             </div>
                         </Card>
                     </Row>
@@ -83,32 +83,32 @@ const Herbs: React.FC<IAppProps> = props => {
 
     let makeCards = (resObj: any) => {
         let cardMemory = resObj.map((element: any, index: any) => {
-            let veggieImg = element.url;
-            let veggieName = element.name;
-            let veggieId = element.id;
-            let veggieSciName = element.sci_name
+            let herbsImg = element.url;
+            let herbsName = element.name;
+            let herbsId = element.id;
+            let herbsSciName = element.sci_name
             return (
-                <Container key={veggieId} className=" p-3 mb-5 rounded border-0 ">
+                <Container key={herbsId} className=" p-3 mb-5 rounded border-0 ">
                     <Row className="d-flex ">
                         <Card className="mx-auto col-sm-8 px-0 p-3 mb-2 bg-success shadow p-3 mb-5 h-50">
                             <div className="d-flex flex-row p-3 mb-2 bg-success rounded">
                                 <Card.Img className="rounded border border-light " variant="top" style={{ "width": "10em" }}
-                                    src={veggieImg} />
+                                    src={herbsImg} />
                                 <Card.ImgOverlay className="px-2 py-2" style={{ "width": "4em" }}>
                                     <Button className="px-3 py-0 bg-light border-light text-success" style={{ "borderRadius": "50%" }}
-                                        onClick={(e: React.MouseEvent<HTMLButtonElement>) => { handleClick(e, veggieId) }}>
+                                        onClick={(e: React.MouseEvent<HTMLButtonElement>) => { handleClick(e, herbsId) }}>
                                         <small style={{ "fontSize": "2em" }}>+</small>
                                     </Button>
                                   </Card.ImgOverlay>
 
                                   <Card.Body className="p-3 mb-2 bg-success text-white ">
-                                    <Card.Title>{veggieName}</Card.Title>
+                                    <Card.Title>{herbsName}</Card.Title>
                                     <Card.Text className="text-white">
-                                        {veggieSciName}
+                                        {herbsSciName}
                                     </Card.Text>
                                 </Card.Body>
 
-                                <Button className="shadow p-3 mb-5 text-center" variant="primary" as={Link} to={`/veggies/${veggieId}`}>Read More</Button>
+                                <Button className="shadow p-3 mb-5 text-center" variant="primary" as={Link} to={`/veggies/${herbsId}`}>Read More</Button>
                             </div>
                         </Card>
                     </Row>
