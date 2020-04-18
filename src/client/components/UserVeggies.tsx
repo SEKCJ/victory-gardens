@@ -96,10 +96,10 @@ const Veggies: React.FC<IVeggieProps> = props => {
                 )
             } else {
                 btnType = (
-               <Button className="px-3 py-0 bg-light border-light text-success" style={{ "borderRadius": "50%" }}
-                    onClick={(e: React.MouseEvent<HTMLButtonElement>) => { handleClick(e, veggieId, veggieName) }}>
-                    <small style={{ "fontSize": "2em" }}>+</small>
-                </Button> 
+                    <Button className="px-3 py-0 bg-light border-light text-success" style={{ "borderRadius": "50%" }}
+                        onClick={(e: React.MouseEvent<HTMLButtonElement>) => { setAdding(true); handleClick(e, veggieId, veggieName) }}>
+                        <small style={{ "fontSize": "2em" }}>+</small>
+                    </Button>
                 )
             }
 
@@ -157,13 +157,13 @@ const Veggies: React.FC<IVeggieProps> = props => {
             if (savedVegs[veggieId]) {
                 btnType = (
                     <Button className="px-3 py-1" variant="warning"
-                        style={{ "borderRadius": "50%"}}>
-                        <small className="text-light"style={{ "fontSize": "1.8em"}}>&#10003;</small>
+                        style={{ "borderRadius": "50%" }}>
+                        <small className="text-light" style={{ "fontSize": "1.8em" }}>&#10003;</small>
                     </Button>
                 )
             } else {
                 btnType = (
-                    <Button variant="info" className="px-3 py-0" style={{ "borderRadius": "50%" }}
+                    <Button className="px-3 py-0 bg-light border-light text-success" style={{ "borderRadius": "50%" }}
                         onClick={(e: React.MouseEvent<HTMLButtonElement>) => { setAdding(true); handleClick(e, veggieId, veggieName) }}>
                         <small style={{ "fontSize": "2em" }}>+</small>
                     </Button>
@@ -210,7 +210,7 @@ const Veggies: React.FC<IVeggieProps> = props => {
         if (count === 0) {
             setApiArray([(
                 <Container className="d-flex mt-4" key="0">
-                    <Alert variant="warning" className="mx-auto col-sm-6 d-flex flex-column"> 
+                    <Alert variant="warning" className="mx-auto col-sm-6 d-flex flex-column">
                         Nothing was found for "{searchVal}"
                     </Alert>
                 </Container>
@@ -221,28 +221,28 @@ const Veggies: React.FC<IVeggieProps> = props => {
 
     return (
         <>
-<Jumbotron fluid className="shadow rounded text-secondary bg-success text-light"> 
+            <Jumbotron fluid className="shadow rounded text-secondary bg-success text-light">
                 <Container >
                     <h1>Veggie Masterlist</h1>
                     <p>
-                        Looking for something inparticular? Come choose from our masterlist of vegetables! 
+                        Looking for something inparticular? Come choose from our masterlist of vegetables!
                         </p>
                 </Container>
             </Jumbotron>
             <Container fluid>
-            <Form className="d-flex">
-                <Form.Group controlId="search-bar" className="mx-auto d-flex col-sm-8">
-                    <Form.Control className="mr-4" type="text" placeholder="Search..." value={searchVal}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchVal(e.target.value)} />
-                    <Button variant="success" className="my-auto"
-                        onClick={() => setBtnState(true)}>Search</Button>
-                </Form.Group>
-            </Form>
-            {results}
-            {apiArray}
-            {added}
+                <Form className="d-flex">
+                    <Form.Group controlId="search-bar" className="mx-auto d-flex col-sm-8">
+                        <Form.Control className="mr-4" type="text" placeholder="Search..." value={searchVal}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchVal(e.target.value)} />
+                        <Button variant="success" className="my-auto"
+                            onClick={() => setBtnState(true)}>Search</Button>
+                    </Form.Group>
+                </Form>
+                {results}
+                {apiArray}
+                {added}
 
-        </Container>
+            </Container>
         </>
     )
 }
