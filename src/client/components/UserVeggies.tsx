@@ -38,13 +38,16 @@ const Veggies: React.FC<IVeggieProps> = props => {
     }, [])
 
     let fetchAPI = async () => {
+        let response = {};
+        let mode: string = "all";
         if (searchVal !== "") {
-            let response = await api(`/api/vegetables/name/${searchVal}`)
-            findCards(response)
+            response = await api(`/api/vegetables/name/${searchVal}`)
+            mode = "query"
         } else {
-            let response = await api(`/api/vegetables`)
-            makeCards(response)
+            response = await api(`/api/vegetables`)
+            mode = "all";
         }
+        makeCards(response, mode)
     }
 
     let handleClick = async (e: React.MouseEvent<HTMLButtonElement>, vegetableid: number, veggieName: string) => {
@@ -80,63 +83,6 @@ const Veggies: React.FC<IVeggieProps> = props => {
         )
     }
 
-    let findCards = async (resObj: any) => {
-        let savedVegs: any = await vgCheck();
-        let cardMemory = resObj.map((element: any, index: any) => {
-            let veggieImg = element.url;
-            let veggieName = element.name;
-            let veggieId = element.id;
-            let veggieSciName = element.sci_name
-            let btnType: JSX.Element = (<div></div>);
-            if (savedVegs[veggieId]) {
-                btnType = (
-                    <Button variant="success" className="px-3 py-1 border border-dark" style={{ "borderRadius": "50%" }}>
-                        <small style={{ "fontSize": "1.8em" }}>&#10003;</small>
-                    </Button>
-                )
-            } else {
-                btnType = (
-                    <Button className="px-3 py-0 bg-light border-light text-success" style={{ "borderRadius": "50%" }}
-                        onClick={(e: React.MouseEvent<HTMLButtonElement>) => { setAdding(true); handleClick(e, veggieId, veggieName) }}>
-                        <small style={{ "fontSize": "2em" }}>+</small>
-                    </Button>
-                )
-            }
-
-            return (
-                <Container key={veggieId} className=" p-3 mb-5 rounded border-0 ">
-                    <Row className="d-flex ">
-                        <Card className="mx-auto col-sm-8 px-0 p-3 mb-2 bg-success shadow p-3 mb-5 h-50">
-                            <div className="d-flex flex-row p-3 mb-2 bg-success rounded">
-                                <Card.Img className="rounded border border-light " variant="top" style={{ "width": "10em" }}
-                                    src={veggieImg} />
-                                <Card.ImgOverlay className="px-2 py-2" style={{ "width": "4em" }}>
-                                    {btnType}
-                                </Card.ImgOverlay>
-
-                                <Card.Body className="p-3 mb-2 bg-success text-white ">
-                                    <Card.Title>{veggieName}</Card.Title>
-                                    <Card.Text className="text-white">
-                                        {veggieSciName}
-                                    </Card.Text>
-                                </Card.Body>
-
-                                <Button className="shadow p-3 mb-5 text-center" variant="primary" as={Link} to={`/veggies/${veggieId}`}>Read More</Button>
-                            </div>
-                        </Card>
-                    </Row>
-                </Container>
-            )
-        })
-        setApiArray(cardMemory)
-        setCount(cardMemory.length)
-        setResults(
-            <Row className="d-flex">
-                <p className="mx-auto col-sm-8 mb-0">Showing {cardMemory.length} results for "{searchVal}"...</p>
-            </Row>
-        )
-    }
-
     let vgCheck = async () => {
         let check = await api(`/api/savedvegetables/${Token}`);
         let savedVegs: any = {};
@@ -146,7 +92,7 @@ const Veggies: React.FC<IVeggieProps> = props => {
         return savedVegs
     }
 
-    let makeCards = async (resObj: any) => {
+    let makeCards = async (resObj: any, mode: string) => {
         let savedVegs: any = await vgCheck()
         let cardMemory = resObj.map((element: any, index: any) => {
             let veggieImg = element.url;
@@ -170,7 +116,6 @@ const Veggies: React.FC<IVeggieProps> = props => {
                 )
             }
 
-            // console.log(savedVegs[veggieId])
             return (
                 <Container className=" p-3 mb-5 rounded border-0 " key={veggieId}>
                     <Row className="d-flex ">
@@ -197,8 +142,18 @@ const Veggies: React.FC<IVeggieProps> = props => {
                 </Container>
             )
         })
+        if (mode === "query") {
+            setCount(cardMemory.length)
+            setResults(
+                <Row className="d-flex">
+                    <p className="mx-auto col-sm-8 mb-0">Showing {cardMemory.length} results for "{searchVal}"...</p>
+                </Row>
+            )
+        } else {
+            setCount(cardMemory.length)
+            setResults(<div></div>)
+        }
         setApiArray(cardMemory)
-        setResults(<div></div>)
     }
 
     useEffect(() => {
