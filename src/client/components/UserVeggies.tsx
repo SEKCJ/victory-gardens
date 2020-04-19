@@ -19,6 +19,8 @@ const Veggies: React.FC<IVeggieProps> = props => {
     const [btnState, setBtnState] = useState<boolean>(false);
     const [adding, setAdding] = useState<boolean>(false);
 
+    const [apiResponse, setApiResponse] = useState<any>();
+
     const handleClose = () => {
         setAdded(<div></div>)
         setAdding(false)
@@ -37,18 +39,33 @@ const Veggies: React.FC<IVeggieProps> = props => {
 
     }, [])
 
-    let fetchAPI = async () => {
-        let response = {};
-        let mode: string = "all";
+    useEffect(() => {
         if (searchVal !== "") {
-            response = await api(`/api/vegetables/name/${searchVal}`)
-            mode = "query"
+            let matchCases: any = []
+            apiResponse.forEach((element: any, index: number) => {
+                if (element.name.toLowerCase().startsWith(searchVal.toLowerCase())) {
+                    matchCases.push(element)
+                }
+            })
+            setCount(matchCases.length)
+            setResults(
+                <Row className="d-flex">
+                    <p className="mx-auto col-sm-8 mb-0">Showing {matchCases.length} results for "{searchVal}"...</p>
+                </Row>
+            )
+            makeCards(matchCases)
         } else {
-            response = await api(`/api/vegetables`)
-            mode = "all";
+            if (apiResponse) {
+                setCount(apiResponse.length)
+                setResults(<div></div>)
+                makeCards(apiResponse)
+            }
         }
-        makeCards(response, mode)
-    }
+    }, [searchVal])
+
+    useEffect(() => {
+        fetchAPI()
+    }, [adding])
 
     let handleClick = async (e: React.MouseEvent<HTMLButtonElement>, vegetableid: number, veggieName: string) => {
         setAdded(
@@ -83,6 +100,12 @@ const Veggies: React.FC<IVeggieProps> = props => {
         )
     }
 
+    let fetchAPI = async () => {
+        let response = await api(`/api/vegetables`)
+        setApiResponse(response);
+        makeCards(response)
+    }
+
     let vgCheck = async () => {
         let check = await api(`/api/savedvegetables/${Token}`);
         let savedVegs: any = {};
@@ -92,8 +115,9 @@ const Veggies: React.FC<IVeggieProps> = props => {
         return savedVegs
     }
 
-    let makeCards = async (resObj: any, mode: string) => {
+    let makeCards = async (resObj: any) => {
         let savedVegs: any = await vgCheck()
+
         let cardMemory = resObj.map((element: any, index: any) => {
             let veggieImg = element.url;
             let veggieName = element.name;
@@ -142,24 +166,9 @@ const Veggies: React.FC<IVeggieProps> = props => {
                 </Container>
             )
         })
-        if (mode === "query") {
-            setCount(cardMemory.length)
-            setResults(
-                <Row className="d-flex">
-                    <p className="mx-auto col-sm-8 mb-0">Showing {cardMemory.length} results for "{searchVal}"...</p>
-                </Row>
-            )
-        } else {
-            setCount(cardMemory.length)
-            setResults(<div></div>)
-        }
-        setApiArray(cardMemory)
+        setApiArray(cardMemory);
     }
 
-    useEffect(() => {
-        fetchAPI()
-
-    }, [searchVal, adding])
 
     useEffect(() => {
         if (count === 0) {
