@@ -428,7 +428,6 @@ const HelpChoose: React.FC<IAppProps> = props => {
                     <br></br>
                 </React.Fragment>
             )
-
             setHerbsContent(<div></div>)
         } else if (k === "herbs") {
             setHerbsContent(

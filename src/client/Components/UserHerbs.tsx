@@ -1,20 +1,28 @@
 
 import React, { useState, useEffect } from 'react';
-import { Card, Container, Jumbotron, Row, Col, Button, Collapse, Form, Alert, Tabs, Tab, Image } from 'react-bootstrap';
+import {
+    Card, Container, Jumbotron, Row, Col, Modal, ProgressBar,
+    Button, Collapse, Form, Alert, Tabs, Tab, Image
+} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { api } from '../Services/apiServices';
+import { api, Token } from '../Services/apiServices';
 import { IAppProps } from '../App';
 
 const Herbs: React.FC<IAppProps> = props => {
 
     const [apiArray, setApiArray] = useState<JSX.Element[]>([]);
     const [results, setResults] = useState<JSX.Element>();
-    const [searchVal, setSearchVal] = useState<string>("");
-    const [btnState, setBtnState] = useState<boolean>(false);
-    const [count, setCount] = useState<number>();
     const [added, setAdded] = useState<JSX.Element>();
+
+    const [searchVal, setSearchVal] = useState<string>("");
+    const [count, setCount] = useState<number>();
+    const [btnState, setBtnState] = useState<boolean>(false);
     const [adding, setAdding] = useState<boolean>();
 
+    const handleClose = () => {
+        setAdded(<div></div>)
+        setAdding(false)
+    };
 
     let fetchAPI = async () => {
         if (searchVal !== "") {
@@ -23,27 +31,66 @@ const Herbs: React.FC<IAppProps> = props => {
         } else {
             let response = await api(`/api/herbs`)
             makeCards(response)
-            console.log(response)
         }
     }
-    let handleClick = async (e: React.MouseEvent<HTMLButtonElement>, vegId: number) => {
+
+    let handleClick = async (e: React.MouseEvent<HTMLButtonElement>, herbsId: number, herbsName: string) => {
         setAdded(
-            <Container className="d-flex mt-4">
-                <Alert variant="warning" className="mx-auto col-sm-6 d-flex flex-column">
-                    Deleting Vegetable...
-                </Alert>
-            </Container>
+            <Modal show={true} animation={true} size="sm"
+                autoFocus={true} restoreFocus={true}>
+                <Modal.Header>
+                    <Modal.Title>Adding {herbsName} to your garden...</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <ProgressBar animated now={100} variant="success" />
+                </Modal.Body>
+            </Modal>
         )
-        setAdding(true)
+        let response = await api('/api/savedherbs', "POST", { Token, herbsId })
+        setAdded(
+            <Modal show={true} onHide={handleClose} animation={true} keyboard={true}
+                autoFocus={true} restoreFocus={true}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Successfully Added to Your Garden!</Modal.Title>
+                </Modal.Header>
+                <Modal.Body className="d-flex">
+                    <div className="mx-auto">
+                        <Button variant="info" className="mx-2" as={Link} to={`/herbs/${herbsId}`}>
+                            View Details
+                        </Button>
+                        <Button variant="success" className="mx-2" as={Link} to="/savedveggies">
+                            View In Garden
+                        </Button>
+                    </div>
+                </Modal.Body>
+            </Modal>
+        )
     }
 
-    
-    let findCards = (resObj: any) => {
+
+    let findCards = async (resObj: any) => {
+        let savedHerbs: any = await herbCheck();
         let cardMemory = resObj.map((element: any, index: any) => {
             let herbsImg = element.url;
             let herbsName = element.name;
             let herbsId = element.id;
-            let herbsSciName = element.sci_name
+            let herbsSciName = element.sci_name;
+            let btnType: JSX.Element = (<div></div>);
+            if (savedHerbs[herbsId]) {
+                btnType = (
+                    <Button className="px-3 py-1" variant="warning"
+                        style={{ "borderRadius": "50%" }}>
+                        <small className="text-light" style={{ "fontSize": "1.8em" }}>&#10003;</small>
+                    </Button>
+                )
+            } else {
+                btnType = (
+                    <Button className="px-3 py-0 bg-light border-light text-success" style={{ "borderRadius": "50%" }}
+                        onClick={(e: React.MouseEvent<HTMLButtonElement>) => { setAdding(true); handleClick(e, herbsId, herbsName) }}>
+                        <small style={{ "fontSize": "2em" }}>+</small>
+                    </Button>
+                )
+            }
 
             return (
                 <Container key={herbsId} className=" p-3 mb-5 rounded border-0 ">
@@ -53,13 +100,10 @@ const Herbs: React.FC<IAppProps> = props => {
                                 <Card.Img className="rounded border border-light " variant="top" style={{ "width": "10em" }}
                                     src={herbsImg} />
                                 <Card.ImgOverlay className="px-2 py-2" style={{ "width": "4em" }}>
-                                    <Button className="px-3 py-0 bg-light border-light text-success" style={{ "borderRadius": "50%" }}
-                                        onClick={(e: React.MouseEvent<HTMLButtonElement>) => { handleClick(e, herbsId) }}>
-                                        <small style={{ "fontSize": "2em" }}>+</small>
-                                    </Button>
-                                  </Card.ImgOverlay>
+                                    {btnType}
+                                </Card.ImgOverlay>
 
-                                  <Card.Body className="p-3 mb-2 bg-success text-white ">
+                                <Card.Body className="p-3 mb-2 bg-success text-white ">
                                     <Card.Title>{herbsName}</Card.Title>
                                     <Card.Text className="text-white">
                                         {herbsSciName}
@@ -82,12 +126,38 @@ const Herbs: React.FC<IAppProps> = props => {
         )
     }
 
-    let makeCards = (resObj: any) => {
+    let herbCheck = async () => {
+        let check = await api(`/api/savedherbs/${Token}`);
+        let savedHerbs: any = {};
+        check.forEach((element: any) => {
+            savedHerbs[element.id] = true;
+        })
+        return savedHerbs
+    }
+
+    let makeCards = async (resObj: any) => {
+        let savedHerbs: any = await herbCheck();
         let cardMemory = resObj.map((element: any, index: any) => {
             let herbsImg = element.url;
             let herbsName = element.name;
             let herbsId = element.id;
             let herbsSciName = element.sci_name
+            let btnType: JSX.Element = (<div></div>);
+            if (savedHerbs[herbsId]) {
+                btnType = (
+                    <Button className="px-3 py-1" variant="warning"
+                        style={{ "borderRadius": "50%" }}>
+                        <small className="text-light" style={{ "fontSize": "1.8em" }}>&#10003;</small>
+                    </Button>
+                )
+            } else {
+                btnType = (
+                    <Button className="px-3 py-0 bg-light border-light text-success" style={{ "borderRadius": "50%" }}
+                        onClick={(e: React.MouseEvent<HTMLButtonElement>) => { setAdding(true); handleClick(e, herbsId, herbsName) }}>
+                        <small style={{ "fontSize": "2em" }}>+</small>
+                    </Button>
+                )
+            }
             return (
                 <Container key={herbsId} className=" p-3 mb-5 rounded border-0 ">
                     <Row className="d-flex ">
@@ -96,13 +166,10 @@ const Herbs: React.FC<IAppProps> = props => {
                                 <Card.Img className="rounded border border-light " variant="top" style={{ "width": "10em" }}
                                     src={herbsImg} />
                                 <Card.ImgOverlay className="px-2 py-2" style={{ "width": "4em" }}>
-                                    <Button className="px-3 py-0 bg-light border-light text-success" style={{ "borderRadius": "50%" }}
-                                        onClick={(e: React.MouseEvent<HTMLButtonElement>) => { handleClick(e, herbsId) }}>
-                                        <small style={{ "fontSize": "2em" }}>+</small>
-                                    </Button>
-                                  </Card.ImgOverlay>
+                                    {btnType}
+                                </Card.ImgOverlay>
 
-                                  <Card.Body className="p-3 mb-2 bg-success text-white ">
+                                <Card.Body className="p-3 mb-2 bg-success text-white ">
                                     <Card.Title>{herbsName}</Card.Title>
                                     <Card.Text className="text-white">
                                         {herbsSciName}
@@ -122,7 +189,7 @@ const Herbs: React.FC<IAppProps> = props => {
     useEffect(() => {
         fetchAPI()
 
-    }, [searchVal])
+    }, [searchVal, adding])
 
     useEffect(() => {
         if (count === 0) {
@@ -144,7 +211,7 @@ const Herbs: React.FC<IAppProps> = props => {
                     <h1>Herb Masterlist</h1>
                     <p>
                         Looking for something inparticular? Come choose from our masterlist of Herbs!
-                        </p>
+                    </p>
                 </Container>
             </Jumbotron>
             <Container fluid>
@@ -158,8 +225,9 @@ const Herbs: React.FC<IAppProps> = props => {
                 </Form>
                 {results}
                 {apiArray}
-         </Container>
-     </>
+                {added}
+            </Container>
+        </>
     )
 }
 

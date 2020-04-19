@@ -226,7 +226,7 @@ const Veggies: React.FC<IVeggieProps> = props => {
                     <h1>Veggie Masterlist</h1>
                     <p>
                         Looking for something inparticular? Come choose from our masterlist of vegetables!
-                        </p>
+                    </p>
                 </Container>
             </Jumbotron>
             <Container fluid>
