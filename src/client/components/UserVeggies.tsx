@@ -181,7 +181,7 @@ const Veggies: React.FC<IVeggieProps> = props => {
     }, [btnState])
 
     return (
-        <>
+        <React.Fragment>
             <Jumbotron fluid className="shadow rounded text-secondary bg-success text-light">
                 <Container >
                     <h1>Veggie Masterlist</h1>
@@ -204,7 +204,7 @@ const Veggies: React.FC<IVeggieProps> = props => {
                 {added}
 
             </Container>
-        </>
+        </React.Fragment>
     )
 }
 

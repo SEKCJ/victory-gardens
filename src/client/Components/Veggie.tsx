@@ -139,7 +139,7 @@ const Veggie: React.FC<IVeggieProps> = (props: any) => {
                     <Card className="mx-auto my-4 bg-secondary shadow-lg p-3 mb-5 border-success mb-3 text-info" style={{ width: '50rem' }}>
 
                         <div className="shadow-lg rounded-pill text-center bg-primary">
-                            <Card.Title className="mx-auto text-info">
+                            <Card.Title className="mx-auto text-light">
                                 <br></br>
                                 <h1>{vgObj.vgName}</h1>
                                 <p>{vgObj.vgSciName}</p>
@@ -156,7 +156,7 @@ const Veggie: React.FC<IVeggieProps> = (props: any) => {
                             <Col>
                                 <Accordion >
                                     <Card className="rounded-lg">
-                                        <Card.Header className="bg-primary d-flex">
+                                        <Card.Header className="d-flex" style={{"backgroundColor": "#FFDAB5"}}>
                                             <Accordion.Toggle as={Button} variant="link"
                                                 className="mx-auto text-info" eventKey="0">
                                                 Soil
@@ -171,7 +171,7 @@ const Veggie: React.FC<IVeggieProps> = (props: any) => {
                                         </Accordion.Collapse>
                                     </Card>
                                     <Card className="rounded-lg">
-                                        <Card.Header className="bg-primary d-flex">
+                                        <Card.Header className="d-flex" style={{"backgroundColor": "#FFDAB5"}}>
                                             <Accordion.Toggle as={Button} variant="link"
                                                 className="mx-auto text-info" eventKey="1">
                                                 Position
@@ -182,7 +182,7 @@ const Veggie: React.FC<IVeggieProps> = (props: any) => {
                                         </Accordion.Collapse>
                                     </Card>
                                     <Card className="rounded-lg">
-                                        <Card.Header className="bg-primary d-flex">
+                                        <Card.Header className="d-flex" style={{"backgroundColor": "#FFDAB5"}}>
                                             <Accordion.Toggle as={Button} variant="link"
                                                 className="mx-auto text-info" eventKey="2">
                                                 Frost Tolerance
@@ -193,7 +193,7 @@ const Veggie: React.FC<IVeggieProps> = (props: any) => {
                                         </Accordion.Collapse>
                                     </Card>
                                     <Card className="rounded-lg">
-                                        <Card.Header className="bg-primary d-flex">
+                                        <Card.Header className="d-flex" style={{"backgroundColor": "#FFDAB5"}}>
                                             <Accordion.Toggle as={Button} variant="link"
                                                 className="mx-auto text-info" eventKey="3">
                                                 Feeding
@@ -214,7 +214,7 @@ const Veggie: React.FC<IVeggieProps> = (props: any) => {
                                 <Accordion>
 
                                     <Card className="rounded-lg">
-                                        <Card.Header className="bg-primary d-flex">
+                                        <Card.Header className="d-flex" style={{"backgroundColor": "#FFDAB5"}}>
                                             <Accordion.Toggle as={Button} variant="link"
                                                 className="mx-auto text-info" eventKey="4">
                                                 Companions
@@ -225,7 +225,7 @@ const Veggie: React.FC<IVeggieProps> = (props: any) => {
                                         </Accordion.Collapse>
                                     </Card>
                                     <Card className="rounded-lg">
-                                        <Card.Header className="bg-primary d-flex">
+                                        <Card.Header className="d-flex" style={{"backgroundColor": "#FFDAB5"}}>
                                             <Accordion.Toggle as={Button} variant="link"
                                                 className="mx-auto text-info" eventKey="5">
                                                 Bad Companions
@@ -236,7 +236,7 @@ const Veggie: React.FC<IVeggieProps> = (props: any) => {
                                         </Accordion.Collapse>
                                     </Card>
                                     <Card className="rounded-lg">
-                                        <Card.Header className="bg-primary d-flex">
+                                        <Card.Header className="d-flex" style={{"backgroundColor": "#FFDAB5"}}>
                                             <Accordion.Toggle as={Button} variant="link"
                                                 className="mx-auto text-info" eventKey="6">
                                                 Spacing
@@ -250,7 +250,7 @@ const Veggie: React.FC<IVeggieProps> = (props: any) => {
                                         </Accordion.Collapse>
                                     </Card>
                                     <Card className="rounded-lg">
-                                        <Card.Header className="bg-primary d-flex">
+                                        <Card.Header className="d-flex" style={{"backgroundColor": "#FFDAB5"}}>
                                             <Accordion.Toggle as={Button} variant="link"
                                                 className="mx-auto text-info" eventKey="7">
                                                 Sow and Plant
@@ -261,7 +261,7 @@ const Veggie: React.FC<IVeggieProps> = (props: any) => {
                                         </Accordion.Collapse>
                                     </Card>
                                     <Card className="rounded-lg">
-                                        <Card.Header className="bg-primary d-flex">
+                                        <Card.Header className="d-flex" style={{"backgroundColor": "#FFDAB5"}}>
                                             <Accordion.Toggle as={Button} variant="link"
                                                 className="mx-auto text-info" eventKey="8">
                                                 Planting Months
@@ -279,7 +279,7 @@ const Veggie: React.FC<IVeggieProps> = (props: any) => {
 
 
                                     <Card className="rounded-lg">
-                                        <Card.Header className="bg-primary d-flex">
+                                        <Card.Header className="d-flex" style={{"backgroundColor": "#FFDAB5"}}>
                                             <Accordion.Toggle as={Button} variant="link"
                                                 className="mx-auto text-info" eventKey="9">
                                                 Harvesting Months
@@ -294,7 +294,7 @@ const Veggie: React.FC<IVeggieProps> = (props: any) => {
                                     </Card>
 
                                     <Card className="rounded-lg">
-                                        <Card.Header className="bg-primary d-flex">
+                                        <Card.Header className="d-flex" style={{"backgroundColor": "#FFDAB5"}}>
                                             <Accordion.Toggle as={Button} variant="link"
                                                 className="mx-auto text-info" eventKey="10">
                                                 Notes
@@ -306,7 +306,7 @@ const Veggie: React.FC<IVeggieProps> = (props: any) => {
                                     </Card>
 
                                     <Card className="rounded-lg">
-                                        <Card.Header className="bg-primary d-flex">
+                                        <Card.Header className="d-flex" style={{"backgroundColor": "#FFDAB5"}}>
                                             <Accordion.Toggle as={Button} variant="link"
                                                 className="mx-auto text-info" eventKey="11">
                                                 Harvesting
@@ -320,7 +320,7 @@ const Veggie: React.FC<IVeggieProps> = (props: any) => {
                                         </Accordion.Collapse>
                                     </Card>
                                     <Card className="rounded-lg">
-                                        <Card.Header className="bg-primary d-flex">
+                                        <Card.Header className="d-flex" style={{"backgroundColor": "#FFDAB5"}}>
                                             <Accordion.Toggle as={Button} variant="link"
                                                 className="mx-auto text-info" eventKey="12">
                                                 Troubleshooting
@@ -338,7 +338,7 @@ const Veggie: React.FC<IVeggieProps> = (props: any) => {
                             </Col>
                         </Row>
                         <Row>
-                            <Button as={Link} to="/veggies" variant="link">
+                            <Button as={Link} to="/veggies" variant="link" className="text-light">
                                 Go Back To List
                             </Button>
                         </Row>
