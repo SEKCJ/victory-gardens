@@ -20,6 +20,7 @@ const Veggies: React.FC<IVeggieProps> = props => {
     const [adding, setAdding] = useState<boolean>(false);
 
     const [apiResponse, setApiResponse] = useState<any>();
+    const [savedResponse, setSavedResponse] = useState<any>();
 
     const handleClose = () => {
         setAdded(<div></div>)
@@ -53,18 +54,19 @@ const Veggies: React.FC<IVeggieProps> = props => {
                     <p className="mx-auto col-sm-8 mb-0">Showing {matchCases.length} results for "{searchVal}"...</p>
                 </Row>
             )
-            makeCards(matchCases)
+            makeCards(matchCases, savedResponse)
         } else {
             if (apiResponse) {
                 setCount(apiResponse.length)
                 setResults(<div></div>)
-                makeCards(apiResponse)
+                makeCards(apiResponse, savedResponse)
             }
         }
     }, [searchVal])
 
     useEffect(() => {
         fetchAPI()
+
     }, [adding])
 
     let handleClick = async (e: React.MouseEvent<HTMLButtonElement>, vegetableid: number, veggieName: string) => {
@@ -102,22 +104,17 @@ const Veggies: React.FC<IVeggieProps> = props => {
 
     let fetchAPI = async () => {
         let response = await api(`/api/vegetables`)
-        setApiResponse(response);
-        makeCards(response)
-    }
-
-    let vgCheck = async () => {
         let check = await api(`/api/savedvegetables/${Token}`);
         let savedVegs: any = {};
         check.forEach((element: any) => {
             savedVegs[element.id] = true;
         })
-        return savedVegs
+        setApiResponse(response);
+        setSavedResponse(savedVegs)
+        makeCards(response, savedVegs)
     }
 
-    let makeCards = async (resObj: any) => {
-        let savedVegs: any = await vgCheck()
-
+    let makeCards = (resObj: any, savedVegs: any) => {
         let cardMemory = resObj.map((element: any, index: any) => {
             let veggieImg = element.url;
             let veggieName = element.name;
