@@ -6,7 +6,7 @@ import helpchooseRouter from './helpchoose';
 import herbsRouter from './herbs';
 import savedherbsRouter from './savedherbs';
 import chooseherbsRouter from './chooseherbs';
-
+import avatarRouter from './avatar';
 
 import { tokenCheckpoint } from '../Auth/authCheckpoint';
 
@@ -18,6 +18,7 @@ router.use('/savedvegetables', savedvegetablesRouter);
 router.use('/helpchoose', helpchooseRouter);
 router.use('/herbs', herbsRouter);
 router.use('/savedherbs', savedherbsRouter);
-router.use('/chooseherbs', chooseherbsRouter)
+router.use('/chooseherbs', chooseherbsRouter);
+router.use('/avatar', avatarRouter);
 
 export default router;
