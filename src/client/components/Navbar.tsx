@@ -41,6 +41,7 @@ const Navigate: React.FC<IAppProps> = () => {
 
             <Nav className="mr-5">
                 <Nav.Link as={Link} to="/myprofile">My Profile</Nav.Link>
+        <Nav.Link as={Link} to="/communitygarden">Community Garden</Nav.Link>
         <Nav.Link onClick={(e: React.MouseEvent) =>  handleClick(e)}>Log Out</Nav.Link>
         </Nav></Navbar>
     )
