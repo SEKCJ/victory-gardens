@@ -17,8 +17,8 @@ router.get("/:id?", async (req, res) => {
     }
   } else {
     try {
-      let avatar = await DB.Avatar.allAvatars();
-      res.json(avatar);
+      let avatars = await DB.Avatar.allAvatars();
+      res.json(avatars);
     } catch (e) {
       console.log(e);
       res.sendStatus(500);
@@ -28,7 +28,7 @@ router.get("/:id?", async (req, res) => {
 
 router.get("/myavatar/:token", async (req, res) => {
   try {
-    let token = req.params.token; // lowercase bc params/myavatar/:token is also lc (CM)
+    let token = req.params.token; // lowercase bc params/myavatar/:token is also lowercase (CM)
     let [result]: any = (await DB.Tokens.findUserIdByToken(token))[0];
     let theuserid = parseInt(result.userid, 10);
     res.json(await DB.Users.getAvatar(theuserid))
@@ -51,7 +51,7 @@ router.post("/", isAdmin, async (req, res) => {
 // updates user's table for users to select an avatar
 router.put("/select", hasRole, async (req, res) => {
   try {
-    let avatarid = req.body.avatarid;
+    let avatarid = parseInt(req.body.avatarid, 10);
     let token = req.body.Token;
     let [result]: any = (await DB.Tokens.findUserIdByToken(token))[0];
     let theuserid = parseInt(result.userid, 10);

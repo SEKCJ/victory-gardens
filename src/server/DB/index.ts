@@ -10,6 +10,7 @@ import Herbs from './Queries/herbs';
 import SavedHerbs from './Queries/savedherbs'
 import HelpChoose from './Queries/helpchoose';
 import ChooseHerbs from './Queries/chooseherbs'
+import Post from './Queries/post';
 
 const pool = mysql.createPool(config.mysql);
 
@@ -40,5 +41,6 @@ export default {
   HelpChoose,
   Herbs,
   SavedHerbs,
-  ChooseHerbs
+  ChooseHerbs,
+  Post
 };
