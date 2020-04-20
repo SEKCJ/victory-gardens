@@ -2,7 +2,7 @@ import * as express from "express";
 
 import DB from "../DB";
 import { IVegetables } from "../Models/index";
-import { hasRole, isAdmin } from '../Auth/authCheckpoint';
+import { hasRole, isAdmin } from "../Auth/authCheckpoint";
 
 const router = express.Router();
 
@@ -30,14 +30,15 @@ router.get("/:id?", async (req, res) => {
   }
 });
 
-router.get('/name/:vgName', async (req, res) => {
+router.get("/name/:vgName", async (req, res) => {
   try {
     res.json(await DB.Vegetables.vegByName(req.params.vgName));
   } catch (error) {
     console.log(error);
     res.send(500).json("could not be found");
   }
-})
+});
+
 // POST a new vegetable
 router.post("/", isAdmin, async (req: { body: IVegetables }, res) => {
   let vegsObj = {
@@ -57,7 +58,6 @@ router.post("/", isAdmin, async (req: { body: IVegetables }, res) => {
     harvesting: req.body.harvesting,
     troubleshooting: req.body.troubleshooting,
   };
-
   try {
     res.json(await DB.Vegetables.postVeg(vegsObj));
   } catch (e) {
@@ -67,32 +67,36 @@ router.post("/", isAdmin, async (req: { body: IVegetables }, res) => {
 });
 
 // PUT (edit) an existing vegetable
-router.put("/:id?", isAdmin, async (req: { body: IVegetables; params: any }, res) => {
-  let id = parseInt(req.params.id, 10);
-  let vegsObj = {
-    name: req.body.name,
-    sci_name: req.body.sci_name,
-    soil: req.body.soil,
-    position: req.body.position,
-    frost_tolerant: req.body.frost_tolerant,
-    feeding: req.body.feeding,
-    companions: req.body.companions,
-    bad_companions: req.body.bad_companions,
-    spacing: req.body.spacing,
-    sow_and_plant: req.body.sow_and_plant,
-    planting_months: req.body.planting_months,
-    harvest_months: req.body.harvest_months,
-    notes: req.body.notes,
-    harvesting: req.body.harvesting,
-    troubleshooting: req.body.troubleshooting,
-  };
-  try {
-    res.json(await DB.Vegetables.putVeg(vegsObj, id));
-  } catch (e) {
-    console.log(e);
-    res.sendStatus(500);
+router.put(
+  "/:id?",
+  isAdmin,
+  async (req: { body: IVegetables; params: any }, res) => {
+    let id = parseInt(req.params.id, 10);
+    let vegsObj = {
+      name: req.body.name,
+      sci_name: req.body.sci_name,
+      soil: req.body.soil,
+      position: req.body.position,
+      frost_tolerant: req.body.frost_tolerant,
+      feeding: req.body.feeding,
+      companions: req.body.companions,
+      bad_companions: req.body.bad_companions,
+      spacing: req.body.spacing,
+      sow_and_plant: req.body.sow_and_plant,
+      planting_months: req.body.planting_months,
+      harvest_months: req.body.harvest_months,
+      notes: req.body.notes,
+      harvesting: req.body.harvesting,
+      troubleshooting: req.body.troubleshooting,
+    };
+    try {
+      res.json(await DB.Vegetables.putVeg(vegsObj, id));
+    } catch (e) {
+      console.log(e);
+      res.sendStatus(500);
+    }
   }
-});
+);
 
 // DELETE an existing vegetable
 router.delete("/:id", isAdmin, async (req, res) => {

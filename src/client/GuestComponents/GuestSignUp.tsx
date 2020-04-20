@@ -56,9 +56,9 @@ const UserSignUp: React.FC<ILoginProps> = (props) => {
         if (password !== "" && email !== "" && confirmPass !== ""
           && firstName !== "" && lastName !== "" && userName !== "") {
           if (email.indexOf("@") !== -1) {
-            setLoading(false)
             let results = await api('/auth/register', "POST",
               { email, firstName, lastName, password, userName });
+            
             setToken(results.token);
             props.history.push("/")
             window.location.reload()

@@ -3,7 +3,8 @@ export interface IUsers {
     email: string,
     firstname: string,
     lastname: string,
-    password: string
+    password: string,
+    avatarid?: number
 }
 
 export interface ITokens {

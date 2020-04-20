@@ -3,6 +3,7 @@ import config from "../config";
 
 import Tokens from './Queries/accesstokens';
 import Users from './Queries/users';
+import Avatar from './Queries/avatar';
 import Vegetables from './Queries/vegetables';
 import SavedVegetables from './Queries/savedvegetables';
 import Herbs from './Queries/herbs';
@@ -33,6 +34,7 @@ export const Query = <T = any>(query: string, values?: any) => {
 export default {
   Tokens,
   Users,
+  Avatar,
   Vegetables,
   SavedVegetables,
   HelpChoose,

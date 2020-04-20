@@ -1,6 +1,6 @@
 import * as express from "express";
 
-import { hasRole, isAdmin } from '../Auth/authCheckpoint';
+import { hasRole, isAdmin } from "../Auth/authCheckpoint";
 import DB from "../DB";
 import { ITokens } from "../Models";
 
@@ -20,28 +20,28 @@ router.get("/:token", hasRole, async (req, res) => {
       res.sendStatus(500);
     }
   } else {
-    res.sendStatus(500)
+    res.sendStatus(500);
   }
 });
 
-router.post('/vegetableCheck', hasRole, async (req, res) => {
+router.post("/vegetableCheck", hasRole, async (req, res) => {
   let token = req.body.Token;
   let vegetableid = parseInt(req.body.vegetableid, 10);
   try {
     let [result]: any = (await DB.Tokens.findUserIdByToken(token))[0];
     let theuserid = parseInt(result.userid, 10);
-    res.json((await DB.SavedVegetables.vegCheck(theuserid, vegetableid))[0])
+    res.json((await DB.SavedVegetables.vegCheck(theuserid, vegetableid))[0]);
   } catch (error) {
     console.log(error);
     res.status(500).json("check token and vegetable Id");
   }
-})
+});
 
 // POST a new vegetable to Saved Veg
 router.post("/", hasRole, async (req, res) => {
   let token = req.body.Token;
   let vegetableid = parseInt(req.body.vegetableid, 10);
-  console.log(token ,vegetableid);
+  console.log(token, vegetableid);
   try {
     let [result]: any = (await DB.Tokens.findUserIdByToken(token))[0];
     let theuserid = parseInt(result.userid, 10);
