@@ -69,6 +69,18 @@ const Veggies: React.FC<IVeggieProps> = props => {
 
     }, [adding])
 
+    let fetchAPI = async () => {
+        let response = await api(`/api/vegetables`)
+        let check = await api(`/api/savedvegetables/${Token}`);
+        let savedVegs: any = {};
+        check.forEach((element: any) => {
+            savedVegs[element.id] = true;
+        })
+        setApiResponse(response);
+        setSavedResponse(savedVegs)
+        makeCards(response, savedVegs)
+    }
+
     let handleClick = async (e: React.MouseEvent<HTMLButtonElement>, vegetableid: number, veggieName: string) => {
         setAdded(
             <Modal show={true} animation={true} size="sm"
@@ -102,17 +114,6 @@ const Veggies: React.FC<IVeggieProps> = props => {
         )
     }
 
-    let fetchAPI = async () => {
-        let response = await api(`/api/vegetables`)
-        let check = await api(`/api/savedvegetables/${Token}`);
-        let savedVegs: any = {};
-        check.forEach((element: any) => {
-            savedVegs[element.id] = true;
-        })
-        setApiResponse(response);
-        setSavedResponse(savedVegs)
-        makeCards(response, savedVegs)
-    }
 
     let makeCards = (resObj: any, savedVegs: any) => {
         let cardMemory = resObj.map((element: any, index: any) => {
@@ -138,29 +139,29 @@ const Veggies: React.FC<IVeggieProps> = props => {
             }
 
             return (
-                <Container className=" p-3 mb-5 rounded border-0 " key={veggieId}>
-                    <Row className="d-flex ">
-                        <Card className="mx-auto col-sm-8 px-0 p-3 mb-2 bg-success shadow p-3 mb-5 ">
-                            <div className="d-flex flex-row p-3 mb-2 bg-success rounded">
-                                <Card.Img className="rounded border border-light " variant="top" style={{ "width": "10em" }}
-                                    src={veggieImg} />
+                <Container className=" p-3 mb-1 rounded border-0 " key={veggieId}>
+                <Row className="d-flex ">
+                    <Card className="mx-auto col-sm-8 px-0 p-3 bg-success shadow p-3 mb-2 ">
+                        <div className="d-flex flex-row p-3 mb-2 bg-success rounded">
+                            <Card.Img className="rounded border border-light " variant="top" style={{ "width": "10em" }}
+                                src={veggieImg} />
 
-                                <Card.ImgOverlay className="px-2 py-2" style={{ "width": "4em" }}>
-                                    {btnType}
-                                </Card.ImgOverlay>
+                            <Card.ImgOverlay className="px-2 py-2" style={{ "width": "4em" }}>
+                                {btnType}
+                            </Card.ImgOverlay>
 
-                                <Card.Body className="p-3 mb-2 bg-success text-light">
-                                    <Card.Title>{veggieName}</Card.Title>
-                                    <Card.Text className="text-white">
-                                        {veggieSciName}
-                                    </Card.Text>
-                                </Card.Body>
+                            <Card.Body className="p-3 mb-2 bg-success text-light">
+                                <Card.Title>{veggieName}</Card.Title>
+                                <Card.Text className="text-white">
+                                    {veggieSciName}
+                                </Card.Text>
+                            </Card.Body>
 
-                                <Button className="shadow p-3 mb-5 text-center" variant="primary" as={Link} to={`/veggies/${veggieId}`}>Read More</Button>
-                            </div>
-                        </Card>
-                    </Row>
-                </Container>
+                            <Button className="shadow p-3 mb-5 text-center" variant="primary" as={Link} to={`/veggies/${veggieId}`}>Read More</Button>
+                        </div>
+                    </Card>
+                </Row>
+            </Container>
             )
         })
         setApiArray(cardMemory);
@@ -182,7 +183,7 @@ const Veggies: React.FC<IVeggieProps> = props => {
 
     return (
         <React.Fragment>
-            <Jumbotron fluid className="shadow rounded text-secondary bg-success text-light">
+           <Jumbotron fluid className="shadow rounded text-secondary bg-success text-light">
                 <Container >
                     <h1>Veggie Masterlist</h1>
                     <p>

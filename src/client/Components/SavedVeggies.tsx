@@ -86,9 +86,9 @@ const SavedVeggies: React.FC<IAppProps> = props => {
                                         src={veggieImg} />
 
                                     <Card.ImgOverlay className="px-2 py-2" style={{ "width": "4em" }}>
-                                        <Button className="px-3 py-0 bg-light border-light text-danger" style={{ "borderRadius": "50%" }}
+                                        <Button className="px-0 py-0 bg-primary border-success text-center" style={{ "borderRadius": "25%" }}
                                             onClick={(e: React.MouseEvent<HTMLButtonElement>) => { handleClickVeggie(e, veggieId, veggieName) }}>
-                                            <small style={{ "fontSize": "2em" }}>x</small>
+                                            <small className="text-dark" style={{ "fontSize": "1.8em" }}>&#128465;</small>
                                         </Button>
                                     </Card.ImgOverlay>
 
@@ -123,9 +123,9 @@ const SavedVeggies: React.FC<IAppProps> = props => {
                                         src={herbImg} />
 
                                     <Card.ImgOverlay className="px-2 py-2" style={{ "width": "4em" }}>
-                                        <Button className="px-3 py-0 bg-light border-light text-danger" style={{ "borderRadius": "50%" }}
+                                        <Button className="px-0 py-0 bg-primary border-success text-center" style={{ "borderRadius": "25%" }}
                                             onClick={(e: React.MouseEvent<HTMLButtonElement>) => { handleClickHerb(e, herbId, herbName) }}>
-                                            <small style={{ "fontSize": "2em" }}>x</small>
+                                            <small className="text-dark" style={{ "fontSize": "1.8em" }}>&#128465;</small>
                                         </Button>
                                     </Card.ImgOverlay>
 
@@ -155,7 +155,7 @@ const SavedVeggies: React.FC<IAppProps> = props => {
 
 
     return (
-        <>
+        <React.Fragment>
             <Jumbotron fluid className="shadow rounded text-secondary bg-success text-light">
                 <h1>My Garden</h1>
             </Jumbotron>
@@ -163,7 +163,8 @@ const SavedVeggies: React.FC<IAppProps> = props => {
                 {deleting}
                 {apiArray}
             </Container>
-        </>
+
+        </React.Fragment>
     )
 }
 

@@ -41,6 +41,11 @@ const Herbs: React.FC<IAppProps> = props => {
     }, [])
 
     useEffect(() => {
+        fetchAPI()
+
+    }, [adding])
+
+    useEffect(() => {
         if (searchVal !== "") {
             let matchCases: any = []
             apiResponse.forEach((element: any, index: number) => {
@@ -63,11 +68,6 @@ const Herbs: React.FC<IAppProps> = props => {
             }
         }
     }, [searchVal])
-
-    useEffect(() => {
-        fetchAPI()
-
-    }, [adding])
 
     let fetchAPI = async () => {
         let response = await api(`/api/herbs`)
@@ -119,8 +119,9 @@ const Herbs: React.FC<IAppProps> = props => {
             let herbsImg = element.url;
             let herbsName = element.name;
             let herbsId = element.id;
-            let herbsSciName = element.sci_name
+            let herbsSciName = element.sci_name;
             let btnType: JSX.Element = (<div></div>);
+
             if (savedHerbs[herbsId]) {
                 btnType = (
                     <Button className="px-3 py-1" variant="warning"
@@ -136,6 +137,7 @@ const Herbs: React.FC<IAppProps> = props => {
                     </Button>
                 )
             }
+            
             return (
                 <Container key={herbsId} className=" p-3 mb-5 rounded border-0 ">
                     <Row className="d-flex ">

@@ -6,7 +6,7 @@ import { Jumbotron, Button, Container, Row, Col, Image, Carousel } from 'react-b
 const UserHome: React.FC<IAppProps> = props => { 
   return (
   <>
-    <Jumbotron fluid className="shadow rounded text-white bg-success">
+    <Jumbotron fluid className="shadow rounded text-white ">
       <h1 className="text-light">Welcome to Victory Gardens!</h1><p className="text-light">How will YOU help flatten the curve?</p>
       </Jumbotron>
            <Container fluid className="justify-content-center">
