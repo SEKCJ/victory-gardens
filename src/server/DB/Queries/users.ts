@@ -13,9 +13,9 @@ const checkEmail = async (email: string) => {
     return Query<IUsers[]>('SELECT email FROM users WHERE email = ?; --', [email])
 }
 
-const post = async (email: string, firstname: string, lastname: string, password: string) => {
-    let values = [email, firstname, lastname, password];
-    return Query<IUsers>('SET @@auto_increment_increment = 1; INSERT INTO users(email, firstname, lastname, password) VALUES(?,?,?,?); --', values)
+const post = async (email: string, firstname: string, lastname: string, password: string, user: string) => {
+    let values = [email, firstname, lastname, password, user];
+    return Query<IUsers>('SET @@auto_increment_increment = 1; INSERT INTO users(email, firstname, lastname, password, username) VALUES(?,?,?,?,?); --', values)
 }
 
 export default {

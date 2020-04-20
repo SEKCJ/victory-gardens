@@ -9,10 +9,13 @@ const MyProfile: React.FC<IProfileProps> = props => {
     await localStorage.clear()
     window.location.reload()
   }
+
+
+
   return (
     <Card>
       <Card.Header>
-        <Nav variant="tabs" defaultActiveKey="#first">
+        <Nav variant="tabs" defaultActiveKey="#first" >
           <Nav.Item>
             <Nav.Link as={Link} to='/myprofile'>User Profile</Nav.Link>
           </Nav.Item>
@@ -45,7 +48,7 @@ const MyProfile: React.FC<IProfileProps> = props => {
           <br></br>
           <Card.Text>
             Password (encrypted):
-    </Card.Text>
+          </Card.Text>
           <Button variant="danger" onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleClick(e)}>Log Out</Button>
 
         </Card.Body>

@@ -114,7 +114,7 @@ const Herbs: React.FC<IAppProps> = props => {
         )
     }
 
-    let makeCards = async (resObj: any, savedHerbs: any) => {
+    let makeCards = (resObj: any, savedHerbs: any) => {
         let cardMemory = resObj.map((element: any, index: any) => {
             let herbsImg = element.url;
             let herbsName = element.name;

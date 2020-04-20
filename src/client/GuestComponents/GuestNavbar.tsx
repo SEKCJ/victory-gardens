@@ -67,7 +67,7 @@ const GuestNavigate: React.FC<any> = props => {
             <Form.Control type="password" placeholder="Password" value={password}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)} />
           </Form.Group>
-          <Button variant="primary" onClick={() => handleLogin()}
+          <Button variant="success" onClick={() => handleLogin()}
             type="submit" className="mx-auto" as={Link} to="/">
             Submit
             </Button>
