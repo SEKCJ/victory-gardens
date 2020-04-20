@@ -1,5 +1,5 @@
 import React, { } from 'react';
-import { Form, Col, Card, Button, Jumbotron, Dropdown } from 'react-bootstrap';
+import { Form, Col, Card, Button, Jumbotron, Dropdown, Media } from 'react-bootstrap';
 import { FaLeaf } from 'react-icons/fa';
 import { IAppProps } from '../App';
 
@@ -10,7 +10,51 @@ const CommGard: React.FC<IAppProps> = () => {
       <h1 className="text-light">Community Garden</h1><p className="text-light">Do you have questions for your fellow gardeners? Tips? Tricks? Post them here!</p>
       </Jumbotron>
             <Card className="col-md-6 mx-auto ">
-                <img
+            <Media>
+  <img
+    width={64}
+    height={64}
+    className="mr-3"
+    src="holder.js/64x64"
+    alt="Generic placeholder"
+  />
+  <Media.Body>
+  <h5 className="text-success">Username</h5>
+  <h2>Title of Post</h2>
+    <p>
+      Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque
+      ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at,
+      tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla.
+      Donec lacinia congue felis in faucibus.
+    </p>
+    <h6 className="text-muted">2 days ago</h6>
+    <Media>
+      <img
+        width={64}
+        height={64}
+        className="mr-3"
+        src="holder.js/64x64"
+        alt="Generic placeholder"
+      />
+      <Media.Body>
+      <h5 className="text-success">Username</h5>
+      <h2>Title of Post</h2>
+        <p>
+          Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
+          scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in
+          vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi
+          vulputate fringilla. Donec lacinia congue felis in faucibus.
+        </p>
+        <h6 className="text-muted">2 days ago</h6>
+      </Media.Body>
+    </Media>
+  </Media.Body >
+ 
+</Media>
+
+
+
+                {/* <img
                     width={64}
                     height={64}
                     className="mr-3"
@@ -27,7 +71,7 @@ const CommGard: React.FC<IAppProps> = () => {
     </p>
 
                 </Card.Body>
-                <Button variant="success">Reply</Button>
+                <Button variant="success">Reply</Button> */}
             </Card>
 
 
