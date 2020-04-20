@@ -33,8 +33,8 @@ const Auth: React.FC<IAppProps> = props => {
         )
     } else {
         return (
-            <Container className="d-flex">
-                <Spinner className="mx-auto my-3" animation="border" variant="warning" style={{ "width": "30em", "height": "30em" }} />
+            <Container className="d-flex" style={{"width": "100vw", "height": "100vh"}}>
+                <Spinner className="mx-auto my-auto" animation="border" variant="warning" style={{ "width": "30em", "height": "30em" }} />
             </Container>
         )
     }

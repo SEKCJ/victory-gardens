@@ -13,7 +13,7 @@ const Herb: React.FC<IVeggieProps> = (props: any) => {
     const [pageState, setPageState] = useState<boolean>(true);
     const [vgObj, setvgObj] = useState<IVeggieState>() 
 
-    let herbsid = props.match.params.herbid;
+    let herbsId = props.match.params.herbid;
 
     useEffect(() => {
         herbCheck();
@@ -21,13 +21,13 @@ const Herb: React.FC<IVeggieProps> = (props: any) => {
     }, []);
 
     let herbCheck = async () => {
-        let check = await api('/api/savedherbs/vegetableCheck', "POST", { Token, herbsid });
+        let check = await api('/api/savedherbs/herbCheck', "POST", { Token, herbsId });
         if (check) {
 
             setInGarden(
                 <Container className="d-flex mt-4">
                     <Alert variant="warning" className="mx-auto col-sm-6 d-flex flex-column">
-                        <p className="mb-0">Looks like this vegetable has already been added to your garden!</p>
+                        <p className="mb-0">Looks like this herb has already been added to your garden!</p>
                         <Alert.Link as={Link} to="/savedveggies">Click to go to your garden!</Alert.Link>
                     </Alert>
                 </Container>
@@ -46,7 +46,7 @@ const Herb: React.FC<IVeggieProps> = (props: any) => {
     }
 
     let fetchAPI = async () => {
-        let [response]: IResObj[] = await api(`/api/herbs/${herbsid}`)
+        let [response]: IResObj[] = await api(`/api/herbs/${herbsId}`)
         makeHerbs(response);
         setPageState(false);
     }
@@ -54,7 +54,7 @@ const Herb: React.FC<IVeggieProps> = (props: any) => {
     let handleClick = async (e: React.MouseEvent<HTMLButtonElement>, method: string) => {
         if (method === "add") {
             setAdded(true);
-            let response = await api('/api/savedherbs', "POST", { Token, herbsid })
+            let response = await api('/api/savedherbs', "POST", { Token, herbsId })
             if (response) {
                 props.history.push("/savedveggies")
             } else {
@@ -62,7 +62,7 @@ const Herb: React.FC<IVeggieProps> = (props: any) => {
             }
         } else if (method === "delete") {
             setDeleted(true);
-            let response = await api(`/api/savedherbs/${herbsid}`, "DELETE", { Token })
+            let response = await api(`/api/savedherbs/${herbsId}`, "DELETE", { Token })
             if (response) {
                 props.history.push("/savedveggies")
             } else {
@@ -139,7 +139,7 @@ const Herb: React.FC<IVeggieProps> = (props: any) => {
                     <Card className="mx-auto my-4" style={{ width: '40rem' }}>
 
                         <Card.Body className="d-flex">
-                            <Card.Link as={Link} to="/veggies" className="mx-auto btn btn-secondary col-sm-8"><h5 className="my-auto">Back to List</h5></Card.Link>
+                            <Card.Link as={Link} to="/userherbs" className="mx-auto btn btn-secondary col-sm-8"><h5 className="my-auto">Back to List</h5></Card.Link>
                         </Card.Body>
 
                         <Card.Title className="mx-auto">
@@ -338,37 +338,6 @@ const Herb: React.FC<IVeggieProps> = (props: any) => {
                                 </Accordion> </Col>
 
                         </Row>
-
-
-
-
-                        {/* 
-                <Container>
-                    <Row>
-                        <Col>
-                       
-                            <ListGroup className="list-group-flush">
-        <ListGroupItem><h5>SOIL:</h5> {vgSoil}</ListGroupItem>
-        <ListGroupItem><h5>POSITION:</h5> {vgPosition}</ListGroupItem>
-        <ListGroupItem><h5>FROST TOLERANCE:</h5> {vgFt}</ListGroupItem>
-        <ListGroupItem><h5>FEEDING:</h5> {vgFeeding}</ListGroupItem>
-        <ListGroupItem><h5>COMPANIONS:</h5> {vgCompanions}</ListGroupItem>
-        <ListGroupItem><h5>BAD COMPANIONS:</h5> {vgBadCompanions}</ListGroupItem>
-        <ListGroupItem><h5>SPACING:</h5> {vgSpacing}</ListGroupItem>
-                            </ListGroup> 
-                        </Col>
-
-                        <Col>
-                            <ListGroup className="list-group-flush"> 
-        <ListGroupItem><h5>SOW AND PLANT:</h5> {vgSandP}</ListGroupItem>
-        <ListGroupItem><h5>PLANTING MONTHS:</h5> {vgPm}</ListGroupItem>
-        <ListGroupItem><h5>HARVESTING MONTHS:</h5> {vgHm}</ListGroupItem>
-        <ListGroupItem><h5>NOTES:</h5> {vgNotes}</ListGroupItem>
-        <ListGroupItem><h5>HARVEST:</h5> {vgHarvest}</ListGroupItem>
-        <ListGroupItem><h5>TROUBLESHOOTING:</h5> {vgTs}</ListGroupItem>
-                                
-                            </ListGroup>  </Col></Row> </Container> */}
-
 
                     </Card>
                 </div>

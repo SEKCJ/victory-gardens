@@ -19,6 +19,9 @@ const Veggies: React.FC<IVeggieProps> = props => {
     const [btnState, setBtnState] = useState<boolean>(false);
     const [adding, setAdding] = useState<boolean>(false);
 
+    const [apiResponse, setApiResponse] = useState<any>();
+    const [savedResponse, setSavedResponse] = useState<any>();
+
     const handleClose = () => {
         setAdded(<div></div>)
         setAdding(false)
@@ -37,14 +40,45 @@ const Veggies: React.FC<IVeggieProps> = props => {
 
     }, [])
 
-    let fetchAPI = async () => {
+    useEffect(() => {
         if (searchVal !== "") {
-            let response = await api(`/api/vegetables/name/${searchVal}`)
-            findCards(response)
+            let matchCases: any = []
+            apiResponse.forEach((element: any, index: number) => {
+                if (element.name.toLowerCase().startsWith(searchVal.toLowerCase())) {
+                    matchCases.push(element)
+                }
+            })
+            setCount(matchCases.length)
+            setResults(
+                <Row className="d-flex">
+                    <p className="mx-auto col-sm-8 mb-0">Showing {matchCases.length} results for "{searchVal}"...</p>
+                </Row>
+            )
+            makeCards(matchCases, savedResponse)
         } else {
-            let response = await api(`/api/vegetables`)
-            makeCards(response)
+            if (apiResponse) {
+                setCount(apiResponse.length)
+                setResults(<div></div>)
+                makeCards(apiResponse, savedResponse)
+            }
         }
+    }, [searchVal])
+
+    useEffect(() => {
+        fetchAPI()
+
+    }, [adding])
+
+    let fetchAPI = async () => {
+        let response = await api(`/api/vegetables`)
+        let check = await api(`/api/savedvegetables/${Token}`);
+        let savedVegs: any = {};
+        check.forEach((element: any) => {
+            savedVegs[element.id] = true;
+        })
+        setApiResponse(response);
+        setSavedResponse(savedVegs)
+        makeCards(response, savedVegs)
     }
 
     let handleClick = async (e: React.MouseEvent<HTMLButtonElement>, vegetableid: number, veggieName: string) => {
@@ -80,75 +114,8 @@ const Veggies: React.FC<IVeggieProps> = props => {
         )
     }
 
-    let findCards = async (resObj: any) => {
-        let savedVegs: any = await vgCheck();
-        let cardMemory = resObj.map((element: any, index: any) => {
-            let veggieImg = element.url;
-            let veggieName = element.name;
-            let veggieId = element.id;
-            let veggieSciName = element.sci_name
-            let btnType: JSX.Element = (<div></div>);
-            if (savedVegs[veggieId]) {
-                btnType = (
-                    <Button className="px-2.5 py-0 bg-warning text-center border-dark"
-                        style={{ "borderRadius": "100%"}}>
-                        <small className="text-dark"style={{ "fontSize": "2em"}}>✔</small>
-                    </Button>
-                )
-            } else {
-                btnType = (
-               <Button className="px-3 py-0 bg-warning text-dark border-dark" style={{ "borderRadius": "50%" }}
-                    onClick={(e: React.MouseEvent<HTMLButtonElement>) => { handleClick(e, veggieId, veggieName) }}>
-                    <small className="text-dark" style={{ "fontSize": "2em" }}>+</small>
-                </Button> 
-                )
-            }
 
-            return (
-                <Container key={veggieId} className=" p-3 mb-5 rounded border-0 ">
-                    <Row className="d-flex ">
-                        <Card className="mx-auto col-sm-8 px-0 p-3 mb-2 bg-info shadow p-3 mb-5 h-50">
-                            <div className="d-flex flex-row p-3 mb-2 bg-info rounded">
-                                <Card.Img className="rounded border border-dark " variant="top" style={{ "width": "10em" }}
-                                    src={veggieImg} />
-                                <Card.ImgOverlay className="px-2 py-2" style={{ "width": "4em" }}>
-                                    {btnType}
-                                </Card.ImgOverlay>
-
-                                <Card.Body className="p-3 mb-2 bg-info text-white ">
-                                    <Card.Title>{veggieName}</Card.Title>
-                                    <Card.Text className="text-white">
-                                        {veggieSciName}
-                                    </Card.Text>
-                                </Card.Body>
-
-                                <Button className="shadow p-3 mb-5 text-center bg-warning text-dark border-dark" variant="primary" as={Link} to={`/veggies/${veggieId}`}>Read More</Button>
-                            </div>
-                        </Card>
-                    </Row>
-                </Container>
-            )
-        })
-        setApiArray(cardMemory)
-        setCount(cardMemory.length)
-        setResults(
-            <Row className="d-flex">
-                <p className="mx-auto col-sm-8 mb-0">Showing {cardMemory.length} results for "{searchVal}"...</p>
-            </Row>
-        )
-    }
-
-    let vgCheck = async () => {
-        let check = await api(`/api/savedvegetables/${Token}`);
-        let savedVegs: any = {};
-        check.forEach((element: any) => {
-            savedVegs[element.id] = true;
-        })
-        return savedVegs
-    }
-
-    let makeCards = async (resObj: any) => {
-        let savedVegs: any = await vgCheck()
+    let makeCards = (resObj: any, savedVegs: any) => {
         let cardMemory = resObj.map((element: any, index: any) => {
             let veggieImg = element.url;
             let veggieName = element.name;
@@ -157,61 +124,55 @@ const Veggies: React.FC<IVeggieProps> = props => {
             let btnType: JSX.Element = (<div></div>);
             if (savedVegs[veggieId]) {
                 btnType = (
-                    <Button className="px-2.5 py-0 bg-warning text-center border-dark"
-                        style={{ "borderRadius": "100%"}}>
-                        <small className="text-dark"style={{ "fontSize": "2em"}}>✔</small>
+                    <Button className="px-3 py-1" variant="warning"
+                        style={{ "borderRadius": "50%" }}>
+                        <small className="text-light" style={{ "fontSize": "1.8em" }}>&#10003;</small>
                     </Button>
                 )
             } else {
                 btnType = (
-                    <Button className="px-3 py-0 bg-warning border-dark" style={{ "borderRadius": "100%" }}
+                    <Button className="px-3 py-0 bg-light border-light text-success" style={{ "borderRadius": "50%" }}
                         onClick={(e: React.MouseEvent<HTMLButtonElement>) => { setAdding(true); handleClick(e, veggieId, veggieName) }}>
-                        <small className="text-dark" style={{ "fontSize": "2em" }}>+</small>
+                        <small style={{ "fontSize": "2em" }}>+</small>
                     </Button>
                 )
             }
 
-            // console.log(savedVegs[veggieId])
             return (
                 <Container className=" p-3 mb-5 rounded border-0 " key={veggieId}>
-                    <Row className="d-flex ">
-                        <Card className="mx-auto col-sm-8 px-0 p-3 mb-2 bg-info shadow p-3 mb-5 ">
-                            <div className="d-flex flex-row p-3 mb-2 bg-info rounded">
-                                <Card.Img className="rounded border border-dark " variant="top" style={{ "width": "10em" }}
-                                    src={veggieImg} />
+                <Row className="d-flex ">
+                    <Card className="mx-auto col-sm-8 px-0 p-3 mb-2 bg-success shadow p-3 mb-5 ">
+                        <div className="d-flex flex-row p-3 mb-2 bg-success rounded">
+                            <Card.Img className="rounded border border-light " variant="top" style={{ "width": "10em" }}
+                                src={veggieImg} />
 
-                                <Card.ImgOverlay className="px-2 py-2" style={{ "width": "4em" }}>
-                                    {btnType}
-                                </Card.ImgOverlay>
+                            <Card.ImgOverlay className="px-2 py-2" style={{ "width": "4em" }}>
+                                {btnType}
+                            </Card.ImgOverlay>
 
-                                <Card.Body className="p-3 mb-2 bg-info text-light">
-                                    <Card.Title>{veggieName}</Card.Title>
-                                    <Card.Text className="text-light">
-                                        {veggieSciName}
-                                    </Card.Text>
-                                </Card.Body>
+                            <Card.Body className="p-3 mb-2 bg-success text-light">
+                                <Card.Title>{veggieName}</Card.Title>
+                                <Card.Text className="text-white">
+                                    {veggieSciName}
+                                </Card.Text>
+                            </Card.Body>
 
-                                <Button className="shadow p-3 mb-5 text-center bg-warning text-dark border-dark" variant="primary" as={Link} to={`/veggies/${veggieId}`}>Read More</Button>
-                            </div>
-                        </Card>
-                    </Row>
-                </Container>
+                            <Button className="shadow p-3 mb-5 text-center" variant="primary" as={Link} to={`/veggies/${veggieId}`}>Read More</Button>
+                        </div>
+                    </Card>
+                </Row>
+            </Container>
             )
         })
-        setApiArray(cardMemory)
-        setResults(<div></div>)
+        setApiArray(cardMemory);
     }
 
-    useEffect(() => {
-        fetchAPI()
-
-    }, [searchVal, adding])
 
     useEffect(() => {
         if (count === 0) {
             setApiArray([(
                 <Container className="d-flex mt-4" key="0">
-                    <Alert variant="warning" className="mx-auto col-sm-6 d-flex flex-column"> 
+                    <Alert variant="warning" className="mx-auto col-sm-6 d-flex flex-column">
                         Nothing was found for "{searchVal}"
                     </Alert>
                 </Container>
@@ -221,30 +182,30 @@ const Veggies: React.FC<IVeggieProps> = props => {
     }, [btnState])
 
     return (
-        <>
-<Jumbotron fluid className="shadow rounded text-light bg-info text-center border-dark"> 
+        <React.Fragment>
+           <Jumbotron fluid className="shadow rounded text-secondary bg-success text-light">
                 <Container >
-                    <h1 className="text-dark" >Veggie Masterlist</h1>
+                    <h1>Veggie Masterlist</h1>
                     <p>
-                        Looking for something inparticular? Come choose from our masterlist of vegetables! 
-                        </p>
+                        Looking for something inparticular? Come choose from our masterlist of vegetables!
+                    </p>
                 </Container>
             </Jumbotron>
             <Container fluid>
-            <Form className="d-flex">
-                <Form.Group controlId="search-bar" className="mx-auto d-flex col-sm-8">
-                    <Form.Control className="mr-4" type="text" placeholder="Search..." value={searchVal}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchVal(e.target.value)} />
-                    <Button variant="warning" className="my-auto border-dark"
-                        onClick={() => setBtnState(true)}>Search</Button>
-                </Form.Group>
-            </Form>
-            {results}
-            {apiArray}
-            {added}
+                <Form className="d-flex">
+                    <Form.Group controlId="search-bar" className="mx-auto d-flex col-sm-8">
+                        <Form.Control className="mr-4" type="text" placeholder="Search..." value={searchVal}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchVal(e.target.value)} />
+                        <Button variant="success" className="my-auto"
+                            onClick={() => setBtnState(true)}>Search</Button>
+                    </Form.Group>
+                </Form>
+                {results}
+                {apiArray}
+                {added}
 
-        </Container>
-        </>
+            </Container>
+        </React.Fragment>
     )
 }
 

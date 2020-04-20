@@ -24,7 +24,7 @@ router.get("/:token", hasRole, async (req, res) => {
 
 router.post('/herbCheck', hasRole, async (req, res) => {
   let token = req.body.Token;
-  let herbsid = parseInt(req.body.herbsid, 10);
+  let herbsid = parseInt(req.body.herbsId, 10);
   try {
     let [result]: any = (await DB.Tokens.findUserIdByToken(token))[0];
     let theuserid = parseInt(result.userid, 10);
@@ -38,7 +38,7 @@ router.post('/herbCheck', hasRole, async (req, res) => {
 // POST a new herb to SavedHerb
 router.post("/", hasRole, async (req, res) => {
   let token = req.body.Token;
-  let herbsid = parseInt(req.body.herbsid, 10);
+  let herbsid = parseInt(req.body.herbsId, 10);
   try {
     let [result]: any = (await DB.Tokens.findUserIdByToken(token))[0];
     let theuserid = parseInt(result.userid, 10);

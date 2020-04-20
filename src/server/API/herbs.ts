@@ -27,9 +27,9 @@ router.get("/:id?", async (req, res) => {
   }
 });
 
-router.get("/name/:vgName", async (req, res) => {
+router.get("/name/:herbName", async (req, res) => {
   try {
-    res.json(await DB.Herbs.herbByName(req.params.vgName));
+    res.json(await DB.Herbs.herbByName(req.params.herbName));
   } catch (error) {
     console.log(error);
     res.send(500).json("could not be found");
