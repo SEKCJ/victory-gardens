@@ -90,15 +90,16 @@ const Veggies: React.FC<IVeggieProps> = props => {
             let btnType: JSX.Element = (<div></div>);
             if (savedVegs[veggieId]) {
                 btnType = (
-                    <Button variant="success" className="px-3 py-1 border border-dark" style={{ "borderRadius": "50%" }}>
-                        <small style={{ "fontSize": "1.8em" }}>&#10003;</small>
+                    <Button className="px-2.5 py-0 bg-warning text-center border-dark"
+                        style={{ "borderRadius": "100%"}}>
+                        <small className="text-dark"style={{ "fontSize": "2em"}}>✔</small>
                     </Button>
                 )
             } else {
                 btnType = (
-               <Button className="px-3 py-0 bg-light border-light text-success" style={{ "borderRadius": "50%" }}
+               <Button className="px-3 py-0 bg-warning text-dark border-dark" style={{ "borderRadius": "50%" }}
                     onClick={(e: React.MouseEvent<HTMLButtonElement>) => { handleClick(e, veggieId, veggieName) }}>
-                    <small style={{ "fontSize": "2em" }}>+</small>
+                    <small className="text-dark" style={{ "fontSize": "2em" }}>+</small>
                 </Button> 
                 )
             }
@@ -106,22 +107,22 @@ const Veggies: React.FC<IVeggieProps> = props => {
             return (
                 <Container key={veggieId} className=" p-3 mb-5 rounded border-0 ">
                     <Row className="d-flex ">
-                        <Card className="mx-auto col-sm-8 px-0 p-3 mb-2 bg-success shadow p-3 mb-5 h-50">
-                            <div className="d-flex flex-row p-3 mb-2 bg-success rounded">
-                                <Card.Img className="rounded border border-light " variant="top" style={{ "width": "10em" }}
+                        <Card className="mx-auto col-sm-8 px-0 p-3 mb-2 bg-info shadow p-3 mb-5 h-50">
+                            <div className="d-flex flex-row p-3 mb-2 bg-info rounded">
+                                <Card.Img className="rounded border border-dark " variant="top" style={{ "width": "10em" }}
                                     src={veggieImg} />
                                 <Card.ImgOverlay className="px-2 py-2" style={{ "width": "4em" }}>
                                     {btnType}
                                 </Card.ImgOverlay>
 
-                                <Card.Body className="p-3 mb-2 bg-success text-white ">
+                                <Card.Body className="p-3 mb-2 bg-info text-white ">
                                     <Card.Title>{veggieName}</Card.Title>
                                     <Card.Text className="text-white">
                                         {veggieSciName}
                                     </Card.Text>
                                 </Card.Body>
 
-                                <Button className="shadow p-3 mb-5 text-center" variant="primary" as={Link} to={`/veggies/${veggieId}`}>Read More</Button>
+                                <Button className="shadow p-3 mb-5 text-center bg-warning text-dark border-dark" variant="primary" as={Link} to={`/veggies/${veggieId}`}>Read More</Button>
                             </div>
                         </Card>
                     </Row>
@@ -156,16 +157,16 @@ const Veggies: React.FC<IVeggieProps> = props => {
             let btnType: JSX.Element = (<div></div>);
             if (savedVegs[veggieId]) {
                 btnType = (
-                    <Button className="px-3 py-1" variant="warning"
-                        style={{ "borderRadius": "50%"}}>
-                        <small className="text-light"style={{ "fontSize": "1.8em"}}>&#10003;</small>
+                    <Button className="px-2.5 py-0 bg-warning text-center border-dark"
+                        style={{ "borderRadius": "100%"}}>
+                        <small className="text-dark"style={{ "fontSize": "2em"}}>✔</small>
                     </Button>
                 )
             } else {
                 btnType = (
-                    <Button variant="info" className="px-3 py-0" style={{ "borderRadius": "50%" }}
+                    <Button className="px-3 py-0 bg-warning border-dark" style={{ "borderRadius": "100%" }}
                         onClick={(e: React.MouseEvent<HTMLButtonElement>) => { setAdding(true); handleClick(e, veggieId, veggieName) }}>
-                        <small style={{ "fontSize": "2em" }}>+</small>
+                        <small className="text-dark" style={{ "fontSize": "2em" }}>+</small>
                     </Button>
                 )
             }
@@ -174,23 +175,23 @@ const Veggies: React.FC<IVeggieProps> = props => {
             return (
                 <Container className=" p-3 mb-5 rounded border-0 " key={veggieId}>
                     <Row className="d-flex ">
-                        <Card className="mx-auto col-sm-8 px-0 p-3 mb-2 bg-success shadow p-3 mb-5 ">
-                            <div className="d-flex flex-row p-3 mb-2 bg-success rounded">
-                                <Card.Img className="rounded border border-light " variant="top" style={{ "width": "10em" }}
+                        <Card className="mx-auto col-sm-8 px-0 p-3 mb-2 bg-info shadow p-3 mb-5 ">
+                            <div className="d-flex flex-row p-3 mb-2 bg-info rounded">
+                                <Card.Img className="rounded border border-dark " variant="top" style={{ "width": "10em" }}
                                     src={veggieImg} />
 
                                 <Card.ImgOverlay className="px-2 py-2" style={{ "width": "4em" }}>
                                     {btnType}
                                 </Card.ImgOverlay>
 
-                                <Card.Body className="p-3 mb-2 bg-success text-light">
+                                <Card.Body className="p-3 mb-2 bg-info text-light">
                                     <Card.Title>{veggieName}</Card.Title>
-                                    <Card.Text className="text-white">
+                                    <Card.Text className="text-light">
                                         {veggieSciName}
                                     </Card.Text>
                                 </Card.Body>
 
-                                <Button className="shadow p-3 mb-5 text-center" variant="primary" as={Link} to={`/veggies/${veggieId}`}>Read More</Button>
+                                <Button className="shadow p-3 mb-5 text-center bg-warning text-dark border-dark" variant="primary" as={Link} to={`/veggies/${veggieId}`}>Read More</Button>
                             </div>
                         </Card>
                     </Row>
@@ -221,9 +222,9 @@ const Veggies: React.FC<IVeggieProps> = props => {
 
     return (
         <>
-<Jumbotron fluid className="shadow rounded text-secondary bg-success text-light"> 
+<Jumbotron fluid className="shadow rounded text-light bg-info text-center border-dark"> 
                 <Container >
-                    <h1>Veggie Masterlist</h1>
+                    <h1 className="text-dark" >Veggie Masterlist</h1>
                     <p>
                         Looking for something inparticular? Come choose from our masterlist of vegetables! 
                         </p>
@@ -234,7 +235,7 @@ const Veggies: React.FC<IVeggieProps> = props => {
                 <Form.Group controlId="search-bar" className="mx-auto d-flex col-sm-8">
                     <Form.Control className="mr-4" type="text" placeholder="Search..." value={searchVal}
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchVal(e.target.value)} />
-                    <Button variant="success" className="my-auto"
+                    <Button variant="warning" className="my-auto border-dark"
                         onClick={() => setBtnState(true)}>Search</Button>
                 </Form.Group>
             </Form>

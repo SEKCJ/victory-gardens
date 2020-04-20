@@ -64,26 +64,26 @@ const SavedVeggies: React.FC<IAppProps> = props => {
                 return (
                     <Container className=" p-3 mb-5 rounded border-0 " key={veggieId}>
                         <Row className="d-flex ">
-                            <Card className="mx-auto col-sm-8 px-0 p-3 mb-2 bg-success shadow p-3 mb-5 ">
-                                <div className="d-flex flex-row p-3 mb-2 bg-success rounded">
-                                    <Card.Img className="rounded border border-light " variant="top" style={{ "width": "10em" }}
+                            <Card className="mx-auto col-sm-8 px-0 p-3 mb-2 bg-primary shadow p-3 mb-5 ">
+                                <div className="d-flex flex-row p-3 mb-2 bg-primary rounded">
+                                    <Card.Img className="rounded border border-dark " variant="top" style={{ "width": "10em" }}
                                         src={veggieImg} />
 
-                                    <Card.ImgOverlay className="px-2 py-2" style={{ "width": "4em" }}>
-                                        <Button className="px-3 py-0 bg-light border-light text-danger" style={{ "borderRadius": "50%" }}
+                                    <Card.ImgOverlay className="px-0 py-0" style={{ "width": "4em" }}>
+                                        <Button className="px-0 py-0 bg-primary border-primary text-center" style={{ "borderRadius": "25%" }}
                                             onClick={(e: React.MouseEvent<HTMLButtonElement>) => { handleClick(e, veggieId, veggieName) }}>
-                                            <small style={{ "fontSize": "2em" }}>x</small>
+                                            <small className="text-dark" style={{ "fontSize": "1.8em" }}>&#128465;</small>
                                         </Button>
                                     </Card.ImgOverlay>
 
-                                    <Card.Body className="p-3 mb-2 bg-success text-light">
+                                    <Card.Body className="p-3 mb-2 bg-primary border-dark text-dark">
                                         <Card.Title>{veggieName}</Card.Title>
                                         <Card.Text className="text-white">
                                             {veggieSciName}
                                         </Card.Text>
                                     </Card.Body>
 
-                                    <Button className="shadow p-3 mb-5 text-center" variant="primary" as={Link} to={`/veggies/${veggieId}`}>Read More</Button>
+                                    <Button className="shadow p-3 mb-5 text-white border-dark" variant="info" as={Link} to={`/veggies/${veggieId}`}>Read More</Button>
                                 </div>
                             </Card>
                         </Row>
@@ -103,10 +103,11 @@ const SavedVeggies: React.FC<IAppProps> = props => {
 
     return (
         <>
-            <Jumbotron fluid className="shadow rounded text-secondary bg-success text-light">
-                <h1>My Garden</h1>
+            <Jumbotron fluid className="shadow rounded bg-info text-center">
+                <h1 className="text-dark">My Garden</h1>
+                <p className="text-white">Welcome back! Have a look at all the veggies you've added to your garden.</p>
             </Jumbotron>
-            <Container fluid className="bg-succss">
+            <Container fluid >
                 {deleting}
                 {apiArray}
             </Container>

@@ -37,7 +37,7 @@ const Herbs: React.FC<IAppProps> = props => {
         setAdding(true)
     }
 
-    
+
     let findCards = (resObj: any) => {
         let cardMemory = resObj.map((element: any, index: any) => {
             let herbsImg = element.url;
@@ -48,25 +48,25 @@ const Herbs: React.FC<IAppProps> = props => {
             return (
                 <Container key={herbsId} className=" p-3 mb-5 rounded border-0 ">
                     <Row className="d-flex ">
-                        <Card className="mx-auto col-sm-8 px-0 p-3 mb-2 bg-success shadow p-3 mb-5 h-50">
-                            <div className="d-flex flex-row p-3 mb-2 bg-success rounded">
-                                <Card.Img className="rounded border border-light " variant="top" style={{ "width": "10em" }}
+                        <Card className="mx-auto col-sm-8 px-0 p-3 mb-2 bg-secondary shadow p-3 mb-5 h-50">
+                            <div className="d-flex flex-row p-3 mb-2 bg-secondary rounded">
+                                <Card.Img className="rounded border border-info " variant="top" style={{ "width": "10em" }}
                                     src={herbsImg} />
                                 <Card.ImgOverlay className="px-2 py-2" style={{ "width": "4em" }}>
-                                    <Button className="px-3 py-0 bg-light border-light text-success" style={{ "borderRadius": "50%" }}
+                                    <Button className="px-3 py-0 bg-info border-dark text-white" style={{ "borderRadius": "50%" }}
                                         onClick={(e: React.MouseEvent<HTMLButtonElement>) => { handleClick(e, herbsId) }}>
                                         <small style={{ "fontSize": "2em" }}>+</small>
                                     </Button>
                                   </Card.ImgOverlay>
 
-                                  <Card.Body className="p-3 mb-2 bg-success text-white ">
-                                    <Card.Title>{herbsName}</Card.Title>
+                                  <Card.Body className="p-3 mb-2 bg-secondary text-white ">
+                                    <Card.Title className="text-dark">{herbsName}</Card.Title>
                                     <Card.Text className="text-white">
                                         {herbsSciName}
                                     </Card.Text>
                                 </Card.Body>
 
-                                <Button className="shadow p-3 mb-5 text-center" variant="primary" as={Link} to={`/veggies/${herbsId}`}>Read More</Button>
+                                <Button className="shadow p-3 mb-5 text-white border-dark text-center" variant="info" as={Link} to={`/veggies/${herbsId}`}>Read More</Button>
                             </div>
                         </Card>
                     </Row>
@@ -91,25 +91,25 @@ const Herbs: React.FC<IAppProps> = props => {
             return (
                 <Container key={herbsId} className=" p-3 mb-5 rounded border-0 ">
                     <Row className="d-flex ">
-                        <Card className="mx-auto col-sm-8 px-0 p-3 mb-2 bg-success shadow p-3 mb-5 h-50">
-                            <div className="d-flex flex-row p-3 mb-2 bg-success rounded">
-                                <Card.Img className="rounded border border-light " variant="top" style={{ "width": "10em" }}
+                        <Card className="mx-auto col-sm-8 px-0 p-3 mb-2 bg-secondary shadow p-3 mb-5 h-50">
+                            <div className="d-flex flex-row p-3 mb-2 bg-secondary rounded">
+                                <Card.Img className="rounded border border-info " variant="top" style={{ "width": "10em" }}
                                     src={herbsImg} />
                                 <Card.ImgOverlay className="px-2 py-2" style={{ "width": "4em" }}>
-                                    <Button className="px-3 py-0 bg-light border-light text-success" style={{ "borderRadius": "50%" }}
+                                    <Button className="px-3 py-0 bg-info border-dark text-white" style={{ "borderRadius": "50%" }}
                                         onClick={(e: React.MouseEvent<HTMLButtonElement>) => { handleClick(e, herbsId) }}>
                                         <small style={{ "fontSize": "2em" }}>+</small>
                                     </Button>
                                   </Card.ImgOverlay>
 
-                                  <Card.Body className="p-3 mb-2 bg-success text-white ">
-                                    <Card.Title>{herbsName}</Card.Title>
+                                  <Card.Body className="p-3 mb-2 bg-secondary text-white ">
+                                    <Card.Title className="text-dark">{herbsName}</Card.Title>
                                     <Card.Text className="text-white">
                                         {herbsSciName}
                                     </Card.Text>
                                 </Card.Body>
 
-                                <Button className="shadow p-3 mb-5 text-center" variant="primary" as={Link} to={`/veggies/${herbsId}`}>Read More</Button>
+                                <Button className="shadow p-3 mb-5 text-center text-white border-dark" variant="info" as={Link} to={`/veggies/${herbsId}`}>Read More</Button>
                             </div>
                         </Card>
                     </Row>
@@ -139,10 +139,10 @@ const Herbs: React.FC<IAppProps> = props => {
 
     return (
         <>
-            <Jumbotron fluid className="shadow rounded text-secondary bg-success text-light">
+            <Jumbotron fluid className="shadow rounded bg-secondary ">
                 <Container >
-                    <h1>Herb Masterlist</h1>
-                    <p>
+                    <h1 className="text-dark"> Herb Masterlist</h1>
+                    <p className="text-white">
                         Looking for something inparticular? Come choose from our masterlist of Herbs!
                         </p>
                 </Container>
@@ -152,7 +152,7 @@ const Herbs: React.FC<IAppProps> = props => {
                     <Form.Group controlId="search-bar" className="mx-auto d-flex col-sm-8">
                         <Form.Control className="mr-4" type="text" placeholder="Search..." value={searchVal}
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchVal(e.target.value)} />
-                        <Button variant="success" className="my-auto"
+                        <Button variant="info" className="my-auto"
                             onClick={() => setBtnState(true)}>Search</Button>
                     </Form.Group>
                 </Form>
