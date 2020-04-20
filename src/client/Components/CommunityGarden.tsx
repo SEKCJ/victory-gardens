@@ -1,5 +1,5 @@
 import React, { } from 'react';
-import { Form, Col, Card, Button, Jumbotron } from 'react-bootstrap';
+import { Form, Col, Card, Button, Jumbotron, Dropdown } from 'react-bootstrap';
 import { FaLeaf } from 'react-icons/fa';
 import { IAppProps } from '../App';
 
@@ -27,11 +27,25 @@ const CommGard: React.FC<IAppProps> = () => {
     </p>
 
                 </Card.Body>
+                <Button variant="success">Reply</Button>
             </Card>
 
-            <Button variant="success" style={{"position": "fixed", "bottom": "0px", "right":"0px"}}>
-              <FaLeaf size="3.5em"  />
-            </Button>
+
+        <Dropdown>
+            <Dropdown.Toggle variant="success" id="dropdown-basic" style={{"position": "fixed", "bottom": "0px", "right":"0px"}}>
+               <FaLeaf size="3.5em"  />
+             </Dropdown.Toggle>
+           
+            <Dropdown.Menu>
+            <Form.Group controlId="exampleForm.ControlTextarea1">
+    <Form.Label>A Seed of Thought</Form.Label>
+    <Form.Control as="textarea" rows="5" />
+  </Form.Group>
+  <Button variant="success">Submit</Button>
+            </Dropdown.Menu>
+         </Dropdown>
+
+
         </React.Fragment>
     );
 
