@@ -15,8 +15,10 @@ import UserLogin from './Components/Login';
 // import Garden from './Components/Garden';
 import GardenVis from './Components/GardenVis';
 import Herbs from './Components/UserHerbs';
-import SingleHerb from './Components/Herb'
-import CommGard from './Components/CommunityGarden'
+import SingleHerb from './Components/Herb';
+import CommGard from './Components/CommunityGarden';
+
+
 
 const App: React.FC<IAppProps> = props => {
 	
@@ -36,6 +38,8 @@ const App: React.FC<IAppProps> = props => {
 				<Route exact path="/userherbs" component={Herbs} />
 				<Route exact path="/userherbs/:herbid" component={SingleHerb} />
 				<Route exact path="/communitygarden" component={CommGard} />
+				
+
 
 				<Route path='/' component={UserHome} />
 				{/* <Route exact path="/myprofile" component={ControlledTabs} /> */}

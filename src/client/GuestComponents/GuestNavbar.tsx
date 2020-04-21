@@ -88,7 +88,7 @@ const GuestNavigate: React.FC<any> = props => {
             <Nav.Link as={Link} to="/guestchoose">Help Me Choose</Nav.Link>
             <NavDropdown className="mr-auto" title="Browse All" id="browse-dropdown">
               <NavDropdown.Item as={Link} to='/guestveggies'>Veggies</NavDropdown.Item>
-              <NavDropdown.Item as={Link} to='/'>Herbs</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to='/guestherbs'>Herbs</NavDropdown.Item>
 
             </NavDropdown>
             {/* <Nav.Link as={Link} to="/">Calendar</Nav.Link> */}
