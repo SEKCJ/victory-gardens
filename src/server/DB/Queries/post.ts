@@ -21,16 +21,16 @@ const onePost = async (id: number) => {
 
 const postPost = async (userid: number, title: string, content: string) => {
   return Query<IPost>(
-    `SET @@auto_increment_increment = 1; INSERT INTO posts (title, content, userid) VALUES (?,?,?)`,
+    `SET @@auto_increment_increment = 1; INSERT INTO posts (userid, title, content) VALUES (?,?,?)`,
     [userid, title, content]
   );
 };
 
 const putPost = async (id: number, title: string, content: string) => {
   return Query<IPost>(`UPDATE posts SET title = ?, content = ? WHERE id = ?`, [
-    id,
     title,
     content,
+    id
   ]);
 };
 
