@@ -56,12 +56,22 @@ export interface IAvatar {
 }
 
 export interface IPost {
+  id: number,
   postid: number;
   userid: number;
   avatarid?: number;
   username: string;
-  firstname: string;
   title: string;
   content: string;
+  created_at: any;
+}
+
+export interface IResponse {
+  id: number,
+  postid: number;
+  userid: number;
+  avatarid?: number;
+  username: string;
+  response: string;
   created_at: any;
 }
