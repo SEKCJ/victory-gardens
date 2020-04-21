@@ -27,7 +27,8 @@ const Navigate: React.FC<IAppProps> = () => {
             {/* <Nav.Link as={Link} to="/">Calendar</Nav.Link> */}
             {/* </Nav> */}
 
-            <Navbar.Collapse id="navigate">  <Nav>
+            <Navbar.Collapse className="d-flex" id="navigate">  
+            <Nav className="mr-auto">
                 <Nav.Link as={Link} to="/choose">Help Me Choose</Nav.Link>
                 <NavDropdown className="mr-auto" title="Browse All" id="browse-dropdown">
                     <NavDropdown.Item as={Link} to='/veggies'>Veggies</NavDropdown.Item>
@@ -35,18 +36,24 @@ const Navigate: React.FC<IAppProps> = () => {
 
                 </NavDropdown>
                 <Nav.Link as={Link} to="/savedveggies">My Garden</Nav.Link>
+                <Nav.Link as={Link} to="/communitygarden">Community Garden</Nav.Link>
             </Nav>
+
+
+
+
+                <Nav>
+                    <NavDropdown alignRight title="My Profile" id="profile-dropdown">
+                        <NavDropdown.Item as={Link} to="/myprofile">My Profile</NavDropdown.Item>
+                        <NavDropdown.Item className="text-danger" onClick={(e: React.MouseEvent) => handleClick(e)}>Log Out</NavDropdown.Item>
+                    </NavDropdown>
+
+                </Nav>
             </Navbar.Collapse>
-    
-
-            <Nav className="mr-5">
-                <Nav.Link as={Link} to="/myprofile">My Profile</Nav.Link>
-        <Nav.Link as={Link} to="/communitygarden">Community Garden</Nav.Link>
-        <Nav.Link onClick={(e: React.MouseEvent) =>  handleClick(e)}>Log Out</Nav.Link>
-        </Nav></Navbar>
+        </Navbar>
     )
-    }
+}
 
- 
- 
+
+
 export default Navigate;
