@@ -115,7 +115,7 @@ const UserSignUp: React.FC<ILoginProps> = (props) => {
   } else {
     return (
       <React.Fragment>
-        <Jumbotron fluid className="rounded">
+        <Jumbotron fluid className="rounded bg-success text-white ">
           <h1>Join the Army of Victory Gardens!</h1>
           <p>Join the fight against potential source rationing and start gardening today!</p>
         </Jumbotron>
@@ -188,7 +188,7 @@ const UserSignUp: React.FC<ILoginProps> = (props) => {
                 </Col>
                 <Button href="/veggies" className="col-sm-8"
                   onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleClick(e)}
-                  variant="info" type="submit"><h5 className="my-auto">Let's dig in!</h5></Button>
+                  variant="success" type="submit"><h5 className="my-auto text-white">Let's dig in!</h5></Button>
               </Col>
             </Row>
           </Form>
