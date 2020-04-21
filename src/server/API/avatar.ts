@@ -31,7 +31,7 @@ router.get("/myavatar/:token", async (req, res) => {
     let token = req.params.token; // lowercase bc params/myavatar/:token is also lc (CM)
     let [result]: any = (await DB.Tokens.findUserIdByToken(token))[0];
     let theuserid = parseInt(result.userid, 10);
-    res.json(await DB.Users.getAvatar(theuserid))
+    res.json(await DB.Users.getUserInfo(theuserid))
   } catch (e) {
       console.log(e);
       res.sendStatus(500);

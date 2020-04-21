@@ -1,5 +1,5 @@
-body 
-{font-family: 'Josefin Sans', sans-serif;
+body {
+    font-family: 'Josefin Sans', sans-serif;
     background-color: rgba(255, 205, 111, 0.781);
 }
 
@@ -7,7 +7,6 @@ body
     background-color: rgba(130, 194, 57, 0.884);
     text-align: center;
 }
-
 
 #board {
     display: block;
@@ -29,4 +28,23 @@ body
     cursor: pointer;
     /* flex for stretching horizontal plant images to be square */
     display: flex;
+}
+
+.profileTabs>a {
+    color: white;
+}
+
+.profileTabs :hover {
+    transition-delay: 100ms;
+    color: white;
+}
+
+.avatars:hover {
+    border-radius: 50%;
+    border: 5px solid #28a745;
+}
+
+.avatarselect {
+    border-radius: 50%;
+    border: 5px solid #28a745;
 }

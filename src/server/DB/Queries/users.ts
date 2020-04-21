@@ -23,8 +23,11 @@ const selectAvatar = async (id: number, avatarid: number) => {
     return Query<IUsers>('UPDATE users SET avatarid = ? WHERE id= ?', values)
 };
 
-const getAvatar = async (id: number) => {
-    return Query<IUsers>('SELECT avatar.url FROM avatar JOIN users ON users.avatarid = avatar.id WHERE users.id = ?', [id]);
+const getUserInfo = async (id: number) => {
+    return Query<IUsers>(
+        `SELECT avatar.url, users.email, users.firstname, users.lastname, users.username
+        FROM avatar RIGHT JOIN users ON users.avatarid = avatar.id WHERE users.id = ?`
+        , [id]);
 }
 
 export default {
@@ -33,5 +36,5 @@ export default {
     findOneById,
     post,
     selectAvatar,
-    getAvatar
+    getUserInfo
 }

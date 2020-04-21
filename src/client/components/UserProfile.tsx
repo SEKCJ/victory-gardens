@@ -1,9 +1,14 @@
-import React, { } from 'react';
+import React, { useState, useEffect } from 'react';
 import { RouteComponentProps } from 'react-router';
-import { Card, Nav, Button, Image } from 'react-bootstrap';
+import { Card, Container, Col, Row, Tabs, Tab, Fade, } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import Settings from './Settings';
+import Profile from './MyProfile';
 
 const MyProfile: React.FC<IProfileProps> = props => {
+
+  const [key, setKey] = useState('settings');
+
   let handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     await localStorage.clear()
@@ -13,47 +18,27 @@ const MyProfile: React.FC<IProfileProps> = props => {
 
 
   return (
-    <Card>
-      <Card.Header>
-        <Nav variant="tabs" defaultActiveKey="#first" >
-          <Nav.Item>
-            <Nav.Link as={Link} to='/myprofile'>User Profile</Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link as={Link} to='/settings'>Settings</Nav.Link>
-          </Nav.Item>
-        </Nav>
-      </Card.Header>
-      <div className="d-flex flex-row mx-auto">
+    <Container>
+      <Row className="d-flex">
+        <Col sm="10" className="mx-auto my-4">
+          <Tabs defaultActiveKey="settings" activeKey={key} transition={Fade} id="my-profile"
+            className="bg-success rounded profileTabs" variant="pills" onSelect={(k: any) => setKey(k)}>
+            <Tab eventKey="profile" title="My Profile" >
+              <Tab.Content as={Card}>
+                <Profile />
+              </Tab.Content>
+            </Tab>
+            <Tab eventKey="settings" title="Settings">
+              <Tab.Content as={Card}>
+                <Settings />
+              </Tab.Content>
+            </Tab>
 
-        <Card.Body>
-          <br></br>
-          <Image
-            width={70}
-            height={70}
-            className="mr-3"
-            src="https://www.jing.fm/clipimg/detail/29-294477_jpg-royalty-free-stock-tomato-clipart-free-cherry.png"
-            alt="Generic placeholder" roundedCircle
-          />
-          <br></br>
-          <Card.Title>User Profile</Card.Title>
-          <br></br>
-          <Card.Text>
-            Name:
-    </Card.Text>
-          <br></br>
-          <Card.Text>
-            Email:
-    </Card.Text>
-          <br></br>
-          <Card.Text>
-            Password (encrypted):
-          </Card.Text>
-          <Button variant="danger" onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleClick(e)}>Log Out</Button>
+          </Tabs>
+        </Col>
+      </Row>
 
-        </Card.Body>
-      </div>
-    </Card>
+    </Container>
   )
 }
 
