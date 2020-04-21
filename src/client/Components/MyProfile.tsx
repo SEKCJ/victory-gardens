@@ -24,11 +24,9 @@ const Profile: React.FC<IAppProps> = props => {
 
     let fetchAPI = async () => {
         let [response]: any = await api(`/api/avatar/myavatar/${Token}`)
-        response.url = "https://images.pexels.com/photos/551628/pexels-photo-551628.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-        let avatars = ["https://images.pexels.com/photos/551628/pexels-photo-551628.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-            "https://i.kym-cdn.com/entries/icons/facebook/000/032/280/meme1.jpg",
-            "https://www.petguide.com/wp-content/uploads/2015/02/chug.jpg"]
         setApiResponse(response);
+        let avatars = await api('/api/avatar/')
+        console.log(avatars)
         setAvatarsResponse(avatars)
         makeModalRows(avatars)
     }
@@ -61,11 +59,11 @@ const Profile: React.FC<IAppProps> = props => {
     }
 
     let makeModalRows = async (avatars: string[]) => {
-        let avatarOptions = avatars.map((element: string, index: number, array: string[]) => {
+        let avatarOptions = avatars.map((element: any, index: number, array: string[]) => {
             return (
                 <Col sm="3" key={index}>
                     <div style={{
-                        "backgroundImage": `url("${element}")`, "backgroundSize": "cover",
+                        "backgroundImage": `url("${element.url}")`, "backgroundSize": "cover",
                         "borderRadius": "50%", "width": "100%", "paddingTop": "100%",
                         "backgroundPosition": "center"
                     }} className="avatars" onClick={() => handleClick(index, element, array)}>
