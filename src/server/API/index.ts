@@ -6,7 +6,9 @@ import helpchooseRouter from './helpchoose';
 import herbsRouter from './herbs';
 import savedherbsRouter from './savedherbs';
 import chooseherbsRouter from './chooseherbs';
-
+import avatarRouter from './avatar';
+import postRouter from './post';
+import responseRouter from './response'
 
 import { tokenCheckpoint } from '../Auth/authCheckpoint';
 
@@ -18,6 +20,9 @@ router.use('/savedvegetables', savedvegetablesRouter);
 router.use('/helpchoose', helpchooseRouter);
 router.use('/herbs', herbsRouter);
 router.use('/savedherbs', savedherbsRouter);
-router.use('/chooseherbs', chooseherbsRouter)
+router.use('/chooseherbs', chooseherbsRouter);
+router.use('/avatar', avatarRouter);
+router.use('/post', postRouter);
+router.use('/response', responseRouter);
 
 export default router;

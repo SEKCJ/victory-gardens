@@ -139,9 +139,9 @@ const Veggies: React.FC<IVeggieProps> = props => {
             }
 
             return (
-                <Container className=" p-3 mb-5 rounded border-0 " key={veggieId}>
+                <Container className=" p-3 mb-1 rounded border-0 " key={veggieId}>
                 <Row className="d-flex ">
-                    <Card className="mx-auto col-sm-8 px-0 p-3 mb-2 bg-success shadow p-3 mb-5 ">
+                    <Card className="mx-auto col-sm-8 px-0 p-3 bg-success shadow p-3 mb-2 ">
                         <div className="d-flex flex-row p-3 mb-2 bg-success rounded">
                             <Card.Img className="rounded border border-light " variant="top" style={{ "width": "10em" }}
                                 src={veggieImg} />

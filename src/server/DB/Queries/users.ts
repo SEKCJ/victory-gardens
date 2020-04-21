@@ -18,9 +18,23 @@ const post = async (email: string, firstname: string, lastname: string, password
     return Query<IUsers>('SET @@auto_increment_increment = 1; INSERT INTO users(email, firstname, lastname, password, username) VALUES(?,?,?,?,?); --', values)
 }
 
+const selectAvatar = async (id: number, avatarid: number) => {
+    let values = [avatarid, id];
+    return Query<IUsers>('UPDATE users SET avatarid = ? WHERE id= ?', values)
+};
+
+const getUserInfo = async (id: number) => {
+    return Query<IUsers>(
+        `SELECT avatar.url, users.email, users.firstname, users.lastname, users.username
+        FROM avatar RIGHT JOIN users ON users.avatarid = avatar.id WHERE users.id = ?`
+        , [id]);
+}
+
 export default {
     findOneByEmail,
     checkEmail,
     findOneById,
-    post
+    post,
+    selectAvatar,
+    getUserInfo
 }

@@ -8,7 +8,6 @@ body
     text-align: center;
 }
 
-
 #board {
     display: block;
     /* display: flex; */
@@ -29,4 +28,23 @@ body
     cursor: pointer;
     /* flex for stretching horizontal plant images to be square */
     display: flex;
+}
+
+.profileTabs>a {
+    color: white;
+}
+
+.profileTabs :hover {
+    transition-delay: 100ms;
+    color: white;
+}
+
+.avatars:hover {
+    border-radius: 50%;
+    border: 5px solid #28a745;
+}
+
+.avatarselect {
+    border-radius: 50%;
+    border: 5px solid #28a745;
 }
