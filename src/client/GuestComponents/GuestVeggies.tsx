@@ -5,7 +5,7 @@ import {
     Spinner, ProgressBar, Modal
 } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { api, Token } from '../Services/apiServices';
+import { api } from '../Services/apiServices';
 import { IVeggieProps } from '../Services/interfaces';
 
 const GuestVeggies: React.FC<IVeggieProps> = props => {
@@ -20,7 +20,6 @@ const GuestVeggies: React.FC<IVeggieProps> = props => {
     const [adding, setAdding] = useState<boolean>(false);
 
     const [apiResponse, setApiResponse] = useState<any>();
-    const [savedResponse, setSavedResponse] = useState<any>();
 
     const handleClose = () => {
         setAdded(<div></div>)
@@ -54,12 +53,12 @@ const GuestVeggies: React.FC<IVeggieProps> = props => {
                     <p className="mx-auto col-sm-8 mb-0">Showing {matchCases.length} results for "{searchVal}"...</p>
                 </Row>
             )
-            makeCards(matchCases, savedResponse)
+            makeCards(matchCases)
         } else {
             if (apiResponse) {
                 setCount(apiResponse.length)
                 setResults(<div></div>)
-                makeCards(apiResponse, savedResponse)
+                makeCards(apiResponse)
             }
         }
     }, [searchVal])
@@ -71,72 +70,42 @@ const GuestVeggies: React.FC<IVeggieProps> = props => {
 
     let fetchAPI = async () => {
         let response = await api(`/api/vegetables`)
-        let check = await api(`/api/savedvegetables/${Token}`);
-        let savedVegs: any = {};
-        check.forEach((element: any) => {
-            savedVegs[element.id] = true;
-        })
+
         setApiResponse(response);
-        setSavedResponse(savedVegs)
-        makeCards(response, savedVegs)
+
+        makeCards(response)
     }
 
     let handleClick = async (e: React.MouseEvent<HTMLButtonElement>, vegetableid: number, veggieName: string) => {
         setAdded(
-            <Modal show={true} animation={true} size="sm"
-                autoFocus={true} restoreFocus={true}>
-                <Modal.Header>
-                    <Modal.Title>Adding {veggieName} to your garden...</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <ProgressBar animated now={100} variant="success" />
-                </Modal.Body>
-            </Modal>
-        )
-        let response = await api('/api/savedvegetables', "POST", { Token, vegetableid })
-        setAdded(
-            <Modal show={true} onHide={handleClose} animation={true} keyboard={true}
+            <Modal show={true} animation={true} onHide={handleClose}
                 autoFocus={true} restoreFocus={true}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Successfully Added {veggieName} to Your Garden!</Modal.Title>
+                    <Modal.Title>Must be Signed In to Add Vegetables!</Modal.Title>
                 </Modal.Header>
-                <Modal.Body className="d-flex">
-                    <div className="mx-auto">
-                        <Button variant="info" className="mx-2" as={Link} to={`/veggies/${vegetableid}`}>
-                            View Details
-                        </Button>
-                        <Button variant="success" className="mx-2" as={Link} to="/savedveggies">
-                            View In Garden
-                        </Button>
-                    </div>
+                <Modal.Body>
+                    <Button as={Link} to="/guestsignup" variant="primary">Create An Account!</Button>
                 </Modal.Body>
             </Modal>
         )
+
     }
 
 
-    let makeCards = (resObj: any, savedVegs: any) => {
+    let makeCards = (resObj: any) => {
         let cardMemory = resObj.map((element: any, index: any) => {
             let veggieImg = element.url;
             let veggieName = element.name;
             let veggieId = element.id;
             let veggieSciName = element.sci_name;
-            let btnType: JSX.Element = (<div></div>);
-            if (savedVegs[veggieId]) {
-                btnType = (
-                    <Button className="px-3 py-1" variant="warning"
-                        style={{ "borderRadius": "50%" }}>
-                        <small className="text-success bg-white" style={{ "fontSize": "1.8em" }}>&#10003;</small>
-                    </Button>
-                )
-            } else {
-                btnType = (
-                    <Button className="px-3 py-0 bg-light border-light text-success" style={{ "borderRadius": "50%" }}
-                        onClick={(e: React.MouseEvent<HTMLButtonElement>) => { setAdding(true); handleClick(e, veggieId, veggieName) }}>
-                        <small style={{ "fontSize": "2em" }} >+</small>
-                    </Button>
-                )
-            }
+
+            let btnType = (
+                <Button className="px-3 py-0 bg-light border-light text-success" style={{ "borderRadius": "50%" }}
+                    onClick={(e: React.MouseEvent<HTMLButtonElement>) => { setAdding(true); handleClick(e, veggieId, veggieName) }}>
+                    <small style={{ "fontSize": "2em" }} >+</small>
+                </Button>
+            )
+
 
             return (
                 <Container className=" p-3 mb-5 rounded border-0 " key={veggieId}>
@@ -184,12 +153,12 @@ const GuestVeggies: React.FC<IVeggieProps> = props => {
     return (
         <React.Fragment>
             <Jumbotron fluid className="shadow rounded bg-success text-light">
-                    <h1>Veggie Masterlist</h1>
-                    <p> </p>
-                    <p>Looks like you haven't signed in yet!<Button className="text-dark" href="/guestlogin" variant="link" type="submit">Go to login page.</Button></p>
-                    <p className="text-white">Don't have an account yet? Click<Button className="text-dark" href="/guestsignup" variant="link" type="submit">here</Button>to join Victory Gardens!</p>
-                    <Button variant="primary" type="submit" disabled>Add a veggie!</Button>
-                    <Form.Text className="text-dark">Must be signed in to add a veggie.</Form.Text>
+                <h1>Veggie Masterlist</h1>
+                <p> </p>
+                <p>Looks like you haven't signed in yet!<Button className="text-dark" href="/guestlogin" variant="link" type="submit">Go to login page.</Button></p>
+                <p className="text-white">Don't have an account yet? Click<Button className="text-dark" href="/guestsignup" variant="link" type="submit">here</Button>to join Victory Gardens!</p>
+                <Button variant="primary" type="submit" disabled>Add a veggie!</Button>
+                <Form.Text className="text-dark">Must be signed in to add a veggie.</Form.Text>
             </Jumbotron>
             <Container fluid>
                 <Form className="d-flex">
