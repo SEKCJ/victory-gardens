@@ -19,7 +19,7 @@ const GuestHerbs: React.FC<IAppProps> = props => {
     const [adding, setAdding] = useState<boolean>();
 
     const [apiResponse, setApiResponse] = useState<any>();
-    const [savedResponse, setSavedResponse] = useState<any>();
+    // const [savedResponse, setSavedResponse] = useState<any>();
 
     const handleClose = () => {
         setAdded(<div></div>)
@@ -58,84 +58,60 @@ const GuestHerbs: React.FC<IAppProps> = props => {
                     <p className="mx-auto col-sm-8 mb-0">Showing {matchCases.length} results for "{searchVal}"...</p>
                 </Row>
             )
-            makeCards(matchCases, savedResponse)
+            makeCards(matchCases)
         } else {
             if (apiResponse) {
                 setCount(apiResponse.length)
                 setResults(<div></div>)
-                makeCards(apiResponse, savedResponse)
+                makeCards(apiResponse)
             }
         }
     }, [searchVal])
 
+    useEffect(() => {
+        fetchAPI()
+
+    }, [adding])
+
     let fetchAPI = async () => {
-        let response = await api(`/api/herbs`)
-        let check = await api(`/api/savedherbs/${Token}`)
-        let savedHerbs: any = {}
-        check.forEach((element: any) => {
-            savedHerbs[element.id] = true;
-        })
+        let response = await api(`/api/vegetables`)
+
         setApiResponse(response);
-        setSavedResponse(savedHerbs);
-        makeCards(response, savedHerbs)
+
+        makeCards(response)
     }
 
-    let handleClick = async (e: React.MouseEvent<HTMLButtonElement>, herbsId: number, herbsName: string) => {
+  
+    let handleClick = async (e: React.MouseEvent<HTMLButtonElement>, vegetableid: number, veggieName: string) => {
         setAdded(
-            <Modal show={true} animation={true} size="sm"
-                autoFocus={true} restoreFocus={true}>
-                <Modal.Header>
-                    <Modal.Title>Adding {herbsName} to your garden...</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <ProgressBar animated now={100} variant="success" />
-                </Modal.Body>
-            </Modal>
-        )
-        let response = await api('/api/savedherbs', "POST", { Token, herbsId })
-        setAdded(
-            <Modal show={true} onHide={handleClose} animation={true} keyboard={true}
+            <Modal show={true} animation={true} onHide={handleClose}
                 autoFocus={true} restoreFocus={true}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Successfully Added to Your Garden!</Modal.Title>
+                    <Modal.Title>Must be Signed In to Add Vegetables!</Modal.Title>
                 </Modal.Header>
-                <Modal.Body className="d-flex">
-                    <div className="mx-auto">
-                        <Button variant="info" className="mx-2" as={Link} to={`/userherbs/${herbsId}`}>
-                            View Details
-                        </Button>
-                        <Button variant="success" className="mx-2" as={Link} to="/savedveggies">
-                            View In Garden
-                        </Button>
-                    </div>
+                <Modal.Body>
+                    <Button as={Link} to="/guestsignup" variant="primary">Create An Account!</Button>
                 </Modal.Body>
             </Modal>
         )
+
     }
 
-    let makeCards = (resObj: any, savedHerbs: any) => {
+    let makeCards = (resObj: any) => {
         let cardMemory = resObj.map((element: any, index: any) => {
             let herbsImg = element.url;
             let herbsName = element.name;
             let herbsId = element.id;
             let herbsSciName = element.sci_name;
-            let btnType: JSX.Element = (<div></div>);
+            // let btnType: JSX.Element = (<div></div>);
 
-            if (savedHerbs[herbsId]) {
-                btnType = (
-                    <Button className="px-3 py-1 bg-white border-white" 
-                        style={{ "borderRadius": "50%" }}>
-                        <small className="text-success" style={{ "fontSize": "1.8em" }}>&#10003;</small>
-                    </Button>
-                )
-            } else {
-                btnType = (
-                    <Button className="px-3 py-0 bg-light border-light text-success" style={{ "borderRadius": "50%" }}
-                        onClick={(e: React.MouseEvent<HTMLButtonElement>) => { setAdding(true); handleClick(e, herbsId, herbsName) }}>
-                        <small style={{ "fontSize": "2em" }}>+</small>
-                    </Button>
-                )
-            }
+            let btnType = (
+                <Button className="px-3 py-0 bg-light border-light text-success" style={{ "borderRadius": "50%" }}
+                    onClick={(e: React.MouseEvent<HTMLButtonElement>) => { setAdding(true); handleClick(e, herbsId, herbsName) }}>
+                    <small style={{ "fontSize": "2em" }} >+</small>
+                </Button>
+            )
+            
             
             return (
                 <Container key={herbsId} className=" p-3 mb-5 rounded border-0 ">
