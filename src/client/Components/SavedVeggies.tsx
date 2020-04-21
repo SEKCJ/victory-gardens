@@ -86,7 +86,7 @@ const SavedVeggies: React.FC<IAppProps> = props => {
                                         src={veggieImg} />
 
                                     <Card.ImgOverlay className="px-2 py-2" style={{ "width": "4em" }}>
-                                        <Button className="px-0 py-0 bg-primary border-success text-center" style={{ "borderRadius": "25%" }}
+                                        <Button className="px-0 py-0 text-center" style={{ "borderRadius": "25%" }}
                                             onClick={(e: React.MouseEvent<HTMLButtonElement>) => { handleClickVeggie(e, veggieId, veggieName) }}>
                                             <small className="text-dark" style={{ "fontSize": "1.8em" }}>&#128465;</small>
                                         </Button>
@@ -99,7 +99,7 @@ const SavedVeggies: React.FC<IAppProps> = props => {
                                         </Card.Text>
                                     </Card.Body>
 
-                                    <Button className="shadow p-3 mb-5 text-center" variant="info" as={Link} to={`/veggies/${veggieId}`}>Read More</Button>
+                                    <Button className="shadow p-3 mb-5 text-center text-white border-white" variant="success" as={Link} to={`/veggies/${veggieId}`}>Read More</Button>
                                 </div>
                             </Card>
                         </Row>
@@ -123,7 +123,7 @@ const SavedVeggies: React.FC<IAppProps> = props => {
                                         src={herbImg} />
 
                                     <Card.ImgOverlay className="px-2 py-2" style={{ "width": "4em" }}>
-                                        <Button className="px-0 py-0 bg-primary border-success text-center" style={{ "borderRadius": "25%" }}
+                                        <Button className="px-0 py-0  text-center" style={{ "borderRadius": "25%" }}
                                             onClick={(e: React.MouseEvent<HTMLButtonElement>) => { handleClickHerb(e, herbId, herbName) }}>
                                             <small className="text-dark" style={{ "fontSize": "1.8em" }}>&#128465;</small>
                                         </Button>
@@ -136,7 +136,7 @@ const SavedVeggies: React.FC<IAppProps> = props => {
                                         </Card.Text>
                                     </Card.Body>
 
-                                    <Button className="shadow p-3 mb-5 text-center" variant="info" as={Link} to={`/herbs/${herbId}`}>Read More</Button>
+                                    <Button className="shadow p-3 mb-5 text-center text-white border-white" variant="success" as={Link} to={`/herbs/${herbId}`}>Read More</Button>
                                 </div>
                             </Card>
                         </Row>

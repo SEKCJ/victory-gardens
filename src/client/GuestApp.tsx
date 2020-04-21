@@ -16,7 +16,8 @@ const GuestApp: React.FC<IAppProps> = props => {
         <Router>
             <GuestNavigate />
             <Switch>
-                <Route exact path="/guestchoose" component={HelpChoose} />
+                 <Route exact path="/guestchoose" component={HelpChoose} /> 
+                 <Route exact path="/guestveggies" component={GuestVeggies} /> 
                 {/* <Route exact path= "/joingarden" component={UserSignUp}/> */}
                 <Route exact path="/guestsignup" component={GuestSignUp} />
                 <Route exact path="/guestabout" component={GuestAbout} />

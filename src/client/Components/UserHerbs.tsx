@@ -124,9 +124,9 @@ const Herbs: React.FC<IAppProps> = props => {
 
             if (savedHerbs[herbsId]) {
                 btnType = (
-                    <Button className="px-3 py-1" variant="warning"
+                    <Button className="px-3 py-1 bg-white border-white" 
                         style={{ "borderRadius": "50%" }}>
-                        <small className="text-light" style={{ "fontSize": "1.8em" }}>&#10003;</small>
+                        <small className="text-success" style={{ "fontSize": "1.8em" }}>&#10003;</small>
                     </Button>
                 )
             } else {
@@ -141,8 +141,8 @@ const Herbs: React.FC<IAppProps> = props => {
             return (
                 <Container key={herbsId} className=" p-3 mb-5 rounded border-0 ">
                     <Row className="d-flex ">
-                        <Card className="mx-auto col-sm-8 px-0 p-3 mb-2 bg-success shadow p-3 mb-5 h-50">
-                            <div className="d-flex flex-row p-3 mb-2 bg-success rounded">
+                        <Card className="mx-auto col-sm-8 px-0 p-3 mb-0 bg-success shadow p-3 mb-1">
+                            <div className="d-flex flex-row p-1 mb-2 bg-success rounded">
                                 <Card.Img className="rounded border border-light " variant="top" style={{ "width": "10em" }}
                                     src={herbsImg} />
                                 <Card.ImgOverlay className="px-2 py-2" style={{ "width": "4em" }}>
@@ -156,7 +156,7 @@ const Herbs: React.FC<IAppProps> = props => {
                                     </Card.Text>
                                 </Card.Body>
 
-                                <Button className="shadow p-3 mb-5 text-center" variant="primary" as={Link} to={`/userherbs/${herbsId}`}>Read More</Button>
+                                <Button className="shadow p-3 mb-5 border-white text-center" variant="primary" as={Link} to={`/userherbs/${herbsId}`}>Read More</Button>
                             </div>
                         </Card>
                     </Row>

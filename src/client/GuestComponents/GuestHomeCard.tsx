@@ -29,8 +29,8 @@ const GuestHome: React.FC<ILoginProps> = props => {
   } else {
     return (
       <>
-        <Jumbotron fluid className="shadow rounded text-white bg-success"> 
-          <h1>Victory Gardens</h1>
+        <Jumbotron fluid className="shadow rounded text-success bg-primary"> 
+          <h1 className="text-dark">Victory Gardens</h1>
           <h4>How can YOU help flatten the curve?</h4>
           <br></br>
           <Container>

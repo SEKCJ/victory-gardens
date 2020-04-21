@@ -9,7 +9,24 @@ const UserHome: React.FC<IAppProps> = props => {
     <Jumbotron fluid className="shadow rounded text-white ">
       <h1 className="text-light">Welcome to Victory Gardens!</h1><p className="text-light">How will YOU help flatten the curve?</p>
       </Jumbotron>
-           <Container fluid className="justify-content-center">
+      <Container className="justify-content-around ">  
+        <div className="justify-content-around">
+          <Carousel className="rounded mb-5">
+            <Carousel.Item>
+              <Image className="d-block w-100"
+                src="assets/victorydefintion2.png"
+                alt="First slide" rounded />
+            </Carousel.Item>
+
+            <Carousel.Item>
+              <Image className="d-block w-100"
+                src="assets/victoryabout3.jpg"
+                alt="Third slide" rounded />
+            </Carousel.Item>
+          </Carousel>
+        </div>
+      </Container>
+           {/* <Container fluid className="justify-content-center">
       <div className="justify-content">
         <Carousel className="rounded mb-5">
           <Carousel.Item>
@@ -25,7 +42,7 @@ const UserHome: React.FC<IAppProps> = props => {
           </Carousel.Item>
         </Carousel>
       </div>
-    </Container>
+    </Container> */}
 </>
   )
 }

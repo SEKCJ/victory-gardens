@@ -124,9 +124,9 @@ const Veggies: React.FC<IVeggieProps> = props => {
             let btnType: JSX.Element = (<div></div>);
             if (savedVegs[veggieId]) {
                 btnType = (
-                    <Button className="px-3 py-1" variant="warning"
+                    <Button className="px-3 py-1 bg-white" variant="warning"
                         style={{ "borderRadius": "50%" }}>
-                        <small className="text-light" style={{ "fontSize": "1.8em" }}>&#10003;</small>
+                        <small className="text-success bg-white" style={{ "fontSize": "1.8em" }}>&#10003;</small>
                     </Button>
                 )
             } else {
@@ -157,7 +157,7 @@ const Veggies: React.FC<IVeggieProps> = props => {
                                 </Card.Text>
                             </Card.Body>
 
-                            <Button className="shadow p-3 mb-5 text-center" variant="primary" as={Link} to={`/veggies/${veggieId}`}>Read More</Button>
+                            <Button className="shadow p-3 mb-5 text-center border-white" variant="primary" as={Link} to={`/veggies/${veggieId}`}>Read More</Button>
                         </div>
                     </Card>
                 </Row>
