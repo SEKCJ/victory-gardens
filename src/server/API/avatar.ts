@@ -51,7 +51,7 @@ router.post("/", isAdmin, async (req, res) => {
 // updates user's table for users to select an avatar
 router.put("/select", hasRole, async (req, res) => {
   try {
-    let avatarid = parseInt(req.body.avatarid, 10);
+    let avatarid = parseInt(req.body.avatarId, 10);
     let token = req.body.Token;
     let [result]: any = (await DB.Tokens.findUserIdByToken(token))[0];
     let theuserid = parseInt(result.userid, 10);

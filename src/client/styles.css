@@ -1,5 +1,5 @@
-body 
-{font-family: 'Josefin Sans', sans-serif;
+body {
+    font-family: 'Josefin Sans', sans-serif;
     background-color: rgba(192, 245, 171, 0.973);
 }
 
@@ -42,9 +42,25 @@ body
 .avatars:hover {
     border-radius: 50%;
     border: 5px solid #28a745;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 .avatarselect {
+    background-size: cover;
     border-radius: 50%;
+    width: 100%;
+    padding-top: 100%;
+    padding-left: 5px;
+    padding-right: 5px;
+    background-position: center;
     border: 5px solid #28a745;
+}
+
+.avatars {
+    background-size: cover;
+    border-radius: 50%;
+    width: 100%;
+    padding-top: 100%;
+    background-position: center;
 }
