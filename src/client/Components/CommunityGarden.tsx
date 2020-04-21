@@ -41,6 +41,7 @@ const CommGard: React.FC<IAppProps> = () => {
                                 View Responses
       </Button>
                             <Collapse in={open}>
+                                
                                 <Media>
                                     <img
                                         width={64}
