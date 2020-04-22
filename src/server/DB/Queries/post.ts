@@ -11,9 +11,9 @@ const allPosts = async () => {
 
 const onePost = async (id: number) => {
   return Query<IPost[]>(
-    `SELECT posts.*, users.avatarid, avatar.url
-        FROM posts JOIN users ON users.id = users.id
-        JOIN avatar ON users.avatarid = avatar.id
+    `SELECT posts.*, users.username, avatar.url FROM posts
+    JOIN users ON posts.userid = users.id
+    JOIN avatar ON users.avatarid = avatar.id
         WHERE posts.id = ?`,
     [id]
   );
@@ -21,16 +21,16 @@ const onePost = async (id: number) => {
 
 const postPost = async (userid: number, title: string, content: string) => {
   return Query<IPost>(
-    `SET @@auto_increment_increment = 1; INSERT INTO posts (title, content, userid) VALUES (?,?,?)`,
+    `SET @@auto_increment_increment = 1; INSERT INTO posts (userid, title, content) VALUES (?,?,?)`,
     [userid, title, content]
   );
 };
 
 const putPost = async (id: number, title: string, content: string) => {
   return Query<IPost>(`UPDATE posts SET title = ?, content = ? WHERE id = ?`, [
-    id,
     title,
     content,
+    id
   ]);
 };
 

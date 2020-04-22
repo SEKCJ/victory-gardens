@@ -1,10 +1,11 @@
 
 import React, { useState, useEffect } from 'react';
 import { IAppProps } from '../App';
-import { Container, Row, Col, Card, Image, Button, Modal, ListGroup} from 'react-bootstrap';
+import { Container, Row, Col, Card, Image, Button, Modal, ListGroup } from 'react-bootstrap';
 import { FaInfoCircle, FaPen } from 'react-icons/fa';
 import { api, Token } from '../Services/apiServices';
 
+interface IAvatars { id: number, url: string }
 
 const Profile: React.FC<IAppProps> = props => {
 
@@ -12,7 +13,7 @@ const Profile: React.FC<IAppProps> = props => {
     const [avatarsResponse, setAvatarsResponse] = useState<any>([]);
     const [avatarRows, setAvatarRows] = useState<JSX.Element[]>([]);
     const [avatarId, setAvatarId] = useState<number>();
-
+    const [submit, setSubmit] = useState<boolean>(false);
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -20,58 +21,112 @@ const Profile: React.FC<IAppProps> = props => {
 
     useEffect(() => {
         fetchAPI();
-    }, [])
+    }, [submit])
 
     let fetchAPI = async () => {
         let [response]: any = await api(`/api/avatar/myavatar/${Token}`)
         setApiResponse(response);
         let avatars = await api('/api/avatar/')
-        console.log(avatars)
         setAvatarsResponse(avatars)
         makeModalRows(avatars)
     }
 
-    let handleClick = (index: number, element: string, array: string[]) => {
-        let savedArray = [...array];
-        let avatarOptions = savedArray.map((element: string, index: number, array: string[]) => {
+    let handleClick = (element: IAvatars, index: number, avatars: IAvatars[]) => {
+        setAvatarId(element.id)
+
+        let columns = avatars.map((element, index, array) => {
             return (
-                <Col sm="3" key={index}>
-                    <div style={{
-                        "backgroundImage": `url("${element}")`, "backgroundSize": "cover",
-                        "borderRadius": "50%", "width": "100%", "paddingTop": "100%",
-                        "backgroundPosition": "center"
-                    }} className="avatars" onClick={() => handleClick(index, element, array)}>
-                    </div>
+                <Col sm="3" key={element.url} >
+                    <div style={{ "backgroundImage": `url("${element.url}")` }}
+                        className="avatars" onClick={() => handleClick(element, index, array)}></div>
                 </Col>
             )
         })
-        avatarOptions[index] = (
-            <Col sm="3" key={index}>
-                <div style={{
-                    "backgroundImage": `url("${element}")`, "backgroundSize": "cover",
-                    "borderRadius": "50%", "width": "100%", "paddingTop": "100%",
-                    "backgroundPosition": "center"
-                }} className="avatarselect" onClick={() => handleClick(index, element, array)}>
-                </div>
+
+        columns[index] = (
+            <Col sm="3" key={element.url} >
+                <div style={{ "backgroundImage": `url("${element.url}")` }}
+                    className="avatarselect" onClick={() => handleClick(element, index, avatars)}></div>
             </Col>
         )
-        setAvatarRows(avatarOptions)
+
+        let rows: JSX.Element[] = []
+        let tempArr: JSX.Element[] = [];
+        let count = 1;
+        columns.forEach((element: any, index: number) => {
+            if (count !== 4) {
+                tempArr.push(element)
+                if ((index + 1) === columns.length) {
+                    rows.push(
+                        <Row key={index} className="mb-3">
+                            {tempArr}
+                        </Row>
+                    )
+                    tempArr = []
+                }
+                count += 1;
+            } else if (count === 4) {
+                tempArr.push(element);
+                rows.push(
+                    <Row key={index} className="mb-3">
+                        {tempArr}
+                    </Row>
+                )
+                tempArr = []
+                count = 1;
+            }
+        })
+
+        setAvatarRows(rows)
     }
 
-    let makeModalRows = async (avatars: string[]) => {
-        let avatarOptions = avatars.map((element: any, index: number, array: string[]) => {
+    let makeModalRows = async (avatars: IAvatars[]) => {
+        let columns = avatars.map((element, index, array) => {
             return (
-                <Col sm="3" key={index}>
-                    <div style={{
-                        "backgroundImage": `url("${element.url}")`, "backgroundSize": "cover",
-                        "borderRadius": "50%", "width": "100%", "paddingTop": "100%",
-                        "backgroundPosition": "center"
-                    }} className="avatars" onClick={() => handleClick(index, element, array)}>
-                    </div>
+                <Col sm="3" key={element.url} >
+                    <div style={{ "backgroundImage": `url("${element.url}")` }}
+                        className="avatars" onClick={() => handleClick(element, index, array)}></div>
                 </Col>
             )
         })
-        setAvatarRows(avatarOptions)
+
+        let rows: JSX.Element[] = []
+        let tempArr: JSX.Element[] = [];
+        let count = 1;
+        columns.forEach((element: any, index: number) => {
+            if (count !== 4) {
+                tempArr.push(element)
+                if ((index + 1) === columns.length) {
+                    rows.push(
+                        <Row key={index} className="mb-3">
+                            {tempArr}
+                        </Row>
+                    )
+                    tempArr = []
+                }
+                count += 1;
+            } else if (count === 4) {
+                tempArr.push(element);
+                rows.push(
+                    <Row key={index} className="mb-3">
+                        {tempArr}
+                    </Row>
+                )
+                tempArr = []
+                count = 1;
+            }
+        })
+
+        setAvatarRows(rows)
+    }
+
+    let handleAvatarSelect = async (e: React.MouseEvent<HTMLButtonElement>) => {
+        setSubmit(true)
+        let avatarSubmit = await api('/api/avatar/select', "PUT", { avatarId, Token })
+        if (avatarSubmit) {
+            setSubmit(false);
+            handleClose();
+        }
     }
 
     return (
@@ -82,12 +137,11 @@ const Profile: React.FC<IAppProps> = props => {
                     <Modal.Title>Pick a New Avatar!</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Row>
-                        {avatarRows.slice(0, 4)}
-                    </Row>
+                    {avatarRows}
                 </Modal.Body>
                 <Modal.Footer className="py-0">
-                    <Button variant="info" className="mx-auto my-0" size="lg" onClick={handleClose}>
+                    <Button variant="info" className="mx-auto my-0" size="lg"
+                        onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleAvatarSelect(e)}>
                         Save Changes
                     </Button>
                 </Modal.Footer>
@@ -98,11 +152,8 @@ const Profile: React.FC<IAppProps> = props => {
             <Card.Body className="mx-3">
                 <Row className="mb-3">
                     <Col sm="3">
-                        <div style={{
-                            "backgroundImage": `url("${apiResponse.url}")`, "backgroundSize": "cover",
-                            "borderRadius": "50%", "width": "100%", "paddingTop": "100%",
-                            "backgroundPosition": "center"
-                        }}>
+                        <div style={{ "backgroundImage": `url("${apiResponse.url}")` }}
+                            className="mainAvatar">
                             <Button variant="dark" style={{
                                 "position": "absolute",
                                 "top": "0em", "right": "10%"
@@ -133,7 +184,7 @@ const Profile: React.FC<IAppProps> = props => {
                                 <h6>Email</h6>
                                 <h5>{apiResponse.email}</h5>
                             </ListGroup.Item>
-                            
+
                         </ListGroup>
                     </Card.Body>
                 </Card>

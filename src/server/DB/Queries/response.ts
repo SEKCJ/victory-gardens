@@ -1,5 +1,5 @@
 import { Query } from "../index";
-import { IPost, IResponse } from "../../Models";
+import { IResponse } from "../../Models";
 
 const allResByPost = async (postid: number) => {
   return Query<IResponse[]>(
@@ -10,11 +10,25 @@ const allResByPost = async (postid: number) => {
   );
 };
 
-const oneResByPost = async (id: number) => {
-  return Query<IResponse[]>(`SELECT responses.*`);
+const postRes = async (postid: number, userid: number, response: string) => {
+  return Query<IResponse>(
+    `SET @@auto_increment_increment = 1; INSERT INTO responses (postid, userid, response) VALUES (?,?,?)`, [postid, userid, response]);
 };
+
+const putRes = async (id: number, response: string) => {
+  return Query<IResponse>(`UPDATE responses SET responses = ? WHERE id =?`, [
+    response,
+    id
+  ]);
+};
+
+const deleteRes = async (id: number) => {
+  return Query<IResponse>(`DELETE FROM responses WHERE id = ?`, [id])
+}
 
 export default {
   allResByPost,
-  oneResByPost,
+  postRes,
+  putRes,
+  deleteRes
 };
