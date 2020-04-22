@@ -61,8 +61,16 @@ router.put("/:id", hasRole, async (req, res) => {
 
 router.delete("/:id", hasRole, async (req, res) => {
   let id = parseInt(req.params.id, 10);
+  let token = req.body.Token;
   try {
-    res.json(await DB.Post.deletePost(id));
+    let [userResults]: any = (await DB.Tokens.findUserIdByToken(token))[0];
+    let userid = parseInt(userResults.userid, 10);
+    let [results] = await DB.Post.confirmUserPost(userid, id)
+    if (results) {
+      res.json(await DB.Post.deletePost(id));
+    } else {
+      res.sendStatus(400).json("nice try")
+    }
   } catch (e) {
     res.sendStatus(500).json("delete failed");
   }

@@ -19,6 +19,13 @@ router.post('/', async (req, res) => {
     }
 })
 
+router.post('/user', hasRole, async (req, res) => {
+    let token = req.body.Token;
+    let [result] = await DB.Tokens.findUserIdByToken(token)
+    res.json(result)
+})
+
+
 router.put('/', hasRole, async (req, res) => {
     let token = req.body.Token;
     let password = req.body.password;

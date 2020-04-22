@@ -38,7 +38,7 @@ const App: React.FC<IAppProps> = props => {
 				<Route exact path="/userherbs" component={Herbs} />
 				<Route exact path="/userherbs/:herbid" component={SingleHerb} />
 				<Route exact path="/communitygarden" component={CommGard} />
-				<Route exact path="/communitygarden/:id" component={Response} />
+				<Route exact path="/communitygarden/post/:id" component={Response} />
 				<Route path='/' component={UserHome} />
 				{/* <Route exact path="/myprofile" component={ControlledTabs} /> */}
 				{/* <Route exact path="/joingarden" component={UserSignUp} /> */}

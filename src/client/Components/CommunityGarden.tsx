@@ -46,43 +46,9 @@ const CommGard: React.FC<IAppProps> = () => {
                                 <p className="text-light">{element.content}</p>
                                 <h6 className="text-muted">{days}</h6>
 
-                                <Button variant="success" as={Link} to={`/communitygarden/${element.id}`}>
+                                <Button variant="success" as={Link} to={`/communitygarden/post/${element.id}`}>
                                     View Responses
                                 </Button>
-                                {/* <Button
-                                    onClick={() => handleOpen(index)}
-                                    aria-controls="example-collapse-text"
-                                    aria-expanded={open1}
-                                    variant="success"
-                                >
-                                    View Responses
-                                </Button> 
-                                <Collapse in={open1}>
-
-                                    <Media>
-                                        <img
-                                            width={64}
-                                            height={64}
-                                            className="mr-3"
-                                            src="holder.js/64x64"
-                                            alt="Generic placeholder"
-                                        />
-
-                                        <Media.Body>
-                                            <h5 className="text-success">Username</h5>
-                                            <h2>Title of Post</h2>
-                                            <p>
-                                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
-                                                scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in
-                                                vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi
-                                                vulputate fringilla. Donec lacinia congue felis in faucibus.
-                                    </p>
-                                            <h6 className="text-muted">2 days ago</h6>
-                                        </Media.Body></Media>
-                                </Collapse> */}
-
-
-
                             </Media.Body >
 
                         </Media>
@@ -118,7 +84,8 @@ const CommGard: React.FC<IAppProps> = () => {
             </div>
 
             <Dropdown>
-                <Dropdown.Toggle variant="success" id="dropdown-basic" style={{ "position": "fixed", "bottom": "0px", "right": "0px" }}>
+                <Dropdown.Toggle variant="success" id="dropdown-basic" 
+                style={{ "position": "fixed", "bottom": "0px", "right": "0px" }}>
                     <FaLeaf size="3.5em" />
                 </Dropdown.Toggle>
 

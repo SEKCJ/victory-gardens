@@ -132,11 +132,12 @@ const Profile: React.FC<IAppProps> = props => {
     return (
         <React.Fragment>
 
-            <Modal show={show} onHide={handleClose}>
+            <Modal show={show} onHide={handleClose} scrollable={true}
+                autoFocus={true} restoreFocus={true}>
                 <Modal.Header closeButton>
                     <Modal.Title>Pick a New Avatar!</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
+                <Modal.Body style={{"maxHeight": "20em"}}>
                     {avatarRows}
                 </Modal.Body>
                 <Modal.Footer className="py-0">

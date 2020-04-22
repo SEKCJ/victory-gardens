@@ -3,9 +3,12 @@ import { IResponse } from "../../Models";
 
 const allResByPost = async (postid: number) => {
   return Query<IResponse[]>(
-    `SELECT responses.* FROM responses
-        JOIN posts ON posts.id = responses.postid
-        WHERE posts.id = ?`,
+    `SELECT responses.created_at, responses.id, responses.response, users.username, avatar.url
+    FROM responses
+    JOIN posts ON posts.id = responses.postid
+    JOIN users ON responses.userid = users.id
+    JOIN avatar ON users.avatarid = avatar.id
+    WHERE posts.id = ?`,
     [postid]
   );
 };

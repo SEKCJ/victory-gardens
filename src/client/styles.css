@@ -76,3 +76,13 @@ body {
     border: 1px solid #191A1C;
     background-color: #FAF8D9;
 }
+
+.responseAvatar {
+    background-size: cover;
+    border-radius: 50%;
+    height: 100%;
+    padding-left: 100%;
+    background-position: center;
+    border: 1px solid #191A1C;
+    background-color: #FAF8D9;
+}
