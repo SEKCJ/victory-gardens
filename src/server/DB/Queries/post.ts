@@ -11,9 +11,9 @@ const allPosts = async () => {
 
 const onePost = async (id: number) => {
   return Query<IPost[]>(
-    `SELECT posts.*, users.avatarid, avatar.url
-        FROM posts JOIN users ON users.id = users.id
-        JOIN avatar ON users.avatarid = avatar.id
+    `SELECT posts.*, users.username, avatar.url FROM posts
+    JOIN users ON posts.userid = users.id
+    JOIN avatar ON users.avatarid = avatar.id
         WHERE posts.id = ?`,
     [id]
   );

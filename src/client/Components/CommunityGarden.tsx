@@ -1,103 +1,152 @@
-import React, { useState } from 'react';
-import { Form, Col, Card, Button, Jumbotron, Dropdown, Media, Collapse } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { Form, Col, Card, Button, Jumbotron, Dropdown, Media, Collapse, Pagination } from 'react-bootstrap';
 import { FaLeaf } from 'react-icons/fa';
+import { api, Token } from '../Services/apiServices';
 import { IAppProps } from '../App';
 
 const CommGard: React.FC<IAppProps> = () => {
-    const [open, setOpen] = useState(false);
+    const [open1, setOpen1] = useState(false);
+    const [open2, setOpen2] = useState(false);
+    const [open3, setOpen3] = useState(false);
+    const [open4, setOpen4] = useState(false);
+    const [open5, setOpen5] = useState(false);
 
+    const [apiResponse, setApiResponse] = useState<any>();
+    const [posts, setPosts] = useState<JSX.Element[]>();
+
+    let handleOpen = (index: number) => {
+        switch (index) {
+            case 1:
+                setOpen1(!open1)
+                break;
+            case 2:
+                setOpen2(!open2);
+                break;
+            case 3:
+                setOpen3(!open3);
+                break;
+            case 4:
+                setOpen4(!open4);
+                break;
+            case 5:
+                setOpen5(!open5);
+                break;
+        }
+    }
+
+    useEffect(() => {
+        fetchAPI()
+    }, [])
+
+    let fetchAPI = async () => {
+        let results = await api(`/api/posts/range/${0}/${5}`)
+        console.log(results)
+        setApiResponse(results);
+        makePosts(results)
+    }
+
+    useEffect(() => {
+        if (apiResponse) {
+            makePosts(apiResponse);
+        }
+    }, [open1, open2, open3, open4, open5])
+
+    let makePosts = (resObj: any) => {
+        let postCards = resObj.map((element: any, index: number) => {
+            let mysqldate: any = new Date(element.created_at);
+            let currentDate: any = new Date();
+            let diffTime = Math.abs(currentDate - mysqldate);
+            let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            let days = "";
+            if (diffDays === 1) {
+                days = `${diffDays} day ago`;
+            } else {
+                days = `${diffDays} days ago`
+            }
+            return (
+                <Card className="col-sm-8 mx-auto my-4" bg="dark" key={element.id}>
+                    <Card.Body className="px-0">
+                        <Media className="col-sm-12 px-0">
+                            <Col sm="3" className="mt-3 px-0 mr-3">
+                                <div style={{ "backgroundImage": `url("${element.url}")` }}
+                                    className="mainAvatar"></div>
+                            </Col>
+                            <Media.Body>
+                                <h5 className="text-light">{element.username}</h5>
+                                <h2 className="text-light">{element.title}</h2>
+                                <p className="text-light">{element.content}</p>
+                                <h6 className="text-muted">{days}</h6>
+
+                                <Button variant="success">
+                                    View Responses
+                                </Button>
+                                {/* <Button
+                                    onClick={() => handleOpen(index)}
+                                    aria-controls="example-collapse-text"
+                                    aria-expanded={open1}
+                                    variant="success"
+                                >
+                                    View Responses
+                                </Button> 
+                                <Collapse in={open1}>
+
+                                    <Media>
+                                        <img
+                                            width={64}
+                                            height={64}
+                                            className="mr-3"
+                                            src="holder.js/64x64"
+                                            alt="Generic placeholder"
+                                        />
+
+                                        <Media.Body>
+                                            <h5 className="text-success">Username</h5>
+                                            <h2>Title of Post</h2>
+                                            <p>
+                                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
+                                                scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in
+                                                vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi
+                                                vulputate fringilla. Donec lacinia congue felis in faucibus.
+                                    </p>
+                                            <h6 className="text-muted">2 days ago</h6>
+                                        </Media.Body></Media>
+                                </Collapse> */}
+
+
+
+                            </Media.Body >
+
+                        </Media>
+                    </Card.Body>
+                </Card>
+            )
+        })
+
+        setPosts(postCards)
+    }
 
     return (
         <React.Fragment>
             <Jumbotron fluid className="shadow rounded text-white ">
                 <h1 className="text-light">Community Garden</h1><p className="text-light">Do you have questions for your fellow gardeners? Tips? Tricks? Post them here!</p>
             </Jumbotron>
-            <Card className="col-md-6 mx-auto ">
-                <Media>
-                    <img
-                        width={64}
-                        height={64}
-                        className="mr-3"
-                        src="holder.js/64x64"
-                        alt="Generic placeholder"
-                    />
-                    <Media.Body>
-                        <h5 className="text-success">Username</h5>
-                        <h2>Title of Post</h2>
-                        <p>
-                            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque
-                            ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at,
-                            tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla.
-                            Donec lacinia congue felis in faucibus.
-    </p>
-                        <h6 className="text-muted">2 days ago</h6>
 
-                        <>
-                            <Button
-                                onClick={() => setOpen(!open)}
-                                aria-controls="example-collapse-text"
-                                aria-expanded={open}
-                            >
-                                View Responses
-      </Button>
-                            <Collapse in={open}>
-                                
-                                <Media>
-                                    <img
-                                        width={64}
-                                        height={64}
-                                        className="mr-3"
-                                        src="holder.js/64x64"
-                                        alt="Generic placeholder"
-                                    />
-
-                                    <Media.Body>
-                                        <h5 className="text-success">Username</h5>
-                                        <h2>Title of Post</h2>
-                                        <p>
-                                            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
-                                            scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in
-                                            vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi
-                                            vulputate fringilla. Donec lacinia congue felis in faucibus.
-        </p>
-                                        <h6 className="text-muted">2 days ago</h6>
-                                    </Media.Body></Media>
-                            </Collapse>
-                        </>
-
-                        {/* <div id="example-collapse-text">
-          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
-          terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer
-          labore wes anderson cred nesciunt sapiente ea proident.
-        </div> */}
+            {posts}
 
 
-                    </Media.Body >
-
-                </Media>
-
-
-
-                {/* <img
-                    width={64}
-                    height={64}
-                    className="mr-3"
-                    src="holder.js/64x64"
-                    alt="Generic placeholder"
-                />
-                <Card.Body>
-                    <h5 className="text-success">Username</h5>
-                    <p>
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque
-                        ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at,
-                        tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla.
-                        Donec lacinia congue felis in faucibus.
-    </p>
-
-                </Card.Body>
-                <Button variant="success">Reply</Button> */}
-            </Card>
-
+            <div className="d-flex">
+                <Pagination className="mx-auto">
+                    <Pagination.First />
+                    <Pagination.Prev />
+                    <Pagination.Item active>{1}</Pagination.Item>
+                    <Pagination.Item>{2}</Pagination.Item>
+                    <Pagination.Item>{3}</Pagination.Item>
+                    <Pagination.Ellipsis />
+                    <Pagination.Item>{20}</Pagination.Item>
+                    <Pagination.Next />
+                    <Pagination.Last />
+                </Pagination>
+            </div>
 
             <Dropdown>
                 <Dropdown.Toggle variant="success" id="dropdown-basic" style={{ "position": "fixed", "bottom": "0px", "right": "0px" }}>

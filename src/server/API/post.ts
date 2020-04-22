@@ -25,7 +25,7 @@ router.get("/:id?", async (req, res) => {
         mainPost["comments"] = responses;
         return mainPost;
       });
-      console.log(await Promise.all(forum));
+      await Promise.all(forum);
       res.json(posts);
     } catch (e) {
       console.log(e);
@@ -33,6 +33,25 @@ router.get("/:id?", async (req, res) => {
     }
   }
 });
+
+router.get('/range/:start/:end', async (req, res) => {
+  let start = parseInt(req.params.start, 10);
+  let end = parseInt(req.params.end, 10);
+  try {
+    let posts = (await DB.Post.allPosts()).slice(start, end);
+    let forum = posts.map(async (element) => {
+      let responses = await DB.Response.allResByPost(element.id);
+      let mainPost: any = Object.assign(element);
+      mainPost["comments"] = responses;
+      return mainPost;
+    });
+    await Promise.all(forum);
+    res.json(posts);
+  } catch (e) {
+    console.log(e);
+    res.sendStatus(500);
+  }
+})
 
 // creates a new forum post
 router.post("/", hasRole, async (req, res) => {
