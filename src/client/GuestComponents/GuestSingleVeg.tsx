@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { RouteComponentProps } from 'react-router-dom';
+import { RouteComponentProps, Link } from 'react-router-dom';
 import { api } from '../Services/apiServices';
-import { Card, ListGroup, ListGroupItem, Container, Row, Col, Button, Jumbotron, Form, Spinner } from 'react-bootstrap';
+import { Card, ListGroup, ListGroupItem, Container, Row, Col, Button, Jumbotron, Form, Spinner, Accordion } from 'react-bootstrap';
 import { IVeggieState, IResObj } from '../services/interfaces';
 
 interface IVeggieProps extends RouteComponentProps<{ id: string }> { }
@@ -21,13 +21,16 @@ const GSingleVeg: React.FC<IVeggieProps> = (props) => {
     }
 
     let makeVeggie = (resObj: any) => {
-    
+        console.log(resObj)
         setVgObj(
             {
                 vgId: resObj.id,
                 vgName: resObj.name,
                 vgSciName: resObj.sci_name,
-                vgImg: resObj.url
+                vgImg: resObj.url, 
+                vgSoil: resObj.soil,
+                vgCompanions: resObj.companions,
+                vgHM: resObj.harvest_months,
             }
         )
         setPageState(false);
@@ -51,8 +54,8 @@ const GSingleVeg: React.FC<IVeggieProps> = (props) => {
             <Container>
                 <Jumbotron fluid>
                     <h1></h1>
-                    <p>Must sign in to view details.<Button href="/guestlogin" variant="link" type="submit">Go to login page.</Button></p>
-                    <p className="text-muted">Don't have an account yet? Click<Button href="/guestsignup" variant="link" type="submit">here</Button>to join Victory Gardens!</p>
+                    <p >Must be signed in to view all plant details.<Button className="text-white" href="/guestlogin" variant="link" type="submit">Go to login page.</Button></p>
+                    <p className="text-muted">Don't have an account yet? Click<Button className="text-white" href="/guestsignup" variant="link" type="submit">here</Button>to join Victory Gardens!</p>
                 </Jumbotron>
                 <div className="d-flex">
                     <Card className="mx-auto my-4 bg-white shadow-lg p-3 mb-5 border- mb-3 text-success" style={{ width: '50rem' }}>
@@ -71,36 +74,178 @@ const GSingleVeg: React.FC<IVeggieProps> = (props) => {
 
 
                         <Card.Body className="mx-auto">
-                            <Button variant="primary" type="submit" disabled>Add to My Garden!</Button>
+                            <Button variant="light" type="submit" disabled>Add to My Garden!</Button>
                             <Form.Text className="text-muted">Must be signed in to add a veggie.</Form.Text>
 
 
                         </Card.Body>
                         <Container>
-                            <Row>
-                                <Col>
-                                    <ListGroup className="text-muted">
-                                        <ListGroupItem>Login to view details.</ListGroupItem>
-                                        <ListGroupItem></ListGroupItem>
-                                        <ListGroupItem></ListGroupItem>
-                                        <ListGroupItem></ListGroupItem>
-                                        <ListGroupItem></ListGroupItem>
-                                        <ListGroupItem></ListGroupItem>
-                                        <ListGroupItem></ListGroupItem>
-                                    </ListGroup>
-                                </Col>
+                        <br></br>
+                        <Row>
+                            <Col>
+                            <br></br>
+                            <Accordion >
+                                    <Card className="rounded-lg">
+                                        <Card.Header className="bg-success text-white d-flex">
+                                        <Accordion.Toggle as={Button} variant="link"
+                                                className="mx-auto text-white" eventKey="0">
+                                                Soil
+                                                </Accordion.Toggle>
+                                        </Card.Header>
+                                        <Accordion.Collapse eventKey="0">
+                                            <Card.Body>
+                                                <ListGroup className="list-group-flush">
+                                                    {vgObj.vgSoil}
+                                                </ListGroup>
+                                            </Card.Body>
+                                            </Accordion.Collapse>
+                                    </Card>
+                                    <br></br>
+                                    <Card className="rounded-lg">
+                                        <Card.Header className="bg-success text-white d-flex">
+                                        Position
+                                        </Card.Header>
+                                       
+                                 
+                                      
+                                    </Card>
+                                    <br></br>
+                                    <Card className="rounded-lg">
+                                        <Card.Header className="bg-success text-white d-flex">
+                                         
+                                                Frost Tolerance
+                                      
+                                        </Card.Header>
+                                        
+                                    </Card>
+                                    <br></br>
+                                    <Card className="rounded-lg">
+                                        <Card.Header className="bg-success text-white d-flex">
+                                           
+                                                Feeding
+                                       
+                                        </Card.Header>
+                                        
+                                     
+                                    </Card>
+                            
+                                <br></br>
+                                </Accordion>
+                            </Col>
 
-                                <Col>
+                            <Col>
+                            <Accordion>
+                                    <br></br>
+                                    <Card className="rounded-lg">
+                                        <Card.Header className="bg-success text-white d-flex">
+                                        <Accordion.Toggle as={Button} variant="link"
+                                                className="mx-auto text-white" eventKey="2">
+                                                Companions
+                                                </Accordion.Toggle>
+                                        </Card.Header>
+                                        <Accordion.Collapse eventKey="2">
+        <Card.Body>{vgObj.vgCompanions}</Card.Body>
+        </Accordion.Collapse>
+                                    </Card>
+                                    <br></br>
+                                    <Card className="rounded-lg">
+                                        <Card.Header className="bg-success text-white d-flex">
+                                           
+                                                Bad Companions
+                                     
+                                        </Card.Header>
+                                      
+                                    </Card>
+                                    <br></br>
+                                    <Card className="rounded-lg">
+                                        <Card.Header className="bg-success text-white d-flex">
+                                            
+                                                Spacing
+                                        
+                                        </Card.Header>
+                                        
+                                            
+                                    </Card>
+                                    <br></br>
+                                    <Card className="rounded-lg">
+                                        <Card.Header className="bg-success text-white d-flex">
+                                            
+                                                Sow and Plant
+                                        
+                                        </Card.Header>
+                                        
+                                            
+                                    </Card>
+                                    <br></br>
+                                    <Card className="rounded-lg">
+                                        <Card.Header className="bg-success text-white d-flex">
+                                            
+                                                Planting Months
+                                      
+                                        </Card.Header>
+                               
+                                         
+                                      
+                                    </Card>
+                                    <br></br>
+                      </Accordion>
+                            </Col>
 
-                                    <ListGroup className="text-muted">
-                                        <ListGroupItem></ListGroupItem>
-                                        <ListGroupItem></ListGroupItem>
-                                        <ListGroupItem></ListGroupItem>
-                                        <ListGroupItem></ListGroupItem>
-                                        <ListGroupItem></ListGroupItem>
-                                        <ListGroupItem></ListGroupItem>
-                                        <ListGroupItem></ListGroupItem>
-                                    </ListGroup>  </Col></Row> </Container>
+                            <Col>
+                            <Accordion>
+                                    <br></br>
+                                    <Card className="rounded-lg">
+                                        <Card.Header className="bg-success text-white d-flex">
+                                        <Accordion.Toggle as={Button} variant="link"
+                                                className="mx-auto text-white" eventKey="3">
+                                                Harvesting Months
+                                                </Accordion.Toggle>
+                                        </Card.Header>
+                                        <Accordion.Collapse eventKey="3">
+                                        <Card.Body>{vgObj.vgHM}</Card.Body>
+                                        </Accordion.Collapse>
+                                    </Card>
+                                    <br></br>
+                                    <Card className="rounded-lg">
+                                        <Card.Header className="bg-success text-white d-flex">
+                                            
+                                                Notes
+                                      
+                                        </Card.Header>
+                                     
+                                  
+                                    </Card>
+                                    <br></br>
+                                    <Card className="rounded-lg">
+                                        <Card.Header className="bg-success text-white d-flex">
+                                            
+                                                Harvesting
+                                   
+                                        </Card.Header>
+                                        
+                                            
+                                    
+                                    </Card>
+                                    <br></br>
+                                    <Card className="rounded-lg">
+                                        <Card.Header className="bg-success text-white d-flex">
+                                          
+                                                Troubleshooting
+                                     
+                                        </Card.Header>
+                                   
+                                           
+                                  
+                                    </Card>
+                                    <br></br>
+                    </Accordion>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Button className="text-success" as={Link} to="/veggies" variant="link">
+                                Go Back To List
+                            </Button>
+                        </Row> </Container>
                     </Card>
                 </div>
             </Container>
