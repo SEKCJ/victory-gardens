@@ -74,7 +74,7 @@ const GuestHerbs: React.FC<IAppProps> = props => {
     }, [adding])
 
     let fetchAPI = async () => {
-        let response = await api(`/api/vegetables`)
+        let response = await api(`/api/herbs`)
 
         setApiResponse(response);
 
