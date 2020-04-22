@@ -2,37 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Form, Col, Card, Button, Jumbotron, Dropdown, Media, Collapse, Pagination } from 'react-bootstrap';
 import { FaLeaf } from 'react-icons/fa';
 import { api, Token } from '../Services/apiServices';
+import { Link } from 'react-router-dom';
 import { IAppProps } from '../App';
 
 const CommGard: React.FC<IAppProps> = () => {
-    const [open1, setOpen1] = useState(false);
-    const [open2, setOpen2] = useState(false);
-    const [open3, setOpen3] = useState(false);
-    const [open4, setOpen4] = useState(false);
-    const [open5, setOpen5] = useState(false);
 
     const [apiResponse, setApiResponse] = useState<any>();
     const [posts, setPosts] = useState<JSX.Element[]>();
-
-    let handleOpen = (index: number) => {
-        switch (index) {
-            case 1:
-                setOpen1(!open1)
-                break;
-            case 2:
-                setOpen2(!open2);
-                break;
-            case 3:
-                setOpen3(!open3);
-                break;
-            case 4:
-                setOpen4(!open4);
-                break;
-            case 5:
-                setOpen5(!open5);
-                break;
-        }
-    }
 
     useEffect(() => {
         fetchAPI()
@@ -40,16 +16,9 @@ const CommGard: React.FC<IAppProps> = () => {
 
     let fetchAPI = async () => {
         let results = await api(`/api/posts`)
-        console.log(results)
         setApiResponse(results);
         makePosts(results)
     }
-
-    useEffect(() => {
-        if (apiResponse) {
-            makePosts(apiResponse);
-        }
-    }, [open1, open2, open3, open4, open5])
 
     let makePosts = (resObj: any) => {
         let postCards = resObj.map((element: any, index: number) => {
@@ -77,7 +46,7 @@ const CommGard: React.FC<IAppProps> = () => {
                                 <p className="text-light">{element.content}</p>
                                 <h6 className="text-muted">{days}</h6>
 
-                                <Button variant="success">
+                                <Button variant="success" as={Link} to={`/communitygarden/${element.id}`}>
                                     View Responses
                                 </Button>
                                 {/* <Button

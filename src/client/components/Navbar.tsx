@@ -2,15 +2,18 @@ import React, { } from 'react';
 import { Nav, Navbar, NavDropdown, Image } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { IAppProps } from '../App';
-import NavbarCollapse from 'react-bootstrap/NavbarCollapse';
+import { RouteComponentProps, withRouter } from 'react-router';
 
+interface INavbar extends RouteComponentProps { };
 
-const Navigate: React.FC<IAppProps> = () => {
+const Navigate: React.FC<INavbar> = (props) => {
     let handleClick = async (e: React.MouseEvent) => {
         e.preventDefault()
+        props.history.push('/')
         await localStorage.clear()
         window.location.reload()
     }
+
 
     return (
         <Navbar variant="dark" bg="dark" expand="sm" className="sticky-top">
@@ -27,17 +30,17 @@ const Navigate: React.FC<IAppProps> = () => {
             {/* <Nav.Link as={Link} to="/">Calendar</Nav.Link> */}
             {/* </Nav> */}
 
-            <Navbar.Collapse className="d-flex" id="navigate">  
-            <Nav className="mr-auto">
-                <Nav.Link as={Link} to="/choose">Help Me Choose</Nav.Link>
-                <NavDropdown className="mr-auto" title="Browse All" id="browse-dropdown">
-                    <NavDropdown.Item as={Link} to='/veggies'>Veggies</NavDropdown.Item>
-                    <NavDropdown.Item as={Link} to='/userherbs'>Herbs</NavDropdown.Item>
+            <Navbar.Collapse className="d-flex" id="navigate">
+                <Nav className="mr-auto">
+                    <Nav.Link as={Link} to="/choose">Help Me Choose</Nav.Link>
+                    <NavDropdown className="mr-auto" title="Browse All" id="browse-dropdown">
+                        <NavDropdown.Item as={Link} to='/veggies'>Veggies</NavDropdown.Item>
+                        <NavDropdown.Item as={Link} to='/userherbs'>Herbs</NavDropdown.Item>
 
-                </NavDropdown>
-                <Nav.Link as={Link} to="/savedveggies">My Garden</Nav.Link>
-                <Nav.Link as={Link} to="/communitygarden">Community Garden</Nav.Link>
-            </Nav>
+                    </NavDropdown>
+                    <Nav.Link as={Link} to="/savedveggies">My Garden</Nav.Link>
+                    <Nav.Link as={Link} to="/communitygarden">Community Garden</Nav.Link>
+                </Nav>
 
 
 
@@ -56,4 +59,4 @@ const Navigate: React.FC<IAppProps> = () => {
 
 
 
-export default Navigate;
+export default withRouter(Navigate);
