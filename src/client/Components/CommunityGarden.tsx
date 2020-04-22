@@ -39,7 +39,7 @@ const CommGard: React.FC<IAppProps> = () => {
     }, [])
 
     let fetchAPI = async () => {
-        let results = await api(`/api/posts/range/${0}/${5}`)
+        let results = await api(`/api/posts`)
         console.log(results)
         setApiResponse(results);
         makePosts(results)
