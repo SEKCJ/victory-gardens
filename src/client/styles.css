@@ -55,6 +55,7 @@ body {
     padding-right: 5px;
     background-position: center;
     border: 5px solid #28a745;
+    background-color: #FAF8D9;
 }
 
 .avatars {
@@ -63,4 +64,15 @@ body {
     width: 100%;
     padding-top: 100%;
     background-position: center;
+    background-color: #FAF8D9;
+}
+
+.mainAvatar {
+    background-size: cover;
+    border-radius: 50%;
+    width: 100%;
+    padding-top: 100%;
+    background-position: center;
+    border: 1px solid #191A1C;
+    background-color: #FAF8D9;
 }

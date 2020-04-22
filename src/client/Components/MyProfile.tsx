@@ -5,6 +5,7 @@ import { Container, Row, Col, Card, Image, Button, Modal, ListGroup } from 'reac
 import { FaInfoCircle, FaPen } from 'react-icons/fa';
 import { api, Token } from '../Services/apiServices';
 
+interface IAvatars { id: number, url: string }
 
 const Profile: React.FC<IAppProps> = props => {
 
@@ -30,59 +31,92 @@ const Profile: React.FC<IAppProps> = props => {
         makeModalRows(avatars)
     }
 
-    let handleClick = (index: number, element: any, array: string[]) => {
-        let savedArray = [...array];
-        let avatarOptions = savedArray.map((element: any, index: number, array: string[]) => {
+    let handleClick = (element: IAvatars, index: number, avatars: IAvatars[]) => {
+        setAvatarId(element.id)
+
+        let columns = avatars.map((element, index, array) => {
             return (
-                <Col sm="3" key={index}>
-                    <div style={{ "backgroundImage": `url("${element.url}")`, "backgroundColor": "#FAF8D9" }}
-                        className="avatars" onClick={() => handleClick(index, element, array)}>
-                    </div>
+                <Col sm="3" key={element.url} >
+                    <div style={{ "backgroundImage": `url("${element.url}")` }}
+                        className="avatars" onClick={() => handleClick(element, index, array)}></div>
                 </Col>
             )
         })
-        avatarOptions[index] = (
-            <Col sm="3" key={index}>
-                <div style={{ "backgroundImage": `url("${element.url}")`, "backgroundColor": "#FAF8D9" }}
-                    className="avatarselect" onClick={() => handleClick(index, element, array)}>
-                </div>
+
+        columns[index] = (
+            <Col sm="3" key={element.url} >
+                <div style={{ "backgroundImage": `url("${element.url}")` }}
+                    className="avatarselect" onClick={() => handleClick(element, index, avatars)}></div>
             </Col>
         )
-        let rows: any = [];
-        let tempArr: any = [];
-        avatarOptions.forEach((column: any, index: number) => {
-            if ((index + 1) % 4 !== 0) {
-                tempArr.push(column)
-            } else {
-                tempArr.push(column)
+
+        let rows: JSX.Element[] = []
+        let tempArr: JSX.Element[] = [];
+        let count = 1;
+        columns.forEach((element: any, index: number) => {
+            if (count !== 4) {
+                tempArr.push(element)
+                if ((index + 1) === columns.length) {
+                    rows.push(
+                        <Row key={index} className="mb-3">
+                            {tempArr}
+                        </Row>
+                    )
+                    tempArr = []
+                }
+                count += 1;
+            } else if (count === 4) {
+                tempArr.push(element);
                 rows.push(
-                    <Row key={index} className="mb-2">
+                    <Row key={index} className="mb-3">
                         {tempArr}
                     </Row>
                 )
-                tempArr = [];
+                tempArr = []
+                count = 1;
             }
         })
+
         setAvatarRows(rows)
-        setAvatarId(element.id);
     }
 
-    let makeModalRows = async (avatars: string[]) => {
-        let avatarOptions = avatars.map((element: any, index: number, array: string[]) => {
+    let makeModalRows = async (avatars: IAvatars[]) => {
+        let columns = avatars.map((element, index, array) => {
             return (
-                <Col sm="3" key={element.url}>
-                    <div style={{ "backgroundImage": `url("${element.url}")`, "backgroundColor": "#FAF8D9" }}
-                        className="avatars" onClick={() => handleClick(index, element, array)}>
-                    </div>
+                <Col sm="3" key={element.url} >
+                    <div style={{ "backgroundImage": `url("${element.url}")` }}
+                        className="avatars" onClick={() => handleClick(element, index, array)}></div>
                 </Col>
             )
         })
-        let rows: any = [];
-        let tempArr: any = [];
-        avatarOptions.forEach((column: any, index: number) => {
-            
 
+        let rows: JSX.Element[] = []
+        let tempArr: JSX.Element[] = [];
+        let count = 1;
+        columns.forEach((element: any, index: number) => {
+            if (count !== 4) {
+                tempArr.push(element)
+                if ((index + 1) === columns.length) {
+                    rows.push(
+                        <Row key={index} className="mb-3">
+                            {tempArr}
+                        </Row>
+                    )
+                    tempArr = []
+                }
+                count += 1;
+            } else if (count === 4) {
+                tempArr.push(element);
+                rows.push(
+                    <Row key={index} className="mb-3">
+                        {tempArr}
+                    </Row>
+                )
+                tempArr = []
+                count = 1;
+            }
         })
+
         setAvatarRows(rows)
     }
 
@@ -118,12 +152,8 @@ const Profile: React.FC<IAppProps> = props => {
             <Card.Body className="mx-3">
                 <Row className="mb-3">
                     <Col sm="3">
-                        <div style={{
-                            "backgroundImage": `url("${apiResponse.url}")`, "backgroundSize": "cover",
-                            "borderRadius": "50%", "width": "100%", "paddingTop": "100%",
-                            "backgroundPosition": "center", "border": "1px solid #191A1C",
-                            "backgroundColor": "#FAF8D9"
-                        }}>
+                        <div style={{ "backgroundImage": `url("${apiResponse.url}")` }}
+                            className="mainAvatar">
                             <Button variant="dark" style={{
                                 "position": "absolute",
                                 "top": "0em", "right": "10%"
