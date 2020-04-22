@@ -78,7 +78,7 @@ const GuestNavigate: React.FC<any> = props => {
 
   return (
     <Navbar variant="dark" bg="dark" expand="lg" className="sticky-top">
-      <Navbar.Brand href="/"> <img src={window.location.origin + "/assets/VGLogo.png"}
+      <Navbar.Brand  href="/"> <img className="rounded" src={window.location.origin + "/assets/VGLogo.png"}
         style={{ "width": "3em" }} /></Navbar.Brand>
       <Navbar.Toggle aria-controls="navigate" />
       <Navbar.Collapse id="navigate">

@@ -126,7 +126,7 @@ const GuestVeggies: React.FC<IVeggieProps> = props => {
                                     </Card.Text>
                                 </Card.Body>
 
-                                <Button className="shadow p-3 mb-5 text-center border-white" variant="primary" as={Link} to={`/veggies/${veggieId}`} disabled>Read More</Button>
+                                <Button className="shadow p-3 mb-5 text-center border-white" variant="primary" as={Link} to={`/guestveggies/${veggieId}`}>Read More</Button>
                             </div>
                         </Card>
                     </Row>

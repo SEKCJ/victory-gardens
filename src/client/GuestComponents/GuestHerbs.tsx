@@ -5,7 +5,7 @@ import {
 } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { api, Token } from '../Services/apiServices';
-import { IAppProps } from '../GuestApp';
+import { IAppProps } from '../App';
 
 const GuestHerbs: React.FC<IAppProps> = props => {
 
@@ -131,7 +131,7 @@ const GuestHerbs: React.FC<IAppProps> = props => {
                                     </Card.Text>
                                 </Card.Body>
 
-                                <Button className="shadow p-3 mb-5 border-white text-center" variant="primary" as={Link} to={`/userherbs/${herbsId}`}>Read More</Button>
+                                <Button className="shadow p-3 mb-5 border-white text-center" variant="primary" as={Link} to={`/guestherbs/${herbsId}`}>Read More</Button>
                             </div>
                         </Card>
                     </Row>
