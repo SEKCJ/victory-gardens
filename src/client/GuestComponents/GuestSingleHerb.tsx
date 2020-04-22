@@ -4,7 +4,7 @@ import { api } from '../Services/apiServices';
 import { Card, ListGroup, ListGroupItem, Container, Row, Col, Button, Jumbotron, Form } from 'react-bootstrap';
 
 interface IVeggieProps extends RouteComponentProps<{ id: string }> { }
-const GSingleHerb: React.FC<IVeggieProps> = ({ match: { params: { id } } }) => {
+const GSingleVeg: React.FC<IVeggieProps> = ({ match: { params: { id } } }) => {
     return (
         <Container>
             <Jumbotron fluid>
@@ -64,4 +64,4 @@ const GSingleHerb: React.FC<IVeggieProps> = ({ match: { params: { id } } }) => {
     )
 
 }
-export default GSingleHerb;
+export default GSingleVeg;
