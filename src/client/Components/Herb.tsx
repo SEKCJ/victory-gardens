@@ -38,7 +38,7 @@ const Herb: React.FC<IVeggieProps> = (props: any) => {
             )
         } else {
             setBtnType(
-                <Button variant="success"
+                <Button className="btn btn-outline-dark shadow-lg border-primary mb-3 text-white bg-success rounded"
                     onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleClick(e, "add")}>Add to My Garden</Button>
             )
 
@@ -136,30 +136,32 @@ const Herb: React.FC<IVeggieProps> = (props: any) => {
             <React.Fragment>
                 {inGarden}
                 <div className="d-flex">
-                    <Card className="mx-auto my-4" style={{ width: '40rem' }}>
-
-                        <Card.Body className="d-flex">
+                <Card className="mx-auto my-4 bg-white shadow-lg p-3 mb-5  mb-3 text-success" style={{ width: '50rem' }}>
+                        <div className="shadow-lg rounded-pill text-white text-center bg-success">
+                        {/* <Card.Body className="mx-auto my-4 bg-white shadow-lg p-3 mb-5  mb-3 text-success">
                             <Card.Link as={Link} to="/userherbs" className="mx-auto btn btn-secondary col-sm-8"><h5 className="my-auto">Back to List</h5></Card.Link>
-                        </Card.Body>
-
+                        </Card.Body> */}
+                        
                         <Card.Title className="mx-auto">
                             <h1>{vgObj.vgName}</h1>
                             <p>{vgObj.vgSciName}</p>
                         </Card.Title>
-
-                        <Card.Img className="mx-auto" variant="top" style={{ "width": '15em' }} src={vgObj.vgImg} />
+                        </div>
+<br></br>
+                        <Card.Img className="mx-auto  border-success mb-3 rounded-pill shadow-lg" style={{ "width": '20em' }} src={vgObj.vgImg} />
 
                         <Card.Body className="mx-auto d-flex">
                             {btnType}
                         </Card.Body>
-
+<br></br>
                         <Row>
                             <Col>
+
                                 <Accordion>
-                                    <Card>
-                                        <Card.Header className="bg-info d-flex">
+                                    <Card className="rounded-lg">
+                                        <Card.Header className="bg-success text-white d-flex">
                                             <Accordion.Toggle as={Button} variant="link"
-                                                className="mx-auto text-light" eventKey="0">
+                                                className="mx-auto text-white" eventKey="0">
                                                 Soil
                                         </Accordion.Toggle>
                                         </Card.Header>
@@ -171,8 +173,9 @@ const Herb: React.FC<IVeggieProps> = (props: any) => {
                                             </Card.Body>
                                         </Accordion.Collapse>
                                     </Card>
-                                    <Card>
-                                        <Card.Header className="bg-info d-flex">
+                                    <br></br>
+                                    <Card className="rounded-lg">
+                                        <Card.Header className="bg-success text-white d-flex">
                                             <Accordion.Toggle as={Button} variant="link"
                                                 className="mx-auto text-light" eventKey="1">
                                                 Position
@@ -182,8 +185,9 @@ const Herb: React.FC<IVeggieProps> = (props: any) => {
                                             <Card.Body>{vgObj.vgPosition}</Card.Body>
                                         </Accordion.Collapse>
                                     </Card>
-                                    <Card>
-                                        <Card.Header className="bg-info d-flex">
+                                    <br></br>
+                                    <Card className="rounded-lg">
+                                        <Card.Header className="bg-success text-white d-flex">
                                             <Accordion.Toggle as={Button} variant="link"
                                                 className="mx-auto text-light" eventKey="2">
                                                 Frost Tolerance
@@ -193,8 +197,9 @@ const Herb: React.FC<IVeggieProps> = (props: any) => {
                                             <Card.Body>{vgObj.vgFt}</Card.Body>
                                         </Accordion.Collapse>
                                     </Card>
-                                    <Card>
-                                        <Card.Header className="bg-info d-flex">
+                                    <br></br>
+                                    <Card  className="rounded-lg">
+                                        <Card.Header className="bg-success text-white d-flex">
                                             <Accordion.Toggle as={Button} variant="link"
                                                 className="mx-auto text-light" eventKey="3">
                                                 Feeding
@@ -207,6 +212,7 @@ const Herb: React.FC<IVeggieProps> = (props: any) => {
                                             </ListGroup> </Card.Body>
                                         </Accordion.Collapse>
                                     </Card>
+                                    <br></br>
 
                                 </Accordion>
                             </Col>
@@ -214,8 +220,8 @@ const Herb: React.FC<IVeggieProps> = (props: any) => {
                             <Col>
                                 <Accordion>
 
-                                    <Card>
-                                        <Card.Header className="bg-info d-flex">
+                                    <Card className="rounded-lg">
+                                        <Card.Header className="bg-success text-white d-flex">
                                             <Accordion.Toggle as={Button} variant="link"
                                                 className="mx-auto text-light" eventKey="4">
                                                 Companions
@@ -225,8 +231,9 @@ const Herb: React.FC<IVeggieProps> = (props: any) => {
                                             <Card.Body>{vgObj.vgCompanions}</Card.Body>
                                         </Accordion.Collapse>
                                     </Card>
-                                    <Card>
-                                        <Card.Header className="bg-info d-flex">
+                                    <br></br>
+                                    <Card className="rounded-lg">
+                                        <Card.Header className="bg-success text-white d-flex">
                                             <Accordion.Toggle as={Button} variant="link"
                                                 className="mx-auto text-light" eventKey="5">
                                                 Bad Companions
@@ -236,8 +243,9 @@ const Herb: React.FC<IVeggieProps> = (props: any) => {
                                             <Card.Body>{vgObj.vgBadCompanions}</Card.Body>
                                         </Accordion.Collapse>
                                     </Card>
-                                    <Card>
-                                        <Card.Header className="bg-info d-flex">
+                                    <br></br>
+                                    <Card className="rounded-lg">
+                                        <Card.Header className="bg-success text-white d-flex">
                                             <Accordion.Toggle as={Button} variant="link"
                                                 className="mx-auto text-light" eventKey="6">
                                                 Spacing
@@ -250,8 +258,9 @@ const Herb: React.FC<IVeggieProps> = (props: any) => {
                                             </ListGroup> </Card.Body>
                                         </Accordion.Collapse>
                                     </Card>
-                                    <Card>
-                                        <Card.Header className="bg-info d-flex">
+                                    <br></br>
+                                    <Card className="rounded-lg">
+                                        <Card.Header className="bg-success text-white d-flex">
                                             <Accordion.Toggle as={Button} variant="link"
                                                 className="mx-auto text-light" eventKey="7">
                                                 Sow and Plant
@@ -261,8 +270,9 @@ const Herb: React.FC<IVeggieProps> = (props: any) => {
                                             <Card.Body>{vgObj.vgSandP}</Card.Body>
                                         </Accordion.Collapse>
                                     </Card>
-                                    <Card>
-                                        <Card.Header className="bg-info d-flex">
+                                    <br></br>
+                                    <Card className="rounded-lg">
+                                        <Card.Header className="bg-success text-white d-flex">
                                             <Accordion.Toggle as={Button} variant="link"
                                                 className="mx-auto text-light" eventKey="8">
                                                 Planting Months
@@ -272,15 +282,17 @@ const Herb: React.FC<IVeggieProps> = (props: any) => {
                                             <Card.Body>{vgObj.vgPm}</Card.Body>
                                         </Accordion.Collapse>
                                     </Card>
+                                    <br></br>
                                 </Accordion>
+                                <br></br>
                             </Col>
 
                             <Col>
                                 <Accordion>
 
 
-                                    <Card>
-                                        <Card.Header className="bg-info d-flex">
+                                    <Card className="rounded-lg">
+                                        <Card.Header className="bg-success text-white d-flex">
                                             <Accordion.Toggle as={Button} variant="link"
                                                 className="mx-auto text-light" eventKey="9">
                                                 Harvesting Months
@@ -293,9 +305,10 @@ const Herb: React.FC<IVeggieProps> = (props: any) => {
                                             </ListGroup> </Card.Body>
                                         </Accordion.Collapse>
                                     </Card>
+                                    <br></br>
 
-                                    <Card>
-                                        <Card.Header className="bg-info d-flex">
+                                    <Card className="rounded-lg">
+                                        <Card.Header className="bg-success text-white d-flex">
                                             <Accordion.Toggle as={Button} variant="link"
                                                 className="mx-auto text-light" eventKey="10">
                                                 Notes
@@ -305,9 +318,10 @@ const Herb: React.FC<IVeggieProps> = (props: any) => {
                                             <Card.Body>{vgObj.vgNotes}</Card.Body>
                                         </Accordion.Collapse>
                                     </Card>
+                                    <br></br>
 
-                                    <Card>
-                                        <Card.Header className="bg-info d-flex">
+                                    <Card className="rounded-lg">
+                                        <Card.Header className="bg-success text-white d-flex">
                                             <Accordion.Toggle as={Button} variant="link"
                                                 className="mx-auto text-light" eventKey="11">
                                                 Harvesting
@@ -320,8 +334,9 @@ const Herb: React.FC<IVeggieProps> = (props: any) => {
                                             </ListGroup> </Card.Body>
                                         </Accordion.Collapse>
                                     </Card>
-                                    <Card>
-                                        <Card.Header className="bg-info d-flex">
+                                    <br></br>
+                                    <Card className="rounded-lg">
+                                        <Card.Header className="bg-success text-white d-flex">
                                             <Accordion.Toggle as={Button} variant="link"
                                                 className="mx-auto text-light" eventKey="12">
                                                 Troubleshooting
@@ -335,10 +350,15 @@ const Herb: React.FC<IVeggieProps> = (props: any) => {
                                         </Accordion.Collapse>
                                     </Card>
 
-                                </Accordion> </Col>
+                                </Accordion>
+                                <br></br> </Col>
 
                         </Row>
-
+                        <Row>
+                            <Button className="text-success" as={Link} to="/veggies" variant="link">
+                                Go Back To List
+                            </Button>
+                        </Row>
                     </Card>
                 </div>
             </React.Fragment>

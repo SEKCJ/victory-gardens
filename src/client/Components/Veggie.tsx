@@ -136,8 +136,8 @@ const Veggie: React.FC<IVeggieProps> = (props: any) => {
             <React.Fragment>
                 {inGarden}
                 <div className="d-flex">
-                    <Card className="mx-auto my-4 bg-secondary shadow-lg p-3 mb-5 border- mb-3 text-info" style={{ width: '50rem' }}>
-                        <div className="shadow-lg rounded-pill text-white text-center bg-info">
+                    <Card className="mx-auto my-4 bg-white shadow-lg p-3 mb-5  mb-3 text-success" style={{ width: '50rem' }}>
+                        <div className="shadow-lg rounded-pill text-white text-center bg-success">
                             <Card.Title className="mx-auto">
                                 <br></br>
                                 <h1>{vgObj.vgName}</h1>
@@ -145,7 +145,7 @@ const Veggie: React.FC<IVeggieProps> = (props: any) => {
                             </Card.Title>
                         </div>
                         <br></br>
-                        <Image className="mx-auto border-info rounded mb-3 rounded-pill-lg shadow-lg" style={{ "width": '20em' }} src={vgObj.vgImg} />
+                        <Image className="mx-auto border-success mb-3 rounded-pill shadow-lg" style={{ "width": '20em' }} src={vgObj.vgImg} />
 
                         <Card.Body className="mx-auto d-flex">
                             {btnType}
@@ -156,7 +156,7 @@ const Veggie: React.FC<IVeggieProps> = (props: any) => {
                             <br></br>
                                 <Accordion >
                                     <Card className="rounded-lg">
-                                        <Card.Header className="bg-info text-white d-flex">
+                                        <Card.Header className="bg-success text-white d-flex">
                                             <Accordion.Toggle as={Button} variant="link"
                                                 className="mx-auto text-white" eventKey="0">
                                                 Soil
@@ -172,7 +172,7 @@ const Veggie: React.FC<IVeggieProps> = (props: any) => {
                                     </Card>
                                     <br></br>
                                     <Card className="rounded-lg">
-                                        <Card.Header className="bg-info texsuccess text-white d-flex">
+                                        <Card.Header className="bg-success text-white d-flex">
                                             <Accordion.Toggle as={Button} variant="link"
                                                 className="mx-auto text-white" eventKey="1">
                                                 Position
@@ -184,7 +184,7 @@ const Veggie: React.FC<IVeggieProps> = (props: any) => {
                                     </Card>
                                     <br></br>
                                     <Card className="rounded-lg">
-                                        <Card.Header className="bg-info text-white d-flex">
+                                        <Card.Header className="bg-success text-white d-flex">
                                             <Accordion.Toggle as={Button} variant="link"
                                                 className="mx-auto text-white" eventKey="2">
                                                 Frost Tolerance
@@ -196,7 +196,7 @@ const Veggie: React.FC<IVeggieProps> = (props: any) => {
                                     </Card>
                                     <br></br>
                                     <Card className="rounded-lg">
-                                        <Card.Header className="bg-info text-white d-flex">
+                                        <Card.Header className="bg-success text-white d-flex">
                                             <Accordion.Toggle as={Button} variant="link"
                                                 className="mx-auto text-white" eventKey="3">
                                                 Feeding
@@ -216,7 +216,7 @@ const Veggie: React.FC<IVeggieProps> = (props: any) => {
                                 <Accordion>
                                     <br></br>
                                     <Card className="rounded-lg">
-                                        <Card.Header className="bg-info text-white d-flex">
+                                        <Card.Header className="bg-success text-white d-flex">
                                             <Accordion.Toggle as={Button} variant="link"
                                                 className="mx-auto text-white" eventKey="4">
                                                 Companions
@@ -228,7 +228,7 @@ const Veggie: React.FC<IVeggieProps> = (props: any) => {
                                     </Card>
                                     <br></br>
                                     <Card className="rounded-lg">
-                                        <Card.Header className="bg-info text-white d-flex">
+                                        <Card.Header className="bg-success text-white d-flex">
                                             <Accordion.Toggle as={Button} variant="link"
                                                 className="mx-auto text-white" eventKey="5">
                                                 Bad Companions
@@ -240,7 +240,7 @@ const Veggie: React.FC<IVeggieProps> = (props: any) => {
                                     </Card>
                                     <br></br>
                                     <Card className="rounded-lg">
-                                        <Card.Header className="bg-info text-white d-flex">
+                                        <Card.Header className="bg-success text-white d-flex">
                                             <Accordion.Toggle as={Button} variant="link"
                                                 className="mx-auto text-white" eventKey="6">
                                                 Spacing
@@ -255,7 +255,7 @@ const Veggie: React.FC<IVeggieProps> = (props: any) => {
                                     </Card>
                                     <br></br>
                                     <Card className="rounded-lg">
-                                        <Card.Header className="bg-info text-white d-flex">
+                                        <Card.Header className="bg-success text-white d-flex">
                                             <Accordion.Toggle as={Button} variant="link"
                                                 className="mx-auto text-white" eventKey="7">
                                                 Sow and Plant
@@ -267,7 +267,7 @@ const Veggie: React.FC<IVeggieProps> = (props: any) => {
                                     </Card>
                                     <br></br>
                                     <Card className="rounded-lg">
-                                        <Card.Header className="bg-info text-white d-flex">
+                                        <Card.Header className="bg-success text-white d-flex">
                                             <Accordion.Toggle as={Button} variant="link"
                                                 className="mx-auto text-white" eventKey="8">
                                                 Planting Months
@@ -285,7 +285,7 @@ const Veggie: React.FC<IVeggieProps> = (props: any) => {
                                 <Accordion>
                                     <br></br>
                                     <Card className="rounded-lg">
-                                        <Card.Header className="bg-info text-white d-flex">
+                                        <Card.Header className="bg-success text-white d-flex">
                                             <Accordion.Toggle as={Button} variant="link"
                                                 className="mx-auto text-white" eventKey="9">
                                                 Harvesting Months
@@ -300,7 +300,7 @@ const Veggie: React.FC<IVeggieProps> = (props: any) => {
                                     </Card>
                                     <br></br>
                                     <Card className="rounded-lg">
-                                        <Card.Header className="bg-info text-white d-flex">
+                                        <Card.Header className="bg-success text-white d-flex">
                                             <Accordion.Toggle as={Button} variant="link"
                                                 className="mx-auto text-white" eventKey="10">
                                                 Notes
@@ -312,7 +312,7 @@ const Veggie: React.FC<IVeggieProps> = (props: any) => {
                                     </Card>
                                     <br></br>
                                     <Card className="rounded-lg">
-                                        <Card.Header className="bg-info text-white d-flex">
+                                        <Card.Header className="bg-success text-white d-flex">
                                             <Accordion.Toggle as={Button} variant="link"
                                                 className="mx-auto text-white" eventKey="11">
                                                 Harvesting
@@ -327,7 +327,7 @@ const Veggie: React.FC<IVeggieProps> = (props: any) => {
                                     </Card>
                                     <br></br>
                                     <Card className="rounded-lg">
-                                        <Card.Header className="bg-info text-white d-flex">
+                                        <Card.Header className="bg-success text-white d-flex">
                                             <Accordion.Toggle as={Button} variant="link"
                                                 className="mx-auto text-white" eventKey="12">
                                                 Troubleshooting
@@ -344,7 +344,7 @@ const Veggie: React.FC<IVeggieProps> = (props: any) => {
                             </Col>
                         </Row>
                         <Row>
-                            <Button className="text-primary" as={Link} to="/veggies" variant="link">
+                            <Button className="text-success" as={Link} to="/veggies" variant="link">
                                 Go Back To List
                             </Button>
                         </Row>

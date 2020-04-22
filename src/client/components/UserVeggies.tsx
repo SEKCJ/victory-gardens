@@ -124,7 +124,7 @@ const Veggies: React.FC<IVeggieProps> = props => {
             let btnType: JSX.Element = (<div></div>);
             if (savedVegs[veggieId]) {
                 btnType = (
-                    <Button className="px-3 py-1 bg-white" variant="warning"
+                    <Button className="px-3 py-1 bg-white" 
                         style={{ "borderRadius": "50%" }}>
                         <small className="text-success bg-white" style={{ "fontSize": "1.8em" }}>&#10003;</small>
                     </Button>
@@ -157,7 +157,7 @@ const Veggies: React.FC<IVeggieProps> = props => {
                                 </Card.Text>
                             </Card.Body>
 
-                            <Button className="shadow p-3 mb-5 text-center border-white" variant="primary" as={Link} to={`/veggies/${veggieId}`}>Read More</Button>
+                            <Button className="shadow p-3 mb-5 text-center text-white border-white bg-success"  as={Link} to={`/veggies/${veggieId}`}>Read More</Button>
                         </div>
                     </Card>
                 </Row>
@@ -183,7 +183,7 @@ const Veggies: React.FC<IVeggieProps> = props => {
 
     return (
         <React.Fragment>
-           <Jumbotron fluid className="shadow rounded text-secondary bg-success text-light">
+           <Jumbotron fluid className="shadow rounded bg-success text-light">
                 <Container >
                     <h1>Veggie Masterlist</h1>
                     <p>
