@@ -7,7 +7,7 @@ import Profile from './MyProfile';
 
 const MyProfile: React.FC<IProfileProps> = props => {
 
-  const [key, setKey] = useState('profile');
+  const [key, setKey] = useState('settings');
 
   let handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
