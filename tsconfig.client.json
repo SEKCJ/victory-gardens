@@ -3,6 +3,9 @@
       "outDir": "./public/js/",
       "noImplicitAny": true,
       "module": "es6",
+      "typeRoots": [
+          "node_modules/@types"
+      ],
       "target": "es5",
       "jsx": "react",
       "allowSyntheticDefaultImports": true,

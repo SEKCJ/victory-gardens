@@ -9,7 +9,9 @@ router.get("/:id?", async (req, res) => {
   let id: number = parseInt(req.params.id, 10);
   if (id) {
     try {
-      let post = await DB.Post.onePost(id);
+      let [post]: any = await DB.Post.onePost(id);
+      let responses = await DB.Response.allResByPost(id);
+      post["comments"] = responses;
       res.json(post);
     } catch (e) {
       console.log(e);
@@ -18,14 +20,6 @@ router.get("/:id?", async (req, res) => {
   } else {
     try {
       let posts = await DB.Post.allPosts();
-      let forum = posts.map(async (element) => {
-        // element gets an element in the array of posts
-        let responses = await DB.Response.allResByPost(element.id);
-        let mainPost: any = Object.assign(element);
-        mainPost["comments"] = responses;
-        return mainPost;
-      });
-      await Promise.all(forum);
       res.json(posts);
     } catch (e) {
       console.log(e);
