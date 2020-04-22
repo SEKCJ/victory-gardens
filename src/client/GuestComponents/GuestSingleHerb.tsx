@@ -55,8 +55,8 @@ const GSingleHerb: React.FC<IVeggieProps> = (props) => {
                     <p className="text-muted">Don't have an account yet? Click<Button href="/guestsignup" variant="link" type="submit">here</Button>to join Victory Gardens!</p>
                 </Jumbotron>
                 <div className="d-flex">
-                    <Card className="mx-auto my-4 bg-secondary shadow-lg p-3 mb-5 border- mb-3 text-info" style={{ width: '50rem' }}>
-                        <div className="shadow-lg rounded-pill text-white text-center bg-info">
+                    <Card className="mx-auto my-4 bg-white shadow-lg p-3 mb-5 border- mb-3 text-success" style={{ width: '50rem' }}>
+                        <div className="shadow-lg rounded-pill text-white text-center bg-success">
 
                         <Card.Body>
                             <Card.Link href='/herbs'>Back to List</Card.Link>
