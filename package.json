@@ -12,8 +12,8 @@
     "heroku-postbuild": "npm run build"
   },
   "engines": {
-    "node": "12.6.0",
-    "npm": "6.13.4"
+    "node": "12.6.x",
+    "npm": "6.x"
   },
   "keywords": [],
   "author": "",
