@@ -36,7 +36,8 @@ router.post("/", hasRole, async (req, res) => {
   try {
     let [result]: any = (await DB.Tokens.findUserIdByToken(token))[0];
     let userid = parseInt(result.userid, 10);
-    res.json(await DB.Post.postPost(userid, title, content));
+    let posted: any = await DB.Post.postPost(userid, title, content)
+    res.json(posted[1]);
   } catch (e) {
     console.log(e);
     res.sendStatus(500);

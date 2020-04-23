@@ -8,7 +8,7 @@ const router = express.Router();
 router.post("/", hasRole, async (req, res) => {
   let token = req.body.Token;
   let postid = req.body.postid;
-  let response = req.body.response;
+  let response = req.body.replyBody;
   try {
     let [result]: any = (await DB.Tokens.findUserIdByToken(token))[0];
     let userid = parseInt(result.userid, 10);

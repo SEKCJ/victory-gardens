@@ -21,8 +21,9 @@ router.post('/', async (req, res) => {
 
 router.post('/user', hasRole, async (req, res) => {
     let token = req.body.Token;
-    let [result] = await DB.Tokens.findUserIdByToken(token)
-    res.json(result)
+    let [result]: any = (await DB.Tokens.findUserIdByToken(token))[0]
+    let [user]: any = await DB.Users.getUserInfo(result.userid)
+    res.json(user)
 })
 
 

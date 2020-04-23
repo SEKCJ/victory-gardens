@@ -30,7 +30,7 @@ const updatePassword = async (id: number, newPassword: string) => {
 
 const getUserInfo = async (id: number) => {
     return Query<IUsers>(
-        `SELECT avatar.url, users.email, users.firstname, users.lastname, users.username
+        `SELECT avatar.url, users.email, users.firstname, users.lastname, users.username, users.id
         FROM avatar RIGHT JOIN users ON users.avatarid = avatar.id WHERE users.id = ?`
         , [id]);
 }
