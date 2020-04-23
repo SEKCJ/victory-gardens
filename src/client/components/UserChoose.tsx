@@ -40,7 +40,7 @@ const HelpChoose: React.FC<IAppProps> = props => {
                     pizzaLinks.push(
                         <Row key={element.id} className="d-flex">
                             <Col>
-                                <Card.Link as={Link}
+                                <Card.Link as={Link} className="text-info"
                                     to={`/veggies/${element.id}`}>{element.name}</Card.Link>
                             </Col>
                         </Row>
@@ -50,7 +50,7 @@ const HelpChoose: React.FC<IAppProps> = props => {
                     salsaLinks.push(
                         <Row key={element.id} className="d-flex">
                             <Col>
-                                <Card.Link as={Link}
+                                <Card.Link as={Link} className="text-info"
                                     to={`/veggies/${element.id}`}>{element.name}</Card.Link>
                             </Col>
                         </Row>
@@ -60,7 +60,7 @@ const HelpChoose: React.FC<IAppProps> = props => {
                     saladLinks.push(
                         <Row key={element.id} className="d-flex">
                             <Col>
-                                <Card.Link as={Link}
+                                <Card.Link as={Link} className="text-info"
                                     to={`/veggies/${element.id}`}>{element.name}</Card.Link>
                             </Col>
                         </Row>
@@ -70,7 +70,7 @@ const HelpChoose: React.FC<IAppProps> = props => {
                     grillLinks.push(
                         <Row key={element.id} className="d-flex">
                             <Col>
-                                <Card.Link as={Link}
+                                <Card.Link as={Link} className="text-info"
                                     to={`/veggies/${element.id}`}>{element.name}</Card.Link>
                             </Col>
                         </Row>
@@ -80,7 +80,7 @@ const HelpChoose: React.FC<IAppProps> = props => {
                     beginnerLinks.push(
                         <Row key={element.id} className="d-flex">
                             <Col>
-                                <Card.Link as={Link}
+                                <Card.Link as={Link} className="text-info"
                                     to={`/veggies/${element.id}`}>{element.name}</Card.Link>
                             </Col>
                         </Row>
@@ -90,7 +90,7 @@ const HelpChoose: React.FC<IAppProps> = props => {
                     immortalLinks.push(
                         <Row key={element.id} className="d-flex">
                             <Col>
-                                <Card.Link as={Link}
+                                <Card.Link as={Link} className="text-info"
                                     to={`/veggies/${element.id}`}>{element.name}</Card.Link>
                             </Col>
                         </Row>
@@ -100,7 +100,7 @@ const HelpChoose: React.FC<IAppProps> = props => {
                     beesLinks.push(
                         <Row key={element.id} className="d-flex">
                             <Col>
-                                <Card.Link as={Link}
+                                <Card.Link as={Link} className="text-info"
                                     to={`/veggies/${element.id}`}>{element.name}</Card.Link>
                             </Col>
                         </Row>
@@ -110,7 +110,7 @@ const HelpChoose: React.FC<IAppProps> = props => {
                     largeLinks.push(
                         <Row key={element.id} className="d-flex">
                             <Col>
-                                <Card.Link as={Link}
+                                <Card.Link as={Link} className="text-info"
                                     to={`/veggies/${element.id}`}>{element.name}</Card.Link>
                             </Col>
                         </Row>
@@ -120,7 +120,7 @@ const HelpChoose: React.FC<IAppProps> = props => {
                     aromaticLinks.push(
                         <Row key={element.id} className="d-flex">
                             <Col>
-                                <Card.Link as={Link}
+                                <Card.Link as={Link} className="text-info"
                                     to={`/userherbs/${element.id}`}>{element.name}</Card.Link>
                             </Col>
                         </Row>
@@ -130,7 +130,7 @@ const HelpChoose: React.FC<IAppProps> = props => {
                     cookingLinks.push(
                         <Row key={element.id} className="d-flex">
                             <Col>
-                                <Card.Link as={Link}
+                                <Card.Link as={Link} className="text-info"
                                     to={`/userherbs/${element.id}`}>{element.name}</Card.Link>
                             </Col>
                         </Row>
@@ -140,7 +140,7 @@ const HelpChoose: React.FC<IAppProps> = props => {
                     teaLinks.push(
                         <Row key={element.id} className="d-flex">
                             <Col>
-                                <Card.Link as={Link}
+                                <Card.Link as={Link} className="text-info"
                                     to={`/userherbs/${element.id}`}>{element.name}</Card.Link>
                             </Col>
                         </Row>

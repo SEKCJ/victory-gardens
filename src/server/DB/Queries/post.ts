@@ -5,7 +5,8 @@ const allPosts = async () => {
   return Query<IPost[]>(
     `SELECT posts.*, users.username, avatar.url FROM posts
     JOIN users ON posts.userid = users.id
-    JOIN avatar ON users.avatarid = avatar.id`
+    JOIN avatar ON users.avatarid = avatar.id
+    ORDER BY posts.id ASC`
   );
 };
 
