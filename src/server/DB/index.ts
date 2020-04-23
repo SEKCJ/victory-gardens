@@ -1,5 +1,5 @@
 import * as mysql from "mysql";
-import config from "../config";
+import config from "../Config";
 
 import Tokens from './Queries/accesstokens';
 import Users from './Queries/users';
