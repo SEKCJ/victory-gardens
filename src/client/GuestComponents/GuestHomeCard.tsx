@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { RouteComponentProps } from 'react-router';
 import { IAppProps } from '../GuestApp';
 import { Jumbotron,  Container, Spinner, Alert, Carousel, Image, Row, Col } from 'react-bootstrap';
-import { api, setToken, Token } from '../services/apiServices';
+import { api, setToken, Token } from '../Services/apiServices';
 
 const GuestHome: React.FC<ILoginProps> = props => {
   const [loading, setLoading] = useState<boolean>(true);

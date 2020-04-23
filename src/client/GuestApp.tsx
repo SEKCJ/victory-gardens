@@ -8,7 +8,7 @@ import GuestSignUp from './GuestComponents/GuestSignUp';
 //import GuestLogin from './GuestComponents/GuestLogin';
 import GuestAbout from './GuestComponents/GuestAbout';
 import GSingleVeg from './GuestComponents/GuestSingleVeg';
-import HelpChoose from './Components/UserChoose';
+import HelpChoose from './components/UserChoose';
 import GuestHerbs from './GuestComponents/GuestHerbs';
 import GSingleHerb from './GuestComponents/GuestSingleHerb';
 

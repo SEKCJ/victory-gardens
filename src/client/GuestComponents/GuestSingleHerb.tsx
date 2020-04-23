@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { RouteComponentProps, Link } from 'react-router-dom';
 import { api } from '../Services/apiServices';
 import { Card, ListGroup, ListGroupItem, Container, Row, Col, Button, Jumbotron, Form, Spinner, Accordion } from 'react-bootstrap';
-import { IVeggieState, IResObj } from '../services/interfaces';
+import { IVeggieState, IResObj } from '../Services/interfaces';
 
 interface IVeggieProps extends RouteComponentProps<{ id: string }> { }
 const GSingleHerb: React.FC<IVeggieProps> = (props) => {

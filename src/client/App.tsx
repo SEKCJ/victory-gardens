@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
-import Navigate from './Components/Navbar';
-import UserHome from './Components/UserHome';
-import Veggies from './Components/UserVeggies';
-import HelpChoose from './Components/UserChoose';
+import Navigate from './components/Navbar';
+import UserHome from './components/UserHome';
+import Veggies from './components/UserVeggies';
+import HelpChoose from './components/UserChoose';
 import Veggie from './Components/Veggie';
-import MyProfile from './Components/UserProfile';
+import MyProfile from './components/UserProfile';
 import SavedVeggies from './Components/SavedVeggies';
 import Settings from './Components/Settings';
 import AboutUs from './Components/AboutUs';
